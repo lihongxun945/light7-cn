@@ -1,0 +1,67 @@
+<article class="component active" id="init">
+  <h2 class="component-title">初始化</h2>
+  <p class="component-description">
+    <p>注意，从 v0.2.1 开始，初始化方法变成了 <code>$.init()</code>， <code>$.config.autoInit = false;</code>，也就是默认不会调用 <code>$.init</code> 方法。现在需要自己手动调用 <code>$.init</code>，他会调用 $.initPage 方法初始化页面组件，并且触发一个 <code>pageInit</code> 事件，所以请确保在所有的 <code>pageInit</code> 事件绑定之后再调用 <code>$.init()</code> 方法。</p>
+    <p>请不要修改 <code>$.init</code> 方法，这个方法是MSUI提供好的，调用它就会初始化页面。</p>
+
+    <p>如果设置了 <code>$.config.autoInit = true;</code>，那么在 document.onload的时候就会执行 <code>$.init</code>方法，从而触发 <code>pageInit</code>事件，如果在这之后监听了 pageInit 事件是无法被执行的。强烈建议不要设置为true，而是在绑定完所有的 <code>pageInit</code> 事件之后，再调用 <code>$.init</code>方法</p>
+
+  </p>
+
+  <p>关于如何初始化，可以参考<a href="/assets/js/demos.js" data-ignore="push" target="_blank">demos中的写法</a></p>
+
+  <h3 class="component-title">全局配置</h3>
+  <p class="component-description">
+    我们提供了一些全局配置，可以在初始化之前通过这些配置改变一些默认行为。
+    在引入JS之前通过一个 <code>$.config</code> 变量来改变默认配置：
+  </p>
+  <p>从 v0.2.1 版本开始， <code>autoInit</code> 默认为 false</p>
+
+{% highlight html %}
+<script>
+  //打开自动初始化页面的功能
+  //建议不要打开自动初始化，而是自己调用 $.init 方法完成初始化
+  $.config = {
+    autoInit: true
+  }
+</script>
+<script src='sm.min.js'></script>
+
+{% endhighlight %}
+
+  所有配置项如下：
+
+  <table>
+    <tr>
+      <th>参数名</th>
+      <th>默认值</th>
+      <th>说明</th>
+    </tr>
+    <tr>
+      <td>autoInit</td>
+      <td>false</td>
+      <td>在 <code>document.onload</code> 和 push 结束之后自动调用 <code>$.init</code> 方法。如果你的页面内容是异步加载的，应该关闭这个配置，并且在加载完成之后手动调用 <code>$.init</code></td>
+    </tr>
+    <tr>
+      <td>pushjs</td>
+      <td>true</td>
+      <td>使用push.js加载页面，如果设置为true，那么默认所有的链接都会被push.js拦截，并通过ajax加载新页面。</td>
+    </tr>
+    <tr>
+      <td>showPageLoadingIndicator</td>
+      <td>true</td>
+      <td>在push.js加载新页面过程中显示一个加载指示器。只有 <code>pushjs</code> 为true时这个设置才有效</td>
+    </tr>
+    <tr>
+      <td>swipePanel</td>
+      <td>"left"</td>
+      <td>是否可以通过左右滑动打开侧栏，一次只能指定一个方向。</td>
+    </tr>
+    <tr>
+      <td>swipePanelOnlyClose</td>
+      <td>true</td>
+      <td>只允许滑动关闭侧栏，不允许滑动打开。</td>
+    </tr>
+  </table>
+
+</article>

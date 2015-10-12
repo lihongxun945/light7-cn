@@ -1,0 +1,102 @@
+<article class="component" id="push" data-url='one'>
+    <h2 class="component-title">Push</h2>
+    <p class="component-description">push.js 是一个很轻量的页面加载和历史管理组件。他会监听所有的链接click事件，并自动使用ajax加载新页面。</p>
+    <p>注意，push.js 仍处在测试阶段，这意味着他的api现在还不是稳定的，在后面的版本中随时会进行改动。如果你不希望使用push.js，那么你可以在初始化的时候通过传入一个 <code>pushjs: false</code> 参数来禁用 push.js。</p>
+{% highlight html %}
+<!-- A one.html link -->
+<a href="two.html">Two</a>
+{% endhighlight %}
+    <p class="component-note">他会自动通过AJAX加载链接上的href地址，并把加载到的内容中的 .content 替换到当前页面，同样如果有 .bar-nav 或者 .bar-tab 也会被替换掉。</p>
+    <p class="component-description">你可以通过 <code>data-transition</code> 来指定加载动画，有三个可选值： <code>fade</code>, <code>slide-in</code>, or <code>slide-out</code>.</p>
+{% highlight html %}
+<!-- An one.html link that animates to two.html -->
+<a href="two.html" data-transition="fade">Two</a>
+{% endhighlight %}
+    <p class="component-description">比如:</p>
+    <div class="component-example component-example-fullbleed">
+        <header class="bar bar-nav">
+            <h1 class="title">Push</h1>
+        </header>
+        <div class="content">
+            <div class="card">
+                <ul class="table-view">
+                    <li class="table-view-cell">
+                        <a class="navigate-right" href="/two.html" data-transition="slide-in">
+                          加载新页面
+                </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% highlight html %}
+<header class="bar bar-nav">
+    <h1 class="title">Push</h1>
+</header>
+<div class="content">
+    <div class="card">
+        <ul class="table-view">
+            <li class="table-view-cell">
+                <a class="navigate-right" href="../two.html" data-transition="slide-in">
+                  加载新页面
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endhighlight %}
+    <p class="component-description">如果你不希望一个链接被push.js管理，那么只需要增加一个 <code>data-ignore="push"</code> 属性即可：</p>
+    {% highlight html %}
+    <!-- Use data-ignore="push" to prevent the push.js interception -->
+    <a href="http://www.baidu.com" data-ignore="push">直接访问baidu</a>
+{% endhighlight %}
+
+        <p class="component-description">push.js 加载完成新页面之后，会在document上触发一个 <code>pageInit</code> 事件：</p>
+
+{% highlight js %}
+$(document).on('pageInit', function(e, id, content){});
+{% endhighlight %}
+
+        <p class="component-description">你的每一个页面的 <code>.content</code> 容器上必须设置一个id，以保证 <code>pageInit</code>事件中你可以通过 id 参数来区分被加载的是哪一个页面。而且 push.js 会根据页面的id来记录每个页面的滚动位置，如果没有设置id则无法记住滚动位置。</p>
+        <p>如果你不希望记住一个页面的滚动位置，你可以在 <code>.content</code> 上增加一个 <code>data-remember-scroll='false'</code> 。</p>
+        <p class="component-description">使用 push.js 加载页面的情况下，你应该把所有页面的js都打包到一个文件中，并且在每一个页面都引用这个js文件。并且通过 <code>pageInit</code>事件来初始化不同的页面</p>
+{% highlight js %}
+$(document).on('pageInit', '#page-index', function(e, id, content){
+//初始化 page-index
+});
+$(document).on('pageInit', '#page-detail', function(e, id, content){
+//初始化 page-detail
+});
+{% endhighlight %}
+        <p>你可以参考我们在 <a href='/demos' target="_blank" data-ignore='push'>demos</a> 中初始化每一个页面的方法。</p>
+        <p class="component-description">你也可以调用 <code>$.push</code> 方法来手动加载一个新页面.</p>
+
+{% highlight js %}
+$.push({url: "/signin"});
+$.push({
+  url: "/signin",
+  transition: "slide-in"
+});
+{% endhighlight %}
+
+
+    <h3 class="component-title">pageAnimationStart</h3>
+    <p class="component-description">除了 pageInit 之外，当新页面被插入到当前DOM中，即将开始执行动画的时候，会触发 <code>pageAnimationStart</code> 事件，用法和 <code>pageInit</code> 完全一样:</p>
+{% highlight js %}
+$(document).on('pageAnimationStart', '#page-index', function(e, id, content){
+//此时初始化页面
+});
+{% endhighlight %}
+
+    <p>使用 <code>pageAnimationStart</code> 初始化页面会比 <code>pageInit</code> 更早，因为 pageInit 事件是在动画结束的时候才触发的。</p>
+
+    <h3 class="component-title">pageLoadStart</h3>
+    <p> <code>pageLoadStart</code> 事件会在开始发送xhr请求的时候就触发，用法如下：</p>
+{% highlight js %}
+$(document).on("pageLoadStart", function(e,d){
+console.log(d.url);
+});
+{% endhighlight %}
+
+    <p>如果你的页面是异步加载数据的，你可以在 <code>pageLoadStart</code> 的时候就开始加载数据，然后在 <code>pageAnimationStart</code> 的时候渲染页面。</p>
+</article>
