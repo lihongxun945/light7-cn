@@ -1,0 +1,687 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  
+  <url>
+    <loc>/about/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/actions/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/baichuan-portal/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/bar/bar-multi/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/btns/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/docs-demos/calendar-inline/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/docs-demos/calendar/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/calendar/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/changelog/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/docs-demos/check-list/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/list/check-list/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/docs-demos/city-picker/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/city-picker/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/colors/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/docs-demos/colors/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/components/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/list/contacts-list/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/datetime-picker/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/docs-demos/datetime-picker/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/examples/baichuan/detail/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/examples/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/extends/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/card/facebook-card/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/getting-started/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/examples/baichuan/goods/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/grid/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/examples/baichuan/home/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/form/icon-input/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/icons/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/examples/baichuan/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/list/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/bar/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/form/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/card/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  
+  
+  <url>
+    <loc>/demos/infinite-scroll/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/docs-demos/infinite-scroll/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/list/inset-list/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/form/label-input/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/form/layout/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/card/list-card/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/docs-demos/list/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/list/mail-list/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/modal/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/bar/nav-bar-labels/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/bar/nav-bar/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/docs-demos/one/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/docs-demos/panels/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/photo-browser/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/docs-demos/photo-browser/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/docs-demos/picker/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/picker/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/preloader/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/pull-to-refresh/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/docs-demos/router/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/router/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/router2/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/docs-demos/router2/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/searchbar/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/examples/baichuan/settings/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/card/simple-card/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/list/simple-list/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/list/songs-list/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/docs-demos/structure/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/card/styled-card/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/swiper/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/tab/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/docs-demos/theme-dark/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/bar/title-bar-btns/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/bar/title-bar-links/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/bar/title-bar/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/docs-demos/toast/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/docs-demos/two/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/card/view-card/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  
+  <url>
+    <loc>/demos/list/view-list/</loc>
+    <lastmod>2015-10-12T19:55:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+</urlset>
