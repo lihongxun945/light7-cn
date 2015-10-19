@@ -1,5 +1,5 @@
 {
-  "name": "sm",
+  "name": "light7",
   "description": "Build mobile apps with simple HTML, CSS, and JS components.",
   "version": "0.0.1",
   "keywords": [
@@ -10,9 +10,9 @@
     "mobile",
     "prototype"
   ],
-  "homepage": "http://m.sui.taobao.org/",
-  "style": "dist/css/sm.css",
-  "less": "less/sm.less",
+  "homepage": "http://light7.org/",
+  "style": "dist/css/light7.css",
+  "less": "less/light7.less",
   "repository": {
     "type": "git",
     "url": ""

@@ -1,5 +1,5 @@
 /*!
- * SUI Mobile
+ * light7
  */
 
 /* jshint node: true */
@@ -32,7 +32,7 @@ module.exports = function(grunt) {
 
         banner: '/*!\n' +
             ' * =====================================================\n' +
-            ' * SUI Mobile - http://m.sui.taobao.org/\n' +
+            ' * light7 - http://light7.org/\n' +
             ' *\n' +
             ' * =====================================================\n' +
             ' */\n',
@@ -42,7 +42,7 @@ module.exports = function(grunt) {
         },
 
         concat: {
-            sm: {
+            light7: {
               options: {
                   banner: '<%= banner %>'
               },
@@ -98,11 +98,11 @@ module.exports = function(grunt) {
 
         less: {
             core: {
-                src: 'less/sm.less',
+                src: 'less/light7.less',
                 dest: '<%= meta.distPath %>css/<%= pkg.name %>.css'
             },
             extend: {
-                src: 'less/sm-extend.less',
+                src: 'less/light7-extend.less',
                 dest: '<%= meta.distPath %>css/<%= pkg.name %>-extend.css'
             },
             docs: {
@@ -170,7 +170,6 @@ module.exports = function(grunt) {
         autoprefixer: {
             options: {
                 browsers: [
-                    'Android 2.3',
                     'Android >= 4',
                     'Chrome >= 20',
                     'Firefox >= 24', // Firefox 24 is the latest ESR
@@ -198,7 +197,7 @@ module.exports = function(grunt) {
             options: {
                 keepSpecialComments: '*' // keep all important comments
             },
-            sm: {
+            light7: {
                 src: '<%= meta.distPath %>css/<%= pkg.name %>.css',
                 dest: '<%= meta.distPath %>css/<%= pkg.name %>.min.css'
             },
@@ -224,8 +223,8 @@ module.exports = function(grunt) {
                 mangle: true,
                 preserveComments: false
             },
-            sm: {
-                src: '<%= concat.sm.dest %>',
+            light7: {
+                src: '<%= concat.light7.dest %>',
                 dest: '<%= meta.distPath %>js/<%= pkg.name %>.min.js'
             },
             extend: {
@@ -321,13 +320,7 @@ module.exports = function(grunt) {
   grunt.registerTask('build', ['dist']);
   grunt.registerTask('test', ['dist', 'jshint', 'qunit', 'validate-html']);
   grunt.registerTask('server', ['dist', 'jekyll', 'connect', 'watch']);
-  if(buildTo) {
-    //CDN发布环境
-    grunt.registerTask('default', ['dist-js', 'dist-css', 'copy']);
-  } else {
-    //开发环境
-    grunt.registerTask('default', ['test', 'dist']);
-  }
+  grunt.registerTask('default', ['test', 'dist']);
 
   // Version numbering task.
   // grunt change-version-number --oldver=A.B.C --newver=X.Y.Z
