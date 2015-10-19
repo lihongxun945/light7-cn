@@ -1,6 +1,6 @@
 /*!
  * =====================================================
- * SUI Mobile - http://m.sui.taobao.org/
+ * light7 - http://light7.org/
  *
  * =====================================================
  */
@@ -309,12 +309,10 @@ body {
     padding-top: 10px;
     padding-bottom: 10px;
     background-color: #fff;
-    -webkit-background-clip: padding-box;
-            background-clip: padding-box;
+    background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, .2);
     border-radius: 3px;
-    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .05);
-            box-shadow: 0 0 8px rgba(0, 0, 0, .05);
+    box-shadow: 0 0 8px rgba(0, 0, 0, .05);
   }
   .docs-component-group.active {
     display: block;
@@ -376,8 +374,7 @@ body {
 }
 .docs-header-content .btn:hover {
   background-color: #fff;
-  -webkit-box-shadow: 0 0 50px rgba(255, 255, 255, .3);
-          box-shadow: 0 0 50px rgba(255, 255, 255, .3);
+  box-shadow: 0 0 50px rgba(255, 255, 255, .3);
 }
 .docs-header-content .btn:active {
   opacity: .5;
@@ -789,8 +786,7 @@ code {
     background-image: url("../img/device-sprite.png");
     background-repeat: no-repeat;
     background-position: 0 0;
-    -webkit-background-size: 300% 300%;
-            background-size: 300%;
+    background-size: 300%;
     -webkit-transition: background-image .1s linear;
          -o-transition: background-image .1s linear;
             transition: background-image .1s linear;
@@ -1229,8 +1225,7 @@ table td {
   margin-right: 60px;
   overflow: hidden;
   border-radius: 125px;
-  -webkit-box-shadow: 0 0 10px 5px rgba(0, 0, 0, .15);
-          box-shadow: 0 0 10px 5px rgba(0, 0, 0, .15);
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, .15);
 }
 .index-content .section .round img {
   position: relative;
@@ -1381,8 +1376,7 @@ table td {
 }
 .page-baichuan article .code {
   width: 150px;
-  -webkit-box-shadow: 0 0 3px 3px rgba(0, 0, 0, .1);
-          box-shadow: 0 0 3px 3px rgba(0, 0, 0, .1);
+  box-shadow: 0 0 3px 3px rgba(0, 0, 0, .1);
 }
 .page-baichuan .text-gray {
   color: #999;

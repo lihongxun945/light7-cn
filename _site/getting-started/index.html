@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>开始使用 &middot; SUI Mobile</title>
+<title>开始使用 &middot; light7</title>
 <meta name="description" content="MSUI: Build mobile apps with simple HTML, CSS, and JS components.">
 <meta name="author" content="任行">
 <meta name="viewport" content="initial-scale=1, maximum-scale=1">
@@ -13,8 +13,8 @@
 
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1431676360_347254.css">
 
-<link rel="stylesheet" href="/dist/css/sm.css">
-<link rel="stylesheet" href="/dist/css/sm-extend.css">
+<link rel="stylesheet" href="/dist/css/light7.css">
+<link rel="stylesheet" href="/dist/css/light7-extend.css">
 <link rel="stylesheet" href="/assets/css/docs.css">
 
 <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/img/apple-touch-icon-114x114.png">
@@ -48,7 +48,7 @@
   <div class="container">
     <div class="column">
       <h1 class="docs-title">
-        <a href="/" data-ignore="push">SUI Mobile</a>
+        <a href="/" data-ignore="push">light7</a>
       </h1>
       <nav class="docs-nav clearfix">
         <a class="docs-nav-trigger icon icon-menu pull-right js-docs-nav-trigger" href="#"></a>
@@ -60,7 +60,7 @@
           <a class="docs-nav-item" href="/demos" data-ignore="push">示例</a>
           <a class="docs-nav-item" href="/changelog" data-ignore="push">更新日志</a>
           <a class="docs-nav-item" href="/about" data-ignore="push">关于</a>
-          <a class="docs-nav-item" href="https://github.com/sdc-alibaba/SUI-Mobile" target="_blank" data-ignore="push">github</a>
+          <a class="docs-nav-item" href="https://github.com/lihongxun945/light7" target="_blank" data-ignore="push">github</a>
         </div>
       </nav>
     </div>
@@ -84,24 +84,16 @@
         <p class="lead"></p>
 
         <h3>1. 引用静态资源</h3>
-        <p>我们提供了CDN地址可以直接使用，并且强烈建议使用我们的CDN而不是下载到本地。</p>
  
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"//g.alicdn.com/sui-mobile/sm/0.5.0/css/sm.min.css"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">'text/javascript'</span> <span class="na">src=</span><span class="s">'//g.alicdn.com/sj/lib/zepto/zepto.min.js'</span> <span class="na">charset=</span><span class="s">'utf-8'</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">'text/javascript'</span> <span class="na">src=</span><span class="s">'//g.alicdn.com/sui-mobile/sm/0.5.0/js/sm.min.js'</span> <span class="na">charset=</span><span class="s">'utf-8'</span><span class="nt">&gt;&lt;/script&gt;</span>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"css/light7.min.css"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">'text/javascript'</span> <span class="na">src=</span><span class="s">'js/zepto.min.js'</span> <span class="na">charset=</span><span class="s">'utf-8'</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">'text/javascript'</span> <span class="na">src=</span><span class="s">'js/light7.min.js'</span> <span class="na">charset=</span><span class="s">'utf-8'</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="c">&lt;!--如果你用到了拓展包中的组件，还需要引用下面两个--&gt;</span>
-<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"//g.alicdn.com/sui-mobile/sm/0.5.0/css/sm-extend.min.css"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">'text/javascript'</span> <span class="na">src=</span><span class="s">'//g.alicdn.com/sui-mobile/sm/0.5.0/js/sm-extend.min.js'</span> <span class="na">charset=</span><span class="s">'utf-8'</span><span class="nt">&gt;&lt;/script&gt;</span></code></pre></div>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"css/light7-extend.min.css"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">'text/javascript'</span> <span class="na">src=</span><span class="s">'js/light7-extend.min.js'</span> <span class="na">charset=</span><span class="s">'utf-8'</span><span class="nt">&gt;&lt;/script&gt;</span></code></pre></div>
 
         <h3>2. 调试代码</h3>
-        <p>如果你希望在开发环境下可以调试代码，那么你可以这样引用未压缩的版本</p>
-
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"//g.alicdn.com/sui-mobile/sm/0.5.0/css/sm.css"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">'text/javascript'</span> <span class="na">src=</span><span class="s">'//g.alicdn.com/sj/lib/zepto/zepto.js'</span> <span class="na">charset=</span><span class="s">'utf-8'</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">'text/javascript'</span> <span class="na">src=</span><span class="s">'//g.alicdn.com/sui-mobile/sm/0.5.0/js/sm.js'</span> <span class="na">charset=</span><span class="s">'utf-8'</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="c">&lt;!--如果你用到了拓展包中的组件，还需要引用下面两个--&gt;</span>
-<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"//g.alicdn.com/sui-mobile/sm/0.5.0/css/sm-extend.css"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">'text/javascript'</span> <span class="na">src=</span><span class="s">'//g.alicdn.com/sui-mobile/sm/0.5.0/js/sm-extend.js'</span> <span class="na">charset=</span><span class="s">'utf-8'</span><span class="nt">&gt;&lt;/script&gt;</span></code></pre></div>
+        <p>如果你希望在开发环境下可以调试代码，那么你可以这样引用未压缩的版本。只要把上面的对应文件名中的 `.min` 去掉就可以</p>
 
         <h3>完整的页面模板</h3>
         <p>你可以直接用下面的模板来创建你的页面：</p>
@@ -117,16 +109,16 @@
     <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"apple-mobile-web-app-capable"</span> <span class="na">content=</span><span class="s">"yes"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"apple-mobile-web-app-status-bar-style"</span> <span class="na">content=</span><span class="s">"black"</span><span class="nt">&gt;</span>
 
-    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"//g.alicdn.com/sui-mobile/sm/0.5.0/css/sm.min.css"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"//g.alicdn.com/sui-mobile/sm/0.5.0/css/sm-extend.min.css"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"css/light7.min.css"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"css/light7-extend.min.css"</span><span class="nt">&gt;</span>
 
     <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"/your-css-file.css"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;/head&gt;</span>
   <span class="nt">&lt;body&gt;</span>
     <span class="c">&lt;!-- 你的html代码 --&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">'text/javascript'</span> <span class="na">src=</span><span class="s">'//g.alicdn.com/sj/lib/zepto/zepto.min.js'</span> <span class="na">charset=</span><span class="s">'utf-8'</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">'text/javascript'</span> <span class="na">src=</span><span class="s">'//g.alicdn.com/sui-mobile/sm/0.5.0/js/sm.min.js'</span> <span class="na">charset=</span><span class="s">'utf-8'</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">'text/javascript'</span> <span class="na">src=</span><span class="s">'//g.alicdn.com/sui-mobile/sm/0.5.0/js/sm-extend.min.js'</span> <span class="na">charset=</span><span class="s">'utf-8'</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">'text/javascript'</span> <span class="na">src=</span><span class="s">'js/zepto.min.js'</span> <span class="na">charset=</span><span class="s">'utf-8'</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">'text/javascript'</span> <span class="na">src=</span><span class="s">'js/light7.min.js'</span> <span class="na">charset=</span><span class="s">'utf-8'</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">'text/javascript'</span> <span class="na">src=</span><span class="s">'js/light7-extend.min.js'</span> <span class="na">charset=</span><span class="s">'utf-8'</span><span class="nt">&gt;&lt;/script&gt;</span>
 
     <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/your-js-file.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
   <span class="nt">&lt;/body&gt;</span>
@@ -207,17 +199,17 @@
     <div class="docs-footer">
   <!-- Social links -->
 
-  <p class="docs-footer-text">@author 阿里巴巴共享业务事业部UED团队</p>
+  <p class="docs-footer-text">@author <a href="mailto:lihongxun945@gmail.com">任行</a></p>
 
   <ul class="docs-footer-links">
     <li>友情链接</li>
-    <li><a href="http://sui.taobao.org" data-ignore="push">SUI PC 版</a></li>
+    <li><a href="http://f7cn.com/" data-ignore="push">Framework7</a></li>
   </ul>
 </div>
 
-<script src="/dist/js/sm.js"></script>
-<script src="/dist/js/sm-extend.js"></script>
-<script src="/dist/js/sm-city-picker.js"></script>
+<script src="/dist/js/light7.js"></script>
+<script src="/dist/js/light7-extend.js"></script>
+<script src="/dist/js/light7-city-picker.js"></script>
 <script src="/assets/js/docs.js"></script>
 
   </div>

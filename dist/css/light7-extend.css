@@ -1,6 +1,6 @@
 /*!
  * =====================================================
- * SUI Mobile - http://m.sui.taobao.org/
+ * light7 - http://light7.org/
  *
  * =====================================================
  */
@@ -101,9 +101,8 @@ body > .photo-browser .toolbar {
   background: none;
 }
 .photo-browser .page {
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
+  -moz-box-sizing: border-box;
+       box-sizing: border-box;
   position: absolute;
   left: 0;
   top: 0;
@@ -113,7 +112,6 @@ body > .photo-browser .toolbar {
 }
 .photo-browser .view {
   overflow: hidden;
-  -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   position: relative;
@@ -181,9 +179,8 @@ body > .photo-browser .toolbar {
   transformt: ranslate3d(0, 0rem, 0);
 }
 .photo-browser-caption {
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
+  -moz-box-sizing: border-box;
+       box-sizing: border-box;
   -webkit-transition: 300ms;
        -o-transition: 300ms;
           transition: 300ms;
@@ -258,9 +255,8 @@ body > .photo-browser .toolbar {
   -webkit-flex-shrink: 0;
       -ms-flex-negative: 0;
           flex-shrink: 0;
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
+  -moz-box-sizing: border-box;
+       box-sizing: border-box;
 }
 .photo-browser-slide.transitioning {
   -webkit-transition: 400ms;
@@ -429,7 +425,6 @@ body > .photo-browser .toolbar {
   -webkit-transition-property: -webkit-transform;
   -o-transition-property: -o-transform;
   transition-property: transform;
-  -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
 }
@@ -495,7 +490,6 @@ body > .photo-browser .toolbar {
   margin-top: -22px;
   z-index: 10;
   cursor: pointer;
-  -webkit-background-size: 27px 44px;
   background-size: 27px 44px;
   background-position: center;
   background-repeat: no-repeat;
@@ -603,7 +597,6 @@ body > .photo-browser .toolbar {
   /* Firefox 3.6-15 */
   background-image: -o-linear-gradient(right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
   /* Opera 11.10-12.00 */
-  background-image: -webkit-gradient(linear, right top, left top, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0)));
   background-image: linear-gradient(to left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
   /* Firefox 16+, IE10, Opera 12.50+ */
 }
@@ -615,7 +608,6 @@ body > .photo-browser .toolbar {
   /* Firefox 3.6-15 */
   background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
   /* Opera 11.10-12.00 */
-  background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0)));
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
   /* Firefox 16+, IE10, Opera 12.50+ */
 }
@@ -627,7 +619,6 @@ body > .photo-browser .toolbar {
   /* Firefox 3.6-15 */
   background-image: -o-linear-gradient(bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
   /* Opera 11.10-12.00 */
-  background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0)));
   background-image: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
   /* Firefox 16+, IE10, Opera 12.50+ */
 }
@@ -639,7 +630,6 @@ body > .photo-browser .toolbar {
   /* Firefox 3.6-15 */
   background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
   /* Opera 11.10-12.00 */
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0)));
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
   /* Firefox 16+, IE10, Opera 12.50+ */
 }
