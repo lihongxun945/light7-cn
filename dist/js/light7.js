@@ -6204,27 +6204,7 @@ Device/OS Detection
 /* global Zepto:true */
 + function($) {
     "use strict";
-    //比较一个字符串版本号
-    //a > b === 1
-    //a = b === 0
-    //a < b === -1
-    var compareVersion = function(a, b) {
-        var as = a.split('.');
-        var bs = b.split('.');
-        if (a === b) return 0;
-
-        for (var i = 0; i < as.length; i++) {
-            var x = parseInt(as[i]);
-            if (!bs[i]) return 1;
-            var y = parseInt(bs[i]);
-            if (x < y) return -1;
-            if (x > y) return 1;
-        }
-        return 1;
-    };
-
-
-        //重置zepto自带的滚动条
+    //重置zepto自带的滚动条
     var _zeptoMethodCache = {
         "scrollTop": $.fn.scrollTop,
         "scrollLeft": $.fn.scrollLeft
@@ -6263,56 +6243,7 @@ Device/OS Detection
 
         this.options = $.extend({}, this._defaults, _options);
 
-        var type = this.options.type;
-        //auto的type,系统版本的小于4.4.0的安卓设备和系统版本小于6.0.0的ios设备，启用js版的iscoll
-        var useJSScroller = (type === 'js') || (type === 'auto' && ($.os.android && compareVersion('4.4.0', $.os.version) > -1) || ($.os.ios && compareVersion('6.0.0', $.os.version) > -1));
-
-        if (useJSScroller) {
-
-            var $pageContentInner = $pageContent.find('.content-inner');
-            //如果滚动内容没有被包裹，自动添加wrap
-            if (!$pageContentInner[0]) {
-                // $pageContent.html('<div class="content-inner">' + $pageContent.html() + '</div>');
-                var children = $pageContent.children();
-                if (children.length < 1) {
-                    $pageContent.children().wrapAll('<div class="content-inner"></div>');
-                } else {
-                    $pageContent.html('<div class="content-inner">' + $pageContent.html() + '</div>');
-                }
-            }
-
-            if ($pageContent.hasClass('pull-to-refresh-content')) {
-                //因为iscroll 当页面高度不足 100% 时无法滑动，所以无法触发下拉动作，这里改动一下高度
-                $pageContent.find('.content-inner').css('min-height', ($(window).height() + 20) + 'px');
-            }
-
-            var ptr = $(pageContent).hasClass('pull-to-refresh-content');
-            var options = {
-                probeType: 1,
-                mouseWheel: true,
-            };
-            if (ptr) {
-                options.ptr = true;
-                options.ptrOffset = 44;
-            }
-            this.scroller = new IScroll(pageContent, options); // jshint ignore:line
-            //和native滚动统一起来
-            this._bindEventToDomWhenJs();
-            $.initPullToRefresh = $._pullToRefreshJSScroll.initPullToRefresh;
-            $.pullToRefreshDone = $._pullToRefreshJSScroll.pullToRefreshDone;
-            $.pullToRefreshTrigger = $._pullToRefreshJSScroll.pullToRefreshTrigger;
-            $.destroyToRefresh = $._pullToRefreshJSScroll.destroyToRefresh;
-            $pageContent.addClass('javascript-scroll');
-            
-            //如果页面本身已经进行了原生滚动，那么把这个滚动换成JS的滚动
-            var nativeScrollTop = this.$pageContent[0].scrollTop;
-            if(nativeScrollTop) {
-              this.$pageContent[0].scrollTop = 0;
-              this.scrollTop(nativeScrollTop);
-            }
-        } else {
-            $pageContent.addClass('native-scroll');
-        }
+        $pageContent.addClass('native-scroll');
     };
     Scroller.prototype = {
         _defaults: {
