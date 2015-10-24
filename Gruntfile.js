@@ -60,7 +60,6 @@ module.exports = function(grunt) {
                   'js/calendar.js',
                   'js/picker.js',
                   'js/datetime-picker.js',
-                  'js/iscroll.js',
                   'js/scroller.js',
                   'js/pull-to-refresh-js-scroll.js',
                   'js/pull-to-refresh.js',
