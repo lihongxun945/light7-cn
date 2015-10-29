@@ -25,6 +25,7 @@
         };
     });
 
+    $.noop = function() {};
     
     //support
     $.support = (function() {
