@@ -56,6 +56,7 @@
           <a class="docs-nav-item" href="/getting-started" data-ignore="push">开始使用</a>
           <a class="docs-nav-item" href="/components" data-ignore="push">基础组件</a>
           <a class="docs-nav-item" href="/extends" data-ignore="push">拓展组件</a>
+          <a class="docs-nav-item" href="https://github.com/lihongxun945/light7/archive/build.zip" data-ignore="push" target="_blank">下载</a>
           <a class="docs-nav-item" href="/demos" data-ignore="push">示例</a>
           <a class="docs-nav-item" href="/changelog" data-ignore="push">更新日志</a>
           <a class="docs-nav-item" href="/about" data-ignore="push">关于</a>
@@ -233,9 +234,14 @@
       <td>在 <code>document.onload</code> 和 push 结束之后自动调用 <code>$.init</code> 方法。如果你的页面内容是异步加载的，应该关闭这个配置，并且在加载完成之后手动调用 <code>$.init</code></td>
     </tr>
     <tr>
+      <td>router</td>
+      <td>true</td>
+      <td>启用router使用ajax加载新页面，如果关闭此功能则使用原生跳转。如果关闭此功能，则无法使用路由相关的所有功能。</td>
+    </tr>
+    <tr>
       <td>showPageLoadingIndicator</td>
       <td>true</td>
-      <td>在push.js加载新页面过程中显示一个加载指示器。只有 <code>pushjs</code> 为true时这个设置才有效</td>
+      <td>在router加载新页面过程中显示一个加载指示器。只有 <code>router</code> 为true时这个设置才有效</td>
     </tr>
     <tr>
       <td>swipePanel</td>
@@ -3926,6 +3932,7 @@ $(function() {
   <h2 class="component-title">路由</h2>
   <p class="component-description">现在有一个全新的路由代替了以前的 push.js。 这个路由支持在同一个html中内联多个页面，ajax加载新页面，前进和后退操作。</p>
   <p>默认情况下，router 会自动拦截所有的链接点击事件，如果你希望一个链接通过浏览器原生跳转而不使用 router，你可以在连接上增加一个 <code>class="external"</code> 或者 <code>external</code></p>
+  <p>你也可以通过 `$.config.router` 参数来全局关闭路由器，参见 <a href="#init">初始化</a>。即使关闭了路由器，也强烈建议通过 `pageInit` 事件来初始化页面，因为这样可以保证你随时可以打开路由器而不用修改任何JS代码。</p>
 
   <h3 class="component-title">内联页面</h3>
   <p class="component-description">你可以在同一个HTML文件中内联编写多个页面。每一个页面都是一个 <code>.page</code> 容器，如果有多个页面，则需要用 <code>.page-current</code> 标记出第一次进入的时候应该显示的页面。</p>
