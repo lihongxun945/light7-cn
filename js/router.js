@@ -281,6 +281,7 @@
   };
 
   $(function() {
+    if(!$.smConfig.router) return;
     var router = $.router = new Router();
     $(document).on("click", "a", function(e) {
       var $target = $(e.currentTarget);
