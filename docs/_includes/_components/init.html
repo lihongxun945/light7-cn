@@ -43,9 +43,14 @@
       <td>在 <code>document.onload</code> 和 push 结束之后自动调用 <code>$.init</code> 方法。如果你的页面内容是异步加载的，应该关闭这个配置，并且在加载完成之后手动调用 <code>$.init</code></td>
     </tr>
     <tr>
+      <td>router</td>
+      <td>true</td>
+      <td>启用router使用ajax加载新页面，如果关闭此功能则使用原生跳转。如果关闭此功能，则无法使用路由相关的所有功能。</td>
+    </tr>
+    <tr>
       <td>showPageLoadingIndicator</td>
       <td>true</td>
-      <td>在push.js加载新页面过程中显示一个加载指示器。只有 <code>pushjs</code> 为true时这个设置才有效</td>
+      <td>在router加载新页面过程中显示一个加载指示器。只有 <code>router</code> 为true时这个设置才有效</td>
     </tr>
     <tr>
       <td>swipePanel</td>
