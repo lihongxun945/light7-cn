@@ -2,6 +2,10 @@
 
 简单易用的h5 UI库，前身是 SUI Mobile。 官网地址： [http://www.light7.org/](http://www.light7.org/)
 
+# 下载
+
+建议下载源码自行编译。如果不想编译，你也可以直接切换到 `build` 分支，这个分支包含全部的编译后的JS,CSS和文档。或者直接点击 [这里下载](https://github.com/lihongxun945/light7/archive/build.zip).
+
 # grunt 配置
 
 执行 `grunt` 编译打包所有JS和CSS文件，并生成离线文档。
