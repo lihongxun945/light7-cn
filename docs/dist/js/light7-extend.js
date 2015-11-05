@@ -2729,13 +2729,6 @@ Framework7 Swiper Additions
         var page = $(pageContainer || document.body);
         var swipers = page.find('.swiper-container');
         if (swipers.length === 0) return;
-        function destroySwiperOnRemove(slider) {
-            function destroySwiper() {
-                slider.destroy();
-                page.off('pageBeforeRemove', destroySwiper);
-            }
-            page.on('pageBeforeRemove', destroySwiper);
-        }
         for (var i = 0; i < swipers.length; i++) {
             var swiper = swipers.eq(i);
             var params;
@@ -2746,8 +2739,6 @@ Framework7 Swiper Additions
             else {
                 params = swiper.dataset();
             }
-            var _slider = $.swiper(swiper[0], params);
-            destroySwiperOnRemove(_slider);
         }
     };
     $.reinitSwiper = function (pageContainer) {

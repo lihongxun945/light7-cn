@@ -255,6 +255,7 @@ Device/OS Detection
         };
     });
 
+    $.noop = function() {};
     
     //support
     $.support = (function() {
@@ -5077,11 +5078,6 @@ Device/OS Detection
     if(!state) {
       var id = this.genStateID();
       this.pushState(location.href, id);
-      this.pushBack({
-        url: location.href,
-        pageid: currentPage[0].id,
-        id: id
-      });
       this.setCurrentStateID(id);
     }
 
@@ -5106,12 +5102,11 @@ Device/OS Detection
         $(forward[i].pageid).each(function() {
           var $page = $(this);
           if($page.data("page-remote")) $page.remove();
-        });;
+        });
       }
       this.state.setItem("forward", "[]");  //clearforward
 
       page.insertAfter($(".page")[0]);
-      this.animatePages(this.getCurrentPage(), page);
 
       var id = this.genStateID();
       this.setCurrentStateID(id);
@@ -5119,34 +5114,36 @@ Device/OS Detection
       this.pushState(url, id);
 
       this.forwardStack  = [];  //clear forward stack
-
+      
+      this.animatePages(this.getCurrentPage(), page);
     });
   }
 
   Router.prototype.animatePages = function (leftPage, rightPage, leftToRight) {
-    var removeClasses = 'page-left page-right page-current page-from-center-to-left page-from-center-to-right page-from-right-to-center page-from-left-to-center';
-    var self = this;
+    var removeClasses = 'page-left page-right page-from-center-to-left page-from-center-to-right page-from-right-to-center page-from-left-to-center';
     if (!leftToRight) {
       rightPage.trigger("pageAnimationStart", [rightPage[0].id, rightPage]);
-      leftPage.removeClass(removeClasses).addClass('page-from-center-to-left');
-      rightPage.removeClass(removeClasses).addClass('page-from-right-to-center');
+      leftPage.removeClass(removeClasses).addClass("page-from-center-to-left").removeClass('page-current');
+      rightPage.removeClass(removeClasses).addClass("page-from-right-to-center page-current");
+      rightPage.trigger("pageInitInternal", [rightPage[0].id, rightPage]);
+
       leftPage.animationEnd(function() {
         leftPage.removeClass(removeClasses);
       });
       rightPage.animationEnd(function() {
-        rightPage.removeClass(removeClasses).addClass("page-current");
+        rightPage.removeClass(removeClasses);
         rightPage.trigger("pageAnimationEnd", [rightPage[0].id, rightPage]);
-        rightPage.trigger("pageInitInternal", [rightPage[0].id, rightPage]);
       });
     } else {
-        leftPage.trigger("pageAnimationStart", [rightPage[0].id, rightPage]);
-        leftPage.removeClass(removeClasses).addClass('page-from-left-to-center');
-        rightPage.removeClass(removeClasses).addClass('page-from-center-to-right');
-        leftPage.animationEnd(function() {
-          leftPage.removeClass(removeClasses).addClass("page-current");
-          leftPage.trigger("pageAnimationEnd", [leftPage[0].id, leftPage]);
-          leftPage.trigger("pageReinit", [leftPage[0].id, leftPage]);
-        });
+      leftPage.trigger("pageAnimationStart", [rightPage[0].id, rightPage]);
+      rightPage.removeClass(removeClasses).addClass("page-from-center-to-right").removeClass('page-current');
+      leftPage.removeClass(removeClasses).addClass("page-from-left-to-center page-current");
+      leftPage.trigger("pageReinit", [leftPage[0].id, leftPage]);
+
+      leftPage.animationEnd(function() {
+        leftPage.removeClass(removeClasses);
+        leftPage.trigger("pageAnimationEnd", [leftPage[0].id, leftPage]);
+      });
       rightPage.animationEnd(function() {
         rightPage.removeClass(removeClasses);
       });
@@ -5182,8 +5179,8 @@ Device/OS Detection
     var newPage = $(h.pageid);
     if(!newPage[0]) return;
     this.pushForward({url: location.href, pageid: "#"+currentPage[0].id, id: this.getCurrentStateID()});
-    this.animatePages(newPage, currentPage, true);
     this.setCurrentStateID(h.id);
+    this.animatePages(newPage, currentPage, true);
   }
 
   //前进
@@ -5193,8 +5190,8 @@ Device/OS Detection
     var newPage = $(h.pageid);
     if(!newPage[0]) return;
     this.pushBack({url: location.href, pageid: "#"+currentPage[0].id, id: this.getCurrentStateID()});
-    this.animatePages(currentPage, newPage);
     this.setCurrentStateID(h.id);
+    this.animatePages(currentPage, newPage);
   }
 
   Router.prototype.pushState = function(url, id) {
@@ -5223,8 +5220,8 @@ Device/OS Detection
     this.dispatch("pageLoadStart");
 
     if(this.xhr && this.xhr.readyState < 4) {
-      xhr.onreadystatechange = noop;
-      xhr.abort();
+      this.xhr.onreadystatechange = $.noop;
+      this.xhr.abort();
       this.dispatch("pageLoadCancel");
     }
 

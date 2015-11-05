@@ -24,16 +24,20 @@
     </script>
   </head>
   <body>
-    <div class="page" id='page-photo-browser'>
+    <div class="page" id='page-swiper-demo'>
   <header class="bar bar-nav">
-    <h1 class="title">图片浏览器</h1>
+    <h1 class='title'>幻灯片</h1>
   </header>
   <div class="content">
-    <div class="content-block row">
-      <div class="col-50"><a class="button pb-standalone">默认模式</a></div>
-      <div class="col-50"><a class="button pb-popup">Popup</a></div>
+    <!-- Slider -->
+    <div class="swiper-container" data-space-between='10' data-pagination='.swiper-pagination' data-autoplay="1000">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i1/TB1n3rZHFXXXXX9XFXXXXXXXXXX_!!0-item_pic.jpg_320x320q60.jpg" alt=""></div>
+        <div class="swiper-slide"><img src="//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i4/TB10rkPGVXXXXXGapXXXXXXXXXX_!!0-item_pic.jpg_320x320q60.jpg" alt=""></div>
+        <div class="swiper-slide"><img src="//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i1/TB1kQI3HpXXXXbSXFXXXXXXXXXX_!!0-item_pic.jpg_320x320q60.jpg" alt=""></div>
+      </div>
+      <div class="swiper-pagination"></div>
     </div>
-    <div class="content-block"><a class="button pb-standalone-captions">带文字描述</a></div>
   </div>
 </div>
 
