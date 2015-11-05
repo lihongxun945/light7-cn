@@ -1,4 +1,4 @@
-<article class="component active" id="swiper">
+<article class="component active" id="swiper" data-url='swiper'>
   <h2 class="component-title">幻灯片</h2>
   <p class="component-description">使用幻灯片组件，你需要在 <code>light7.js</code> 和 <code>light7.css</code> 之后额外引入如下两个文件:</p>
 
@@ -8,45 +8,19 @@
 <script type='text/javascript' src='{{ site.version }}/js/light7-extend.min.js' charset='utf-8'></script>
 {% endhighlight %}
 
-  <p>幻灯片需要你手动初始化。</p>
-  <div class="component-example component-example-fullbleed">
-    <header class="bar bar-nav">
-      <h1 class="title">幻灯片</h1>
-    </header>
-    <div class="content">
-      <!-- Slider -->
-      <div class="swiper-container" data-space-between='10' data-pagination='.swiper-pagination'>
-        <div class="swiper-wrapper">
-          <div class="swiper-slide"><img src="//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i1/TB1n3rZHFXXXXX9XFXXXXXXXXXX_!!0-item_pic.jpg_320x320q60.jpg" alt=""></div>
-          <div class="swiper-slide"><img src="//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i4/TB10rkPGVXXXXXGapXXXXXXXXXX_!!0-item_pic.jpg_320x320q60.jpg" alt=""></div>
-          <div class="swiper-slide"><img src="//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i1/TB1kQI3HpXXXXbSXFXXXXXXXXXX_!!0-item_pic.jpg_320x320q60.jpg" alt=""></div>
-        </div>
-        <div class="swiper-pagination"></div>
-      </div>
-    </div>
-  </div>
+<p>如果你打开了自动初始化功能，幻灯片会在页面加载以后自动初始化。如果你关闭了自动初始化，或者你的幻灯片是页面加载之后又异步加载的，那么你需要手动初始化 <code>$(".swiper-container").swiper(config)</code> 。</p>
 
 {% highlight html %}
-<header class="bar bar-nav">
-  <h1 class="title">幻灯片</h1>
-</header>
-<div class="content">
-  <!-- Slider -->
-  <div class="swiper-container" data-space-between='10'>
-    <div class="swiper-wrapper">
-      <div class="swiper-slide"><img src="//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i1/TB1n3rZHFXXXXX9XFXXXXXXXXXX_!!0-item_pic.jpg_320x320q60.jpg" alt=""></div>
-      <div class="swiper-slide"><img src="//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i4/TB10rkPGVXXXXXGapXXXXXXXXXX_!!0-item_pic.jpg_320x320q60.jpg" alt=""></div>
-      <div class="swiper-slide"><img src="//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i1/TB1kQI3HpXXXXbSXFXXXXXXXXXX_!!0-item_pic.jpg_320x320q60.jpg" alt=""></div>
-    </div>
-    <div class="swiper-pagination"></div>
+<div class="swiper-container" data-space-between='10' data-pagination='.swiper-pagination' data-autoplay="1000">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide"><img src="//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i1/TB1n3rZHFXXXXX9XFXXXXXXXXXX_!!0-item_pic.jpg_320x320q60.jpg" alt=""></div>
+    <div class="swiper-slide"><img src="//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i4/TB10rkPGVXXXXXGapXXXXXXXXXX_!!0-item_pic.jpg_320x320q60.jpg" alt=""></div>
+    <div class="swiper-slide"><img src="//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i1/TB1kQI3HpXXXXbSXFXXXXXXXXXX_!!0-item_pic.jpg_320x320q60.jpg" alt=""></div>
   </div>
 </div>
 {% endhighlight %}
-
-
-{% highlight js %}
-$(function() {
-  $(".swiper-container").swiper();
-});
-{% endhighlight %}
 </article>
+
+  <h3>幻灯片配置</h3>
+
+  <p>你可以通过在 <code>.swiper-container</code> 容器上通过 <code>data-xxx</code> 的形式配置，也可以在初始化的时候传入一个JS对象来配置。可以用配置项请参考这里： <a href='http://www.idangero.us/swiper/api/#.VjtIEK4rLyU' target="_blank">swiper 官方文档</a></p>
