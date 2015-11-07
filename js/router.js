@@ -101,9 +101,14 @@
         leftPage.removeClass(removeClasses);
       });
       rightPage.animationEnd(function() {
-        rightPage.removeClass(removeClasses);
-        rightPage.trigger("pageAnimationEnd", [rightPage[0].id, rightPage]);
+        afterAnimation(rightPage);
       });
+
+      if(rightPage.hasClass("no-tabbar")) {
+        $(document.body).addClass("tabbar-hidden");
+      } else {
+        $(document.body).removeClass("tabbar-hidden");
+      }
     } else {
       leftPage.trigger("pageAnimationStart", [rightPage[0].id, rightPage]);
       rightPage.removeClass(removeClasses).addClass("page-from-center-to-right").removeClass('page-current');
@@ -111,12 +116,21 @@
       leftPage.trigger("pageReinit", [leftPage[0].id, leftPage]);
 
       leftPage.animationEnd(function() {
-        leftPage.removeClass(removeClasses);
-        leftPage.trigger("pageAnimationEnd", [leftPage[0].id, leftPage]);
+        afterAnimation(leftPage);
       });
       rightPage.animationEnd(function() {
         rightPage.removeClass(removeClasses);
       });
+      if(leftPage.hasClass("no-tabbar")) {
+        $(document.body).addClass("tabbar-hidden");
+      } else {
+        $(document.body).removeClass("tabbar-hidden");
+      }
+    }
+
+    function afterAnimation(page) {
+      page.removeClass(removeClasses);
+      page.trigger("pageAnimationEnd", [page[0].id, page]);
     }
 
   }

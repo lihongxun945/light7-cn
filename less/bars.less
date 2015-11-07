@@ -89,6 +89,7 @@
   .hairline(top, @border-default-color);
   .hairline-remove(bottom);
   z-index: 9000;  //less than popup
+  transition-duration: 400ms;
 
   // Navigational tab (Nested to be more specific for the icons in tab-items)
   .tab-item {
@@ -143,6 +144,10 @@
       }
     }
   }
+}
+
+.tabbar-hidden .bar-tab {
+  transform: translate3d(0, 110%, 0);
 }
 
 // Bars with buttons
