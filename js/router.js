@@ -55,7 +55,7 @@
   }
 
   //加载一个页面,传入的参数是页面id或者url
-  Router.prototype.loadPage = function(url) {
+  Router.prototype.loadPage = function(url, noAnimation) {
 
     this.getPage(url, function(page) {
 
@@ -85,46 +85,72 @@
 
       this.forwardStack  = [];  //clear forward stack
       
-      this.animatePages(this.getCurrentPage(), page);
+      this.animatePages(this.getCurrentPage(), page, null, noAnimation);
     });
   }
 
-  Router.prototype.animatePages = function (leftPage, rightPage, leftToRight) {
+  Router.prototype.animatePages = function (leftPage, rightPage, leftToRight, noTransition) {
     var removeClasses = 'page-left page-right page-from-center-to-left page-from-center-to-right page-from-right-to-center page-from-left-to-center';
-    if (!leftToRight) {
-      rightPage.trigger("pageAnimationStart", [rightPage[0].id, rightPage]);
-      leftPage.removeClass(removeClasses).addClass("page-from-center-to-left").removeClass('page-current');
-      rightPage.removeClass(removeClasses).addClass("page-from-right-to-center page-current");
-      rightPage.trigger("pageInitInternal", [rightPage[0].id, rightPage]);
+    if(noTransition) {
+      if (!leftToRight) {
+        rightPage.trigger("pageAnimationStart", [rightPage[0].id, rightPage]);
+        leftPage.removeClass(removeClasses).removeClass('page-current');
+        rightPage.removeClass(removeClasses).addClass("page-current");
+        rightPage.trigger("pageInitInternal", [rightPage[0].id, rightPage]);
 
-      leftPage.animationEnd(function() {
-        leftPage.removeClass(removeClasses);
-      });
-      rightPage.animationEnd(function() {
-        afterAnimation(rightPage);
-      });
-
-      if(rightPage.hasClass("no-tabbar")) {
-        $(document.body).addClass("tabbar-hidden");
+        if(rightPage.hasClass("no-tabbar")) {
+          $(document.body).addClass("tabbar-hidden");
+        } else {
+          $(document.body).removeClass("tabbar-hidden");
+        }
       } else {
-        $(document.body).removeClass("tabbar-hidden");
+        leftPage.trigger("pageAnimationStart", [rightPage[0].id, rightPage]);
+        rightPage.removeClass(removeClasses).removeClass('page-current');
+        leftPage.removeClass(removeClasses).addClass("page-current");
+        leftPage.trigger("pageReinit", [leftPage[0].id, leftPage]);
+
+        if(leftPage.hasClass("no-tabbar")) {
+          $(document.body).addClass("tabbar-hidden");
+        } else {
+          $(document.body).removeClass("tabbar-hidden");
+        }
       }
     } else {
-      leftPage.trigger("pageAnimationStart", [rightPage[0].id, rightPage]);
-      rightPage.removeClass(removeClasses).addClass("page-from-center-to-right").removeClass('page-current');
-      leftPage.removeClass(removeClasses).addClass("page-from-left-to-center page-current");
-      leftPage.trigger("pageReinit", [leftPage[0].id, leftPage]);
+      if (!leftToRight) {
+        rightPage.trigger("pageAnimationStart", [rightPage[0].id, rightPage]);
+        leftPage.removeClass(removeClasses).addClass("page-from-center-to-left").removeClass('page-current');
+        rightPage.removeClass(removeClasses).addClass("page-from-right-to-center page-current");
+        rightPage.trigger("pageInitInternal", [rightPage[0].id, rightPage]);
 
-      leftPage.animationEnd(function() {
-        afterAnimation(leftPage);
-      });
-      rightPage.animationEnd(function() {
-        rightPage.removeClass(removeClasses);
-      });
-      if(leftPage.hasClass("no-tabbar")) {
-        $(document.body).addClass("tabbar-hidden");
+        leftPage.animationEnd(function() {
+          leftPage.removeClass(removeClasses);
+        });
+        rightPage.animationEnd(function() {
+          afterAnimation(rightPage);
+        });
+
+        if(rightPage.hasClass("no-tabbar")) {
+          $(document.body).addClass("tabbar-hidden");
+        } else {
+          $(document.body).removeClass("tabbar-hidden");
+        }
       } else {
-        $(document.body).removeClass("tabbar-hidden");
+        leftPage.trigger("pageAnimationStart", [rightPage[0].id, rightPage]);
+        rightPage.removeClass(removeClasses).addClass("page-from-center-to-right").removeClass('page-current');
+        leftPage.removeClass(removeClasses).addClass("page-from-left-to-center page-current");
+        leftPage.trigger("pageReinit", [leftPage[0].id, leftPage]);
+
+        leftPage.animationEnd(function() {
+          afterAnimation(leftPage);
+        });
+        rightPage.animationEnd(function() {
+          rightPage.removeClass(removeClasses);
+        });
+        if(leftPage.hasClass("no-tabbar")) {
+          $(document.body).addClass("tabbar-hidden");
+        } else {
+          $(document.body).removeClass("tabbar-hidden");
+        }
       }
     }
 
@@ -309,7 +335,7 @@
       }
 
       if(!url || url === "#") return;
-      router.loadPage(url);
+      router.loadPage(url, $target.hasClass("no-transition"));
     })
   });
 }(Zepto);
