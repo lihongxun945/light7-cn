@@ -7,13 +7,15 @@
 
   var showTab = function (tab, tabLink, force) {
     var newTab = $(tab);
+
+    var activeClass = newTab.hasClass("page") ? "page-current" : "active";
     if (arguments.length === 2) {
       if (typeof tabLink === 'boolean') {
         force = tabLink;
       }
     }
     if (newTab.length === 0) return false;
-    if (newTab.hasClass('active')) {
+    if (newTab.hasClass(activeClass)) {
       if (force) newTab.trigger('show');
       return false;
     }
@@ -27,9 +29,9 @@
       }*/
 
     // Remove active class from old tabs
-    var oldTab = tabs.children('.tab.active').removeClass('active');
+    var oldTab = tabs.children('.tab.'+activeClass).removeClass(activeClass);
     // Add active class to new tab
-    newTab.addClass('active');
+    newTab.addClass(activeClass);
     // Trigger 'show' event on new tab
     newTab.trigger('show');
 
