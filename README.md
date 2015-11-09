@@ -39,4 +39,4 @@ F7 是国外大神写的一个UI库。SUI 是我在阿里的时候基于F7改造
 
 现在因为离职了，不方便继续改阿里的东西。 所以从SUI fork出了一个新的 light7。以后我个人只会维护 light7, SUI 属于阿里巴巴国际UED团队。
 
-尊重版权，SUI Mobile & Framework7-cn 均是阿里巴巴国际UED团队的成果。
+*就事论事，尊重版权，上述提到的 SUI Mobile & Framework7-cn 均是阿里巴巴国际UED团队的成果*。
