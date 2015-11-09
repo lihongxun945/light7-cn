@@ -1,6 +1,6 @@
 # light7 - a light H5 UI lib for webapp
 
-简单易用的h5 UI库，前身是 SUI Mobile。 官网地址： [http://www.light7.org/](http://www.light7.org/)
+简单易用的h5 UI库，是从 [SUI Mobile](https://github.com/sdc-alibaba/SUI-Mobile) Fork 出来的一个版本。 官网地址： [http://www.light7.org/](http://www.light7.org/)
 
 # 下载
 
@@ -29,15 +29,14 @@
 
 # 关于作者
 
-[SUI Mobile](https://github.com/sdc-alibaba/SUI-Mobile) 和 [Framework7-Plus](https://github.com/sdc-fe/Framework7-Plus) 作者，Framework7 中文官网的创建者，前阿里巴巴国际UED前端。博客地址：http://blog.csdn.net/lihongxun945?viewmode=contents
-
+前阿里巴巴国际UED前端, 在阿里主要负责 [SUI Mobile](https://github.com/sdc-alibaba/SUI-Mobile) 和 [Framework7-Plus](https://github.com/sdc-fe/Framework7-Plus) 以及 [Framework7](http://framework7.taobao.org/) 。博客地址：http://blog.csdn.net/lihongxun945?viewmode=contents。
 
 # 关于 f7, sui 和 light7
 
-很多人没搞清楚这三者的关系。 
+很多人没搞清楚这三者的关系。
 
 F7 是国外大神写的一个UI库。SUI 是我在阿里的时候基于F7改造的，主要是提升兼容性以及更轻量化。
 
-现在因为离职了，不方便继续改阿里的东西。
+现在因为离职了，不方便继续改阿里的东西。 所以从SUI fork出了一个新的 light7。以后我个人只会维护 light7, SUI 属于阿里巴巴国际UED团队。
 
-所以从SUI fork出了一个新的 light7。虽然目前light7和SUI没区别，但是以后我只会维护 light7。SUI 的用户可以尽快转到light7。
+尊重版权，SUI Mobile & Framework7-cn 均是阿里巴巴国际UED团队的成果。
