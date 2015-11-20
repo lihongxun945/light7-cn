@@ -55,7 +55,7 @@
   }
 
   //加载一个页面,传入的参数是页面id或者url
-  Router.prototype.loadPage = function(url) {
+  Router.prototype.loadPage = function(url, noAnimation) {
 
     this.getPage(url, function(page) {
 
@@ -63,7 +63,8 @@
       this.pushBack({
         url: url,
         pageid: "#"+ pageid,
-        id: this.getCurrentStateID()
+        id: this.getCurrentStateID(),
+        animation: !noAnimation
       });
 
       //删除全部forward
@@ -85,38 +86,78 @@
 
       this.forwardStack  = [];  //clear forward stack
       
-      this.animatePages(this.getCurrentPage(), page);
+      this.animatePages(this.getCurrentPage(), page, null, noAnimation);
     });
   }
 
-  Router.prototype.animatePages = function (leftPage, rightPage, leftToRight) {
+  Router.prototype.animatePages = function (leftPage, rightPage, leftToRight, noTransition) {
     var removeClasses = 'page-left page-right page-from-center-to-left page-from-center-to-right page-from-right-to-center page-from-left-to-center';
-    if (!leftToRight) {
-      rightPage.trigger("pageAnimationStart", [rightPage[0].id, rightPage]);
-      leftPage.removeClass(removeClasses).addClass("page-from-center-to-left").removeClass('page-current');
-      rightPage.removeClass(removeClasses).addClass("page-from-right-to-center page-current");
-      rightPage.trigger("pageInitInternal", [rightPage[0].id, rightPage]);
+    if(noTransition) {
+      if (!leftToRight) {
+        rightPage.trigger("pageAnimationStart", [rightPage[0].id, rightPage]);
+        leftPage.removeClass(removeClasses).removeClass('page-current');
+        rightPage.removeClass(removeClasses).addClass("page-current");
+        rightPage.trigger("pageInitInternal", [rightPage[0].id, rightPage]);
 
-      leftPage.animationEnd(function() {
-        leftPage.removeClass(removeClasses);
-      });
-      rightPage.animationEnd(function() {
-        rightPage.removeClass(removeClasses);
-        rightPage.trigger("pageAnimationEnd", [rightPage[0].id, rightPage]);
-      });
+        if(rightPage.hasClass("no-tabbar")) {
+          $(document.body).addClass("tabbar-hidden");
+        } else {
+          $(document.body).removeClass("tabbar-hidden");
+        }
+      } else {
+        leftPage.trigger("pageAnimationStart", [rightPage[0].id, rightPage]);
+        rightPage.removeClass(removeClasses).removeClass('page-current');
+        leftPage.removeClass(removeClasses).addClass("page-current");
+
+        if(leftPage.hasClass("no-tabbar")) {
+          $(document.body).addClass("tabbar-hidden");
+        } else {
+          $(document.body).removeClass("tabbar-hidden");
+        }
+        rightPage.trigger("pageInitInternal", [leftPage[0].id, leftPage]);
+      }
     } else {
-      leftPage.trigger("pageAnimationStart", [rightPage[0].id, rightPage]);
-      rightPage.removeClass(removeClasses).addClass("page-from-center-to-right").removeClass('page-current');
-      leftPage.removeClass(removeClasses).addClass("page-from-left-to-center page-current");
-      leftPage.trigger("pageReinit", [leftPage[0].id, leftPage]);
+      if (!leftToRight) {
+        rightPage.trigger("pageAnimationStart", [rightPage[0].id, rightPage]);
+        leftPage.removeClass(removeClasses).addClass("page-from-center-to-left").removeClass('page-current');
+        rightPage.removeClass(removeClasses).addClass("page-from-right-to-center page-current");
 
-      leftPage.animationEnd(function() {
-        leftPage.removeClass(removeClasses);
-        leftPage.trigger("pageAnimationEnd", [leftPage[0].id, leftPage]);
-      });
-      rightPage.animationEnd(function() {
-        rightPage.removeClass(removeClasses);
-      });
+        leftPage.animationEnd(function() {
+          leftPage.removeClass(removeClasses);
+        });
+        rightPage.animationEnd(function() {
+          afterAnimation(rightPage);
+        });
+
+        if(rightPage.hasClass("no-tabbar")) {
+          $(document.body).addClass("tabbar-hidden");
+        } else {
+          $(document.body).removeClass("tabbar-hidden");
+        }
+        rightPage.trigger("pageInitInternal", [rightPage[0].id, rightPage]);
+      } else {
+        leftPage.trigger("pageAnimationStart", [rightPage[0].id, rightPage]);
+        rightPage.removeClass(removeClasses).addClass("page-from-center-to-right").removeClass('page-current');
+        leftPage.removeClass(removeClasses).addClass("page-from-left-to-center page-current");
+
+        leftPage.animationEnd(function() {
+          afterAnimation(leftPage);
+        });
+        rightPage.animationEnd(function() {
+          rightPage.removeClass(removeClasses);
+        });
+        if(leftPage.hasClass("no-tabbar")) {
+          $(document.body).addClass("tabbar-hidden");
+        } else {
+          $(document.body).removeClass("tabbar-hidden");
+        }
+        rightPage.trigger("pageInitInternal", [leftPage[0].id, leftPage]);
+      }
+    }
+
+    function afterAnimation(page) {
+      page.removeClass(removeClasses);
+      page.trigger("pageAnimationEnd", [page[0].id, page]);
     }
 
   }
@@ -145,23 +186,25 @@
   //后退
   Router.prototype._back = function() {
     var h = this.popBack();
+    if(!h) return;
     var currentPage = this.getCurrentPage();
     var newPage = $(h.pageid);
     if(!newPage[0]) return;
-    this.pushForward({url: location.href, pageid: "#"+currentPage[0].id, id: this.getCurrentStateID()});
+    this.pushForward({url: location.href, pageid: "#"+currentPage[0].id, id: this.getCurrentStateID(), animation: h.animation});
     this.setCurrentStateID(h.id);
-    this.animatePages(newPage, currentPage, true);
+    this.animatePages(newPage, currentPage, true, !h.animation);
   }
 
   //前进
   Router.prototype._forward = function() {
     var h = this.popForward();
+    if(!h) return;
     var currentPage = this.getCurrentPage();
     var newPage = $(h.pageid);
     if(!newPage[0]) return;
-    this.pushBack({url: location.href, pageid: "#"+currentPage[0].id, id: this.getCurrentStateID()});
+    this.pushBack({url: location.href, pageid: "#"+currentPage[0].id, id: this.getCurrentStateID(), animation: h.animation});
     this.setCurrentStateID(h.id);
-    this.animatePages(currentPage, newPage);
+    this.animatePages(currentPage, newPage, false, !h.animation);
   }
 
   Router.prototype.pushState = function(url, id) {
@@ -170,8 +213,9 @@
 
   Router.prototype.onpopstate = function(d) {
     var state = d.state;
-    if(!state) {//刷新再后退导致无法取到state
-      return;
+    if(!state) {//刷新再后退导致无法取到state，或者是刚从另一个域名跳过来
+      history.back();
+      return true;
     }
 
     if(state.id === this.getCurrentStateID()) {
@@ -215,8 +259,8 @@
   }
   Router.prototype.parseXHR = function(xhr) {
     var response = xhr.responseText;
-    var html  = response.match(/<body[^>]*>([\s\S.]*)<\/body>/i)[1];
-    if(!html) html = response;
+    var body = response.match(/<body[^>]*>([\s\S.]*)<\/body>/i);
+    var html = body ? body[1] : response;
     html = "<div>"+html+"</div>";
     var tmp = $(html);
 
@@ -295,7 +339,7 @@
       }
 
       if(!url || url === "#") return;
-      router.loadPage(url);
+      router.loadPage(url, $target.hasClass("no-transition"));
     })
   });
 }(Zepto);

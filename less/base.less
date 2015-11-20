@@ -88,9 +88,15 @@ a {
 }
 
 // Tab bar margin
-.bar-tab ~ .content {
+.bar-tab ~ .content,
+.bar-tab ~ .page .content {
   bottom: @bar-tab-height;
+
+  .tabbar-hidden & {
+    bottom: 0;
+  }
 }
+
 .bar-footer-secondary-tab ~ .content {
   bottom: (@bar-tab-height+@bar-base-height);
 }
