@@ -135,7 +135,7 @@
 
     </article>
 
-    <article class="component" id='toolbar'>
+    <article class="component" id='toolbar' data-url="toolbar">
       <h2 class="component-title">工具栏</h2>
 
       <p>工具栏一般会作为一级导航来切换几个主页面。这个时候你需要把它放到 <code>.page</code> 元素的同级。如果在某个页面中不需要显示工具栏，只需要在 <code>.page</code> 上增加一个 <code>.no-tabbar</code>即可，或者你可以通过调用 <code>$.showToolbar(true/false)</code> 来切换工具栏的显示状态。</p>
@@ -152,18 +152,7 @@
     <span class="tab-label">文案</span>
     <span class="badge">2</span>
   </a>
-  <a class="tab-item" href="#">
-    <span class="icon icon-star"></span>
-    <span class="tab-label">文案</span>
-  </a>
-  <a class="tab-item" href="#">
-    <span class="icon icon-cart"></span>
-    <span class="tab-label">文案</span>
-  </a>
-  <a class="tab-item" href="#">
-    <span class="icon icon-settings"></span>
-    <span class="tab-label">文案</span>
-  </a>
+  ....
 </nav>
 {% endhighlight %}
 
