@@ -1775,13 +1775,15 @@ Device/OS Detection
 
   var showTab = function (tab, tabLink, force) {
     var newTab = $(tab);
+
+    var activeClass = newTab.hasClass("page") ? "page-current" : "active";
     if (arguments.length === 2) {
       if (typeof tabLink === 'boolean') {
         force = tabLink;
       }
     }
     if (newTab.length === 0) return false;
-    if (newTab.hasClass('active')) {
+    if (newTab.hasClass(activeClass)) {
       if (force) newTab.trigger('show');
       return false;
     }
@@ -1795,9 +1797,9 @@ Device/OS Detection
       }*/
 
     // Remove active class from old tabs
-    var oldTab = tabs.children('.tab.active').removeClass('active');
+    var oldTab = tabs.children('.tab.'+activeClass).removeClass(activeClass);
     // Add active class to new tab
-    newTab.addClass('active');
+    newTab.addClass(activeClass);
     // Trigger 'show' event on new tab
     newTab.trigger('show');
 
@@ -1843,8 +1845,6 @@ Device/OS Detection
     if (tabLink && tabLink.length > 0) tabLink.addClass('active');
     if (oldTabLink && oldTabLink.length > 0) oldTabLink.removeClass('active');
 
-    //app.refreshScroller();
-
     return true;
   };
 
@@ -1862,6 +1862,31 @@ Device/OS Detection
     var clicked = $(this);
     showTab(clicked.data("tab") || clicked.attr('href'), clicked);
   });
+}(Zepto);
+
+/* global Zepto:true */
++function ($) {
+  "use strict";
+  $(document).on("click", ".tab-item", function(e) {
+    var $target = $(e.currentTarget);
+    if(!$target.hasClass("tab-link")) {
+      $target.parent().find(".active").removeClass("active");
+      $target.addClass("active");
+    }
+  });
+
+  var highlight = function(e, pageId) {
+    var $tab = $(".bar-tab .tab-item[href='#"+pageId+"']");
+    $tab.parent().find(".active").removeClass("active");
+    $tab.addClass("active");
+  };
+  $(document).on("pageInit", highlight);
+  $(document).on("pageReinit", highlight);
+
+  $.showToolbar = function(show) {
+    $(document.body)[show ? "removeClass" : "addClass"]("tabbar-hidden");
+  };
+
 }(Zepto);
 
 /*======================================================
@@ -5085,7 +5110,7 @@ Device/OS Detection
   }
 
   //加载一个页面,传入的参数是页面id或者url
-  Router.prototype.loadPage = function(url) {
+  Router.prototype.loadPage = function(url, noAnimation) {
 
     this.getPage(url, function(page) {
 
@@ -5093,7 +5118,8 @@ Device/OS Detection
       this.pushBack({
         url: url,
         pageid: "#"+ pageid,
-        id: this.getCurrentStateID()
+        id: this.getCurrentStateID(),
+        animation: !noAnimation
       });
 
       //删除全部forward
@@ -5115,38 +5141,78 @@ Device/OS Detection
 
       this.forwardStack  = [];  //clear forward stack
       
-      this.animatePages(this.getCurrentPage(), page);
+      this.animatePages(this.getCurrentPage(), page, null, noAnimation);
     });
   }
 
-  Router.prototype.animatePages = function (leftPage, rightPage, leftToRight) {
+  Router.prototype.animatePages = function (leftPage, rightPage, leftToRight, noTransition) {
     var removeClasses = 'page-left page-right page-from-center-to-left page-from-center-to-right page-from-right-to-center page-from-left-to-center';
-    if (!leftToRight) {
-      rightPage.trigger("pageAnimationStart", [rightPage[0].id, rightPage]);
-      leftPage.removeClass(removeClasses).addClass("page-from-center-to-left").removeClass('page-current');
-      rightPage.removeClass(removeClasses).addClass("page-from-right-to-center page-current");
-      rightPage.trigger("pageInitInternal", [rightPage[0].id, rightPage]);
+    if(noTransition) {
+      if (!leftToRight) {
+        rightPage.trigger("pageAnimationStart", [rightPage[0].id, rightPage]);
+        leftPage.removeClass(removeClasses).removeClass('page-current');
+        rightPage.removeClass(removeClasses).addClass("page-current");
+        rightPage.trigger("pageInitInternal", [rightPage[0].id, rightPage]);
 
-      leftPage.animationEnd(function() {
-        leftPage.removeClass(removeClasses);
-      });
-      rightPage.animationEnd(function() {
-        rightPage.removeClass(removeClasses);
-        rightPage.trigger("pageAnimationEnd", [rightPage[0].id, rightPage]);
-      });
+        if(rightPage.hasClass("no-tabbar")) {
+          $(document.body).addClass("tabbar-hidden");
+        } else {
+          $(document.body).removeClass("tabbar-hidden");
+        }
+      } else {
+        leftPage.trigger("pageAnimationStart", [rightPage[0].id, rightPage]);
+        rightPage.removeClass(removeClasses).removeClass('page-current');
+        leftPage.removeClass(removeClasses).addClass("page-current");
+
+        if(leftPage.hasClass("no-tabbar")) {
+          $(document.body).addClass("tabbar-hidden");
+        } else {
+          $(document.body).removeClass("tabbar-hidden");
+        }
+        rightPage.trigger("pageInitInternal", [leftPage[0].id, leftPage]);
+      }
     } else {
-      leftPage.trigger("pageAnimationStart", [rightPage[0].id, rightPage]);
-      rightPage.removeClass(removeClasses).addClass("page-from-center-to-right").removeClass('page-current');
-      leftPage.removeClass(removeClasses).addClass("page-from-left-to-center page-current");
-      leftPage.trigger("pageReinit", [leftPage[0].id, leftPage]);
+      if (!leftToRight) {
+        rightPage.trigger("pageAnimationStart", [rightPage[0].id, rightPage]);
+        leftPage.removeClass(removeClasses).addClass("page-from-center-to-left").removeClass('page-current');
+        rightPage.removeClass(removeClasses).addClass("page-from-right-to-center page-current");
 
-      leftPage.animationEnd(function() {
-        leftPage.removeClass(removeClasses);
-        leftPage.trigger("pageAnimationEnd", [leftPage[0].id, leftPage]);
-      });
-      rightPage.animationEnd(function() {
-        rightPage.removeClass(removeClasses);
-      });
+        leftPage.animationEnd(function() {
+          leftPage.removeClass(removeClasses);
+        });
+        rightPage.animationEnd(function() {
+          afterAnimation(rightPage);
+        });
+
+        if(rightPage.hasClass("no-tabbar")) {
+          $(document.body).addClass("tabbar-hidden");
+        } else {
+          $(document.body).removeClass("tabbar-hidden");
+        }
+        rightPage.trigger("pageInitInternal", [rightPage[0].id, rightPage]);
+      } else {
+        leftPage.trigger("pageAnimationStart", [rightPage[0].id, rightPage]);
+        rightPage.removeClass(removeClasses).addClass("page-from-center-to-right").removeClass('page-current');
+        leftPage.removeClass(removeClasses).addClass("page-from-left-to-center page-current");
+
+        leftPage.animationEnd(function() {
+          afterAnimation(leftPage);
+        });
+        rightPage.animationEnd(function() {
+          rightPage.removeClass(removeClasses);
+        });
+        if(leftPage.hasClass("no-tabbar")) {
+          $(document.body).addClass("tabbar-hidden");
+        } else {
+          $(document.body).removeClass("tabbar-hidden");
+        }
+        rightPage.trigger("pageInitInternal", [leftPage[0].id, leftPage]);
+      }
+    }
+
+    function afterAnimation(page) {
+      page.removeClass(removeClasses);
+      page.trigger("pageAnimationEnd", [page[0].id, page]);
     }
 
   }
@@ -5175,23 +5241,25 @@ Device/OS Detection
   //后退
   Router.prototype._back = function() {
     var h = this.popBack();
+    if(!h) return;
     var currentPage = this.getCurrentPage();
     var newPage = $(h.pageid);
     if(!newPage[0]) return;
-    this.pushForward({url: location.href, pageid: "#"+currentPage[0].id, id: this.getCurrentStateID()});
+    this.pushForward({url: location.href, pageid: "#"+currentPage[0].id, id: this.getCurrentStateID(), animation: h.animation});
     this.setCurrentStateID(h.id);
-    this.animatePages(newPage, currentPage, true);
+    this.animatePages(newPage, currentPage, true, !h.animation);
   }
 
   //前进
   Router.prototype._forward = function() {
     var h = this.popForward();
+    if(!h) return;
     var currentPage = this.getCurrentPage();
     var newPage = $(h.pageid);
     if(!newPage[0]) return;
-    this.pushBack({url: location.href, pageid: "#"+currentPage[0].id, id: this.getCurrentStateID()});
+    this.pushBack({url: location.href, pageid: "#"+currentPage[0].id, id: this.getCurrentStateID(), animation: h.animation});
     this.setCurrentStateID(h.id);
-    this.animatePages(currentPage, newPage);
+    this.animatePages(currentPage, newPage, false, !h.animation);
   }
 
   Router.prototype.pushState = function(url, id) {
@@ -5200,8 +5268,9 @@ Device/OS Detection
 
   Router.prototype.onpopstate = function(d) {
     var state = d.state;
-    if(!state) {//刷新再后退导致无法取到state
-      return;
+    if(!state) {//刷新再后退导致无法取到state，或者是刚从另一个域名跳过来
+      history.back();
+      return true;
     }
 
     if(state.id === this.getCurrentStateID()) {
@@ -5245,8 +5314,8 @@ Device/OS Detection
   }
   Router.prototype.parseXHR = function(xhr) {
     var response = xhr.responseText;
-    var html  = response.match(/<body[^>]*>([\s\S.]*)<\/body>/i)[1];
-    if(!html) html = response;
+    var body = response.match(/<body[^>]*>([\s\S.]*)<\/body>/i);
+    var html = body ? body[1] : response;
     html = "<div>"+html+"</div>";
     var tmp = $(html);
 
@@ -5325,7 +5394,7 @@ Device/OS Detection
       }
 
       if(!url || url === "#") return;
-      router.loadPage(url);
+      router.loadPage(url, $target.hasClass("no-transition"));
     })
   });
 }(Zepto);
@@ -5380,8 +5449,13 @@ Device/OS Detection
   $.init = function() {
     var $page = getPage();
     var id = $page[0].id;
-    $.initPage();
-    $page.trigger("pageInit", [id, $page]);
+    if($page.hasClass("page-inited")) {
+      $page.trigger("pageReinit", [id, $page]);
+    } else {
+      $.initPage();
+      $page.addClass("page-inited");
+      $page.trigger("pageInit", [id, $page]);
+    }
   };
 
   $(function() {
@@ -5389,7 +5463,7 @@ Device/OS Detection
       $.init();
     }
 
-    $(document).on("pageInitInternal", function(e, id, page) {
+    $(document).on("pageInitInternal", function(e, id, $page) {
       $.init();
     });
   });

@@ -52,15 +52,15 @@
       <nav class="docs-nav clearfix">
         <a class="docs-nav-trigger icon icon-menu pull-right js-docs-nav-trigger" href="#"></a>
         <div class="docs-nav-group">
-          <a class="docs-nav-item" href="/" data-ignore="push">首页</a>
-          <a class="docs-nav-item" href="/getting-started" data-ignore="push">开始使用</a>
-          <a class="docs-nav-item" href="/components" data-ignore="push">基础组件</a>
-          <a class="docs-nav-item" href="/extends" data-ignore="push">拓展组件</a>
-          <a class="docs-nav-item" href="https://github.com/lihongxun945/light7/archive/build.zip" data-ignore="push" target="_blank">下载</a>
-          <a class="docs-nav-item" href="/demos" data-ignore="push">示例</a>
-          <a class="docs-nav-item" href="/changelog" data-ignore="push">更新日志</a>
-          <a class="docs-nav-item" href="/about" data-ignore="push">关于</a>
-          <a class="docs-nav-item" href="https://github.com/lihongxun945/light7" target="_blank" data-ignore="push">github</a>
+          <a class="docs-nav-item" href="/">首页</a>
+          <a class="docs-nav-item" href="/getting-started" >开始使用</a>
+          <a class="docs-nav-item" href="/components">基础组件</a>
+          <a class="docs-nav-item" href="/extends">拓展组件</a>
+          <a class="docs-nav-item" href="/examples">案例</a>
+          <a class="docs-nav-item" href="https://github.com/lihongxun945/light7/archive/build.zip" target="_blank">下载</a>
+          <a class="docs-nav-item" href="/changelog">更新日志</a>
+          <a class="docs-nav-item" href="https://github.com/lihongxun945/light7" target="_blank">github</a>
+          <a class="docs-nav-item" href="/about">关于</a>
         </div>
       </nav>
     </div>
@@ -182,7 +182,7 @@
   <h2 class="component-title">rem</h2>
   <p>rem 是相对于 <code>html</code> 元素的 <code>font-size</code> 的一个单位。如果 html 上定义了 <code>font-size: 20px;</code>，则无论在任何地方都是 <code>1rem = 20px</code> 这个大小不会受到父元素的影响。</p>
   <p class="component-description">我们统一使用rem对页面进行整体缩放。强烈建议大家对需要适应页面大小的任何元素都使用 rem 为单位来定义。</p>
-  <p>事实上，除了 <code>border-width</code> 之外，MSUI中已经没有用到px单位的地方。</p>
+  <p>事实上，除了 <code>border-width</code> 之外，Light7中已经没有用到px单位的地方。</p>
 
   <p>我们在 iphone6 上使用 <code>1rem = 20px</code> 来换算。小于 375px 的设备上不做缩小处理，对 大于 375px 宽度的设备进行等比缩放。</p>
 
@@ -435,8 +435,8 @@
     <article class="component" id='toolbar'>
       <h2 class="component-title">工具栏</h2>
 
-      <div class="component-example component-example-fullbleed">
-      </div>
+      <p>工具栏一般会作为一级导航来切换几个主页面。这个时候你需要把它放到 <code>.page</code> 元素的同级。如果在某个页面中不需要显示工具栏，只需要在 <code>.page</code> 上增加一个 <code>.no-tabbar</code>即可，或者你可以通过调用 <code>$.showToolbar(true/false)</code> 来切换工具栏的显示状态。</p>
+      <p>注意如果你通过路由器进行切换，用来切换的几个页面一定要是内联页面，不然会造成重复加载的问题，具体用法参见 <a href="/examples/light7-mall/">light7商城</a>。</p>
 
 <div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"bar bar-tab"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"tab-item active"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>
@@ -462,7 +462,6 @@
   <span class="nt">&lt;/a&gt;</span>
 <span class="nt">&lt;/nav&gt;</span></code></pre></div>
 
-    <p class="component-note touch-only"><strong>注意:</strong> 使用 push.js 加载新页面</p>
 </article>
 <article class="component">
     <h3 class="component-title">工具栏 (只有文案)</h3>
@@ -490,7 +489,6 @@
   文案
 <span class="nt">&lt;/a&gt;</span>
   <span class="nt">&lt;/nav&gt;</span></code></pre></div>
-    <p class="component-note touch-only"><strong>注意:</strong> 使用 push.js 加载新页面.</p>
 </article>
 <article class="component">
     <h3 class="component-title">二级标题栏</h3>
@@ -2287,7 +2285,7 @@
   <p>toast 组件后续会支持不同的情景，包括操作成功、操作失败等，显示出不同的颜色</p>
 </article>
 
-  <article class="component active" id='popup'>
+  <article class="component active" id='popup' data-url="popup">
   <h2 class="component-title">Popup</h2>
   <p class="component-description">Popup 是一种可以包含任何Html内容的弹出窗口，从App的主内容区域上弹出。 Popup 和其他所有的遮罩图层一样，是所谓的“临时视图”的一部分。</p>
   <h3 class="component-title">Popup 布局</h3>
@@ -2297,52 +2295,29 @@
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"popup"</span><span class="nt">&gt;</span>
     Any HTML content goes here
   <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre></div>
+<span class="nt">&lt;/div&gt;</span>  
+
+  <span class="nt">&lt;p&gt;</span>注意，不要把 <span class="nt">&lt;code&gt;</span>popup<span class="nt">&lt;/code&gt;</span> 放到 <span class="nt">&lt;code&gt;</span>page<span class="nt">&lt;/code&gt;</span> 里面！他们是同级的关系，不是包含关系。<span class="nt">&lt;/p&gt;</span></code></pre></div>
     <h3 class="component-title">打开和关闭 Popup</h3>
     <h4 class="component-title">通过HTML</h4>
     <p class="component-description">可以通过在链接上使用特定的类和data属性打开和关闭所需的popups：</p>
     <ul>
-      <li>为了打开popup，我们需要添加 "open-popup" 类到任意 HTML 元素上 (最好是链接)</li>
-      <li>为了关闭popup，我们需要添加 "close-popup" 类到任意 HTML 元素上 (最好是链接)</li>
-      <li>如果你的App里有超过一个popups, 你需要指定适当popup，则需添加额外的属性 data-popup=".my-popup" 到这个 HTML 元素上</li>
+      <li>为了打开popup，我们需要添加 <code>open-popup</code> 类到任意 HTML 元素上 (最好是链接)</li>
+      <li>为了关闭popup，我们需要添加 <code>close-popup</code> 类到任意 HTML 元素上 (最好是链接)</li>
+      <li>如果你的App里有超过一个popups, 你需要指定适当popup，则需添加额外的属性 <code>data-popup=".my-popup"</code> 到这个 HTML 元素上</li>
     </ul>
-    <p class="component-description">根据上面的注意点：</p>
-    <div class="component-example component-example-fullbleed">
-      <div class="">
-        <div class="content-block">
-          <!-- In data-popup attribute we specify CSS selector of popup we need to open -->
-          <p><a href="#" data-popup=".popup-about" class="open-popup">Open About Popup </a></p>
-          <p><a href="#" data-popup=".popup-services" class="open-popup">Open Services Popup </a></p>
-        </div>
-      </div>
-     <!-- About Popup -->
-      <div class="popup popup-about">
-        <div class="content-block">
-          <p>About</p>
-          <p><a href="#" class="close-popup">Close popup</a></p>
-          <p>Lorem ipsum dolor ...</p>
-        </div>
-      </div>
-      <!-- Services Popup -->
-      <div class="popup popup-services">
-        <div class="content-block">
-          <p>Services</p>
-          <p><a href="#" class="close-popup">Close popup</a></p>
-          <p>Lorem ipsum dolor ...</p>
-        </div>
-      </div>
-    </div>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span>Popup(HTML)<span class="nt">&lt;/h1&gt;</span>
-<span class="nt">&lt;/header&gt;</span>
-...
-<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content-block"</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;p&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"open-about"</span><span class="nt">&gt;</span>Open About Popup <span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
-      <span class="nt">&lt;p&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"open-services"</span><span class="nt">&gt;</span>Open Services Popup <span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
-       
-<span class="nt">&lt;/div&gt;</span> 
+    <p class="component-description">代码如下：</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"page"</span><span class="nt">&gt;</span>
+  ...
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content-block"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;p&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"open-popup open-about"</span> <span class="na">data-popup=</span><span class="s">".popup-about"</span><span class="nt">&gt;</span>Open About Popup <span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
+        <span class="nt">&lt;p&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"open-popup open-services"</span> <span class="na">data-popup=</span><span class="s">".popup-services"</span><span class="nt">&gt;</span>Open Services Popup <span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+         
+  <span class="nt">&lt;/div&gt;</span> 
+  ...
+<span class="nt">&lt;/div&gt;</span>
 <span class="c">&lt;!-- About Popup --&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"popup popup-about"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content-block"</span><span class="nt">&gt;</span>
@@ -2372,40 +2347,6 @@
   <ul>
     <li><code>popup - HTML元素 或者 字符串 (需要打开的popup的 CSS 选择器)</code>. 可选. 如果没有设置这个值，任何打开着的Popup/Modal 都将被关闭</li>
   </ul>
-  <div class="component-example component-example-fullbleed">
-    <div class="">
-      <div class="content-block">
-        <p><a href="#" class="open-about">Open About Popup </a></p>
-        <p><a href="#" class="open-services">Open Services Popup </a></p>
-      </div>
-      
-      <script type="text/javascript">
-        $(document).on('click','.open-about', function () {
-          $.popup('.popup-about');
-        });
-         
-        $(document).on('click','.open-services', function () {
-          $.popup('.popup-services');
-        });          
-      </script>    
-    </div>
-   <!-- About Popup -->
-    <div class="popup popup-about">
-      <div class="content-block">
-        <p>About</p>
-        <p><a href="#" class="close-popup">Close popup</a></p>
-        <p>Lorem ipsum dolor ...</p>
-      </div>
-    </div>
-    <!-- Services Popup -->
-    <div class="popup popup-services">
-      <div class="content-block">
-        <p>Services</p>
-        <p><a href="#" class="close-popup">Close popup</a></p>
-        <p>Lorem ipsum dolor ...</p>
-      </div>
-    </div>
-  </div>
 <div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span>Popup(JavaScript)<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;/header&gt;</span>
@@ -3933,6 +3874,10 @@ $(function() {
   <p class="component-description">现在有一个全新的路由代替了以前的 push.js。 这个路由支持在同一个html中内联多个页面，ajax加载新页面，前进和后退操作。</p>
   <p>默认情况下，router 会自动拦截所有的链接点击事件，如果你希望一个链接通过浏览器原生跳转而不使用 router，你可以在连接上增加一个 <code>class="external"</code> 或者 <code>external</code></p>
   <p>你也可以通过 `$.config.router` 参数来全局关闭路由器，参见 <a href="#init">初始化</a>。即使关闭了路由器，也强烈建议通过 `pageInit` 事件来初始化页面，因为这样可以保证你随时可以打开路由器而不用修改任何JS代码。</p>
+
+  <p>默认情况下，加载新的页面会从右向左滑动，后退会从左向右滑动。如果你想关掉加载动画，只需要在链接上加上 <code>class="no-transition"</code> 即可</p>
+
+  <p>注意如果你希望点击工具栏切换页面，一定要用内联页面进行切换，不然会造成重复加载的问题，具体用法参见 <a href="/examples/light7-mall/">light7商城</a>。</p>
 
   <h3 class="component-title">内联页面</h3>
   <p class="component-description">你可以在同一个HTML文件中内联编写多个页面。每一个页面都是一个 <code>.page</code> 容器，如果有多个页面，则需要用 <code>.page-current</code> 标记出第一次进入的时候应该显示的页面。</p>

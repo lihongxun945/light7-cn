@@ -322,8 +322,13 @@ a:active {
 .bar-footer-secondary ~ .content {
   bottom: 4.4rem;
 }
-.bar-tab ~ .content {
+.bar-tab ~ .content,
+.bar-tab ~ .page .content {
   bottom: 2.5rem;
+}
+.tabbar-hidden .bar-tab ~ .content,
+.tabbar-hidden .bar-tab ~ .page .content {
+  bottom: 0;
 }
 .bar-footer-secondary-tab ~ .content {
   bottom: 4.7rem;
@@ -1106,10 +1111,14 @@ i.icon.icon-plus {
 }
 .bar-tab {
   bottom: 0;
+  z-index: 9000;
   width: 100%;
   height: 2.5rem;
   padding: 0;
   table-layout: fixed;
+  -webkit-transition-duration: 400ms;
+       -o-transition-duration: 400ms;
+          transition-duration: 400ms;
 }
 .bar-tab:before {
   position: absolute;
@@ -1190,6 +1199,10 @@ i.icon.icon-plus {
   top: .15rem;
   display: block;
   font-size: .55rem;
+}
+.tabbar-hidden .bar-tab {
+  -webkit-transform: translate3d(0, 110%, 0);
+          transform: translate3d(0, 110%, 0);
 }
 .bar .button {
   position: relative;
@@ -5260,6 +5273,10 @@ html:not(.watch-active-state) .theme-dark label.label-radio:active,
 }
 .theme-dark .buttons-tab .tab-link:not(.active) {
   color: #ddd;
+}
+.theme-dark .popup,
+.theme-dark.popup {
+  background: #222426;
 }
 /* === White layout === */
 .theme-white .navbar,
