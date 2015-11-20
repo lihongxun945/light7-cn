@@ -95,7 +95,15 @@
    
   $.fn.datetimePicker = function(params) {
     return this.each(function() {
+
       if(!this) return;
+
+      params = params || {};
+      var inputValue = $(this).val();
+      if(params.value === undefined && inputValue != "") {
+        params.value = [].concat(inputValue.split(" ")[0].split("-"), inputValue.split(" ")[1].split(":"));
+      }
+
       var p = $.extend(defaults, params);
       $(this).picker(p);
     });
