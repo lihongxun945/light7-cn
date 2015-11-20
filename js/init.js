@@ -47,8 +47,13 @@
   $.init = function() {
     var $page = getPage();
     var id = $page[0].id;
-    $.initPage();
-    $page.trigger("pageInit", [id, $page]);
+    if($page.hasClass("page-inited")) {
+      $page.trigger("pageReinit", [id, $page]);
+    } else {
+      $.initPage();
+      $page.addClass("page-inited");
+      $page.trigger("pageInit", [id, $page]);
+    }
   };
 
   $(function() {
@@ -56,7 +61,7 @@
       $.init();
     }
 
-    $(document).on("pageInitInternal", function(e, id, page) {
+    $(document).on("pageInitInternal", function(e, id, $page) {
       $.init();
     });
   });

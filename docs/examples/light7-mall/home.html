@@ -4,27 +4,28 @@ title: SUI Mobile Demo
 ---
 
 <nav class="bar bar-tab">
-  <a class="tab-item active no-transition" href='#home-page'>
+  <a class="tab-item active no-transition" href='#page-home'>
     <span class="icon icon-home"></span>
     <span class="tab-label">首页</span>
   </a>
-  <a class="tab-item no-transition" href="#goods-page">
+  <a class="tab-item no-transition" href="#page-goods">
     <span class="icon icon-app"></span>
     <span class="tab-label">商品</span>
   </a>
-  <a class="tab-item no-transition" href="#settings-page">
+  <a class="tab-item no-transition" href="#page-settings">
     <span class="icon icon-me"></span>
     <span class="tab-label">我的</span>
   </a>
 </nav>
 
-<div class="page page-current" id="home-page">
+<div class="page page-home page-current" id="page-home">
   <header class="bar bar-nav">
+    <a class="icon icon-settings pull-left open-panel"></a>
     <a class="button button-link button-nav pull-right open-popup" data-popup=".popup-about">
       关于
       <span class="icon icon-menu"></span>
     </a>
-    <h1 class="title">Light7演示App</h1>
+    <h1 class="title">Light7 商城</h1>
   </header>
   <div class="content pull-to-refresh-content page-home infinite-scroll">
     <style>
@@ -115,7 +116,7 @@ title: SUI Mobile Demo
     </div>
   </div>
 </div>
-<div id="goods-page" class="page">
+<div id="page-goods" class="page page-goods">
   <div class="content infinite-scroll">
     <div class="swiper-container swiper-container-horizontal" data-space-between="10">
       <div class="swiper-wrapper">
@@ -219,7 +220,7 @@ title: SUI Mobile Demo
     </div>
   </div>
 </div>
-<div id="settings-page" class="page">
+<div id="page-settings" class="page page-settings">
   <header class="bar bar-nav">
     <h1 class="title">设置</h1>
   </header>
@@ -304,8 +305,33 @@ title: SUI Mobile Demo
 
 <div class="popup popup-about">
   <div class="content-block">
-    <h2 class="text-center">关于 Light7</h2>
-    <p>待完善</p>
+    <h2 class="text-center">关于 Light7商城</h2>
+    <p>这是一个演示APP，你可以参考这个APP中Light7的用法，也可以直接以这个APP为基础开发自己的APP。</p>
     <p><a href="#" class="button close-popup">确定</a></p>
+  </div>
+</div>
+
+<div class="panel-overlay"></div>
+<!-- Left Panel with Reveal effect -->
+<div class="panel panel-left panel-reveal theme-dark" id='panel-themes'>
+  <div class="content-block">
+    <p>换肤</p>
+    <div class="list-block">
+      <ul>
+        <li>
+          <div class="item-content">
+            <div class="item-inner">
+              <div class="item-title label" style='width: 60%;'>夜间模式</div>
+              <div class="item-input">
+                <label class="label-switch">
+                  <input type="checkbox" id="dark-switch">
+                  <div class="checkbox"></div>
+                </label>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
