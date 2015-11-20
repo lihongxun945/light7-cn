@@ -138,8 +138,8 @@
     <article class="component" id='toolbar'>
       <h2 class="component-title">工具栏</h2>
 
-      <div class="component-example component-example-fullbleed">
-      </div>
+      <p>工具栏一般会作为一级导航来切换几个主页面。这个时候你需要把它放到 <code>.page</code> 元素的同级。如果在某个页面中不需要显示工具栏，只需要在 <code>.page</code> 上增加一个 <code>.no-tabbar</code>即可，或者你可以通过调用 <code>$.showToolbar(true/false)</code> 来切换工具栏的显示状态。</p>
+      <p>注意如果你通过路由器进行切换，用来切换的几个页面一定要是内联页面，不然会造成重复加载的问题，具体用法参见 <a href="/examples/light7-mall/">light7商城</a>。</p>
 
 {% highlight html %}
 <nav class="bar bar-tab">
@@ -167,7 +167,6 @@
 </nav>
 {% endhighlight %}
 
-    <p class="component-note touch-only"><strong>注意:</strong> 使用 push.js 加载新页面</p>
 </article>
 <article class="component">
     <h3 class="component-title">工具栏 (只有文案)</h3>
@@ -197,7 +196,6 @@
 </a>
   </nav>
   {% endhighlight %}
-    <p class="component-note touch-only"><strong>注意:</strong> 使用 push.js 加载新页面.</p>
 </article>
 <article class="component">
     <h3 class="component-title">二级标题栏</h3>

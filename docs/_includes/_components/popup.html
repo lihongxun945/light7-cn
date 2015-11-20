@@ -1,4 +1,4 @@
-<article class="component active" id='popup'>
+<article class="component active" id='popup' data-url="popup">
   <h2 class="component-title">Popup</h2>
   <p class="component-description">Popup 是一种可以包含任何Html内容的弹出窗口，从App的主内容区域上弹出。 Popup 和其他所有的遮罩图层一样，是所谓的“临时视图”的一部分。</p>
   <h3 class="component-title">Popup 布局</h3>
@@ -10,53 +10,30 @@
     Any HTML content goes here
   </div>
 </div>  
+
+  <p>注意，不要把 <code>popup</code> 放到 <code>page</code> 里面！他们是同级的关系，不是包含关系。</p>
 {% endhighlight %}
     <h3 class="component-title">打开和关闭 Popup</h3>
     <h4 class="component-title">通过HTML</h4>
     <p class="component-description">可以通过在链接上使用特定的类和data属性打开和关闭所需的popups：</p>
     <ul>
-      <li>为了打开popup，我们需要添加 "open-popup" 类到任意 HTML 元素上 (最好是链接)</li>
-      <li>为了关闭popup，我们需要添加 "close-popup" 类到任意 HTML 元素上 (最好是链接)</li>
-      <li>如果你的App里有超过一个popups, 你需要指定适当popup，则需添加额外的属性 data-popup=".my-popup" 到这个 HTML 元素上</li>
+      <li>为了打开popup，我们需要添加 <code>open-popup</code> 类到任意 HTML 元素上 (最好是链接)</li>
+      <li>为了关闭popup，我们需要添加 <code>close-popup</code> 类到任意 HTML 元素上 (最好是链接)</li>
+      <li>如果你的App里有超过一个popups, 你需要指定适当popup，则需添加额外的属性 <code>data-popup=".my-popup"</code> 到这个 HTML 元素上</li>
     </ul>
-    <p class="component-description">根据上面的注意点：</p>
-    <div class="component-example component-example-fullbleed">
-      <div class="">
-        <div class="content-block">
-          <!-- In data-popup attribute we specify CSS selector of popup we need to open -->
-          <p><a href="#" data-popup=".popup-about" class="open-popup">Open About Popup </a></p>
-          <p><a href="#" data-popup=".popup-services" class="open-popup">Open Services Popup </a></p>
-        </div>
-      </div>
-     <!-- About Popup -->
-      <div class="popup popup-about">
-        <div class="content-block">
-          <p>About</p>
-          <p><a href="#" class="close-popup">Close popup</a></p>
-          <p>Lorem ipsum dolor ...</p>
-        </div>
-      </div>
-      <!-- Services Popup -->
-      <div class="popup popup-services">
-        <div class="content-block">
-          <p>Services</p>
-          <p><a href="#" class="close-popup">Close popup</a></p>
-          <p>Lorem ipsum dolor ...</p>
-        </div>
-      </div>
-    </div>
+    <p class="component-description">代码如下：</p>
 {% highlight html %}  
-<header class="bar bar-nav">
-    <h1 class="title">Popup(HTML)</h1>
-</header>
-...
-<div class="content">
-    <div class="content-block">
-      <p><a href="#" class="open-about">Open About Popup </a></p>
-      <p><a href="#" class="open-services">Open Services Popup </a></p>
-    </div>
-       
-</div> 
+<div class="page">
+  ...
+  <div class="content">
+      <div class="content-block">
+        <p><a href="#" class="open-popup open-about" data-popup=".popup-about">Open About Popup </a></p>
+        <p><a href="#" class="open-popup open-services" data-popup=".popup-services">Open Services Popup </a></p>
+      </div>
+         
+  </div> 
+  ...
+</div>
 <!-- About Popup -->
 <div class="popup popup-about">
   <div class="content-block">
@@ -87,40 +64,6 @@
   <ul>
     <li><code>popup - HTML元素 或者 字符串 (需要打开的popup的 CSS 选择器)</code>. 可选. 如果没有设置这个值，任何打开着的Popup/Modal 都将被关闭</li>
   </ul>
-  <div class="component-example component-example-fullbleed">
-    <div class="">
-      <div class="content-block">
-        <p><a href="#" class="open-about">Open About Popup </a></p>
-        <p><a href="#" class="open-services">Open Services Popup </a></p>
-      </div>
-      
-      <script type="text/javascript">
-        $(document).on('click','.open-about', function () {
-          $.popup('.popup-about');
-        });
-         
-        $(document).on('click','.open-services', function () {
-          $.popup('.popup-services');
-        });          
-      </script>    
-    </div>
-   <!-- About Popup -->
-    <div class="popup popup-about">
-      <div class="content-block">
-        <p>About</p>
-        <p><a href="#" class="close-popup">Close popup</a></p>
-        <p>Lorem ipsum dolor ...</p>
-      </div>
-    </div>
-    <!-- Services Popup -->
-    <div class="popup popup-services">
-      <div class="content-block">
-        <p>Services</p>
-        <p><a href="#" class="close-popup">Close popup</a></p>
-        <p>Lorem ipsum dolor ...</p>
-      </div>
-    </div>
-  </div>
 {% highlight html %}  
 <header class="bar bar-nav">
     <h1 class="title">Popup(JavaScript)</h1>

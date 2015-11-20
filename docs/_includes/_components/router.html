@@ -4,6 +4,10 @@
   <p>默认情况下，router 会自动拦截所有的链接点击事件，如果你希望一个链接通过浏览器原生跳转而不使用 router，你可以在连接上增加一个 <code>class="external"</code> 或者 <code>external</code></p>
   <p>你也可以通过 `$.config.router` 参数来全局关闭路由器，参见 <a href="#init">初始化</a>。即使关闭了路由器，也强烈建议通过 `pageInit` 事件来初始化页面，因为这样可以保证你随时可以打开路由器而不用修改任何JS代码。</p>
 
+  <p>默认情况下，加载新的页面会从右向左滑动，后退会从左向右滑动。如果你想关掉加载动画，只需要在链接上加上 <code>class="no-transition"</code> 即可</p>
+
+  <p>注意如果你希望点击工具栏切换页面，一定要用内联页面进行切换，不然会造成重复加载的问题，具体用法参见 <a href="/examples/light7-mall/">light7商城</a>。</p>
+
   <h3 class="component-title">内联页面</h3>
   <p class="component-description">你可以在同一个HTML文件中内联编写多个页面。每一个页面都是一个 <code>.page</code> 容器，如果有多个页面，则需要用 <code>.page-current</code> 标记出第一次进入的时候应该显示的页面。</p>
   <p>每一个 <code>.page</code> 容器都应该有一个全局唯一的id，路由器会使用这个id作为唯一标示，如果没有设置id，可能会导致路由出错。你只需要这样写一个链接就可以跳转到id对应的内联页面 <code>&lt;a href='#{page-id}'&gt;跳转&lt;/a&gt;</code>.</p>

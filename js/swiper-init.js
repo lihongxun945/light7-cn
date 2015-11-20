@@ -26,6 +26,7 @@ Framework7 Swiper Additions
             else {
                 params = swiper.dataset();
             }
+            $.swiper(swiper[0], params);
         }
     };
     $.reinitSwiper = function (pageContainer) {
