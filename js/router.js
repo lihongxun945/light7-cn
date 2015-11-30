@@ -226,8 +226,7 @@
   Router.prototype.onpopstate = function(d) {
     console.log("popstate");
     var state = d.state;
-    if(!state) {//刷新再后退导致无法取到state，或者是刚从另一个域名跳过来
-      //history.back();
+    if(!state) {
       return true;
     }
 
