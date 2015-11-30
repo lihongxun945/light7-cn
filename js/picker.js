@@ -619,7 +619,7 @@
       if(!picker) {
         params = params || {};
         var inputValue = $this.val();
-        if(params.value === undefined && inputValue != "") {
+        if(params.value === undefined && inputValue !== "") {
           params.value = params.cols.length > 1 ? inputValue.split(" ") : [inputValue];
         }
         var p = $.extend({input: this}, params);
