@@ -37,7 +37,7 @@
 
     rotateEffect: false,  //为了性能
 
-    value: [today.getFullYear(), formatNumber(today.getMonth()+1), today.getDate(), today.getHours(), formatNumber(today.getMinutes())],
+    value: [today.getFullYear(), formatNumber(today.getMonth()+1), today.getDate(), formatNumber(today.getHours()), formatNumber(today.getMinutes())],
 
     onChange: function (picker, values, displayValues) {
       var days = getDaysByMonthAndYear(picker.cols[1].value, picker.cols[0].value);
@@ -73,7 +73,7 @@
       {
         values: (function () {
           var arr = [];
-          for (var i = 0; i <= 23; i++) { arr.push(i); }
+          for (var i = 0; i <= 23; i++) { arr.push(formatNumber(i)); }
           return arr;
         })(),
       },
@@ -86,7 +86,7 @@
       {
         values: (function () {
           var arr = [];
-          for (var i = 0; i <= 59; i++) { arr.push(i < 10 ? '0' + i : i); }
+          for (var i = 0; i <= 59; i++) { arr.push(formatNumber(i)); }
           return arr;
         })(),
       }

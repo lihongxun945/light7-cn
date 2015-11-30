@@ -2,6 +2,8 @@
 
 简单易用的h5 UI库，是从 [SUI Mobile](https://github.com/sdc-alibaba/SUI-Mobile) Fork 出来的一个版本。 官网地址： [http://www.light7.org/](http://www.light7.org/)
 
+**官网以为没有备案，服务器还在国外，国内可以暂时用 [http://123.56.245.102/](http://123.56.245.102/)**
+
 # 下载
 
 建议下载源码自行编译。如果不想编译，你也可以直接切换到 `build` 分支，这个分支包含全部的编译后的JS,CSS和文档。或者直接点击 [这里下载](https://github.com/lihongxun945/light7/archive/build.zip).

@@ -12,6 +12,9 @@
   <p class="component-description">你可以在同一个HTML文件中内联编写多个页面。每一个页面都是一个 <code>.page</code> 容器，如果有多个页面，则需要用 <code>.page-current</code> 标记出第一次进入的时候应该显示的页面。</p>
   <p>每一个 <code>.page</code> 容器都应该有一个全局唯一的id，路由器会使用这个id作为唯一标示，如果没有设置id，可能会导致路由出错。你只需要这样写一个链接就可以跳转到id对应的内联页面 <code>&lt;a href='#{page-id}'&gt;跳转&lt;/a&gt;</code>.</p>
 
+  <h3 class="component-title">JS和CSS等脚本问题</h3>
+  <p>当通过ajax加载新页面的时候，路由器会自动忽略新页面的JS和CSS脚本。所以请把全部页面的脚本都打包到入口页面。在demo中我们每个页面都引用了相同的脚本，是为了在子页面刷新的时候也可以用。</p>
+
 {% highlight html %}
 <div class="page page-current" id='router'>
   <header class="bar bar-nav">
