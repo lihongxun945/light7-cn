@@ -43,11 +43,11 @@
       currentPage = newCurrentPage;
     }
 
-    //第一次打开的时候需要pushstate，不这么做，刷新之后第一次加载新页面会无法后退
+    //第一次加载的时候，初识话当前页面的state
     var state = history.state;
     if(!state) {
       var id = this.genStateID();
-      this.pushState(location.href, id);
+      this.replaceState(location.href, id);
       this.setCurrentStateID(id);
     }
 
@@ -219,11 +219,15 @@
     history.pushState({url: url, id: id}, '', url);
   }
 
+  Router.prototype.replaceState = function(url, id) {
+    history.replaceState({url: url, id: id}, '', url);
+  }
+
   Router.prototype.onpopstate = function(d) {
     console.log("popstate");
     var state = d.state;
     if(!state) {//刷新再后退导致无法取到state，或者是刚从另一个域名跳过来
-      history.back();
+      //history.back();
       return true;
     }
 
