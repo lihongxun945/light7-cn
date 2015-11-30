@@ -51,7 +51,15 @@
       this.setCurrentStateID(id);
     }
 
-    window.addEventListener('popstate', $.proxy(this.onpopstate, this));
+
+    var self = this;
+    window.addEventListener('load', function() {
+      //解决safari的一个bug，safari会在首次加载页面的时候触发 popstate 事件，通过setTimeout 做延迟来忽略这个错误的事件。
+      //参考 https://github.com/visionmedia/page.js/pull/239/files
+      setTimeout(function() {
+        window.addEventListener('popstate', $.proxy(self.onpopstate, self));
+      }, 0);
+    }, false);
   }
 
   //加载一个页面,传入的参数是页面id或者url
@@ -212,6 +220,7 @@
   }
 
   Router.prototype.onpopstate = function(d) {
+    console.log("popstate");
     var state = d.state;
     if(!state) {//刷新再后退导致无法取到state，或者是刚从另一个域名跳过来
       history.back();
