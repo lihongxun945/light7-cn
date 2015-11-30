@@ -100,7 +100,7 @@
 
       params = params || {};
       var inputValue = $(this).val();
-      if(params.value === undefined && inputValue != "") {
+      if(params.value === undefined && inputValue !== "") {
         params.value = [].concat(inputValue.split(" ")[0].split("-"), inputValue.split(" ")[1].split(":"));
       }
 
