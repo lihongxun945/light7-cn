@@ -4168,6 +4168,10 @@ html:not(.watch-active-state) .card-footer a.link:active,
   padding: .75rem .5rem;
 }
 /* === Panels === */
+html {
+  width: 100%;
+  overflow-x: hidden;
+}
 .panel-overlay {
   position: absolute;
   top: 0;

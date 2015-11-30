@@ -4004,6 +4004,11 @@ Device/OS Detection
       
       var picker = $this.data("picker");
       if(!picker) {
+        params = params || {};
+        var inputValue = $this.val();
+        if(params.value === undefined && inputValue !== "") {
+          params.value = params.cols.length > 1 ? inputValue.split(" ") : [inputValue];
+        }
         var p = $.extend({input: this}, params);
         picker = new Picker(p);
         $this.data("picker", picker);
@@ -4054,7 +4059,7 @@ Device/OS Detection
 
     rotateEffect: false,  //为了性能
 
-    value: [today.getFullYear(), formatNumber(today.getMonth()+1), today.getDate(), today.getHours(), formatNumber(today.getMinutes())],
+    value: [today.getFullYear(), formatNumber(today.getMonth()+1), today.getDate(), formatNumber(today.getHours()), formatNumber(today.getMinutes())],
 
     onChange: function (picker, values, displayValues) {
       var days = getDaysByMonthAndYear(picker.cols[1].value, picker.cols[0].value);
@@ -4090,7 +4095,7 @@ Device/OS Detection
       {
         values: (function () {
           var arr = [];
-          for (var i = 0; i <= 23; i++) { arr.push(i); }
+          for (var i = 0; i <= 23; i++) { arr.push(formatNumber(i)); }
           return arr;
         })(),
       },
@@ -4103,7 +4108,7 @@ Device/OS Detection
       {
         values: (function () {
           var arr = [];
-          for (var i = 0; i <= 59; i++) { arr.push(i < 10 ? '0' + i : i); }
+          for (var i = 0; i <= 59; i++) { arr.push(formatNumber(i)); }
           return arr;
         })(),
       }
@@ -4112,7 +4117,15 @@ Device/OS Detection
    
   $.fn.datetimePicker = function(params) {
     return this.each(function() {
+
       if(!this) return;
+
+      params = params || {};
+      var inputValue = $(this).val();
+      if(params.value === undefined && inputValue !== "") {
+        params.value = [].concat(inputValue.split(" ")[0].split("-"), inputValue.split(" ")[1].split(":"));
+      }
+
       var p = $.extend(defaults, params);
       $(this).picker(p);
     });
@@ -5098,15 +5111,23 @@ Device/OS Detection
       currentPage = newCurrentPage;
     }
 
-    //第一次打开的时候需要pushstate，不这么做，刷新之后第一次加载新页面会无法后退
+    //第一次加载的时候，初识话当前页面的state
     var state = history.state;
     if(!state) {
       var id = this.genStateID();
-      this.pushState(location.href, id);
+      this.replaceState(location.href, id);
       this.setCurrentStateID(id);
     }
 
-    window.addEventListener('popstate', $.proxy(this.onpopstate, this));
+
+    var self = this;
+    window.addEventListener('load', function() {
+      //解决safari的一个bug，safari会在首次加载页面的时候触发 popstate 事件，通过setTimeout 做延迟来忽略这个错误的事件。
+      //参考 https://github.com/visionmedia/page.js/pull/239/files
+      setTimeout(function() {
+        window.addEventListener('popstate', $.proxy(self.onpopstate, self));
+      }, 0);
+    }, false);
   }
 
   //加载一个页面,传入的参数是页面id或者url
@@ -5266,10 +5287,14 @@ Device/OS Detection
     history.pushState({url: url, id: id}, '', url);
   }
 
+  Router.prototype.replaceState = function(url, id) {
+    history.replaceState({url: url, id: id}, '', url);
+  }
+
   Router.prototype.onpopstate = function(d) {
+    console.log("popstate");
     var state = d.state;
-    if(!state) {//刷新再后退导致无法取到state，或者是刚从另一个域名跳过来
-      history.back();
+    if(!state) {
       return true;
     }
 

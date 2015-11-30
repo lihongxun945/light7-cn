@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>组件 &middot; light7</title>
-<meta name="description" content="MSUI: Build mobile apps with simple HTML, CSS, and JS components.">
+<meta name="description" content="light7: Build mobile apps with simple HTML, CSS, and JS components.">
 <meta name="author" content="任行">
 <meta name="viewport" content="initial-scale=1, maximum-scale=1">
 <link rel="icon" href="">
@@ -2708,6 +2708,8 @@
 
   <p>picker 需要初始化才能使用，你可以在一个 <code>input </code> 元素上初始化picker，当用户点击input的时候会弹出picker的弹层</p>
 
+  <p>picker 会自动读取 input 的value作为初始值。对于有多个cols的情况，可能初始值无法正确解析，因为picker并不知道该如何进行分割。默认的规则是：多列模式下，会把input中的值以空格分隔作为每一列的值。如果你有多列并且不是以空格分隔的，那么你需要自己通过参数传入这个初始值，而不能通过 input 元素的 value属性设置。</p>
+
 <div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">id=</span><span class="s">'picker'</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;script&gt;</span>
 <span class="nx">$</span><span class="p">(</span><span class="s2">"#picker"</span><span class="p">).</span><span class="nx">picker</span><span class="p">({</span>
@@ -2839,6 +2841,7 @@
 
   <p class="component-description">日期时间选择器是一个定制的picker，因此他的用法和picker完全一致。</p>
   <p>datetime-picker 定制了 onChange 和 cols 参数，请不要设置这两个参数。</p>
+  <p>datetime-picker 会自动解析 input 的 value 作为初始值，但是要注意初始值的格式一定是 <code>yyyy-mm-dd HH:MM</code>， 比如 <code>2015-12-12 08:30</code></p>
 
 <div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">id=</span><span class="s">'datetime-picker'</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;script&gt;</span>
@@ -3871,6 +3874,9 @@ $(function() {
   <h3 class="component-title">内联页面</h3>
   <p class="component-description">你可以在同一个HTML文件中内联编写多个页面。每一个页面都是一个 <code>.page</code> 容器，如果有多个页面，则需要用 <code>.page-current</code> 标记出第一次进入的时候应该显示的页面。</p>
   <p>每一个 <code>.page</code> 容器都应该有一个全局唯一的id，路由器会使用这个id作为唯一标示，如果没有设置id，可能会导致路由出错。你只需要这样写一个链接就可以跳转到id对应的内联页面 <code>&lt;a href='#{page-id}'&gt;跳转&lt;/a&gt;</code>.</p>
+
+  <h3 class="component-title">JS和CSS等脚本问题</h3>
+  <p>当通过ajax加载新页面的时候，路由器会自动忽略新页面的JS和CSS脚本。所以请把全部页面的脚本都打包到入口页面。在demo中我们每个页面都引用了相同的脚本，是为了在子页面刷新的时候也可以用。</p>
 
 <div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"page page-current"</span> <span class="na">id=</span><span class="s">'router'</span><span class="nt">&gt;</span>
   <span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
