@@ -617,6 +617,11 @@
       
       var picker = $this.data("picker");
       if(!picker) {
+        params = params || {};
+        var inputValue = $this.val();
+        if(params.value === undefined && inputValue != "") {
+          params.value = params.cols.length > 1 ? inputValue.split(" ") : [inputValue];
+        }
         var p = $.extend({input: this}, params);
         picker = new Picker(p);
         $this.data("picker", picker);
