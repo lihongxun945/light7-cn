@@ -1,70 +1,70 @@
 <article class="component" id="list" data-url='list'>
-  <h2 class="component-title">列表</h2>
-  <p class="component-description">常在iOS应用中看到的列表，是种多功能且强大的交互组件。列表将数据展现在一个可滚动的多行的列表中，可以将数据划分成不同的片段/组（sections/groups）。</p>
-  <p class="component-description">列表有以下用途：</p>
+  <h2 class="component-title">List</h2>
+  <p class="component-description">List views are versatile and powerful user interface compontents frequently found in iOS apps. A list view presents data in a scrollable list of multiple rows that may be divided into sections/groups.</p>
+  <p class="component-description">List views have many purposes:</p>
   <ul>
-    <li>让用户可以浏览结构化的多级数据</li>
-    <li>展现一个索引列表</li>
-    <li>在可视化的不同分组中，显示详细信息和控件</li>
-    <li>展现一个可以选择的列表</li>
+    <li>To let users navigate through hierarchically structured data</li>
+    <li>To present an indexed list of items</li>
+    <li>To display detail information and controls in visually distinct groupings</li>
+    <li>To present a selectable list of options</li>
   </ul>
 
 {% highlight html %}
 <header class="bar bar-nav">
-  <h1 class="title">视图列表</h1>
+  <h1 class="title">List view</h1>
 </header>
 <div class="content">
-  <div class="content-block-title">图标、标题和副标题</div>
+  <div class="content-block-title">With icon, title and after</div>
   <div class="list-block">
     <ul>
       <li class="item-content">
         <div class="item-media"><i class="icon icon-f7"></i></div>
         <div class="item-inner">
-          <div class="item-title">商品名称</div>
-          <div class="item-after">杜蕾斯</div>
+          <div class="item-title">Bom</div>
+          <div class="item-after">12:12</div>
         </div>
       </li>
       <li class="item-content">
         <div class="item-media"><i class="icon icon-f7"></i></div>
         <div class="item-inner">
-          <div class="item-title">型号</div>
-          <div class="item-after">极致超薄型</div>
+          <div class="item-title">Gender</div>
+          <div class="item-after">Male</div>
         </div>
       </li>
     </ul>
   </div>
-  <div class="content-block-title">标题和副标题</div>
+  <div class="content-block-title">With title and after</div>
   <div class="list-block">
     <ul>
       <li class="item-content">
         <div class="item-inner">
-          <div class="item-title">商品名称</div>
-          <div class="item-after">杜蕾斯</div>
+          <div class="item-title">Bom</div>
+          <div class="item-after">12:12</div>
         </div>
       </li>
       <li class="item-content">
         <div class="item-inner">
-          <div class="item-title">型号</div>
-          <div class="item-after">极致超薄型</div>
+          <div class="item-title">Gender</div>
+          <div class="item-after">Male</div>
         </div>
       </li>
     </ul>
   </div>
-  <div class="content-block-title">带箭头</div>
+  <div class="content-block-title">With Arrow</div>
   <div class="list-block">
     <ul>
       <li class="item-content item-link">
         <div class="item-media"><i class="icon icon-f7"></i></div>
         <div class="item-inner">
-          <div class="item-title">商品名称</div>
-          <div class="item-after">杜蕾斯</div>
+          <div class="item-title">Bom</div>
+          <div class="item-after">12:12</div>
         </div>
       </li>
       <li class="item-content item-link">
         <div class="item-media"><i class="icon icon-f7"></i></div>
         <div class="item-inner">
-          <div class="item-title">型号</div>
-          <div class="item-after">极致超薄型</div>
+          <div class="item-title">Gender</div>
+          <div class="item-after">Male</div>
         </div>
       </li>
     </ul>
@@ -72,26 +72,46 @@
 </div>
 {% endhighlight %}
 
-  <p class="component-description">其中：</p>
+  <p class="component-description">Where:</p>
   <ul>
-    <li><code>item-content</code> - <code>item-media</code>和<code>item-inner</code>的主要弹性(flex)容器。<strong>必选</strong>元素。</li>
-    <li><code>item-media</code> - 媒体元素（如图标，图片等）的容器。<strong>可选</strong>元素。</li>
-    <li><code>item-inner</code> - <code>item-title</code>和<code>item-after</code>的主要弹性(flex)容器。<strong>必选</strong>元素。</li>
-    <li><code>item-title</code> - 单行列表项目标题。<strong>必选</strong>元素。</li>
-    <li><code>item-after</code> - 列表项目标签。可以包含任意额外的html元素（例如标签文本、徽章、switch/toggle、按钮等等）。<strong>可选</strong>元素。</li>
+    <ul>
+      <li>
+        <p><code>item-content</code> - main flex wrapper for <code>item-media</code> and <code>item-inner</code>. <strong>Requred</strong> element.</p>
+      </li>
+      <ul>
+        <li>
+          <p><code>item-media</code> - container for your media element like icon, image, etc. <strong>Optional</strong> element.</p>
+        </li>
+        <li>
+          <p><code>item-inner</code> - main flex wrapper for <code>item-title</code> and <code>item-after</code>. <strong>Requred</strong> element.</p>
+        </li>
+        <ul>
+          <li>
+            <p><code>item-title</code> - single-line list item title. <strong>Required</strong> element.</p>
+          </li>
+          <li>
+            <p><code>item-after</code> - list item label. Could countain any additional HTML elements, like label text, or badge, or switch/toggle or button, etc. <strong>Optional</strong> element.</p>
+          </li>
+        </ul>
+      </ul>
+    </ul>
   </ul>
 
-  <p>在 <code>.item-content</code> 上加上 <code>.item-link</code> 会增加一个向右的箭头。</p>
+  <p>Add <code>.item-link</code> class on <code>.item-content</code> will make it show a right arrow。</p>
 
 </article>
 
 <article class="component active">
-  <h3 class="component-title">联系人列表（Contacts List）</h3>
-  <p class="component-description">联系人列表用来展示个人的联系方式。</p>
-  <p>联系人列表是<a href="#list">分组列表（Grouped Lists）</a>的一个特殊的类型，主要有2点不同：</p>
+  <h3 class="component-title">Contacts List</h3>
+  <p class="component-description">Show contacts</p>
+  <p>Contacts list is a particular case of <a href="list-view.html#grouped-lists">Grouped Lists</a> with two differences:</p>
   <ul>
-    <li>列表区域元素（“list-block”）需要带上额外的“contacts-block”类</li>
-    <li>页面内容元素（“page-content”）需要带上额外的“contacts-content”类</li>
+    <li>
+      <p><code>list-block</code> should have additional <code>contacts-block</code> class</p>
+    </li>
+    <li>
+      <p><code>page-content</code> should have additional <code>contacts-content</code> class</p>
+    </li>
   </ul>
 
   <div class="component-example component-example-fullbleed">
@@ -99,7 +119,7 @@
 
 {% highlight html %}
 <header class="bar bar-nav">
-  <h1 class="title">联系人列表</h1>
+  <h1 class="title">Contacts List</h1>
 </header>
 <div class="content">
   <div class="list-block contacts-block">
@@ -116,49 +136,49 @@
         <li>
           <div class="item-content">
             <div class="item-inner">
-              <div class="item-title">标题2</div>
+              <div class="item-title">Person1</div>
             </div>
           </div>
         </li>
         <li>
           <div class="item-content">
             <div class="item-inner">
-              <div class="item-title">标题3</div>
+              <div class="item-title">Person2</div>
             </div>
           </div>
         </li>
         <li>
           <div class="item-content">
             <div class="item-inner">
-              <div class="item-title">标题4</div>
+              <div class="item-title">Person3</div>
             </div>
           </div>
         </li>
         <li>
           <div class="item-content">
             <div class="item-inner">
-              <div class="item-title">标题5</div>
+              <div class="item-title">Person4</div>
             </div>
           </div>
         </li>
         <li>
           <div class="item-content">
             <div class="item-inner">
-              <div class="item-title">标题6</div>
+              <div class="item-title">Person5</div>
             </div>
           </div>
         </li>
         <li>
           <div class="item-content">
             <div class="item-inner">
-              <div class="item-title">标题7</div>
+              <div class="item-title">Person6</div>
             </div>
           </div>
         </li>
         <li>
           <div class="item-content">
             <div class="item-inner">
-              <div class="item-title">标题8</div>
+              <div class="item-title">Person7</div>
             </div>
           </div>
         </li>
@@ -170,42 +190,42 @@
         <li>
           <div class="item-content">
             <div class="item-inner">
-              <div class="item-title">标题1</div>
+              <div class="item-title">Tom</div>
             </div>
           </div>
         </li>
         <li>
           <div class="item-content">
             <div class="item-inner">
-              <div class="item-title">标题2</div>
+              <div class="item-title">TOm</div>
             </div>
           </div>
         </li>
         <li>
           <div class="item-content">
             <div class="item-inner">
-              <div class="item-title">标题3</div>
+              <div class="item-title">Tom3</div>
             </div>
           </div>
         </li>
         <li>
           <div class="item-content">
             <div class="item-inner">
-              <div class="item-title">标题4</div>
+              <div class="item-title">Tom4</div>
             </div>
           </div>
         </li>
         <li>
           <div class="item-content">
             <div class="item-inner">
-              <div class="item-title">标题5</div>
+              <div class="item-title">Tom5</div>
             </div>
           </div>
         </li>
         <li>
           <div class="item-content">
             <div class="item-inner">
-              <div class="item-title">标题6</div>
+              <div class="item-title">Tom6</div>
             </div>
           </div>
         </li>
@@ -217,49 +237,49 @@
         <li>
           <div class="item-content">
             <div class="item-inner">
-              <div class="item-title">标题1</div>
+              <div class="item-title">David1</div>
             </div>
           </div>
         </li>
         <li>
           <div class="item-content">
             <div class="item-inner">
-              <div class="item-title">标题2</div>
+              <div class="item-title">David2</div>
             </div>
           </div>
         </li>
         <li>
           <div class="item-content">
             <div class="item-inner">
-              <div class="item-title">标题3</div>
+              <div class="item-title">David3</div>
             </div>
           </div>
         </li>
         <li>
           <div class="item-content">
             <div class="item-inner">
-              <div class="item-title">标题4</div>
+              <div class="item-title">David4</div>
             </div>
           </div>
         </li>
         <li>
           <div class="item-content">
             <div class="item-inner">
-              <div class="item-title">标题5</div>
+              <div class="item-title">David5</div>
             </div>
           </div>
         </li>
         <li>
           <div class="item-content">
             <div class="item-inner">
-              <div class="item-title">标题6</div>
+              <div class="item-title">David6</div>
             </div>
           </div>
         </li>
         <li>
           <div class="item-content">
             <div class="item-inner">
-              <div class="item-title">标题7</div>
+              <div class="item-title">David7</div>
             </div>
           </div>
         </li>
@@ -271,7 +291,7 @@
         <li>
           <div class="item-content">
             <div class="item-inner">
-              <div class="item-title">标题1</div>
+              <div class="item-title">Lily1</div>
             </div>
           </div>
         </li>
@@ -284,19 +304,19 @@
 </article>
 
 <article class="component active">
-  <h3 class="component-title">多媒体列表（Media List View）</h3>
-  <p class="component-description">多媒体列表是<a href="#list">列表（list view）</a>的扩展，它是为了展示更复杂的数据比如产品，服务，用户等等。</p>
-  <p class="component-description">当然，它的布局更为复杂：</p>
+  <h3 class="component-title">Media List View</h3>
+  <p>Media list view is extended case of <a href="#list.html">list view</a> indended to display more complex data like products, services, users, etc.</p>
+  <p>And of course it has a bit more complex layout:</p>
 
   <div class="component-example component-example-fullbleed">
   </div>
 
 {% highlight html %}
 <header class="bar bar-nav">
-  <h1 class="title">多媒体列表</h1>
+  <h1 class="title">Media List</h1>
 </header>
 <div class="content">
-  <div class="content-block-title">曲目</div>
+  <div class="content-block-title">Title</div>
   <div class="list-block media-list">
     <ul>
       <li>
@@ -304,17 +324,17 @@
           <div class="item-media"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" style='width: 4rem;'></div>
           <div class="item-inner">
             <div class="item-title-row">
-              <div class="item-title">标题</div>
+              <div class="item-title">Title</div>
               <div class="item-after">$15</div>
             </div>
-            <div class="item-subtitle">标题</div>
-            <div class="item-text">此处是文本内容...</div>
+            <div class="item-subtitle">Title</div>
+            <div class="item-text">some text here...</div>
           </div>
         </a>
       </li>
     </ul>
   </div>
-  <div class="content-block-title">邮件应用</div>
+  <div class="content-block-title">Mail App</div>
   <div class="list-block media-list">
     <ul>
       <li>
@@ -324,14 +344,14 @@
               <div class="item-title">Facebook</div>
               <div class="item-after">17:14</div>
             </div>
-            <div class="item-subtitle">子标题</div>
-            <div class="item-text">此处是文本内容...</div>
+            <div class="item-subtitle">Title</div>
+            <div class="item-text">Some text here...</div>
           </div>
         </a>
       </li>
     </ul>
   </div>
-  <div class="content-block-title">简单列表</div>
+  <div class="content-block-title">Simple list</div>
   <div class="list-block media-list">
     <ul>
       <li>
@@ -339,15 +359,15 @@
           <div class="item-media"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" style='width: 2.2rem;'></div>
           <div class="item-inner">
             <div class="item-title-row">
-              <div class="item-title">标题</div>
+              <div class="item-title">Title</div>
             </div>
-            <div class="item-subtitle">子标题</div>
+            <div class="item-subtitle">sub title</div>
           </div>
         </div>
       </li>
     </ul>
   </div>
-  <div class="content-block-title">嵌入式</div>
+  <div class="content-block-title">Inset</div>
   <div class="list-block media-list inset">
     <ul>
       <li>
@@ -355,9 +375,9 @@
           <div class="item-media"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" style='width: 2.2rem;'></div>
           <div class="item-inner">
             <div class="item-title-row">
-              <div class="item-title">标题</div>
+              <div class="item-title">Title</div>
             </div>
-            <div class="item-subtitle">子标题</div>
+            <div class="item-subtitle">Subtitle</div>
           </div>
         </a>
       </li>
@@ -366,25 +386,43 @@
 </div>
 {% endhighlight %}
 
-  <p class="component-description">其中：</p>
+<p>Where:</p>
+<ul>
+  <li>
+    <p><code>item-content</code> - main flex wrapper for <code>item-media</code> and <code>item-inner</code>. <strong>Requred</strong> element.</p>
+  </li>
   <ul>
-    <li><code>item-media</code>和<code>item-inner</code>的主要弹性(flex)容器。<strong>必选</strong>元素。</li>
-    <li><code>item-media</code> - 媒体元素（如图标，图片等）的容器. <strong>可选</strong>元素。</li>
-    <li><code>item-inner</code> - <code>item-title</code>和<code>item-after</code>的主要弹性(flex)容器。<strong>必选</strong>元素。</li>
-    <li><code>item-title-row</code> - <code>item-title</code> 和 <code>item-after</code>的主要弹性(flex)容器。<strong>必选</strong>元素。</li>
-    <li><code>item-title</code> - 单行列表项目标题。<strong>可选</strong>元素。</li>
-    <li><code>item-after</code> - 列表项目标签。可以包含任意额外的html元素（例如标签文本、徽章、switch/toggle、按钮等等）。<strong>可选</strong>元素。</li>
-    <li><code>item-subtitle</code> - 额外的单行标题。<strong>可选</strong>元素。</li>
-    <li><code>item-text</code> - 额外的两行布局的容器，用来放置细节描述。<strong>可选</strong>元素。</li>
+    <li>
+      <p><code>item-media</code> - container for your media element like icon, image, etc. <strong>Optional</strong> element.</p>
+    </li>
+    <li>
+      <p><code>item-inner</code> - <strong>Requred</strong> element.</p>
+    </li>
+    <ul>
+      <li>
+        <p><code>item-title-row</code> - main flex wrapper for <code>item-title</code> and <code>item-after</code>. <strong>Optional</strong> element.</p>
+      </li>
+      <ul>
+        <li>
+          <p><code>item-title</code> - single-line list item title. <strong>Optional</strong> element.</p>
+        </li>
+        <li>
+          <p><code>item-after</code> - list item label. Could countain any additional HTML elements, like label text, or badge, or switch/toggle or button, etc. <strong>Optional</strong> element. </p>
+        </li>
+      </ul>
+      <li>
+        <p><code>item-subtitle</code> - additional single-line title. <strong>Optional</strong> element.</p>
+      </li>
+      <li>
+        <p><code>item-text</code> - additional two-lines container for detailed description. <strong>Optional</strong> element.</p>
+      </li>
+    </ul>
   </ul>
-
 </article>
 
 <article class="component active" id='check-list' data-url='check-list'>
-  <h3 class="component-title">可选择列表</h3>
-  <p class="component-description">列表可以支持单选和多选，我们只是修改了 <code>checkbox</code> 和 <code>radio</code> 的样式，并没有进行任何JS操作。所以如果取数据，需要从其中隐藏的 <code>input</code> 元素中取，和原生的表单用法完全一样。</p>
-
-  <p>列表是单选还是多选，完全取决于 <code>input</code> 的 <code>type</code> 属性设置。目前我们对单选和多选的图标样式是没有做区分的，后续可能会设置不同的样式以区分单选和多选。</p>
+  <h3 class="component-title">Selectable List</h3>
+  <p class="component-description">List can be selected with <code>checkbox</code> or <code>radio</code>. You can put checkbox or radio in List, and the list item will have a selected style when user select. There is no JS at all, So you should read data from the hidden checkbox or radoi</p>
 
 {% highlight html %}
 <ul>
@@ -394,7 +432,7 @@
       <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
       <div class="item-inner">
         <div class="item-title-row">
-          <div class="item-title">石头</div>
+          <div class="item-title">Lily</div>
           <div class="item-after">17:14</div>
         </div>
         <div class="item-subtitle">New messages from John Doe</div>
@@ -408,7 +446,7 @@
       <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
       <div class="item-inner">
         <div class="item-title-row">
-          <div class="item-title">剪刀</div>
+          <div class="item-title">Lucy</div>
           <div class="item-after">17:14</div>
         </div>
         <div class="item-subtitle">New messages from John Doe</div>
@@ -419,6 +457,6 @@
 </ul>
 {% endhighlight %}
 
-  <p>因为选择操作是由原生的 <code>input</code> 实现的，所以只需要把上面的代码中的 input 元素的 <code>type="radio"</code> 改成 <code>type="checkbox"</code> 就可以变成多选。</p>
+  <p>Change the type of <code>input</code> to "checkbox" to make multiple select.</p>
 
 </article>
