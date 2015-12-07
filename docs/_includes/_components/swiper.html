@@ -1,6 +1,6 @@
 <article class="component active" id="swiper" data-url='swiper'>
-  <h2 class="component-title">幻灯片</h2>
-  <p class="component-description">使用幻灯片组件，你需要在 <code>light7.js</code> 和 <code>light7.css</code> 之后额外引入如下两个文件:</p>
+  <h2 class="component-title">Swiper</h2>
+  <p class="component-description">You must include these to file after <code>light7.js</code> and <code>light7.css</code> to use Swiper:</p>
 
 
 {% highlight html %}
@@ -8,7 +8,7 @@
 <script type='text/javascript' src='{{ site.version }}/js/light7-extend.min.js' charset='utf-8'></script>
 {% endhighlight %}
 
-<p>如果你打开了自动初始化功能，幻灯片会在页面加载以后自动初始化。如果你关闭了自动初始化，或者你的幻灯片是页面加载之后又异步加载的，那么你需要手动初始化 <code>$(".swiper-container").swiper(config)</code> 。</p>
+<p>The swiper will auto be init when <code>$.init</code> is called. If you create a Swiper after that, call <code>$(".swiper-container").swiper(config)</code> to init.</p>
 
 {% highlight html %}
 <div class="swiper-container" data-space-between='10' data-pagination='.swiper-pagination' data-autoplay="1000">
@@ -21,6 +21,6 @@
 {% endhighlight %}
 </article>
 
-  <h3>幻灯片配置</h3>
+  <h3>Config</h3>
 
-  <p>你可以通过在 <code>.swiper-container</code> 容器上通过 <code>data-xxx</code> 的形式配置，也可以在初始化的时候传入一个JS对象来配置。可以用配置项请参考这里： <a href='http://www.idangero.us/swiper/api/#.VjtIEK4rLyU' target="_blank">swiper 官方文档</a></p>
+  <p>You can add <code>data-xxx</code> on <code>.swiper-container</code> to config it, also, you can pass a config object in <code>$().swiper(config)</code>, For more config See <a href='http://www.idangero.us/swiper/api/#.VjtIEK4rLyU' target="_blank">Swiper</a></p>
