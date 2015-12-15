@@ -1,7 +1,7 @@
 <article class="component active" id="init">
-  <h2 class="component-title">初始化</h2>
+  <h2 class="component-title">Init</h2>
   <p class="component-description">
-    <p>Call <code>$.init()</code> to init all components in page。</p>
+    <p>Init all components in a page with <code>$.init()</code>.</p>
     <p>We will not init page on document loaded, because <code>$.config.autoInit = false;</code>. You should call <code>$.init()</code> on document loaded. <code>$.init</code> method will init all components in page, and trigger a <code>pageInit</code> event after init complete. You should call <code>$.init</code> after all <code>pageInit</code> events has binded.</p>
 
     <p>But the page Loaded By router will always be inited.</p>

@@ -1,20 +1,21 @@
 <article class="component" id="picker" data-url='picker'>
   <h2 class="component-title">picker</h2>
 
-  <p class="component-description">picker是一个JS实现的类似select的组件，他可以代替原生的select组件，并且功能更加强大、样式更加统一。</p>
+  <p class="component-description">Picker is a powerful component that allows you to create custom overlay pickers which looks like iOS native picker.</p>
 
-  <p>picker 需要初始化才能使用，你可以在一个 <code>input </code> 元素上初始化picker，当用户点击input的时候会弹出picker的弹层</p>
+  <p>You should init a picker on an input element before you can use it.</p>
 
-  <p>picker 会自动读取 input 的value作为初始值。对于有多个cols的情况，可能初始值无法正确解析，因为picker并不知道该如何进行分割。默认的规则是：多列模式下，会把input中的值以空格分隔作为每一列的值。如果你有多列并且不是以空格分隔的，那么你需要自己通过参数传入这个初始值，而不能通过 input 元素的 value属性设置。</p>
+  <p>Picker will use the value of input as default value. The default read value will be error if you have mutli cols, because picker don't know how to split one string to multi cols.Infact, Piker will use space to split the value of input, and set the them as the value of cols. If your input value is not split with space, you should set the default value with JavaScript.</p>
+
 
 {% highlight html %}
 <input type="text" id='picker'/>
 <script>
 $("#picker").picker({
   toolbarTemplate: '<header class="bar bar-nav">\
-  <button class="button button-link pull-left">按钮</button>\
-  <button class="button button-link pull-right close-picker">确定</button>\
-  <h1 class="title">标题</h1>\
+  <button class="button button-link pull-left">Button</button>\
+  <button class="button button-link pull-right close-picker">OK</button>\
+  <h1 class="title">Title</h1>\
   </header>',
   cols: [
     {
@@ -26,84 +27,148 @@ $("#picker").picker({
 </script>
 {% endhighlight %}
 
-  <h3>关闭picker</h3>
+  <h3>close picker</h3>
 
-  <p>在任何元素上加上一个 <code>.close-picker</code> 类，点击它就会关闭 picker。</p>
-  <p>你也可以通过调用 <code>$(".picker").picker("close")</code> 或者 <code>$.closeModal(".picker-modal.modal-in")</code> 来关闭。</p>
+  <p>Add <code>.close-picker</code> class to any link, and click it to close the picker</p>
+  <p>You can alose call <code>$(".picker").picker("close")</code> or <code>$.closeModal(".picker-modal.modal-in")</code> to close a picker。</p>
 
-  <h3 class="component-title">picker参数</h3>
+  <h3 class="component-title">Params</h3>
 
-  <p class="component-description">你可以通过设置 <code>toolbarTemplate</code> 参数来自定义工具栏模板。在 <code>cols</code> 参数中可以传入多列值。</p>
+  <p class="component-description">See the examplse:</p>
 
 {% highlight js %}
 $("#picker-name").picker({
   toolbarTemplate: '<header class="bar bar-nav">\
-  <button class="button button-link pull-right close-picker">确定</button>\
-  <h1 class="title">请选择称呼</h1>\
+  <button class="button button-link pull-right close-picker">OK</button>\
+  <h1 class="title">Please Choose</h1>\
   </header>',
   cols: [
     {
       textAlign: 'center',
-      values: ['赵', '钱', '孙', '李', '周', '吴', '郑', '王']
-      //如果你希望显示文案和实际值不同，可以在这里加一个displayValues: [.....]
+      values: ['Mr', 'Ms']
+      // displayValues: [.....] the value to display, if not specified, it will display the values
     },
     {
       textAlign: 'center',
-      values: ['杰伦', '磊', '明', '小鹏', '燕姿', '菲菲', 'Baby']
-    },
-    {
-      textAlign: 'center',
-      values: ['先生', '小姐']
+      values: ['Brook', 'Churchill', 'Hill', 'Field', 'Green', 'Baby']
     }
   ]
 });
 {% endhighlight %}
 
-  <p>所有可用参数如下：</p>
+  <p>Let's look on list of all available parameters:</p>
 
   <table>
     <tr>
-      <th>参数名</th>
-      <th>默认值</th>
-      <th>说明</th>
+      <th>Param</th>
+      <th>Default</th>
+      <th>Description</th>
     </tr>
     <tr>
       <td>toolbarTemplate</td>
       <td>
         &lt;header class="bar bar-nav"&gt;
-          &lt;button class="button button-link pull-right close-picker"&gt;确定&lt;/button&gt;
+          &lt;button class="button button-link pull-right close-picker"&gt;OK&lt;/button&gt;
           &lt;h1 class="title"&gt;&lt;/h1&gt;
         &lt;/header&gt;
       </td>
-      <td>工具栏的模板，可以自己定义。</td>
+      <td>Toolbar HTML Template</td>
     </tr>
 
     <tr>
       <td>rotateEffect</td>
       <td>false</td>
-      <td>是否启用3D效果，启用3D可能会影响性能</td>
+      <td>Enables 3D rotate effect</td>
     </tr>
     <tr>
       <td>toolbar</td>
       <td>true</td>
-      <td>是否显示工具栏</td>
+      <td>Enables picker modal toolbar</td>
     </tr>
     <tr>
       <td>inputReadOnly</td>
       <td>true</td>
-      <td>是否会在input上添加一个 readonly 属性</td>
+      <td>Sets "readonly" attribute on specified input</td>
     </tr>
     <tr>
       <td>cssClass</td>
       <td>undefined</td>
-      <td>为 picker 容器增加额外的类，可以用来自定义样式</td>
+      <td>Additional CSS class name to be set on picker modal</td>
     </tr>
 
   </table>
 
+  <h3>Column parameters</h3>
+
+  <p>When we configure Picker we need to pass cols parameter. It is an array where each item is object with column parameters:</p>
+
+  <table class="params-table">
+    <thead>
+      <tr>
+        <th>Parameter</th>
+        <th>Type</th>
+        <th>Default</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>values</td>
+        <td>array</td>
+        <td></td>
+        <td>Array with string columns values</td>
+      </tr>
+      <tr>
+        <td>displayValues</td>
+        <td>array</td>
+        <td></td>
+        <td>Array with string columns values that will be displayed in Picker. If not specified, it will display values from <b>values</b> parameter</td>
+      </tr>
+      <tr>
+        <td>cssClass</td>
+        <td>string</td>
+        <td></td>
+        <td>Additional CSS class name to be set on column HTML container</td>
+      </tr>
+      <tr>
+        <td>textAlign</td>
+        <td>string</td>
+        <td></td>
+        <td>Text alignment of column values, could be "left", "center" or "right"</td>
+      </tr>
+      <tr>
+        <td>width</td>
+        <td>number</td>
+        <td></td>
+        <td>Column width in px. Useful if you need to fix column widths in picker with dependent columns. By default, calculated automatically</td>
+      </tr>
+      <tr>
+        <td>divider</td>
+        <td>boolean</td>
+        <td>false</td>
+        <td>Defines column that should be used as a visual divider, that doesn't have any values</td>
+      </tr>
+      <tr>
+        <td>content</td>
+        <td>string</td>
+        <td></td>
+        <td>Should be specified for divider-column (<code>divider:true</code>) with content of the column</td>
+      </tr>
+      <tr>
+        <th colspan="4">Callbacks</th>
+      </tr>
+      <tr>
+        <td>onChange</td>
+        <td>function (p, value, displayValue)</td>
+        <td></td>
+        <td>Callback function that will be executed when column value changed. <b>value</b> and <b>displayValue</b> represent current column <b>value</b> and <b>displayValue</b></td>
+      </tr>
+    </tbody>
+  </table>
+
   <h3 class="component-title">picker方法</h3>
 
-  <p class="component-description">你可以通过 <code>$(".picker").picker("method", args1, args2...)</code> 的方式来调用相关的方法。</p>
+  <p class="component-description">You can call methods of pickers like this: <code>$(".picker").picker("method", args1, args2...)</code> </p>
 
 {% highlight js %}
 $("#picker-name").picker("open");
@@ -111,53 +176,52 @@ $("#picker-name").picker("close");
 $("#picker-name").picker("setValue", ["2012", "12", "12"]);
 {% endhighlight %}
 
-  <p>所有可用方法如下：</p>
+  <p>All aviable methods:</p>
 
-  <table>
+  <table class="methods-table">
     <tr>
-      <th>方法名</th>
-      <th>参数说明</th>
-      <th>方法说明</th>
+      <th colspan="2">Methods</th>
     </tr>
     <tr>
-      <td>open</td>
-      <td>无</td>
-      <td>打开picker</td>
-    </tr>
-
-    <tr>
-      <td>close</td>
-      <td>无</td>
-      <td>关闭picker</td>
+      <td>myPicker.setValue(values, duration)</td>
+      <td>Set new picker value. <b>values</b> is array where each item represents value for each column. <b>duration</b> - transition duration in ms</td>
     </tr>
     <tr>
-      <td>setValue</td>
-      <td>一个字符串数组，其中每个字符串对应每一列</td>
-      <td>设置值</td>
+      <td>myPicker.open()</td>
+      <td>Open Picker</td>
     </tr>
-
+    <tr>
+      <td>myPicker.close()</td>
+      <td>Close Picker</td>
+    </tr>
+    <tr>
+      <td>myPicker.destroy()</td>
+      <td>Destroy Picker instance and remove all events</td>
+    </tr>
+  </tbody>
   </table>
+
 </article>
 
 <article class="component" id="datetime-picker" data-url='datetime-picker'>
-  <h2 class="component-title">日期时间选择器</h2>
+  <h2 class="component-title">Datetime Picker</h2>
 
-  <p class="component-description">日期时间选择器是一个定制的picker，因此他的用法和picker完全一致。</p>
-  <p>datetime-picker 定制了 onChange 和 cols 参数，请不要设置这两个参数。</p>
-  <p>datetime-picker 会自动解析 input 的 value 作为初始值，但是要注意初始值的格式一定是 <code>yyyy-mm-dd HH:MM</code>， 比如 <code>2015-12-12 08:30</code></p>
+  <p class="component-description">Datetime picker is a customed Picker. So, it'is usage is same to Picker.</p>
+  <p>datetime-picker customed <code>onChange</code> and <code>cols</code>, don't change these two param please.</p>
+  <p>datetime-picker will read the value of input as init value, but the format must be <code>yyyy-mm-dd HH:MM</code>, such as <code>2015-12-12 08:30</code></p>
 
 {% highlight html %}
 <input type="text" id='datetime-picker'/>
 <script>
   $("#datetime-picker").datetimePicker({
     toolbarTemplate: '<header class="bar bar-nav">\
-    <button class="button button-link pull-right close-picker">确定</button>\
-    <h1 class="title">选择日期和时间</h1>\
+    <button class="button button-link pull-right close-picker">OK</button>\
+    <h1 class="title">Choose datetime</h1>\
     </header>'
   });
 </script>
 {% endhighlight %}
 
-  <p>如果你只想选择日期，请使用 <a href='#calendar' data-ignore='push'>日历</a></p>
+  <p>If you only want to select date, use <a href='#calendar' data-ignore='push'>Calendar</a> please.</p>
 </article>
 
