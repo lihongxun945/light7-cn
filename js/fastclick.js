@@ -1,4 +1,5 @@
-;(function () {
+/* global Zepto:true */
+;(function ($) {
 	'use strict';
 
 	/**
@@ -836,4 +837,4 @@
   $(function() {
     FastClick.attach(document.body);
   });
-}());
+}(Zepto));
