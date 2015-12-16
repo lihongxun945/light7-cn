@@ -1,14 +1,14 @@
 ---
 layout: default
-title: 开始使用 &middot; light7
+title: Get Started &middot; light7
 ---
 
 <div class="docs-sub-header">
   {% include masthead.html %}
   <div class="container">
     <div class="docs-sub-content">
-      <h2 class="page-title">开始使用</h2>
-      <p class="page-description">只需要如下几个简单的步骤，就可以在你的应用中使用SUI Mobile了.</p>
+      <h2 class="page-title">Getting Started</h2>
+      <p class="page-description">It's very simple to use Light7 to create a WebApp:</p>
     </div>
     {% include ad.html %}
   </div>
@@ -18,27 +18,27 @@ title: 开始使用 &middot; light7
   <div class="column-group">
     <div class="column docs-content">
       <div class="docs-section">
-        <h2>创建页面</h2>
+        <h2>Create Layout HTML</h2>
         <p class="lead"></p>
 
-        <h3>1. 引用静态资源</h3>
+        <h3>1. Include Static Files</h3>
  
 {% highlight html %}
 <link rel="stylesheet" href="css/light7.min.css">
 <script type='text/javascript' src='js/zepto.min.js' charset='utf-8'></script>
 <script type='text/javascript' src='js/light7.min.js' charset='utf-8'></script>
-<!--如果你用到了拓展包中的组件，还需要引用下面两个-->
+<!--Mybe you will use extends components-->
 <link rel="stylesheet" href="css/light7-extend.min.css">
 <script type='text/javascript' src='js/light7-extend.min.js' charset='utf-8'></script>
 {% endhighlight %}
 
-<p>暂时并没有提供CDN服务，建议在 <a href="https://github.com/lihongxun945/light7" target="_blank">github</a> 上 clone 到本地并且编译一遍。如果你不想自己编译，可以在clone完之后选择 <code>build</code> 分支，里面有全部编译好的文件。或者更懒一点话，你可以直接点击 <a href="https://github.com/lihongxun945/light7/archive/build.zip" target="_blank">这里下载</a>。
+<p>It's recommand to clone <a href="https://github.com/lihongxun945/light7" target="_blank">light7 on github</a> and compile by yourself。You can change to <code>build</code> branch if you don't want to build by yourself, there are all compiled files in <code>dist</code> folder. Or, you can click <a href="https://github.com/lihongxun945/light7/archive/build.zip" target="_blank">Here to download</a>.
 
-        <h3>2. 调试代码</h3>
-        <p>如果你希望在开发环境下可以调试代码，那么你可以这样引用未压缩的版本。只要把上面的对应文件名中的 `.min` 去掉就可以</p>
+        <h3>2. Debug</h3>
+        <p>The "min" in file name means it's compressed. You should include <code>light7.js</code> instead of <code>light7.min.js</code> if you want to debug the code.</p>
 
-        <h3>完整的页面模板</h3>
-        <p>你可以直接用下面的模板来创建你的页面：</p>
+        <h3>Init Layout</h3>
+        <p>The init Layout:</p>
 
 {% highlight html %}
 <!DOCTYPE html>
@@ -46,7 +46,7 @@ title: 开始使用 &middot; light7
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>我的生活</title>
+    <title>Title</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <link rel="shortcut icon" href="/favicon.ico">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -58,7 +58,7 @@ title: 开始使用 &middot; light7
     <link rel="stylesheet" href="/your-css-file.css">
   </head>
   <body>
-    <!-- 你的html代码 -->
+    <!-- Here is your HTML code-->
     <script type='text/javascript' src='js/zepto.min.js' charset='utf-8'></script>
     <script type='text/javascript' src='js/light7.min.js' charset='utf-8'></script>
     <script type='text/javascript' src='js/light7-extend.min.js' charset='utf-8'></script>
@@ -68,47 +68,46 @@ title: 开始使用 &middot; light7
 </html>
 {% endhighlight %}
 
-          <h2>使用组件</h2>
-          <p class="lead">上面已经有了页面的基本结构，下一步就是把你需要的组件塞进去，这里我们以一个卡片形式的页面为例。我们主要会用到导航栏和卡片两个组件。</p>
-          <p>首先，我们需要一个标题栏和工具栏。</p>
+          <h2>Add Components</h2>
+          <p class="lead">Now we have a empty layout, and we can include some components now.</p>
+          <p>First, We include a title bar and toolbar: </p>
 
 {% highlight html %}
 <div class="page">
   <header class="bar bar-nav">
     <a class="button button-link button-nav pull-left" href="/demos/card" data-transition='slide-out'>
       <span class="icon icon-left"></span>
-      返回
+      Back
     </a>
-    <h1 class="title">我的生活</h1>
+    <h1 class="title">Title</h1>
   </header>
   <nav class="bar bar-tab">
     <a class="tab-item active" href="#">
       <span class="icon icon-home"></span>
-      <span class="tab-label">首页</span>
+      <span class="tab-label">Home</span>
     </a>
     <a class="tab-item" href="#">
       <span class="icon icon-me"></span>
-      <span class="tab-label">我</span>
+      <span class="tab-label">Me</span>
     </a>
     <a class="tab-item" href="#">
       <span class="icon icon-star"></span>
-      <span class="tab-label">收藏</span>
+      <span class="tab-label">Fav</span>
     </a>
     <a class="tab-item" href="#">
       <span class="icon icon-settings"></span>
-      <span class="tab-label">设置</span>
+      <span class="tab-label">Setting</span>
     </a>
   </nav>
   <div class="content">
-    <!-- 这里是页面内容区 -->
+    <!-- Content of page -->
   </div>
 </div>
 {% endhighlight %}
 
-          <p>然后我们在内容区中填上几个卡片</p>
+          <p>And then, we add some cards into the page content:</p>
 
 {% highlight html %}
-<div class="page-index">
   <div class="card">
     <div style="background-image:url(//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250.3.0q60.jpg)" valign="bottom" class="card-header color-white no-border">旅途的山</div>
     <div class="card-content">
@@ -135,11 +134,10 @@ title: 开始使用 &middot; light7
       <a href="#" class="link">更多</a>
     </div>
   </div>
-  ... 可以多放几张卡片
-</div>
+  ... 
 {% endhighlight %}
-        <p>最终效果是这样的 <a href="/examples/getting-started/" target="_blank" data-ignore="push">示例</a></p>
-        <p>这里只是一个很简单的例子，并不具有实用价值，建议再看一看 <a href="/examples">案例</a> 中的例子，案例中的例子更加复杂并且具备一个简单app的功能。</p>
+        <p>Here is the complete <a href="/examples/getting-started/" target="_blank" data-ignore="push">demo</a></p>
+        <p>It's a very simple demo to show how to use Light7, see <a href="/examples">Examples</a> for examples with more components please.</p>
       </div>
   </div>
 
