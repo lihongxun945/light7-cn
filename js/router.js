@@ -276,7 +276,7 @@
     html = "<div>"+html+"</div>";
     var tmp = $(html);
 
-    tmp.find(".popup, .panel, .panel-overlay").appendTo(document.body);
+    tmp.find(".popup, .popover, .panel, .panel-overlay").appendTo(document.body);
 
     var $page = tmp.find(".page");
     if(!$page[0]) $page = tmp.addClass("page");

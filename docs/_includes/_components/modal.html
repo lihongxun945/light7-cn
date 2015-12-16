@@ -783,3 +783,73 @@
 $.toast("Error!");
 {% endhighlight %}
 </article>
+
+<article class="component active" id='popover' data-url='popover'>
+  <h2 class="component-title">Popover</h2>
+  <p class="component-description">Popover compontent is used to manage the presentation of content in a popover. You use popovers to present information temporarily. The popover remains visible until the user taps outside of the popover window or you explicitly dismiss it.</p>
+
+  <p>Note that is not recommended to use Popover on small screens (iPhone). On small screens you should use <a href="#actions">Action Sheet</a>. </p>
+
+  <h3>Popover Layout</h3>
+  <p>First of all let's look on Popover layout, it is pretty simple, just add somewhere in the end of the <code>body</code>:</p>
+
+{% highlight html %}  
+<div class="popover">
+  <!-- Popover's angle arrow -->
+  <div class="popover-angle"></div>
+
+  <!-- Popover content -->
+  <div class="popover-inner">
+    <!-- Any HTML content here -->
+  </div>
+</div>
+{% endhighlight %}
+
+  <h3>Open and close with HTML</h3>
+  <p>It is possible to open and close required Popover using special classes and data attributes on links:</p>
+  <ul>
+    <li>
+      <p>To open popover we need to add <code>"open-popover"</code> class to any HTML element (prefered to link)</p>
+    </li>
+    <li>
+      <p>To close popover we may add <code>"close-popover"</code> class to any HTML element (prefered to link)</p>
+    </li>
+    <li>
+      <p>If you have more than one popover in app, you need to specify appropriate popover via additional <code>data-popover=".my-popover"</code> attribute on this HTML element</p>
+    </li>
+  </ul>
+
+
+  <p>When we open Popover with such method (from HTML), it will be automatically positioned around element that we clicked to call this Popover.</p>
+
+  <h3>Open and close with JavaScript</h3>
+
+  <p>We can also open and close Popover with JavaScript:</p>
+
+  <p><code>$.popover(<span>popover</span>, <span>target</span>)</code> - open Popover around <strong>target</strong> element</p>
+
+  <ul class="method-parameters">
+    <li><code>popover</code> - <span class="parameter-type">HTMLElement</span> or <span class="parameter-type">string</span> (with CSS Selector) of Popover to open. Requred</li>
+    <li><code>target</code> - <span class="parameter-type">HTMLElement</span> or <span class="parameter-type">string</span> (with CSS Selector) of target element to set popover position around this element. Requred</li>
+    <li class="method-returns">This method returns Popover's HTMLElement</li>
+  </ul>
+
+  <p><code>$.closeModal(<span>popover</span>)</code> - close Popover</p>
+  <ul class="method-parameters">
+    <li><code>popover</code> - <span class="parameter-type">HTMLElement</span> or <span class="parameter-type">string</span> (with CSS Selector). Optional. If not specified, any opened Popover will be closed</li>
+  </ul>
+
+  <h3>Dynamic Popover</h3>
+
+  <p>It allows you to create Popover dynamically by passing its HTML to related methods:</p>
+
+  <p><code>myApp.popover(<span>popoverHTML</span>, <span>target</span>, <span>removeOnClose</span>)</code> - open Popover with <strong>popoverHTML</strong> content around <strong>target</strong> element</p>
+
+  <ul class="method-parameters">
+    <li><code>popoverHTML</code> - <span class="parameter-type">string</span>. HTML string of popover </li>
+    <li><code>target</code> - <span class="parameter-type">HTMLElement</span> or <span class="parameter-type">string</span> (with CSS Selector) of target element to set popover position around this element. Requred</li>
+    <li><code>removeOnClose</code> - <span class="parameter-type">boolean</span>. Optional, by default - true. If true then Popover will be removed from DOM when closed</li>
+    <li class="method-returns">This method returns dynamically created Popover's HTMLElement</li>
+  </ul>
+
+</article>

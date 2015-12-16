@@ -620,7 +620,7 @@
       
        
     }
-    $(document).on('click', ' .modal-overlay, .popup-overlay, .close-popup, .open-popup, .open-popover,  .close-picker', handleClicks);
+    $(document).on('click', ' .modal-overlay, .popup-overlay, .close-popup, .open-popup, .open-popover, .close-popover, .close-picker', handleClicks);
     var defaults =  $.modal.prototype.defaults  = {
         modalButtonOk: 'OK',
         modalButtonCancel: 'Cancel',
