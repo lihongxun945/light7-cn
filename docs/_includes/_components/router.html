@@ -145,13 +145,12 @@ $.router.loadPage("#about");  //load inline page
     </tr>
   </table>
 
-  <p>其中 pageLoad* 事件是在 window 上触发，其他都是在 <code>.page</code> 元素上触发。为了性能考虑，最好通过 document 代理监听。如果是内联页面，则没有前面的三个 pageLoad* 事件。</p>
+  <p>pageLoad* Events is trigger on <code>window</code>，The others is on <code>.page</code> Element.</p>
 
-  <p>你可以这样监听事件：</p>
 
 {% highlight js %}
 $(document).on("pageInit", "#page-index", function(e, pageId, $page) {});
-<!--或者-->
+<!--Or -->
 $(document).on("pageInit", function(e, pageId, $page) {
   if(pageId == "pageIndex") {}
 });
