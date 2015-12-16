@@ -1,24 +1,23 @@
 <article class="component" id="modal">
   <h2 class="component-title">Modal</h2>
-  <p class="component-description">Modal 是从App的主要内容区域上弹出的一小块内容块. Modals经常被用来向用户询问信息，或通知或警告用户。 Modal和其他所有的遮罩图层一样，是所谓的“临时视图”的一部分。</p>
-  <p class="component-description">Modals 可以只用JavaScript打开。所以让我们来看看使用modals的相关APP方法</p>
+  <p class="component-description">Modal is a small content pane that pops up over App's main content. Modals are usualy used to ask something from user, or to notify or warn user. Modal as all other overlays is part of so called "Temporary Views".</p>
+  <p class="component-description">Modal can be opened only using JavaScript:</p>
 
-  <h3 class="component-title">预定义的 Modals</h3>
+  <h3 class="component-title">Predefined Modals</h3>
   <ul>
-    <li>1.注意，如果你没有指定预定义的modal标题，它讲使用默认的标题，这个可以在App 初始化时，通过传递 modalTitle 参数改变。</li>
-    <li>2.预定义modals的按钮文本(如 "Ok" 和 "Cancel") 也可以在 App 初始化时，通过传递 modalButtonOk 和 modalButtonCancel 参数改变。</li>
+    <li>Buttons text for predefined modals (like "Ok" and "Cancel") can be also changed by <code>$.modal.prototype.defaults</code></li>
   </ul>
-  <p class="component-description">首先，让我们看看已经预定义的最常用的modal:</p>
+  <p class="component-description">First of all, let's look on most used and already predefined modals in Framework7::</p>
 
   <h3 class="component-title">Alert</h3>
-  <p class="component-description">我们需要调用以下任一一种App方法来打开Alert modal ：<code>$.alert(text, [title, callbackOk])</code> </br>或者</br> <code>$.alert(text, [callbackOk])</code></p>
+  <p class="component-description">To open Alert modal we should call one of the following App methods:：<code>$.alert(text, [title, callbackOk])</code> </br> or </br> <code>$.alert(text, [callbackOk])</code></p>
 
   <ul>
-    <li><code>text</code> - string. Alert文本</li>
-    <li><code>title</code> - string. Optional. Alert modal 标题</li>
-    <li><code>callbackOk</code>  - function. Optional.在Alert modal下，当用户点击“Ok”按钮时，回调函数将被执行。</li>
+    <li><code>text</code> - string. Text to alert</li>
+    <li><code>title</code> - string. Optional. Alert modal title</li>
+    <li><code>callbackOk</code>  - function. Optional.Callback function that will be executed when user click "Ok" button on Alert modal</li>
   </ul>
-  <p class="component-description">该方法返回动态创建的modal的HTML元素。</p>
+  <p class="component-description">This method returns dynamically created modal's HTMLElement.</p>
   <div class="component-example component-example-fullbleed">
     <div class="">
       <div class="content-block">
@@ -29,8 +28,7 @@
       </div>
       <script type="text/javascript">     
         $(function(){
-          //只在本站例子中需要加这行改变容器，默认document.body
-           $.modal.prototype.defaults.modalContainer = ".device-content";
+           $.modal.prototype.defaults.modalContainer = ".device-content"; //only for demo, please don't copy this line to your own code
            $(document).on('click','.alert-text',function () {
               $.alert('Here goes alert text haha');
            });
@@ -100,15 +98,16 @@
 
 <article class="component active">
   <h3 class="component-title">Confirm</h3>
-  <p class="component-description">Confirm modal 经常在需要确认一些行为时被使用. 打开Alert modal同样也需要调用以下任一一种App方法：<code>$.confirm(text, [title, callbackOk, callbackCancel])</code></br>或者 </br>
- <code>$.confirm(text, [callbackOk, callbackCancel])</code></p>
+  <p class="component-description">Confirm modal usualy used when it is required to confirm some action. To open Confirm modal we should also call one of the following App methods:</p>
+  <code>myApp.confirm(text, [title, callbackOk, callbackCancel])</code>
+  or
+  <code>myApp.confirm(text, [callbackOk, callbackCancel])</code>
   <ul>
-    <li><code>text  - string. Confirm 文本</code></li>
-    <li><code>title - string. Optional</code>. Confirm modal 标题</li>
-    <li><scode>callbackOk  - function. Optional</code>. 在 Confirm modal下，当用户点击“Ok”按钮时，回调函数将被执行。(当用户确认操作）</li>
-    <li><code>callbackCancel  - function. Optional</code>. 在 Confirm modal下，当用户点击“Cancel”按钮时，回调函数将被执行。(当用户不想进行操作)</li>
+    <li><code>text  - string. Text to Confirm</code></li>
+    <li><code>title - string. Optional</code>. Confirm modal title</li>
+    <li><scode>callbackOk  - function. Optional</code>. Callback function that will be executed when user click "Ok" button on Confirm modal (when user confirm action)</li>
+    <li><code>callbackCancel  - function. Optional</code>. Callback function that will be executed when user click "Cancel" button on Confirm modal (when user dismiss action)</li>
   </ul>
-  <p class="component-description">该方法返回动态创建的modal的HTML元素。</p>
   <div class="component-example component-example-fullbleed">
     <div class="">
       <div class="content-block">
@@ -205,15 +204,15 @@
 
 <article class="component active">
   <h3 class="component-title">Prompt</h3>
-  <p class="component-description">Prompt modal 经常在需要从用户那里得到一些数据/答案时使用。打开 Prompt modal同样也需要调用以下任一一种App方法：<code>$.prompt(text, [title, callbackOk, callbackCancel])</code></br>或者</br>
- <code>$.prompt(text, [callbackOk, callbackCancel])</code></p>
+  <p class="component-description">Prompt modal used when it is required to get some data/answer from user. To open Prompt modal we should also call one of the following App methods:</br>
+  <code>myApp.prompt(text, [title, callbackOk, callbackCancel])</code>
+  <code>$.prompt(text, [callbackOk, callbackCancel])</code></p>
   <ul>
-    <li><code>text - string</code>. Prompt 文本/问题</li>
-    <li><code>title  - string</code>. Optional. Prompt modal 标题</li>
-    <li><code>callbackOk  - function</code>. Optional. 在 Prompt modal下，当用户点击“Ok”按钮时，回调函数将被执行。回调函数的参数是输入框的值</li>
-    <li><code>callbackCancel - function</code>. Optional. 在 Prompt modal下，当用户点击“Cancel”按钮时，回调函数将被执行。回调函数的参数是输入框的值</li>
+    <li><code>text - string</code>. Prompt text/question</li>
+    <li><code>title  - string</code>. Optional. Prompt modal Title</li>
+    <li><code>callbackOk  - function</code>. Optional. OK button callback, As an argument function receives value of text input</li>
+    <li><code>callbackCancel - function</code>. Optional. calcel button callback</li>
   </ul>
-  <p class="component-description">该方法返回动态创建的modal的HTML元素。</p>
   <div class="component-example component-example-fullbleed">
     <div class="">
       <div class="content-block">
@@ -311,47 +310,46 @@
 
 
 <article class="component active">
-  <h3 class="component-title">自定义Modals</h3>
-  <p class="component-description">Ok, 所有的预定义modals都只是一些适用于特定的场景的方法. 让我们看看如何创建自定义的 modals: </p>
-  <p class="component-description"><code>$.modal(parameters)</code> - 显示 custom modal </p>
+  <h3 class="component-title">Modals</h3>
+  <p class="component-description">Ok, all predefined modals were just particular case (like shortcuts) of full Modal methods. Let's look how to create custom modals: </p>
+  <p class="component-description"><code>$.modal(parameters)</code> - show custom modal </p>
   <ul>
-    <li><code>parameters - object</code>. Modal 的 parameters/options对象</li>
+    <li><code>parameters - object</code>. Parameters/options of modal</li>
   </ul>
-  <p class="component-description">该方法返回动态创建的modal的HTML元素。 </p>
-  <p class="component-description">这里有 Modal 的参数列表: </p>
+  <p class="component-description">Here is the list of Modal parameters:</p>
   <table class="params-table">
     <thead>
       <tr>
-        <th>参数</th>
-        <th>类型</th>
-        <th>默认值</th>
-        <th>描述</th>
+        <th>Parameter</th>
+        <th>Type</th>
+        <th>Default</th>
+        <th>Description</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td>title</td>
-        <td>字符串</td>
+        <td>string</td>
         <td></td>
-        <td>可选. Modal 标题 (可以是html字符串)</td>
+        <td>Optional. String with Modal title (could be HTML string)</td>
       </tr>
       <tr>
         <td>text</td>
-        <td>字符串</td>
+        <td>string</td>
         <td></td>
-        <td>可选. Modal 文本 (可以是html字符串)</td>
+        <td>Optional. String with Modal text (could be HTML string)</td>
       </tr>
       <tr>
         <td>afterText</td>
-        <td>字符串</td>
+        <td>string</td>
         <td></td>
-        <td>可选. 将被放在"text"后的文本 (可以是html字符串)</td>
+        <td>Optional. String with text (could be HTML string) that will be placed after "text"</td>
       </tr>
       <tr>
         <td>buttons</td>
-        <td>数组</td>
+        <td>array</td>
         <td></td>
-        <td>可选. 按钮数组. 每个按钮应该被表示为带按钮参数的对象 (看下面)</td>
+        <td>Optional. Array of buttons. Each button should be presented as Object with button parameters (look below)</td>
       </tr>
       <tr>
         <td>verticalButtons</td>
@@ -361,50 +359,50 @@
       </tr>
       <tr>
         <td>onClick</td>
-        <td>函数</td>
+        <td>function</td>
         <td></td>
-        <td>可选. 回调函数将在用户点击任何Modal按钮后被触发执行. 它接收 <b>modal</b> (Modal的 HTML元素) 和 <b>index</b>作为参数 (被点击按钮的索引号)</td>
+        <td>Optional. Callback function that will be executed when user clicks any of Modal's button. As arguments it receives <b>modal</b> (with Modal's HTMLElement) and <b>index</b> (with index number of clicked button)</td>
       </tr>
     </tbody>
   </table>
-  <p class="component-description">让我们一起来看看按钮参数: </p>
+  <p class="component-description">Let's look at Button's parameters:</p>
   <table class="params-table">
     <thead>
       <tr>
-        <th>参数</th>
-        <th>类型</th>
-        <th>默认值</th>
-        <th>描述</th>
+        <th>Parameter</th>
+        <th>Type</th>
+        <th>Default</th>
+        <th>Description</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td>text</td>
-        <td>字符串</td>
+        <td>string</td>
         <td></td>
-        <td>按钮文本 (可以是 HTML 字符串)</td>
+        <td>String with Button's text (could be HTML string)</td>
       </tr>
       <tr>
         <td>bold</td>
-        <td>布尔值</td>
+        <td>boolean</td>
         <td>false</td>
-        <td>可选. 设置为true会加粗按钮文本</td>
+        <td>Optional. Set to true for bold button text</td>
       </tr>
       <tr>
         <td>close</td>
-        <td>布尔值</td>
+        <td>boolean</td>
         <td>true</td>
-        <td>可选. 如果是“true”，点击这个按钮后modal会被关闭</td>
+        <td>Optional. If "true" then modal will be closed after click on this button</td>
       </tr>
       <tr>
         <td>onClick</td>
-        <td>函数</td>
+        <td>function</td>
         <td></td>
-        <td>可选. 用户点击这个按钮后，回调函数会被执行</td>
+        <td>Optional. Callback function that will be executed when user click this button</td>
       </tr>
     </tbody>
   </table>
-  <p class="component-description">这样的配置选项允许我们创建灵活的modals。让我们来看一些例子 </p>
+  <p class="component-description">Such configuration options allows to create flexible modals. Let's look at some examples.</p>
   <div class="component-example component-example-fullbleed">
     <div class="">
       <div class="content-block">
@@ -519,7 +517,7 @@
   </div>
   {% highlight html %}  
   <header class="bar bar-nav">
-      <h1 class="title">自定义Modals</h1>
+      <h1 class="title">Custom Modals</h1>
   </header>
   ...
   <div class="content">
@@ -634,47 +632,55 @@
     })
     });
   {% endhighlight %}
-    <h3 class="component-title">用 JavaScript 关闭 Modals</h3>
-    <p class="component-description">任何 Modal 可以用 JavaScript 来关闭，不仅仅是通过点击按钮。因此我们需要看看相关App方法：</p>
-    <p class="component-description"><code>$.closeModal(modal)</code> - 关闭任意 modal</p>
+    <h3 class="component-title">Close Modals with JavaScript</h3>
+    <p class="component-description">Any Modal can be closed with JavaScript, not only by clicking on its buttons. For this we need to look at relate App method:</p>
+    <p class="component-description"><code>$.closeModal(modal)</code> - close modal</p>
     <ul>
-      <li><code>modal - HTMLElement or string ( CSS 选择器)</code>. 可选. 除了指定的，任何被打开modal都将被关闭。</li>
+      <li><code>modal - HTMLElement or string ( CSS Selector)</code>. Optional. If not specified, any opened modal will be closed
+      </li>
     </ul> 
-     <h3 class="component-title">Modal 事件</h3>
-        <p class="component-description">如果你希望能自定义 modal 模板，你可在 初始化APP 的时候传入一个 modalTemplate 参数。这个参数的值是一个 Template7 模板，当编译该模板的时候会传入一个 groups 参数。</p>
-        <p class="component-description">这个模板可能是这样的：</p>
-  {% highlight html %}  
-  <div class="modal {{#unless buttons}}modal-no-buttons{{/unless}}">
-    <div class="modal-inner">
-      {{#if title}}
-       <div class="modal-title">{{title}}</div>
-      {{/if}}
-      {{#if text}}
-       <div class="modal-text">{{text}}</div>
-      {{/if}}
-      {{#if afterText}}
-      {{afterText}}
-      {{/if}}
-      </div>
-      {{#if buttons}}
-        <div class="modal-buttons">
-      {{#each buttons}}
-        <span class="modal-button {{#if bold}}modal-button-bold{{/if}}">{{text}}</span>
-      {{/each}}
-      </div>
-    {{/if}}
-  </div>  
-  {% endhighlight %}
+     <h3 class="component-title">Modal Events</h3>
+     <p class="component-description">Modal events could be very useful when you need to do something in JavaScript when Modal opened/closed</p>
+     <table class="events-table">
+       <thead>
+         <tr>
+           <th>Event</th>
+           <th>Target</th>
+           <th>Description</th>
+         </tr>
+       </thead>
+       <tbody>
+         <tr>
+           <td>open</td>
+           <td>Modal Element<span>&lt;div class="modal"&gt;</span></td>
+           <td>Event will be triggered when Modal starts its opening animation</td>
+         </tr>
+         <tr>
+           <td>opened</td>
+           <td>Modal Element<span>&lt;div class="modal"&gt;</span></td>
+           <td>Event will be triggered after Modal completes its opening animation</td>
+         </tr>
+         <tr>
+           <td>close</td>
+           <td>Modal Element<span>&lt;div class="modal"&gt;</span></td>
+           <td>Event will be triggered when Modal starts its closing animation</td>
+         </tr>
+         <tr>
+           <td>closed</td>
+           <td>Modal Element<span>&lt;div class="modal"&gt;</span></td>
+           <td>Event will be triggered after Modal completes its closing animation</td>
+         </tr>
+       </tbody>
+     </table> 
 </article>
 
 <article class="component active" id='preloader'>
-  <h2 class="component-title">带标题的加载指示器</h2>
-  <p class="component-description">预加载 Modal 用来提示一些后台活动（像Ajax请求）和阻止在这个活动期间的任何用户操作。 打开预加载 modal 我们也需要调用适当的App方法: $.show预加载(<code>[title]</code>)- 显示 预加载 modal</p>
+  <h2 class="component-title">Preloader Modal</h2>
+  <p class="component-description">Preloader Modal is used to indicate some background activity (like Ajax request) and to block any user actions during this activity. To open Preloader modal we should also call appropriate App method: <code>$.showPreloader([title])</code> - show modal with Preloader</p>
   <ul>
-    <li><code>title  - string. Optional</code>. 预加载 modal 标题. 默认（没有指定）的时候，它等同于 "Loading...". 你可以在App初始化时通过 modal预加载Title 参数改变默认的 预加载 标题。</li>
+    <li><code>title  - string. Optional</code>. Preloader modal title. By default (if not specified) it is euqal to "Loading...". </li>
   </ul>
-  <p class="component-description">该方法返回动态创建的modal的HTML元素。</p>
-  <p class="component-description">$.hide预加载() - 隐藏/关闭 预加载 modal. 因为 预加载 modal 没有任何按钮, 它应该用 JavaScript 来关闭</p>
+  <p class="component-description">$.hidePreloader() - hide/close modal with Preloader. Because Preloader modal has not any buttons, it should be closed by JavaScript</p>
   <div class="component-example component-example-fullbleed">
     <div class="">
       <div class="content-block">
@@ -699,7 +705,7 @@
   </div>
   {% highlight html %}  
   <header class="bar bar-nav">
-    <h1 class="title">预加载 Modal (Preloader Modal)</h1>
+    <h1 class="title">Preloader Modal</h1>
   </header>
   ...
   <div class="content">
@@ -727,10 +733,10 @@
 </article>
 
 <article class="component active">
-  <h3 class="component-title">迷你指示器</h3>
-  <p class="component-description">如果你不需要用像预加载Modal这样如此大的modal 窗口去指示活动, 你可以使用简单并且小的指示器modal: </p>
-  <p class="component-description">$.showIndicator() - 显示指示器 modal </p>
-  <p class="component-description">$.hideIndicator() - 隐藏/关闭指示器 modal. 因为指示器modal没有任何按钮, 它需要用JavaScript来关闭 </p>
+  <h3 class="component-title">Indicator</h3>
+  <p class="component-description">If you don't need such "big" modal window like Preloader Modal to indicate activity, you can use simple and small indicator modal: </p>
+  <p class="component-description">$.showIndicator() - show indicator modal </p>
+  <p class="component-description">$.hideIndicator() - hide/close modal with Indicator. Because Indicator modal has not any buttons, it should be closed by JavaScript</p>
   <div class="component-example component-example-fullbleed">
     <div class="">
       <div class="content-block">
@@ -749,7 +755,7 @@
   </div>
   {% highlight html %}  
   <header class="bar bar-nav">
-      <h1 class="title">指示器(indicator)</h1>
+      <h1 class="title">indicator</h1>
   </header>
   ...
   <div class="content">
@@ -771,11 +777,9 @@
 
 <article class="component active" id='toast' data-url='toast'>
   <h2 class="component-title">toast</h2>
-  <p class="component-description">toast是一种轻量的提示，在页面中间显示，并且会在2秒之后自动消失。</p>
-  <p>可以用来显示一些不会打断用户操作的提示。</p>
+  <p class="component-description">Toast is a verfy light modal, It will not disturb user and will disapear after 3 seconds</p>
 
 {% highlight js %}  
-$.toast("操作失败");
+$.toast("Error!");
 {% endhighlight %}
-  <p>toast 组件后续会支持不同的情景，包括操作成功、操作失败等，显示出不同的颜色</p>
 </article>

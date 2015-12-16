@@ -1,23 +1,23 @@
 <article class="component active" id="bars">
-  <h2 class="component-title">标题栏</h2>
-  <p class="component-description">标题栏放在页面顶部</p>
+  <h2 class="component-title">Titlebar</h2>
+  <p class="component-description">Title bar is on top of page.</p>
 
   <div class="component-example component-example-fullbleed">
     <header class="bar bar-nav">
-      <h1 class="title">标题</h1>
+      <h1 class="title">title</h1>
     </header>
   </div>
 
 {% highlight html %}
 <header class="bar bar-nav">
-  <h1 class="title">标题</h1>
+  <h1 class="title">title</h1>
 </header>
 {% endhighlight %}
 
     </article>
 
     <article class="component">
-      <h3 class="component-title">带按钮的标题栏</h3>
+      <h3 class="component-title">Title bar with buttons</h3>
 
       <div class="component-example component-example-fullbleed">
         <header class="bar bar-nav">
@@ -33,52 +33,47 @@
 {% highlight html %}
 <header class="bar bar-nav">
   <button class="button pull-left">
-    按钮
+    Btn
   </button>
   <button class="button pull-right">
-    按钮
+    Btn
   </button>
-  <h1 class="title">标题</h1>
+  <h1 class="title">Title</h1>
 </header>
 {% endhighlight %}
 
     </article>
 
     <article class="component">
-      <h3 class="component-title">带图标的标题栏</h3>
+      <h3 class="component-title">With icons</h3>
 
       <div class="component-example component-example-fullbleed">
-        <header class="bar bar-nav">
-          <a class="icon icon-left pull-left"></a>
-          <a class="icon icon-refresh pull-right"></a>
-          <h1 class="title">标题</h1>
-        </header>
       </div>
 
 {% highlight html %}
 <header class="bar bar-nav">
   <a class="icon icon-left pull-left"></a>
   <a class="icon icon-refresh pull-right"></a>
-  <h1 class="title">标题</h1>
+  <h1 class="title">title</h1>
 </header>
 {% endhighlight %}
 
     </article>
 
     <article class="component">
-      <h3 class="component-title">带链接和图标</h3>
+      <h3 class="component-title">With icons and text</h3>
 
       <div class="component-example component-example-fullbleed">
         <header class="bar bar-nav">
           <button class="button button-link button-nav pull-left">
             <span class="icon icon-left"></span>
-            返回
+            back
           </button>
           <button class="button button-link button-nav pull-right">
-            下一步
+            next
             <span class="icon icon-right"></span>
           </button>
-          <h1 class="title">标题</h1>
+          <h1 class="title">title</h1>
         </header>
       </div>
 
@@ -86,13 +81,13 @@
 <header class="bar bar-nav">
   <button class="button button-link button-nav pull-left">
     <span class="icon icon-left"></span>
-    返回
+    back
   </button>
   <button class="button button-link button-nav pull-right">
-    下一步
+    next
     <span class="icon icon-right"></span>
   </button>
-  <h1 class="title">标题</h1>
+  <h1 class="title">title</h1>
 </header>
 {% endhighlight %}
 
@@ -136,20 +131,20 @@
     </article>
 
     <article class="component" id='toolbar' data-url="toolbar">
-      <h2 class="component-title">工具栏</h2>
+      <h2 class="component-title">Toolbar</h2>
 
-      <p>工具栏一般会作为一级导航来切换几个主页面。这个时候你需要把它放到 <code>.page</code> 元素的同级。如果在某个页面中不需要显示工具栏，只需要在 <code>.page</code> 上增加一个 <code>.no-tabbar</code>即可，或者你可以通过调用 <code>$.showToolbar(true/false)</code> 来切换工具栏的显示状态。</p>
-      <p>注意如果你通过路由器进行切换，用来切换的几个页面一定要是内联页面，不然会造成重复加载的问题，具体用法参见 <a href="/examples/light7-mall/">light7商城</a>。</p>
+      <p>Toolbar is used as the main tab. You should put it sibling to <code>.page</code> elements to make it a global toolbar.Add a <code>.no-tabbar</code> class on <code>.page</code> when you  want to hide toolbar on specific page. Or, you can use <code>$.showToolbar(true/false)</code> to toggle toolbar.</p>
+      <p>Note! If you use router to switch pages, you should use inline pages instead of ajax pages. Because when load ajax page, the router will not check if it is already exist. The same page may be loaded multi times.</p>
 
 {% highlight html %}
 <nav class="bar bar-tab">
   <a class="tab-item active" href="#">
     <span class="icon icon-home"></span>
-    <span class="tab-label">文案</span>
+    <span class="tab-label">Text</span>
   </a>
   <a class="tab-item" href="#">
     <span class="icon icon-me"></span>
-    <span class="tab-label">文案</span>
+    <span class="tab-label">Text</span>
     <span class="badge">2</span>
   </a>
   ....
@@ -158,39 +153,39 @@
 
 </article>
 <article class="component">
-    <h3 class="component-title">工具栏 (只有文案)</h3>
+    <h3 class="component-title">Toolbar with only text</h3>
     <div class="component-example component-example-fullbleed">
         <nav class="bar bar-tab">
             <a class="tab-item active" href="#">
             文案
           </a>
             <a class="tab-item" href="#">
-            文案
+            text
           </a>
             <a class="tab-item" href="#">
-            文案
+            Text
           </a>
         </nav>
     </div>
   {% highlight html %}
   <nav class="bar bar-tab">
       <a class="tab-item active" href="#">
-  文案
+  Text
 </a>
       <a class="tab-item" href="#">
-  文案
+  Text
 </a>
       <a class="tab-item" href="#">
-  文案
+  Text
 </a>
   </nav>
   {% endhighlight %}
 </article>
 <article class="component">
-    <h3 class="component-title">二级标题栏</h3>
+    <h3 class="component-title">Secondary Titlebar and Toolbar</h3>
     <div class="component-example component-example-fullbleed">
       <nav class="bar bar-nav bar-standard">
-        <h1 class="title">多级标题栏和工具栏</h1>
+        <h1 class="title">Secondary Titlebar and Toolbar</h1>
       </nav>
 
       <!-- Block button in standard bar fixed below top bar -->
@@ -212,7 +207,7 @@
 
 {% highlight html %}
 <nav class="bar bar-nav bar-standard">
-  <h1 class="title">多级标题栏和工具栏</h1>
+  <h1 class="title">Secondary Titlebar and Toolbar</h1>
 </nav>
 
 <!-- Block button in standard bar fixed below top bar -->

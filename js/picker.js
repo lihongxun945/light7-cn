@@ -20,9 +20,9 @@
           convertToPopover: true,
           onlyInPopover: false,
           toolbar: true,
-          toolbarCloseText: '确定',
+          toolbarCloseText: 'OK',
           toolbarTemplate: '<header class="bar bar-nav">\
-          <button class="button button-link pull-right close-picker">确定</button>\
+          <button class="button button-link pull-right close-picker">OK</button>\
           <h1 class="title"></h1>\
           </header>',
       };

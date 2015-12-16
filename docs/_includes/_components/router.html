@@ -1,30 +1,33 @@
 <article class="component" id='router' data-url="router">
-  <h2 class="component-title">路由</h2>
-  <p class="component-description">现在有一个全新的路由代替了以前的 push.js。 这个路由支持在同一个html中内联多个页面，ajax加载新页面，前进和后退操作。</p>
-  <p>默认情况下，router 会自动拦截所有的链接点击事件，如果你希望一个链接通过浏览器原生跳转而不使用 router，你可以在连接上增加一个 <code>class="external"</code> 或者 <code>external</code></p>
-  <p>你也可以通过 `$.config.router` 参数来全局关闭路由器，参见 <a href="#init">初始化</a>。即使关闭了路由器，也强烈建议通过 `pageInit` 事件来初始化页面，因为这样可以保证你随时可以打开路由器而不用修改任何JS代码。</p>
+  <h2 class="component-title">Router</h2>
+  <p class="component-description">The Router is used load Ajax Page or Inline Page.</p>
+  <p>By default, the router will listen to all links click event, and use ajax to load new page instead of directly jump to the new page.</p>
+  <p>Add <code>class="external"</code> or <code>external</code> to a link if you don't want router to proxy it.</p>
+  <p>Set <code>$.config.router = false</code> to close router globally. It's recommend to use <code>pageInit</code> event to init the page, event if you closed the router.</p>
 
-  <p>默认情况下，加载新的页面会从右向左滑动，后退会从左向右滑动。如果你想关掉加载动画，只需要在链接上加上 <code>class="no-transition"</code> 即可</p>
+  <p>The new page will slide from right to left by default. Add <code>class="no-transition"</code> to link to prevent the animation.</p>
 
-  <p>注意如果你希望点击工具栏切换页面，一定要用内联页面进行切换，不然会造成重复加载的问题，具体用法参见 <a href="/examples/light7-mall/">light7商城</a>。</p>
+  <p>If you use Toolbar to switch multi page, use inline page instead of ajax page please. Because you may load the same page multi times if you use ajax page. See <a href="/examples/light7-mall/">light7 Mall</a> for how to use tab to switch inline pages.</p>
 
-  <h3 class="component-title">内联页面</h3>
-  <p class="component-description">你可以在同一个HTML文件中内联编写多个页面。每一个页面都是一个 <code>.page</code> 容器，如果有多个页面，则需要用 <code>.page-current</code> 标记出第一次进入的时候应该显示的页面。</p>
-  <p>每一个 <code>.page</code> 容器都应该有一个全局唯一的id，路由器会使用这个id作为唯一标示，如果没有设置id，可能会导致路由出错。你只需要这样写一个链接就可以跳转到id对应的内联页面 <code>&lt;a href='#{page-id}'&gt;跳转&lt;/a&gt;</code>.</p>
+  <h3 class="component-title">Inline Page</h3>
+  <p class="component-description">You can write multi page in one html file. Each page is in a <code>.page</code> container. If you have multi page in one html, you should use <code>.page-current</code> to make it a visiable at first enter.</p>
+  <p>Every <code>.page</code> container must have an id attr.Router will use id as the unique identify of a page. And you can use the id to jump to the page like this: <code>&lt;a href='#{page-id}'&gt;jump&lt;/a&gt;</code>.</p>
 
-  <h3 class="component-title">JS和CSS等脚本问题</h3>
-  <p>当通过ajax加载新页面的时候，路由器会自动忽略新页面的JS和CSS脚本。所以请把全部页面的脚本都打包到入口页面。在demo中我们每个页面都引用了相同的脚本，是为了在子页面刷新的时候也可以用。</p>
+  <h3 class="component-title">JS And CSS</h3>
+  <p>Router will ignore all scripts and styles when load new page! You should import all CSS file and JS file(pack them into one js and css file) in the entry page, And use 'pageInit' to load different page's JS code.</p>
+
+  <p>Because users may refresh the page, the subpage will broken if it don't import any CSS and JS. So, you can import all CSS and JS file in every page.</p>
 
 {% highlight html %}
 <div class="page page-current" id='router'>
   <header class="bar bar-nav">
-    <h1 class='title'>路由</h1>
+    <h1 class='title'>Router</h1>
   </header>
   <div class="content">
     <div class="content-block">
       <ul>
-        <li><a href="/docs-demos/router2">ajax加载新页面</a></li>
-        <li><a href="#router3">内联的新页面</a></li>
+        <li><a href="/docs-demos/router2">Ajax Page</a></li>
+        <li><a href="#router3">Inline Page</a></li>
       </ul>
     </div>
   </div>
@@ -34,33 +37,33 @@
   <header class="bar bar-nav">
     <a class="button button-link button-nav pull-left back" href="/docs-demos/router">
       <span class="icon icon-left"></span>
-      返回
+      Back
     </a>
-    <h1 class='title'>路由</h1>
+    <h1 class='title'>Router</h1>
   </header>
   <div class="content">
     <div class="content-block">
-      这是内联编写的页面，点击左上角的 <a href="#" class='back'>返回</a> 按钮返回上一页。
+      This is an Inline Page，Click <a href="#" class='back'>Back </a> to go back。
     </div>
   </div>
 </div>
 {% endhighlight %}
 
-<p>注意，内联页面只能在第一个页面编写，通过ajax加载的页面里面不能内联多个页面。</p>
+<p>Note that you can only write multi inline page in the entry html file. There can only be one <code>.page</code> in new page loaded by ajax.</p>
 
-  <h3 class="component-title">ajax页面</h3>
-  <p class="component-description">除了内联编写多个页面以外，你还可以通过ajax来加载新页面。通过ajax加载新页面和普通的链接写法没有区别，路由器会自动拦截链接的点击事件，并通过ajax请求加载新的页面。</p>
+  <h3 class="component-title">Ajax Page</h3>
+  <p class="component-description">Router will prevent all links' click event, and load new page via Ajax by default.</p>
 
 {% highlight html %}
 <!-- page 1 -->
 <div class="page page-current" id='router'>
   <header class="bar bar-nav">
-    <h1 class='title'>路由</h1>
+    <h1 class='title'>Router</h1>
   </header>
   <div class="content">
     <div class="content-block">
       <ul>
-        <li><a href="/docs-demos/router2">ajax加载新页面</a></li>
+        <li><a href="/docs-demos/router2">Ajax New Page</a></li>
       </ul>
     </div>
   </div>
@@ -73,82 +76,81 @@
   <header class="bar bar-nav">
     <a class="button button-link button-nav pull-left back" href="/docs-demos/router">
       <span class="icon icon-left"></span>
-      返回
+      Back
     </a>
-    <h1 class='title'>路由</h1>
+    <h1 class='title'>Router</h1>
   </header>
   <div class="content">
     <div class="content-block">
-      这是ajax 加载的新页面，点击左上角的 <a href="#" class='back'>返回</a> 按钮返回上一页。
+      This is an Ajax Page，click <a href="#" class='back'>Back </a> to go back。
     </div>
   </div>
 </div>
 {% endhighlight %}
 
-  <h3 class="component-title">后退</h3>
-  <p class="component-description">我们对后退操作进行了封装，你只需要在任意链接上增加一个 <code>.back</code> 类，点击就会自动返回到上一页。为了防止在某些情况下无法返回，最好同时设置 <code>href</code> 指定上一页的地址，这样当无法后退的时候，会直接加载指定的地址。</p>
-  <p class="component-description">或者你可以通过调用 <code>$.router.back(url)</code> 来执行返回上一页操作，同样为了确保能正常返回，最好把上一页的地址作为参数传入。</p>
+  <h3 class="component-title">Go Back</h3>
+  <p>It's very easy to go back, what you need to do is only add a <code>.back</code> class on any link. In case of can't go back, you can set the <code>href</code> attr of the link, and router will load the href if it can't go back in history(For example, the user refreshed the page or enter the link directly)</p>
+  <p class="component-description">You can also call<code>$.router.back(url)</code> to go back. The url param is optional but recommend too.</p>
 
 {% highlight html %}
-<a class="button button-link button-nav pull-left back" href="/docs-demos/router">返回上一页</a>
+<a class="button button-link button-nav pull-left back" href="/docs-demos/router">Back</a>
 {% endhighlight %}
 
-  <h3 class="component-title">JS方法</h3>
-  <p class="component-description">你可以通过调用 <code>$.router.loadPage(url)</code> 来加载一个页面，参数url既可以是一个ajax页面的地址，也可以是一个内联页面的id.</p>
+  <h3 class="component-title">JS</h3>
+  <p class="component-description">Call <code>$.router.loadPage(url)</code> to load an Ajax Page or an Inline Page.</p>
 {% highlight js %}
-$.router.loadPage("/detail");  //加载ajax页面
-$.router.loadPage("#about");  //加载内联页面
+$.router.loadPage("/detail");  //load ajax page
+$.router.loadPage("#about");  //load inline page
 {% endhighlight %}
 
-  <h3 class="component-title">事件</h3>
-  <p class="component-description">从一个页面准备开始加载，到执行完加载动画，会按顺序触发以下事件：</p>
+  <h3 class="component-title">Event</h3>
+  <p class="component-description">There are many events：</p>
 
   <table>
     <tr>
-      <th>事件</th>
-      <th>说明</th>
+      <th>Event</th>
+      <th>Description</th>
     </tr>
     <tr>
       <td>pageLoadStart</td>
-      <td>发送Ajax之前触发</td>
+      <td>before Ajax</td>
     </tr>
     <tr>
       <td>pageLoadCancel</td>
-      <td>取消了正在发送的ajax请求</td>
+      <td>the ajax is canceled</td>
     </tr>
     <tr>
       <td>pageLoadError</td>
-      <td>Ajax 请求失败</td>
+      <td>Ajax error</td>
     </tr>
     <tr>
       <td>pageLoadComplete</td>
-      <td>Ajax 请求结束，无论是成功还是失败</td>
+      <td>Ajax complete </td>
     </tr>
     <tr>
       <td>pageAnimationStart</td>
-      <td>新页面的DOM插入当前页面之后，动画执行之前</td>
+      <td>after the DOM of new page insert into document, before the animation start</td>
     </tr>
     <tr>
       <td>pageAnimationEnd</td>
-      <td>新页面动画执行完毕</td>
+      <td>animation end</td>
     </tr>
     <tr>
       <td>pageInit</td>
-      <td>新页面中的组件初始化完毕</td>
+      <td>all components in the page have been inited</td>
     </tr>
     <tr>
       <td>pageReinit</td>
-      <td>返回到上一个页面的时候触发</td>
+      <td>when back to previous page</td>
     </tr>
   </table>
 
-  <p>其中 pageLoad* 事件是在 window 上触发，其他都是在 <code>.page</code> 元素上触发。为了性能考虑，最好通过 document 代理监听。如果是内联页面，则没有前面的三个 pageLoad* 事件。</p>
+  <p>pageLoad* Events is trigger on <code>window</code>，The others is on <code>.page</code> Element.</p>
 
-  <p>你可以这样监听事件：</p>
 
 {% highlight js %}
 $(document).on("pageInit", "#page-index", function(e, pageId, $page) {});
-<!--或者-->
+<!--Or -->
 $(document).on("pageInit", function(e, pageId, $page) {
   if(pageId == "pageIndex") {}
 });

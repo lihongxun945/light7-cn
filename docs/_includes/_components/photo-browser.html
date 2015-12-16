@@ -1,7 +1,7 @@
 <article class="component" id="browser" data-url='photo-browser'>
-  <h2 class="component-title">图片浏览器</h2>
+  <h2 class="component-title">Photo Browser</h2>
 
-  <p class="component-description">使用图片浏览器，你需要在 <code>light7.js</code> 和 <code>light7.css</code> 之后额外引入如下两个文件:</p>
+  <p class="component-description">You should include these two files ater <code>light7.js</code> and <code>light7.css</code>:</p>
 
 {% highlight html %}
 <link rel="stylesheet" href="css/light7-extend.min.css">
@@ -10,7 +10,7 @@
 
 {% highlight html %}
 <header class="bar bar-nav">
-  <h1 class="title">图片浏览器</h1>
+  <h1 class="title">Photo Browser</h1>
 </header>
 <div class="content">
   <div class="content-block row">
@@ -22,9 +22,9 @@
 </div>
 {% endhighlight %}
 {% highlight js %}
-/*=== 默认为 standalone ===*/
+/*=== standalone by default ===*/
 $(function(){
-  /*=== 默认为 standalone ===*/
+  /*=== standalone by default===*/
   var myPhotoBrowserStandalone = $.photoBrowser({
       photos : [
           '//img.alicdn.com/tps/i3/TB1kt4wHVXXXXb_XVXX0HY8HXXX-1024-1024.jpeg',
@@ -32,7 +32,6 @@ $(function(){
           '//img.alicdn.com/tps/i4/TB1AdxNHVXXXXasXpXX0HY8HXXX-1024-1024.jpeg',
       ]
   });
-  //点击时打开图片浏览器
   $(document).on('click','.pb-standalone',function () {
     myPhotoBrowserStandalone.open();
   });
@@ -50,7 +49,7 @@ $(function(){
     myPhotoBrowserPopup.open();
   });
 
-  /*=== 有标题 ===*/
+  /*=== With title ===*/
   var myPhotoBrowserCaptions = $.photoBrowser({
       photos : [
           {
@@ -72,28 +71,7 @@ $(function(){
   $(document).on('click','.pb-standalone-captions',function () {
     myPhotoBrowserCaptions.open();
   });
-   
-  /*=== 有视频 ===*/
-  var myPhotoBrowserVideo = $.photoBrowser({
-      photos : [
-          {
-              html: '<iframe src="//www.youtube.com/embed/lmc21V-zBq0?list=PLpj0FBQgLGEr3mtZ5BTwtmSwF1dkPrPRM" frameborder="0" allowfullscreen></iframe>',
-              caption: 'Woodkid - Run Boy Run (Official HD Video)'
-          },
-          {
-              url: 'http://lorempixel.com/1024/1024/sports/2/',
-              caption: 'Second Caption Text'
-          },
-          {
-              url: 'http://lorempixel.com/1024/1024/sports/3/',
-          },
-      ],
-      theme: 'dark',
-      type: 'standalone'
-  });
-  $(document).on('click','.pb-standalone-video',function () {
-    myPhotoBrowserVideo.open();
-  });
+
 })
 {% endhighlight %}
 </article>

@@ -1,49 +1,41 @@
 $(function () {
   'use strict';
 
-  //下拉刷新页面
   $(document).on("pageInit", "#page-ptr", function(e, id, page) {
     var $content = $(page).find(".content").on('refresh', function(e) {
-      // 模拟2s的加载过程
+      // 2s timeout
       setTimeout(function() {
         var cardHTML = '<div class="card">' +
-          '<div class="card-header">标题</div>' +
+          '<div class="card-header">Title</div>' +
           '<div class="card-content">' +
-          '<div class="card-content-inner">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容' +
+          '<div class="card-content-inner">Contents Contents Contents Contents Contents Contents Contents Contents Contents ' +
           '</div>' +
           '</div>' +
           '</div>';
 
         $content.find('.card-container').prepend(cardHTML);
-        // 加载完毕需要重置
+        // Done
         $.pullToRefreshDone($content);
       }, 2000);
     });
   });
 
-  //无线滚动
   $(document).on("pageInit", "#page-infinite-scroll", function(e, id, page) {
     function addItems(number, lastIndex) {
-      // 生成新条目的HTML
       var html = '';
       for (var i = 0; i < 20; i++) {
-        html += '<li class="item-content"><div class="item-inner"><div class="item-title">新条目</div></div></li>';
+        html += '<li class="item-content"><div class="item-inner"><div class="item-title">Item</div></div></li>';
       }
-      // 添加新条目
       $('.infinite-scroll .list-container').append(html);
     }
     var loading = false;
     $(page).on('infinite', function() {
 
-      // 如果正在加载，则退出
       if (loading) return;
 
-      // 设置flag
       loading = true;
 
-      // 模拟1s的加载过程
       setTimeout(function() {
-        // 重置加载flag
         loading = false;
 
         addItems();
@@ -53,7 +45,6 @@ $(function () {
   });
 
 
-  //图片浏览器
   $(document).on("pageInit", "#page-photo-browser", function(e, id, page) {
     var myPhotoBrowserStandalone = $.photoBrowser({
       photos : [
@@ -62,7 +53,6 @@ $(function () {
         '//img.alicdn.com/tps/i4/TB1AdxNHVXXXXasXpXX0HY8HXXX-1024-1024.jpeg',
       ]
     });
-    //点击时打开图片浏览器
     $(page).on('click','.pb-standalone',function () {
       myPhotoBrowserStandalone.open();
     });
@@ -107,26 +97,26 @@ $(function () {
   $(document).on("pageInit", "#page-modal", function(e, id, page) {
     var $content = $(page).find('.content');
     $content.on('click','.alert-text',function () {
-      $.alert('这是一段提示消息');
+      $.alert('Hello Fool');
     });
 
     $content.on('click','.alert-text-title', function () {
-      $.alert('这是一段提示消息', '这是自定义的标题!');
+      $.alert('Alter message', 'title!');
     });
 
     $content.on('click', '.alert-text-title-callback',function () {
-      $.alert('这是自定义的文案', '这是自定义的标题!', function () {
-        $.alert('你点击了确定按钮!')
+      $.alert('Custom Alert message', 'custom alert title!', function () {
+        $.alert('Yout clicked OK button!')
       });
     });
     $content.on('click','.confirm-ok', function () {
-      $.confirm('你确定吗?', function () {
-        $.alert('你点击了确定按钮!');
+      $.confirm('Are you sure?', function () {
+        $.alert('You clicked OK button!');
       });
     });
     $content.on('click','.prompt-ok', function () {
-      $.prompt('你叫什么问题?', function (value) {
-        $.alert('你输入的名字是"' + value + '"');
+      $.prompt("What's your name?", function (value) {
+        $.alert('Your name is "' + value + '"');
       });
     });
   });
@@ -136,27 +126,27 @@ $(function () {
     $(page).on('click','.create-actions', function () {
       var buttons1 = [
         {
-          text: '请选择',
+          text: 'Please Choose',
           label: true
         },
         {
-          text: '卖出',
+          text: 'Potato',
           bold: true,
           color: 'danger',
           onClick: function() {
-            $.alert("你选择了“卖出“");
+            $.alert("You choosed Potato");
           }
         },
         {
-          text: '买入',
+          text: 'Tomato',
           onClick: function() {
-            $.alert("你选择了“买入“");
+            $.alert("You choosed Tomato");
           }
         }
       ];
       var buttons2 = [
         {
-          text: '取消',
+          text: 'Cancel',
           bg: 'danger'
         }
       ];
@@ -165,10 +155,9 @@ $(function () {
     }); 
   });
 
-  //加载提示符
   $(document).on("pageInit", "#page-preloader", function(e, id, page) {
     $(page).on('click','.open-preloader-title', function () {
-      $.showPreloader('加载中...')
+      $.showPreloader('Loading...')
       setTimeout(function () {
         $.hidePreloader();
       }, 2000);
@@ -182,7 +171,6 @@ $(function () {
   });
 
 
-  //选择颜色主题
   $(document).on("click", ".select-color", function(e) {
     var b = $(e.target);
     document.body.className = "theme-" + (b.data("color") || "");
@@ -195,12 +183,12 @@ $(function () {
     $("#picker").picker({
       toolbarTemplate: '<header class="bar bar-nav">\
         <button class="button button-link pull-left">\
-      按钮\
+      Btn\
       </button>\
       <button class="button button-link pull-right close-picker">\
-      确定\
+      OK\
       </button>\
-      <h1 class="title">标题</h1>\
+      <h1 class="title">Title</h1>\
       </header>',
       cols: [
         {
@@ -212,20 +200,16 @@ $(function () {
     $("#picker-name").picker({
       toolbarTemplate: '<header class="bar bar-nav">\
       <button class="button button-link pull-right close-picker">确定</button>\
-      <h1 class="title">请选择称呼</h1>\
+      <h1 class="title">Choose Name</h1>\
       </header>',
       cols: [
         {
           textAlign: 'center',
-          values: ['赵', '钱', '孙', '李', '周', '吴', '郑', '王']
+          values: ['Mr', 'Ms']
         },
         {
           textAlign: 'center',
-          values: ['杰伦', '磊', '明', '小鹏', '燕姿', '菲菲', 'Baby']
-        },
-        {
-          textAlign: 'center',
-          values: ['先生', '小姐']
+          values: ['Amy', 'Bob', 'Cat', 'Dog', 'Ella', 'Fox', 'Google']
         }
       ]
     });
@@ -233,8 +217,8 @@ $(function () {
   $(document).on("pageInit", "#page-datetime-picker", function(e) {
     $("#datetime-picker").datetimePicker({
       toolbarTemplate: '<header class="bar bar-nav">\
-      <button class="button button-link pull-right close-picker">确定</button>\
-      <h1 class="title">选择日期和时间</h1>\
+      <button class="button button-link pull-right close-picker">OK</button>\
+      <h1 class="title">datetime</h1>\
       </header>'
     });
   });
