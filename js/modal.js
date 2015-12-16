@@ -620,11 +620,16 @@
       
        
     }
-    $(document).on('click', ' .modal-overlay, .popup-overlay, .close-popup, .open-popup, .open-popover, .close-popover, .close-picker', handleClicks);
-    var defaults =  $.modal.prototype.defaults  = {
-        modalButtonOk: 'OK',
-        modalButtonCancel: 'Cancel',
-        modalPreloaderTitle: 'Loading...',
-        modalContainer : document.body 
-    };
+
+    var defaults;
+
+    $(function() {
+      $(document).on('click', ' .modal-overlay, .popup-overlay, .close-popup, .open-popup, .open-popover, .close-popover, .close-picker', handleClicks);
+      defaults = $.modal.prototype.defaults  = {
+          modalButtonOk: 'OK',
+          modalButtonCancel: 'Cancel',
+          modalPreloaderTitle: 'Loading...',
+          modalContainer : document.body 
+      };
+    });
 }(Zepto);

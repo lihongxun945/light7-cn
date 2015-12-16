@@ -833,5 +833,7 @@
 	};
 
   //直接绑定
-  FastClick.attach(document.body);
+  $(function() {
+    FastClick.attach(document.body);
+  });
 }());
