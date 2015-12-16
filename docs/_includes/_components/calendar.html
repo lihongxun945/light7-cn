@@ -30,40 +30,10 @@ $("#my-input").calendar();
         <th colspan="4">Common Picker Modal Component Parameters</th>
       </tr>
       <tr>
-        <td>container</td>
-        <td>string or HTMLElement</td>
-        <td></td>
-        <td>String with CSS selector or HTMLElement where to place generated Calendar HTML. Use only for inline pickers</td>
-      </tr>
-      <tr>
-        <td>input</td>
-        <td>string or HTMLElement</td>
-        <td></td>
-        <td>String with CSS selector or HTMLElement with related input element</td>
-      </tr>
-      <tr>
-        <td>scrollToInput</td>
-        <td>boolean</td>
-        <td>true</td>
-        <td>Scroll viewport (page-content) to input when calendar opened</td>
-      </tr>
-      <tr>
         <td>inputReadOnly</td>
         <td>boolean</td>
         <td>true</td>
         <td>Sets "readonly" attribute on specified input</td>
-      </tr>
-      <tr>
-        <td>convertToPopover</td>
-        <td>boolean</td>
-        <td>true</td>
-        <td>Converts calendar modal to Popover on large screens (on iPad)</td>
-      </tr>
-      <tr>
-        <td>onlyOnPopover</td>
-        <td>boolean</td>
-        <td>false</td>
-        <td>Enable it and Calendar will be always opened in Popover</td>
       </tr>
       <tr>
         <td>cssClass</td>
@@ -84,23 +54,10 @@ $("#my-input").calendar();
         <td>Enables calendar modal toolbar</td>
       </tr>
       <tr>
-        <td>toolbarCloseText</td>
-        <td>string</td>
-        <td>'Done'</td>
-        <td>Text for Done/Close toolbar button</td>
-      </tr>
-      <tr>
         <td>toolbarTemplate</td>
         <td>string</td>
         <td></td>
-        <td>Toolbar HTML Template. By default it is HTML string with following template:
-<pre><code class=" hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"toolbar"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"toolbar-inner"</span>&gt;</span>
-    {{monthPicker}}
-    {{yearPicker}}
-  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span> </code></pre>
-      </td>
+        <td>Toolbar HTML Template </td>
     </tr>
     <tr>
       <th colspan="4">Specific Calendar Parameters</th>
@@ -116,18 +73,6 @@ $("#my-input").calendar();
       <td>Date Range</td>
       <td></td>
       <td>Additonal disabled dates. Parameter accepts so called <b>Date Range</b> (look below for details)</td>
-    </tr>
-    <tr>
-      <td>events</td>
-      <td>Date Range</td>
-      <td></td>
-      <td>Dates with events. Will be marked with additonal "dot" on calendar day. Parameter accepts so called <b>Date Ranges</b> (look below for details)</td>
-    </tr>
-    <tr>
-      <td>rangesClasses</td>
-      <td>array</td>
-      <td></td>
-      <td>Date ranges you want to add custom CSS class for additional styling. Look below for accepted format</td>
     </tr>
     <tr>
       <td>formatValue</td>
@@ -158,24 +103,6 @@ $("#my-input").calendar();
       <td>array</td>
       <td>['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']</td>
       <td>Array with week day short names</td>
-    </tr>
-    <tr>
-      <td>updateValuesOnTouchmove</td>
-      <td>boolean</td>
-      <td>true</td>
-      <td>Updates picker and input values during touch move</td>
-    </tr>
-    <tr>
-      <td>firstDay</td>
-      <td>number</td>
-      <td>1</td>
-      <td>First day of the week. By default 1 - Monday</td>
-    </tr>
-    <tr>
-      <td>weekendDays</td>
-      <td>array</td>
-      <td>[0, 6]</td>
-      <td>Array with index numeber of weekend days, by default it is Saturday and Sunday</td>
     </tr>
     <tr>
       <td>dateFormat</td>
@@ -244,33 +171,6 @@ $("#my-input").calendar();
       <td>false</td>
       <td>Enable and calendar will be closed when user pick a date</td>
     </tr>
-    <tr>
-      <td>weekHeader</td>
-      <td>boolean</td>
-      <td>true</td>
-      <td>Enable week header with short name week days</td>
-    </tr>
-    <tr>
-      <td>monthPicker</td>
-      <td>boolean</td>
-      <td>true</td>
-      <td>Enable month picker in toolbar</td>
-    </tr>
-    <tr>
-      <td>monthPickerTemplate</td>
-      <td>string</td>
-      <td></td>
-      <td>Month picker HTML template. By default it is:
-<pre><code class=" hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"picker-calendar-month-picker"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"link icon-only picker-calendar-prev-month"</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">i</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon icon-prev"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">i</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"current-month-value"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"link icon-only picker-calendar-next-month"</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">i</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon icon-next"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">i</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>    </code></pre>
-    </td>
   </tr>
   <tr>
     <td>yearPicker</td>
@@ -278,21 +178,6 @@ $("#my-input").calendar();
     <td>true</td>
     <td>Enable year picker in toolbar</td>
   </tr>
-  <tr>
-    <td>yearPickerTemplate</td>
-    <td>string</td>
-    <td></td>
-    <td>Year picker HTML template. By default it is:
-<pre><code class=" hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"picker-calendar-year-picker"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"link icon-only picker-calendar-prev-year"</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">i</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon icon-prev"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">i</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"current-year-value"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"link icon-only picker-calendar-next-year"</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">i</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon icon-next"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">i</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span></code></pre>
-  </td>
 </tr>
 <tr>
   <th colspan="4">Callbacks</th>
@@ -314,18 +199,6 @@ $("#my-input").calendar();
   <td>function (p, dayContainer, year, month, day)</td>
   <td></td>
   <td>Callback function that will be executed when user clicks/select any date</td>
-</tr>
-<tr>
-  <td>onMonthYearChangeStart</td>
-  <td>function (p, year, month)</td>
-  <td></td>
-  <td>Callback function that will be executed in the beginning of transition to another month/year</td>
-</tr>
-<tr>
-  <td>onMonthYearChangeEnd</td>
-  <td>function (p, year, month)</td>
-  <td></td>
-  <td>Callback function that will be executed in the end of transition to another month/year</td>
 </tr>
 <tr>
   <td>onOpen</td>
