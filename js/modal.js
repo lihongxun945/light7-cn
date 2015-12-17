@@ -621,15 +621,15 @@
        
     }
 
-    var defaults;
+    var defaults = $.modal.prototype.defaults  = {
+      modalButtonOk: 'OK',
+      modalButtonCancel: 'Cancel',
+      modalPreloaderTitle: 'Loading...',
+      modalContainer : document.body 
+    };
 
     $(function() {
       $(document).on('click', ' .modal-overlay, .popup-overlay, .close-popup, .open-popup, .open-popover, .close-popover, .close-picker', handleClicks);
-      defaults = $.modal.prototype.defaults  = {
-          modalButtonOk: 'OK',
-          modalButtonCancel: 'Cancel',
-          modalPreloaderTitle: 'Loading...',
-          modalContainer : document.body 
-      };
+      defaults.modalContainer = document.body;  //incase some one include js in head
     });
 }(Zepto);
