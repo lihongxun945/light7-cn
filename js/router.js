@@ -97,7 +97,7 @@
       }
       this.state.setItem("forward", "[]");  //clearforward
 
-      $("#"+page[0].id).remove();
+      $("#"+$(page)[0].id).remove();
 
       page.insertAfter($(".page")[0]);
 
