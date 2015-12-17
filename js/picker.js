@@ -445,7 +445,7 @@
           if (p.opened) return;
           p.open();
           if (p.params.scrollToInput && !isPopover()) {
-              var pageContent = p.input.parents('.page-content');
+              var pageContent = p.input.parents('.content');
               if (pageContent.length === 0) return;
 
               var paddingTop = parseInt(pageContent.css('padding-top'), 10),
