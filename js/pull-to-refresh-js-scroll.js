@@ -91,4 +91,4 @@
         "pullToRefreshTrigger": pullToRefreshTriggerJS, 
         "destroyPullToRefresh": destroyPullToRefreshJS, 
     };
-}(Zepto); // jshint ignore:line
+}($); // jshint ignore:line

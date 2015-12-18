@@ -374,5 +374,5 @@
       router.loadPage(url, $target.hasClass("no-transition"), $target.hasClass("replace"));
     })
   });
-}(Zepto);
+}($);
 // jshint ignore: end

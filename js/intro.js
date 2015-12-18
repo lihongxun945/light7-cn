@@ -14,4 +14,4 @@
 
   $.smConfig = $.extend(defaults, $.config);
 
-}(Zepto);
+}($);

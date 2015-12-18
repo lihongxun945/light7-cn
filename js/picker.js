@@ -263,7 +263,8 @@
               if (isMoved || isTouched) return;
               e.preventDefault();
               isTouched = true;
-              touchStartY = touchCurrentY = e.type === 'touchstart' ? e.targetTouches[0].pageY : e.pageY;
+              var position = $.getTouchPosition(e);
+              touchStartY = touchCurrentY = position.y;
               touchStartTime = (new Date()).getTime();
               
               allowItemClick = true;
@@ -273,7 +274,8 @@
               if (!isTouched) return;
               e.preventDefault();
               allowItemClick = false;
-              touchCurrentY = e.type === 'touchmove' ? e.targetTouches[0].pageY : e.pageY;
+              var position = $.getTouchPosition(e);
+              touchCurrentY = position.y;
               if (!isMoved) {
                   // First move
                   $.cancelAnimationFrame(animationFrameId);
@@ -631,4 +633,4 @@
       }
     });
   };
-}(Zepto);
+}($);

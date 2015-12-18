@@ -15,4 +15,4 @@
       $input.parents(".searchbar").removeClass("searchbar-active");
     });
   });
-}(Zepto);
+}($);

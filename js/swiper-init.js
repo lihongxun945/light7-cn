@@ -41,4 +41,4 @@ Framework7 Swiper Additions
         }
     };
 
-}(Zepto);
+}($);

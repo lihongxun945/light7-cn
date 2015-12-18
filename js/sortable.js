@@ -149,4 +149,4 @@ $(document).on("click", ".toggle-sortable, .open-sortable, .close-sortable", fun
     }
 });
 
-}(Zepto);
+}($);

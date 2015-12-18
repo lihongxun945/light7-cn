@@ -837,4 +837,4 @@
   $(function() {
     FastClick.attach(document.body);
   });
-}(Zepto));
+}($));

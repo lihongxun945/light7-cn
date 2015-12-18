@@ -101,4 +101,4 @@ Device/OS Detection
     if (classNames.length > 0) $('html').addClass(classNames.join(' '));
 
     $.device = device;
-})(Zepto);
+})($);

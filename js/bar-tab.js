@@ -21,4 +21,4 @@
     $(document.body)[show ? "removeClass" : "addClass"]("tabbar-hidden");
   };
 
-}(Zepto);
+}($);

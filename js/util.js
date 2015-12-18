@@ -21,4 +21,19 @@
     return 1;
   };
 
-}(Zepto);
+  $.getTouchPosition = function(e) {
+    var e = e.originalEvent || e; //jquery wrap the originevent
+    if(e.type === 'touchstart' || e.type === 'touchmove' || e.type === 'touchend') {
+      return {
+        x: e.targetTouches[0].pageX,
+        y: e.targetTouches[0].pageY
+      };
+    } else {
+      return {
+        x: e.pageX,
+        y: e.pageY
+      };
+    }
+  }
+
+}($);

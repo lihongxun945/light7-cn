@@ -94,4 +94,4 @@
     var clicked = $(this);
     showTab(clicked.data("tab") || clicked.attr('href'), clicked);
   });
-}(Zepto);
+}($);

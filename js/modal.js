@@ -632,4 +632,4 @@
       $(document).on('click', ' .modal-overlay, .popup-overlay, .close-popup, .open-popup, .open-popover, .close-popover, .close-picker', handleClicks);
       defaults.modalContainer = document.body;  //incase some one include js in head
     });
-}(Zepto);
+}($);

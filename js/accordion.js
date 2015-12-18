@@ -74,4 +74,4 @@ $(document).on("click", ".accordion-item .item-content, .accordion-item-toggle",
         $.accordionToggle(accordionItem);
     }
 });
-}(Zepto);
+}($);

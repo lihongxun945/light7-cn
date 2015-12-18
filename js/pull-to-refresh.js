@@ -34,8 +34,9 @@
             isTouched = true;
             isScrolling = undefined;
             wasScrolled = undefined;
-            touchesStart.x = e.type === 'touchstart' ? e.targetTouches[0].pageX : e.pageX;
-            touchesStart.y = e.type === 'touchstart' ? e.targetTouches[0].pageY : e.pageY;
+            var position = $.getTouchPosition(e);
+            touchesStart.x = position.x;
+            touchesStart.y = position.y;
             touchStartTime = (new Date()).getTime();
             /*jshint validthis:true */
             container = $(this);
@@ -43,8 +44,9 @@
 
         function handleTouchMove(e) {
             if (!isTouched) return;
-            var pageX = e.type === 'touchmove' ? e.targetTouches[0].pageX : e.pageX;
-            var pageY = e.type === 'touchmove' ? e.targetTouches[0].pageY : e.pageY;
+            var position = $.getTouchPosition(e);
+            var pageX = position.x;
+            var pageY = position.y;
             if (typeof isScrolling === 'undefined') {
                 isScrolling = !!(isScrolling || Math.abs(pageY - touchesStart.y) > Math.abs(pageX - touchesStart.x));
             }
@@ -217,4 +219,4 @@
     };
 */
 
-}(Zepto); //jshint ignore:line
+}($); //jshint ignore:line

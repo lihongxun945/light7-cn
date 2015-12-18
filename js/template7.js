@@ -419,4 +419,4 @@
     t7.helpers = Template7.prototype.helpers;
     return t7;
   })();
-}(Zepto);
+}($);
