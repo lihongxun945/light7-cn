@@ -1,7 +1,7 @@
 /*===========================
   Template7 Template engine
   ===========================*/
-/* global Zepto:true */
+/* global $:true */
 /* jshint unused:false */
 /* jshint forin:false */
 +function ($) {

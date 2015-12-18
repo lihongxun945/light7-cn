@@ -1,7 +1,6 @@
 + function($) {
     'use strict';
 
-
     $.initPullToRefresh = function(pageContainer) {
         var eventsTarget = $(pageContainer);
         if (!eventsTarget.hasClass('pull-to-refresh-content')) {

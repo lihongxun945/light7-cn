@@ -1,7 +1,7 @@
 /*======================================================
 ************   Photo Browser   ************
 ======================================================*/
-/* global Zepto:true */
+/* global $:true */
 +function($){
     'use strict';
     var PhotoBrowser = function (params) {

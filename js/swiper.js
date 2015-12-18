@@ -1,7 +1,7 @@
 /*===========================
 Swiper
 ===========================*/
-/* global Zepto:true */
+/* global $:true */
 /* global WebKitCSSMatrix:true */
 /* global Modernizr:true */
 /* global DocumentTouch:true */

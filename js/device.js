@@ -1,7 +1,7 @@
 /*===========================
 Device/OS Detection
 ===========================*/
-/* global Zepto:true */
+/* global $:true */
 ;(function ($) {
     "use strict";
     var device = {};

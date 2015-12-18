@@ -1,4 +1,4 @@
-/* global Zepto:true */
+/* global $:true */
 + function($) {
   "use strict";
 
