@@ -250,7 +250,6 @@
 		case 'iframe': // iOS8 homescreen apps can prevent events bubbling into frames
 		case 'video':
 			return true;
-    break;
     default:
       //fix a bug: when input is wrap by label, but click other element in this label will do nothing.
       var parent = target;
