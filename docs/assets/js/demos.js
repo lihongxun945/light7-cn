@@ -39,7 +39,6 @@ $(function () {
         loading = false;
 
         addItems();
-        $.refreshScroller();
       }, 1000);
     });
   });

@@ -1,7 +1,7 @@
 /*======================================================
 ************   Calendar   ************
 ======================================================*/
-/* global Zepto:true */
+/* global $:true */
 /*jshint unused: false*/
 +function ($) {
   "use strict";
@@ -188,8 +188,9 @@
               if (isMoved || isTouched) return;
               // e.preventDefault();
               isTouched = true;
-              touchStartX = touchCurrentY = e.type === 'touchstart' ? e.targetTouches[0].pageX : e.pageX;
-              touchStartY = touchCurrentY = e.type === 'touchstart' ? e.targetTouches[0].pageY : e.pageY;
+              var position = $.getTouchPosition(e);
+              touchStartX = touchCurrentY = position.x;
+              touchStartY = touchCurrentY = position.y;
               touchStartTime = (new Date()).getTime();
               percentage = 0;
               allowItemClick = true;
@@ -198,9 +199,9 @@
           }
           function handleTouchMove (e) {
               if (!isTouched) return;
-              
-              touchCurrentX = e.type === 'touchmove' ? e.targetTouches[0].pageX : e.pageX;
-              touchCurrentY = e.type === 'touchmove' ? e.targetTouches[0].pageY : e.pageY;
+              var position = $.getTouchPosition(e);
+              touchCurrentX = position.x;
+              touchCurrentY = position.y;
               if (typeof isScrolling === 'undefined') {
                   isScrolling = !!(isScrolling || Math.abs(touchCurrentY - touchStartY) > Math.abs(touchCurrentX - touchStartX));
               }
@@ -861,4 +862,4 @@
       $(this).calendar();
     });
   };
-}(Zepto);
+}($);

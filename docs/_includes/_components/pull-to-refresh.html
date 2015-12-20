@@ -47,17 +47,16 @@
 <script type="text/javascript">
 $(document).on('refresh', '.pull-to-refresh-content',function(e) {
     setTimeout(function() {
-        var cardNumber = $(e.target).find('.ptr-demo').length + 1;
         var cardHTML = '<div class="card">' +
-                          '<div class="card-header">card'+cardNumber+'</div>' +
+                          '<div class="card-header">New Card</div>' +
                           '<div class="card-content">' +
                             '<div class="card-content-inner">' +
-                                'Hello! I am the new card!'+
+                                'Hello! I am the new card!'+(Math.random()*1000000)+
                             '</div>' +
                           '</div>' +
                       '</div>';
 
-        $(e.target).find('.card-container').prepend(cardHTML);
+        $(e.target).find('.card').replaceWith(cardHTML);
         // done!
         $.pullToRefreshDone('.pull-to-refresh-content');
     }, 2000);
@@ -67,17 +66,16 @@ $(document).on('refresh', '.pull-to-refresh-content',function(e) {
 {% highlight js %}
 $(document).on('refresh', '.pull-to-refresh-content',function(e) {
     setTimeout(function() {
-        var cardNumber = $(e.target).find('.card').length + 1;
         var cardHTML = '<div class="card">' +
-                          '<div class="card-header">card'+cardNumber+'</div>' +
+                          '<div class="card-header">New Card</div>' +
                           '<div class="card-content">' +
                             '<div class="card-content-inner">' +
-                                'Hello! I am the new card!'+
+                                'Hello! I am the new card!'+(Math.random()*1000000)+
                             '</div>' +
                           '</div>' +
                       '</div>';
 
-        $(e.target).find('.card-container').prepend(cardHTML);
+        $(e.target).find('.card').replaceWith(cardHTML);
         // done
         $.pullToRefreshDone('.pull-to-refresh-content');
     }, 2000);

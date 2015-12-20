@@ -1,7 +1,7 @@
 /*===========================
   Template7 Template engine
   ===========================*/
-/* global Zepto:true */
+/* global $:true */
 /* jshint unused:false */
 /* jshint forin:false */
 +function ($) {
@@ -419,4 +419,4 @@
     t7.helpers = Template7.prototype.helpers;
     return t7;
   })();
-}(Zepto);
+}($);

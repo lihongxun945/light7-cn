@@ -1,7 +1,7 @@
 /*===============================================================================
 ************   Accordion   ************
 ===============================================================================*/
-/* global Zepto:true */
+/* global $:true */
 +function ($) {
   "use strict";
 
@@ -74,4 +74,4 @@ $(document).on("click", ".accordion-item .item-content, .accordion-item-toggle",
         $.accordionToggle(accordionItem);
     }
 });
-}(Zepto);
+}($);

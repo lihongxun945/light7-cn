@@ -1,4 +1,4 @@
-/* global Zepto:true */
+/* global $:true */
 /* jshint unused:false*/
 
 + function($) {
@@ -116,4 +116,4 @@
     });
   };
 
-}(Zepto);
+}($);
