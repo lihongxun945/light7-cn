@@ -62,7 +62,7 @@
     }, false);
   }
 
-  //加载一个页面,传入的参数是页面id或者url
+  //load new page, and push to history
   Router.prototype.loadPage = function(url, noAnimation, replace) {
 
     var param = url;
@@ -79,15 +79,18 @@
 
     this.getPage(url, function(page) {
 
-      var pageid = this.getCurrentPage()[0].id;
+      var currentPage = this.getCurrentPage();
+
+      var pageid = currentPage[0].id;
+
       this[replace ? "replaceBack" : "pushBack"]({
-        url: url,
+        url: location.href,
         pageid: "#"+ pageid,
         id: this.getCurrentStateID(),
         animation: !noAnimation
       });
 
-      //删除全部forward
+      //remove all forward page
       var forward = JSON.parse(this.state.getItem("forward") || "[]");
       for(var i=0;i<forward.length;i++) {
         $(forward[i].pageid).each(function() {
@@ -97,9 +100,11 @@
       }
       this.state.setItem("forward", "[]");  //clearforward
 
-      $("#"+$(page)[0].id).remove();
+      var duplicatePage = $("#"+$(page)[0].id);
 
-      page.insertAfter($(".page")[0]);
+      page.insertBefore($(".page")[0]);
+
+      if(duplicatePage[0] !== page[0]) duplicatePage.remove(); //if inline mod, the duplicate page is current page
 
       var id = this.genStateID();
       this.setCurrentStateID(id);
@@ -110,6 +115,16 @@
       
       this.animatePages(this.getCurrentPage(), page, null, noAnimation);
     });
+  }
+
+  //load new page and replace current page inhistory
+  Router.prototype.replacePage = function(url, noAnimation) {
+    return this.loadPage(url, noAnimation, true);
+  }
+
+  //reload current page
+  Router.prototype.reloadPage = function() {
+    return this.replacePage(location.href, true);
   }
 
   Router.prototype.animatePages = function (leftPage, rightPage, leftToRight, noTransition) {

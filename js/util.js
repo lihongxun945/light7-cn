@@ -22,7 +22,7 @@
   };
 
   $.getTouchPosition = function(e) {
-    var e = e.originalEvent || e; //jquery wrap the originevent
+    e = e.originalEvent || e; //jquery wrap the originevent
     if(e.type === 'touchstart' || e.type === 'touchmove' || e.type === 'touchend') {
       return {
         x: e.targetTouches[0].pageX,
@@ -34,6 +34,6 @@
         y: e.pageY
       };
     }
-  }
+  };
 
 }($);

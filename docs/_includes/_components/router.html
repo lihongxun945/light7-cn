@@ -135,6 +135,14 @@ $.router.loadPage({
     </tr>
   </table>
 
+  <p>The <code>loadPage</code> method will load new page, and push to history. If you dont't want to push to history, but want to replace history, you should use <code>replacePage</code>:</p>
+
+{% highlight js %}
+$.router.replacePage(url, noAnimation);
+{% endhighlight %}
+
+  <p>And if you want to refresh current page, you can simply use <code>$.router.reloadPage();</code>.</p>
+
   <h3 class="component-title">Event</h3>
   <p class="component-description">There are many events：</p>
 
