@@ -85,4 +85,62 @@
 </li>
 {% endhighlight %}
 
+
+  <h3>Swipeout Events</h3>
+
+  <p>Swipeout elements have the following events:</p>
+
+  <table class="events-table">
+    <thead>
+      <tr>
+        <th>Event</th>
+        <th>Target</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>swipeout</td>
+        <td>Swipeout Element<span>&lt;li class="swipeout"&gt;</span></td>
+        <td>Event will be triggered while you move swipeout element. <b>event.detail.progress</b> contains current opened progress percentage</td>
+      </tr>
+      <tr>
+        <td>open</td>
+        <td>Swipeout Element<span>&lt;li class="swipeout"&gt;</span></td>
+        <td>Event will be triggered when swipeout element starts its opening animation</td>
+      </tr>
+      <tr>
+        <td>opened</td>
+        <td>Swipeout Element<span>&lt;li class="swipeout"&gt;</span></td>
+        <td>Event will be triggered after swipeout element completes its opening animation</td>
+      </tr>
+      <tr>
+        <td>close</td>
+        <td>Swipeout Element<span>&lt;li class="swipeout"&gt;</span></td>
+        <td>Event will be triggered when swipeout element starts its closing animation</td>
+      </tr>
+      <tr>
+        <td>closed</td>
+        <td>Swipeout Element<span>&lt;li class="swipeout"&gt;</span></td>
+        <td>Event will be triggered after swipeout element completes its closing animation </td>
+      </tr>
+      <tr>
+        <td>delete</td>
+        <td>Swipeout Element<span>&lt;li class="swipeout"&gt;</span></td>
+        <td>Event will be triggered after swipeout element starts its delete animation </td>
+      </tr>
+      <tr>
+        <td>deleted</td>
+        <td>Swipeout Element<span>&lt;li class="swipeout"&gt;</span></td>
+        <td>Event will be triggered after swipeout element completes its delete animation right before it will be removed from DOM</td>
+      </tr>
+    </tbody>
+  </table>
+
+{% highlight js %}
+$('.swipeout').on('swipeout', function (e) {
+  console.log('Item opened on: ' + e.detail.progress + '%');
+});  
+{% endhighlight %}
+
 </article>
