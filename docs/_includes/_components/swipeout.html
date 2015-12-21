@@ -1,0 +1,88 @@
+<article class="component" id="swipeout" data-url='swipeout'>
+  <h2 class="component-title">Swipeout</h2>
+
+  <p class="component-description">
+    Swipeout is an extension of list view that allows you to swipe over list elements to reveal hidden menu with available actions, like swipe-to-delete.
+  </p>
+  <p>
+    Let's look on layout structure of swipeout element in your list views:
+  </p>
+
+{% highlight html %}
+<div class="list-block">
+  <ul>
+    <!-- Additional "swipeout" class on li -->
+    <li class="swipeout">
+      <!-- Usual list element wrapped with "swipeout-content" -->
+      <div class="swipeout-content">
+        <!-- Your list element here -->
+        <div class="item-content">
+          <div class="item-media">...</div>
+          <div class="item-inner">...</div>
+        </div>
+      </div>
+      <!-- Swipeout actions left -->
+      <div class="swipeout-actions-left">
+        <!-- Swipeout actions links/buttons -->
+        <a href="#">Action 1</a>
+        <a href="#">Action 2</a>
+      </div>
+      <!-- Swipeout actions right -->
+      <div class="swipeout-actions-right">
+        <!-- Swipeout actions links/buttons -->
+        <a href="#">Action 1</a>
+        <a class="swipeout-close" href="#">Action 2</a>
+      </div>
+    </li>
+    ...
+  </ul>
+</div>
+{% endhighlight %}
+
+  <p>Where:</p>
+  <ul>
+    <li><code>swipeout-content</code> - wrapper for your list element. This container will move during swipe over the list item</li>
+    <li><code>swipeout-actions-left</code> - container with left swipeout action buttons/links</li>
+    <li><code>swipeout-actions-right</code> - container with right swipeout action buttons/links</li>
+    <li><code>swipeout-close</code> - additional class on swipeout link that will close swipeout element when you click this link</li>
+  </ul>
+
+  <h3>Close And Delete</h3>
+
+  <p>Add <code>.swipeout-close</code> to action link to close swipeout.</p>
+  <p>Add <code>.swipeout-delete</code> to action link to close swipeout. You can also add <code>data-confirm="confirm message"</code> and <code>data-confirm-title="confirm title"</code> to show a confirm dialog when user click the delete button.</p>
+
+
+{% highlight html %}
+<li class="swipeout">
+  <div class="swipeout-content">
+    <div class="item-content">
+      <div class="item-inner">
+        <div class="item-title">Swipe me left!</div>
+        <div class="item-after">666</div>
+      </div>
+    </div>
+  </div>
+  <div class="swipeout-actions-right">
+    <a class="bg-success">Action 1</a>
+    <!-- close -->
+    <a class="swipeout-close" href="#">Close</a>
+  </div>
+</li>
+<li class="swipeout">
+  <div class="swipeout-content">
+    <div class="item-content">
+      <div class="item-inner">
+        <div class="item-title">Remove me after confirm!</div>
+      </div>
+    </div>
+  </div>
+  <div class="swipeout-actions-right">
+    <!-- delete with confirm -->
+    <a class="bg-danger swipeout-delete" href="#" data-confirm="Are you sure want to delete me?" data-confirm-title="Confirm Delete">Delete</a>
+    <a href="#">Action 2</a>
+  </div>
+</li>
+{% endhighlight %}
+
+</article>

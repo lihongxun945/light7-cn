@@ -1,0 +1,61 @@
+---
+layout: demo
+title: Light7 Demo
+---
+<div class="page" id='page-swipeout-demo'>
+  <header class="bar bar-nav">
+    <h1 class='title'>Swipout</h1>
+  </header>
+  <div class="content">
+    <div class="list-block">
+      <ul>
+        <!-- Additional "swipeout" class on li -->
+        <li class="swipeout">
+          <!-- Usual list element wrapped with "swipeout-content" -->
+          <div class="swipeout-content">
+            <!-- Your list element here -->
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title">Swipe me left!</div>
+                <div class="item-after">666</div>
+              </div>
+            </div>
+          </div>
+          <!-- Swipeout actions right -->
+          <div class="swipeout-actions-right">
+            <!-- Swipeout actions links/buttons -->
+            <a class="bg-success">Action 1</a>
+            <a class="swipeout-close" href="#">Close</a>
+          </div>
+        </li>
+        <li class="swipeout">
+          <div class="swipeout-content">
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title">Swipe me right!</div>
+                <div class="item-after">666</div>
+              </div>
+            </div>
+          </div>
+          <div class="swipeout-actions-left">
+            <a class="bg-danger swipeout-delete" href="#">Delete</a>
+            <a href="#">Action 2</a>
+          </div>
+        </li>
+        <li class="swipeout">
+          <div class="swipeout-content">
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title">Remove me after confirm!</div>
+              </div>
+            </div>
+          </div>
+          <div class="swipeout-actions-right">
+            <a class="bg-danger swipeout-delete" href="#" data-confirm="Are you sure want to delete me?" data-confirm-title="Confirm Delete">Delete</a>
+            <a href="#">Action 2</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
