@@ -7,11 +7,11 @@
 
   <p>The new page will slide from right to left by default. Add <code>class="no-transition"</code> to link to prevent the animation.</p>
 
-  <p>If you use Toolbar to switch multi page, use inline page instead of ajax page please. Because you may load the same page multi times if you use ajax page. See <a href="/examples/light7-mall/">light7 Mall</a> for how to use tab to switch inline pages.</p>
+  <p>There is a stack to manage the history, the new page will push to stack, you can add <code>class='replace'</code> to replace the stack instead of push.</p>
 
   <h3 class="component-title">Inline Page</h3>
   <p class="component-description">You can write multi page in one html file. Each page is in a <code>.page</code> container. If you have multi page in one html, you should use <code>.page-current</code> to make it a visiable at first enter.</p>
-  <p>Every <code>.page</code> container must have an id attr.Router will use id as the unique identify of a page. And you can use the id to jump to the page like this: <code>&lt;a href='#{page-id}'&gt;jump&lt;/a&gt;</code>.</p>
+  <p>Every <code>.page</code> container must have an id attr.Router will use id as the unique identify of a page. And you can use the id to jump to the page like this: <code>&lt;a href='#{page-id}'&gt;jump&lt;/a&gt;</code>. And if the new Page has the same id to a old page , the DOM of old page will be replace by new page.</p>
 
   <h3 class="component-title">JS And CSS</h3>
   <p>Router will ignore all scripts and styles when load new page! You should import all CSS file and JS file(pack them into one js and css file) in the entry page, And use 'pageInit' to load different page's JS code.</p>
@@ -102,6 +102,48 @@
 $.router.loadPage("/detail");  //load ajax page
 $.router.loadPage("#about");  //load inline page
 {% endhighlight %}
+
+  <p>You can call <code>$.router.loadPage</code> with a config object like this:</p>
+{% highlight js %}
+$.router.loadPage({
+  url: "/detail",
+  noAnimation: true,
+  replace: true
+});
+{% endhighlight %}
+
+  <table>
+    <tr>
+      <th>Param</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td>url</td>
+      <td>undefined</td>
+      <td>url to load</td>
+    </tr>
+    <tr>
+      <td>noAnimation</td>
+      <td>false</td>
+      <td>Load new page with animation</td>
+    </tr>
+    <tr>
+      <td>replace</td>
+      <td>false</td>
+      <td>If set true, the new page will replace old page in history, you can't back to old page because it has been removed from histroy(but not removed from DOM).</td>
+    </tr>
+  </table>
+
+  <p>The <code>loadPage</code> method will load new page, and push to history. If you dont't want to push to history, but want to replace history, you should use <code>replacePage</code>:</p>
+
+{% highlight js %}
+$.router.replacePage(url, noAnimation);
+{% endhighlight %}
+
+  <p>Infact, <code>replacePage</code> is only a shortcut of <code>loadPage</code>, but set the param <code>replace</code> as <code>true</code>.</p>
+
+  <p>And if you want to refresh current page, you can simply use <code>$.router.reloadPage();</code>.</p>
 
   <h3 class="component-title">Event</h3>
   <p class="component-description">There are many events：</p>

@@ -72,4 +72,4 @@
         // make available to unit tests
     $.__detect = detect;
 
-}(Zepto); // jshint ignore:line
+}($); // jshint ignore:line

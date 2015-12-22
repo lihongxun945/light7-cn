@@ -1,7 +1,7 @@
 /*===========================
 Device/OS Detection
 ===========================*/
-/* global Zepto:true */
+/* global $:true */
 ;(function ($) {
     "use strict";
     var device = {};
@@ -101,4 +101,4 @@ Device/OS Detection
     if (classNames.length > 0) $('html').addClass(classNames.join(' '));
 
     $.device = device;
-})(Zepto);
+})($);

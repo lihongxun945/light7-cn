@@ -62,20 +62,35 @@
     }, false);
   }
 
-  //加载一个页面,传入的参数是页面id或者url
-  Router.prototype.loadPage = function(url, noAnimation) {
+  //load new page, and push to history
+  Router.prototype.loadPage = function(url, noAnimation, replace) {
+
+    var param = url;
+
+    if(typeof url === typeof "a") {
+      param = {
+        url: url,
+        noAnimation: noAnimation,
+        replace: replace
+      }
+    }
+
+    var url = param.url, noAnimation = param.noAnimation, replace = param.replace;
 
     this.getPage(url, function(page) {
 
-      var pageid = this.getCurrentPage()[0].id;
-      this.pushBack({
-        url: url,
+      var currentPage = this.getCurrentPage();
+
+      var pageid = currentPage[0].id;
+
+      this[replace ? "replaceBack" : "pushBack"]({
+        url: location.href,
         pageid: "#"+ pageid,
         id: this.getCurrentStateID(),
         animation: !noAnimation
       });
 
-      //删除全部forward
+      //remove all forward page
       var forward = JSON.parse(this.state.getItem("forward") || "[]");
       for(var i=0;i<forward.length;i++) {
         $(forward[i].pageid).each(function() {
@@ -85,17 +100,31 @@
       }
       this.state.setItem("forward", "[]");  //clearforward
 
-      page.insertAfter($(".page")[0]);
+      var duplicatePage = $("#"+$(page)[0].id);
+
+      page.insertBefore($(".page")[0]);
+
+      if(duplicatePage[0] !== page[0]) duplicatePage.remove(); //if inline mod, the duplicate page is current page
 
       var id = this.genStateID();
       this.setCurrentStateID(id);
 
-      this.pushState(url, id);
+      this[replace ? "replaceState" : "pushState"](url, id);
 
       this.forwardStack  = [];  //clear forward stack
       
       this.animatePages(this.getCurrentPage(), page, null, noAnimation);
     });
+  }
+
+  //load new page and replace current page inhistory
+  Router.prototype.replacePage = function(url, noAnimation) {
+    return this.loadPage(url, noAnimation, true);
+  }
+
+  //reload current page
+  Router.prototype.reloadPage = function() {
+    return this.replacePage(location.href, true);
   }
 
   Router.prototype.animatePages = function (leftPage, rightPage, leftToRight, noTransition) {
@@ -310,6 +339,12 @@
     stack.push(h);
     this.stack.setItem("back", JSON.stringify(stack));
   }
+  Router.prototype.replaceBack = function(h) {
+    var stack = JSON.parse(this.stack.getItem("back"));
+    stack.pop();
+    stack.push(h);
+    this.stack.setItem("back", JSON.stringify(stack));
+  }
   Router.prototype.popForward = function() {
     var stack = JSON.parse(this.stack.getItem("forward"));
     if(!stack.length) return null;
@@ -351,8 +386,8 @@
       }
 
       if(!url || url === "#") return;
-      router.loadPage(url, $target.hasClass("no-transition"));
+      router.loadPage(url, $target.hasClass("no-transition"), $target.hasClass("replace"));
     })
   });
-}(Zepto);
+}($);
 // jshint ignore: end

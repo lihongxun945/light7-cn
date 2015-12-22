@@ -1,4 +1,4 @@
-/* global Zepto:true */
+/* global $:true */
 +function ($) {
   "use strict";
   $(function() {
@@ -15,4 +15,4 @@
       $input.parents(".searchbar").removeClass("searchbar-active");
     });
   });
-}(Zepto);
+}($);

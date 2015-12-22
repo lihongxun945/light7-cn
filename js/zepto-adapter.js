@@ -1,4 +1,4 @@
-/* global Zepto:true */
+/* global $:true */
 /* global WebKitCSSMatrix:true */
 
 (function($) {
@@ -261,4 +261,8 @@
           this.style.display = defaultDisplay(this.nodeName);
       });
     };
-})(Zepto);
+
+    $.fn.scrollHeight = function() {
+      return this[0].scrollHeight;
+    };
+})($);

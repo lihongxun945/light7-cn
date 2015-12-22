@@ -1,7 +1,7 @@
 /*======================================================
 ************   Panels   ************
 ======================================================*/
-/* global Zepto:true */
+/* global $:true */
 /*jshint unused: false*/
 +function ($) {
   "use strict";
@@ -96,8 +96,9 @@
           if (!(swipePanelCloseOpposite || swipePanelOnlyClose)) {
               if ($('.panel.active').length > 0 && !panel.hasClass('active')) return;
           }
-          touchesStart.x = e.type === 'touchstart' ? e.targetTouches[0].pageX : e.pageX;
-          touchesStart.y = e.type === 'touchstart' ? e.targetTouches[0].pageY : e.pageY;
+          var position = $.getTouchPosition(e);
+          touchesStart.x = position.x;
+          touchesStart.y = position.y;
           if (swipePanelCloseOpposite || swipePanelOnlyClose) {
               if ($('.panel.active').length > 0) {
                   side = $('.panel.active').hasClass('panel-left') ? 'left' : 'right';
@@ -130,8 +131,9 @@
           if (!isTouched) return;
           if(!panel[0]) return;
           if (e.f7PreventPanelSwipe) return;
-          var pageX = e.type === 'touchmove' ? e.targetTouches[0].pageX : e.pageX;
-          var pageY = e.type === 'touchmove' ? e.targetTouches[0].pageY : e.pageY;
+          var position = $.getTouchPosition(e);
+          var pageX = position.x;
+          var pageY = position.y;
           if (typeof isScrolling === 'undefined') {
               isScrolling = !!(isScrolling || Math.abs(pageY - touchesStart.y) > Math.abs(pageX - touchesStart.x));
           }
@@ -318,4 +320,4 @@
   };
 
   $.initSwipePanels();
-}(Zepto);
+}($);
