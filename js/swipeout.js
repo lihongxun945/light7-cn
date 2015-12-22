@@ -6,7 +6,7 @@
 +function ($) {
   "use strict";
 
-  var swipeoutOpenedEl = undefined;
+  var swipeoutOpenedEl;
   var allowSwipeout = true;
 
   var params = {

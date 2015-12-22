@@ -1,6 +1,16 @@
 <article class="component" id="swipeout" data-url='swipeout'>
   <h2 class="component-title">Swipeout</h2>
 
+  <p class="component-description">You must include these to file after <code>light7.js</code> and <code>light7.css</code> to use Swipeout:</p>
+
+
+{% highlight html %}
+<link rel="stylesheet" href="css/light7-swipeout.min.css">
+<script type='text/javascript' src='{{ site.version }}/js/light7-swipeout.min.js' charset='utf-8'></script>
+{% endhighlight %}
+
+
+
   <p class="component-description">
     Swipeout is an extension of list view that allows you to swipe over list elements to reveal hidden menu with available actions, like swipe-to-delete.
   </p>
@@ -84,6 +94,29 @@
   </div>
 </li>
 {% endhighlight %}
+
+  <h3>JavaScript</h3>
+
+  <p>Swipeouts also has rich JavaScript API that allows you to control swipeout elements. Let's look on appropriate App's properties and methods:</p>
+
+  <p><code>$.swipeoutOpen(<span>el</span>, <span>direction</span>, <span>callback</span>)</code> - reveal swipeout actions on specified element</p>
+  <ul class="method-parameters">
+    <li><code>el</code> - <span class="parameter-type">HTMLElement</span> or <span class="parameter-type">string</span> (with CSS Selector) of list (&lt;li&gt;) element with "swipeout" class. Required</li>
+    <li><code>direction</code> - <span class="parameter-type">string</span> (could be "left" or "right") swipeout actions to open. Should be specified if item has both left and right swipeout actions. Optional</li>
+    <li><code>callback</code> - <span class="parameter-type">function</span> - callback function will be executed after swipeout element completes its opening animation</li>
+  </ul>
+
+  <p><code>$.swipeoutClose(<span>el</span>, <span>callback</span>)</code> - close swipeout actions on specified element</p>
+  <ul class="method-parameters">
+    <li><code>el</code> - <span class="parameter-type">HTMLElement</span> or <span class="parameter-type">string</span> (with CSS Selector) of list (&lt;li&gt;) element with "swipeout" class. Required</li>
+    <li><code>callback</code> - <span class="parameter-type">function</span> - callback function will be executed after swipeout element completes its closing animation</li>
+  </ul>
+
+  <p><code>$.swipeoutDelete(<span>el</span>, <span>callback</span>)</code> - delete specified swipeout element</p>
+  <ul class="method-parameters">
+    <li><code>el</code> - <span class="parameter-type">HTMLElement</span> or <span class="parameter-type">string</span> (with CSS Selector) of list (&lt;li&gt;) element with "swipeout" class. Required</li>
+    <li><code>callback</code> - <span class="parameter-type">function</span> - callback function will be executed after swipeout element completes its delete animation right before it will be removed from DOM</li>
+  </ul>
 
 
   <h3>Swipeout Events</h3>
