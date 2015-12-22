@@ -198,7 +198,7 @@ $(function () {
     });
     $("#picker-name").picker({
       toolbarTemplate: '<header class="bar bar-nav">\
-      <button class="button button-link pull-right close-picker">确定</button>\
+      <button class="button button-link pull-right close-picker">OK</button>\
       <h1 class="title">Choose Name</h1>\
       </header>',
       cols: [
