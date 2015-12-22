@@ -195,7 +195,9 @@ module.exports = function(grunt) {
 
         cssmin: {
             options: {
-                keepSpecialComments: '*' // keep all important comments
+                keepSpecialComments: '*', // keep all important comments
+                advanced: false,
+                keepBreaks: true
             },
             light7: {
                 src: '<%= meta.distPath %>css/<%= pkg.name %>.css',
