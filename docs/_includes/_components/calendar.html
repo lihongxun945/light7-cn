@@ -1,20 +1,20 @@
 <article class="component" id="calendar" data-url='calendar'>
-  <h2 class="component-title">Calendar</h2>
-  <p class="component-description">Calendar is a touch optimized component that provides an easy way to handle dates.</p>
-  <p>Calendar can be created and initialized using JavaScript. We need to use related App's method:</p>
+  <h2 class="component-title">日历</h2>
+  <p class="component-description">日历组件用来选择年月日，可以代替系统原生的日历组件，提供更统一的视觉和交互以及更好的兼容性。</p>
+  <p>日历组件需要初始化才能使用，最简单的方式是通过一下JS代码来初始化，绑定到一个input元素上：</p>
 
 {% highlight js %}
 $("#my-input").calendar();
 {% endhighlight %}
 
-  <p>A calendar will popup when user click the input, and the start date will be the value of input.</p>
-  <p>You can use <code>data-toggle='date'</code> to init calendar if you don't want to write any JS code:</p>
+  <p>当你点击input元素后，会自动弹出一个JS生成的日历组件。当用户选择日期之后，input的值会被设置为用户选择的日期。</p>
+  <p>如果你不想写js，可以通过以下方式来自动初始化：</p>
 {% highlight html%}
 <input type="text" data-toggle='date' />
 {% endhighlight %}
 
-  <h2>Params</h2>
-  <p>Let's look on list of all available parameters:</p>
+  <h2>参数</h2>
+  <p>你可以在初始化的时候指定如下参数：</p>
 
   <table class="params-table">
     <thead>
@@ -106,64 +106,23 @@ $("#my-input").calendar();
     </tr>
     <tr>
       <td>dateFormat</td>
-      <td>string</td>
       <td>'yyyy-mm-dd'</td>
-      <td>Default date format, available expressions:
-        <ul>
-          <li>'yyyy' - 4 digits year</li>
-          <li>'yy' - 2 digits year</li>
-          <li>'mm' - 2 digits month number, from 01 to 12</li>
-          <li>'m' - month number, from 1 to 12</li>
-          <li>'MM' - full month name</li>
-          <li>'M' - short month name</li>
-          <li>'dd' - 2 digits day number, from 01 to 31</li>
-          <li>'d' - day number, from 1 to 31</li>
-          <li>'DD' - full week day name</li>
-          <li>'D' - short week day name</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>multiple</td>
-      <td>boolean</td>
-      <td>false</td>
-      <td>Enable to allows select multiple dates/values</td>
-    </tr>
-    <tr>
-      <td>rangePicker</td>
-      <td>boolean</td>
-      <td>false</td>
-      <td>Enable to enable range picker. Not compatible with <code>multiple</code></td>
-    </tr>
-    <tr>
-      <td>direction</td>
-      <td>string</td>
-      <td>'horizontal'</td>
-      <td>Months layout direction, could be 'horizontal' or 'vertical'</td>
+      <td>格式化日期</td>
     </tr>
     <tr>
       <td>minDate</td>
-      <td>Date</td>
-      <td>null</td>
-      <td>Minimum allowed date</td>
+      <td>undefined</td>
+      <td>最小可选日期，比如 <code>2015-06-01</code></td>
     </tr>
     <tr>
       <td>maxDate</td>
-      <td>Date</td>
-      <td>null</td>
-      <td>Maximum allowed date</td>
+      <td>undefined</td>
+      <td>最大可选日期，比如 <code>2015-08-01</code></td>
     </tr>
     <tr>
-      <td>touchmove</td>
-      <td>boolean</td>
-      <td>true</td>
-      <td>If enabled then calendar months slides follow finger during touch move</td>
-    </tr>
-    <tr>
-      <td>animate</td>
-      <td>boolean</td>
-      <td>true</td>
-      <td>Enables transition between months</td>
+      <td>onChange</td>
+      <td>function(p, values, displayValues){}</td>
+      <td>当用户选择日期时触发</td>
     </tr>
     <tr>
       <td>closeOnSelect</td>
@@ -215,15 +174,15 @@ $("#my-input").calendar();
 </tbody>
 </table>
 
-<p>A <code>change</code> Event will triggered on input element when user selected date.</p>
+  <p>当用户选择完日期之后，会在 input 上触发 <code>change</code> 事件，你可以监听此事件。</p>
 
-<p>Use <a href='#datetime-picker' data-ignore='push'>DateTimePicker</a> if you want to select both date and time.</p>
+  <p>如果你只同时选择日期和时间，请使用 <a href='#datetime-picker' data-ignore='push'>日期时间选择器</a></p>
 </article>
 
 <article class="component" data-url='calendar-inline'>
-  <h2 class="component-title">Inline</h2>
-  <p>If you init calendar on an div or other element instead of an input element, it will auto change to inline mode.</p>
-  {% highlight html%}
-  <div data-toggle='date' />
-    {% endhighlight %}
-  </article>
+  <h2 class="component-title">内联日历</h2>
+  <p>日历插件是非常智能的，如果在一个非 <code>input</code> 元素上初始化，它会自动变成内联形式。</p>
+{% highlight html%}
+<div data-toggle='date' />
+{% endhighlight %}
+</article>
