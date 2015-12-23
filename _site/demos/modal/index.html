@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>SUI Mobile Demo</title>
+    <title>Light7 Demo</title>
     <meta name="description" content="light7: Build mobile apps with simple HTML, CSS, and JS components.">
     <meta name="author" content="任行">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="/assets/css/demos.css">
 
     <link rel="apple-touch-icon-precomposed" href="/assets/img/apple-touch-icon-114x114.png">
-    <script src="/assets/js/zepto.js"></script>
+    <script src="/assets/js/jquery-2.1.4.js"></script>
     <script>
       //ga
     </script>
@@ -28,17 +28,33 @@
   <header class="bar bar-nav">
     <a class="button button-link button-nav pull-left back" href="/demos">
       <span class="icon icon-left"></span>
-      返回
+      Back
     </a>
-    <h1 class="title">对话框</h1>
+    <h1 class="title">Modal</h1>
   </header>
   <div class="content">
     <div class="content-padded">
-      <p><a class="alert-text">只有文案的alert</a></p>
-      <p><a class="alert-text-title">带文案和标题的alert</a></p>
-      <p><a class="alert-text-title-callback">带回调函数的alert</a></p>
+      <p><a class="alert-text">Alert with Text</a></p>
+      <p><a class="alert-text-title">Alert with text and title</a></p>
+      <p><a class="alert-text-title-callback">Alert with Call back</a></p>
       <p><a class="confirm-ok">Confirm</a></p>
       <p><a class="prompt-ok">Prompt</a></p>
+
+      <p><a data-popover=".popover-links" class="open-popover">Show Popover</a></p>
+    </div>
+  </div>
+</div>
+
+<div class="popover popover-links">
+  <div class="popover-angle"></div>
+  <div class="popover-inner">
+    <div class="list-block">
+      <ul>
+        <li><a href="#" class="list-button item-link">Link 1</a></li>
+        <li><a href="#" class="list-button item-link">Link 2</a></li>
+        <li><a href="#" class="list-button item-link">Link 3</a></li>
+        <li><a href="#" class="list-button item-link">Link 4</a></li>
+      </ul>
     </div>
   </div>
 </div>

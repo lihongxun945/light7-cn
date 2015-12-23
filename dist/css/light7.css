@@ -3471,7 +3471,7 @@ input.modal-text-input.modal-text-input-double + input.modal-text-input {
   left: 0;
   z-index: 11000;
   display: none;
-  width: 16rem;
+  min-width: 8rem;
   margin: 0;
   background: rgba(255, 255, 255, .95);
   border-radius: .35rem;
@@ -3538,7 +3538,7 @@ input.modal-text-input.modal-text-input-double + input.modal-text-input {
   height: 1.3rem;
   content: ' ';
   background: rgba(255, 255, 255, .95);
-  border-radius: 1.5rem;
+  border-radius: 0;
   -webkit-transform: rotate(45deg);
       -ms-transform: rotate(45deg);
        -o-transform: rotate(45deg);

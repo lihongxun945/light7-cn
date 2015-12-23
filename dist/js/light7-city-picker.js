@@ -13281,10 +13281,10 @@ $.smConfig.rawCitiesData = [
     }
 ];
 
-}(Zepto);
+}($);
 // jshint ignore: end
 
-/* global Zepto:true */
+/* global $:true */
 /* jshint unused:false*/
 
 + function($) {
@@ -13402,4 +13402,4 @@ $.smConfig.rawCitiesData = [
     });
   };
 
-}(Zepto);
+}($);

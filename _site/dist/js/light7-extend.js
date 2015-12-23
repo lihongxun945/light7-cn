@@ -7,7 +7,7 @@
 /*===========================
 Swiper
 ===========================*/
-/* global Zepto:true */
+/* global $:true */
 /* global WebKitCSSMatrix:true */
 /* global Modernizr:true */
 /* global DocumentTouch:true */
@@ -2709,12 +2709,12 @@ Swiper
         plugins: {}
     };
     $.Swiper = Swiper;
-}(Zepto);
+}($);
 
 /*===========================
 Framework7 Swiper Additions
 ===========================*/
-/* global Zepto:true */
+/* global $:true */
 +function($){
     'use strict';
     $.Swiper.prototype.defaults.pagination = '.swiper-pagination';
@@ -2754,12 +2754,12 @@ Framework7 Swiper Additions
         }
     };
 
-}(Zepto);
+}($);
 
 /*======================================================
 ************   Photo Browser   ************
 ======================================================*/
-/* global Zepto:true */
+/* global $:true */
 +function($){
     'use strict';
     var PhotoBrowser = function (params) {
@@ -3369,4 +3369,4 @@ Framework7 Swiper Additions
         defaults: {}
     };
 
-}(Zepto);
+}($);

@@ -80,6 +80,7 @@
   <!-- Components -->
   <div class="docs-components column-group">
     <div class="docs-side-menu">
+
   <li><a href="#layout" data-ignore="push">基本结构 <span class="new">新</span></a></li>
   <li><a href="#rem" data-ignore="push">使用rem <span class="new">新</span></a></li>
   <li><a href="#init" data-ignore="push">初始化</a></li>
@@ -96,6 +97,7 @@
   <li><a href="#modal" data-ignore="push">对话框</a></li>
   <li><a href="#preloader" data-ignore="push">加载指示器</a></li>
   <li><a href="#toast" data-ignore="push">toast <span class='new'>新</span></a></li>
+  <li><a href="#popover" data-ignore="push">popover</a></li>
   <li><a href="#popup" data-ignore="push">popup</a></li>
   <li><a href="#calendar" data-ignore="push">日历</a></li>
   <li><a href="#actions" data-ignore="push">操作表 <span class='new'>新</span></a></li>
@@ -134,7 +136,7 @@
 
   <div class="component-example component-example-fullbleed">
   </div>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- page 容器 --&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- page 容器 --&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"page"</span><span class="nt">&gt;</span>
   <span class="c">&lt;!-- 标题栏 --&gt;</span>
   <span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
@@ -174,19 +176,18 @@
     <span class="c">&lt;!-- Click on link with "close-panel" class will close panel --&gt;</span>
     <span class="nt">&lt;p&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"close-panel"</span><span class="nt">&gt;</span>关闭<span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre></div>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
 <p>注意！每一个页面都要有一个 <code>.page</code> 容器。如果你的页面中没有这个容器，很可能导致如侧栏之类的组件无法正常工作。</p>
 </article>
 
   <article class="component" id="rem">
-  <h2 class="component-title">rem</h2>
-  <p>rem 是相对于 <code>html</code> 元素的 <code>font-size</code> 的一个单位。如果 html 上定义了 <code>font-size: 20px;</code>，则无论在任何地方都是 <code>1rem = 20px</code> 这个大小不会受到父元素的影响。</p>
-  <p class="component-description">我们统一使用rem对页面进行整体缩放。强烈建议大家对需要适应页面大小的任何元素都使用 rem 为单位来定义。</p>
-  <p>事实上，除了 <code>border-width</code> 之外，Light7中已经没有用到px单位的地方。</p>
+  <h2 class="component-title">Rem</h2>
+  <p>Rem is related to <code>html</code> <code>font-size</code>. We scale the whole page with Rem.</p>
+  <p>Infact, there is no <code>px</code> except <code>border-width</code> in css.</p>
 
-  <p>我们在 iphone6 上使用 <code>1rem = 20px</code> 来换算。小于 375px 的设备上不做缩小处理，对 大于 375px 宽度的设备进行等比缩放。</p>
+  <p>See <code>rem.less</code> For more information about how the page is scaled,</p>
 
-  <p>关于 rem 可以参考 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/length" target="_blank">MDN 上的定义</a></p>
+  <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/length" target="_blank">MDN REM</a> for more information about rem, </p>
 
   <p></p>
 
@@ -195,111 +196,111 @@
   <article class="component active" id="init">
   <h2 class="component-title">初始化</h2>
   <p class="component-description">
-    <p>初始化的方法是 <code>$.init()</code>。 <code>$.config.autoInit = false;</code>，也就是默认不会调用 <code>$.init</code> 方法。现在需要自己手动调用 <code>$.init</code>，他会调用 $.initPage 方法初始化页面组件，并且触发一个 <code>pageInit</code> 事件，所以请确保在所有的 <code>pageInit</code> 事件绑定之后再调用 <code>$.init()</code> 方法。</p>
-    <p>请不要修改 <code>$.init</code> 方法，这个方法是light7提供好的，调用它就会初始化页面。</p>
+    <p>Call <code>$.init()</code> to init all components in page。</p>
+    <p>We will not init page on document loaded, because <code>$.config.autoInit = false;</code>. You should call <code>$.init()</code> on document loaded. <code>$.init</code> method will init all components in page, and trigger a <code>pageInit</code> event after init complete. You should call <code>$.init</code> after all <code>pageInit</code> events has binded.</p>
 
-    <p>如果设置了 <code>$.config.autoInit = true;</code>，那么在 document.onload的时候就会执行 <code>$.init</code>方法，从而触发 <code>pageInit</code>事件，如果在这之后监听了 pageInit 事件是无法被执行的。强烈建议不要设置为true，而是在绑定完所有的 <code>pageInit</code> 事件之后，再调用 <code>$.init</code>方法</p>
+    <p>But the page Loaded By router will always be inited.</p>
+    <p>Do not modify <code>$.init</code> please.</p>
+
+    <p>If you set <code>$.config.autoInit = true;</code>, the <code>$.init</code> method will auto be called after document onload. But your pageInit binds may have not executed at this time. So, please do not set autoInit=true, unless you don't listen to pageInit event or you can make sure that your code will be right.</p>
 
   </p>
 
-  <p>关于如何初始化，可以参考<a href="/assets/js/demos.js" data-ignore="push" target="_blank">demos中的写法</a></p>
+  <p>see <a href="/assets/js/demos.js" data-ignore="push" target="_blank">demos</a> for more usage.</p>
 
-  <h3 class="component-title">全局配置</h3>
+  <h3 class="component-title">global config</h3>
   <p class="component-description">
-    我们提供了一些全局配置，可以在初始化之前通过这些配置改变一些默认行为。
-    在引入JS之前通过一个 <code>$.config</code> 变量来改变默认配置：
+    You can set <code>$.config</code> before light7.js to change some default config:
   </p>
-  <p>注意 <code>autoInit</code> 默认为 false</p>
+  <p>Note! <code>autoInit</code> is false in default config.</p>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script&gt;</span>
-  <span class="c1">//打开自动初始化页面的功能</span>
-  <span class="c1">//建议不要打开自动初始化，而是自己调用 $.init 方法完成初始化</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script&gt;</span>
   <span class="nx">$</span><span class="p">.</span><span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">autoInit</span><span class="p">:</span> <span class="kc">true</span>
+    <span class="na">autoInit</span><span class="p">:</span> <span class="kc">true</span> <span class="c1">//no recommend</span>
   <span class="p">}</span>
 <span class="nt">&lt;/script&gt;</span>
-<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">'sm.min.js'</span><span class="nt">&gt;&lt;/script&gt;</span></code></pre></div>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">'light7.min.js'</span><span class="nt">&gt;&lt;/script&gt;</span></code></pre></figure>
 
-  所有配置项如下：
+  all available config:
 
   <table>
     <tr>
-      <th>参数名</th>
-      <th>默认值</th>
-      <th>说明</th>
+      <th>name</th>
+      <th>default</th>
+      <th>description</th>
     </tr>
     <tr>
       <td>autoInit</td>
       <td>false</td>
-      <td>在 <code>document.onload</code> 和 push 结束之后自动调用 <code>$.init</code> 方法。如果你的页面内容是异步加载的，应该关闭这个配置，并且在加载完成之后手动调用 <code>$.init</code></td>
+      <td>Auto call <code>$.init</code> after <code>document.onload</code></td>
     </tr>
     <tr>
       <td>router</td>
       <td>true</td>
-      <td>启用router使用ajax加载新页面，如果关闭此功能则使用原生跳转。如果关闭此功能，则无法使用路由相关的所有功能。</td>
+      <td>Use router to load new page. The router will listen all links events and will prevent links' default behavior and use ajax to load new page</td>
     </tr>
     <tr>
       <td>showPageLoadingIndicator</td>
       <td>true</td>
-      <td>在router加载新页面过程中显示一个加载指示器。只有 <code>router</code> 为true时这个设置才有效</td>
+      <td>Show indicator when router is loading new page。Available only when <code>router</code> is true</td>
     </tr>
     <tr>
       <td>swipePanel</td>
       <td>"left"</td>
-      <td>是否可以通过左右滑动打开侧栏，一次只能指定一个方向。</td>
+      <td>Swipe to open a panel</td>
     </tr>
     <tr>
       <td>swipePanelOnlyClose</td>
       <td>true</td>
-      <td>只允许滑动关闭侧栏，不允许滑动打开。</td>
+      <td>Only Swipe to close panel, but can't swipe to open a panel</td>
     </tr>
   </table>
 
 </article>
 
   <article class="component" id="content">
-  <h2 class="component-title">内容区</h2>
-  <p class="component-description">如果你希望页面内容所有两边有间距，可以把内容放在 <code>.content-padded</code> 容器中</p>
+  <h2 class="component-title">content padded</h2>
+  <p class="component-description">You can put content in <code>.content-padded</code> to add extra margin.</p>
 
   <div class="component-example">
     <div class="content-padded">
-      <p>我的左右两边有留白,我的左右两边有留白,我的左右两边有留白,我的左右两边有留白,我的左右两边有留白,我的左右两边有留白,我的左右两边有留白,我的左右两边有留白,我的左右两边有留白,我的左右两边有留白,我的左右两边有留白</p>
+      <p>Donec et nulla auctor massa pharetra adipiscing ut sit amet sem. Suspendisse molestie velit vitae mattis tincidunt. Ut sit amet quam mollis, vulputate turpis vel, sagittis felis. Donec et nulla auctor massa pharetra adipiscing ut sit amet sem. Suspendisse molestie velit vitae mattis tincidunt. Ut sit amet quam mollis, vulputate turpis vel, sagittis felis. </p>
     </div>
   </div>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content-padded"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;p&gt;</span>我的左右两边有留白,我的左右两边有留白,我的左右两边有留白,我的左右两边有留白,我的左右两边有留白,我的左右两边有留白,我的左右两边有留白,我的左右两边有留白,我的左右两边有留白,我的左右两边有留白,我的左右两边有留白<span class="nt">&lt;/p&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content-padded"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;p&gt;</span>Donec et nulla auctor massa pharetra adipiscing ut sit amet sem. Suspendisse molestie velit vitae mattis tincidunt. Ut sit amet quam mollis, vulputate turpis vel, sagittis felis. <span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
 </article>
 
 
 
   <!-- Typography -->
   <article class="component" id="typography">
-    <h2 class="component-title">文本样式</h2>
-    <p class="component-description">基础文本样式.</p>
+    <h2 class="component-title">Types</h2>
+    <p class="component-description">Basic text style.</p>
 
     <div class="component-example component-example-fullbleed">
       <div class="content-padded">
-        <h1>标题一</h1>
-        <h2>标题二</h2>
-        <h3>标题三</h3>
-        <h4>标题四</h4>
-        <h5>标题五</h5>
-        <h6>标题六</h6>
-        <p>这是一个段落这是一个段落这是一个段落这是一个段落这是一个段落这是一个段落这是一个段落这是一个段落这是一个段落这是一个段落这是一个段落这是一个段落这是一个段落</p>
+        <h1>Heading1</h1>
+        <h2>Heading2</h2>
+        <h3>Heading3</h3>
+        <h4>Heading4</h4>
+        <h5>Heading5</h5>
+        <h6>Heading6</h6>
+        <p>This is a paragraph.This is a paragraph.This is a paragraph.This is a paragraph.This is a paragraph.This is a paragraph.This is a paragraph.This is a paragraph.</p>
       </div>
     </div>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content-padded"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;h1&gt;</span>标题一<span class="nt">&lt;/h1&gt;</span>
-  <span class="nt">&lt;h2&gt;</span>标题二<span class="nt">&lt;/h2&gt;</span>
-  <span class="nt">&lt;h3&gt;</span>标题三<span class="nt">&lt;/h3&gt;</span>
-  <span class="nt">&lt;h4&gt;</span>标题四<span class="nt">&lt;/h4&gt;</span>
-  <span class="nt">&lt;h5&gt;</span>标题五<span class="nt">&lt;/h5&gt;</span>
-  <span class="nt">&lt;h6&gt;</span>标题六<span class="nt">&lt;/h6&gt;</span>
-  <span class="nt">&lt;p&gt;</span>这是一个段落这是一个段落这是一个段落这是一个段落这是一个段落这是一个段落这是一个段落这是一个段落这是一个段落这是一个段落这是一个段落这是一个段落这是一个段落<span class="nt">&lt;/p&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content-padded"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h1&gt;</span>Heading1<span class="nt">&lt;/h1&gt;</span>
+  <span class="nt">&lt;h2&gt;</span>Heading2<span class="nt">&lt;/h2&gt;</span>
+  <span class="nt">&lt;h3&gt;</span>Heading3<span class="nt">&lt;/h3&gt;</span>
+  <span class="nt">&lt;h4&gt;</span>Heading4<span class="nt">&lt;/h4&gt;</span>
+  <span class="nt">&lt;h5&gt;</span>Heading5<span class="nt">&lt;/h5&gt;</span>
+  <span class="nt">&lt;h6&gt;</span>Heading6<span class="nt">&lt;/h6&gt;</span>
+  <span class="nt">&lt;p&gt;</span>This is a paragraph.This is a paragraph.This is a paragraph.This is a paragraph.This is a paragraph.This is a paragraph.This is a paragraph.This is a paragraph.<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
 
   </article>
 
@@ -315,9 +316,9 @@
     </header>
   </div>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span>标题<span class="nt">&lt;/h1&gt;</span>
-<span class="nt">&lt;/header&gt;</span></code></pre></div>
+<span class="nt">&lt;/header&gt;</span></code></pre></figure>
 
     </article>
 
@@ -335,7 +336,7 @@
             <h1 class="title">Title</h1>
         </header>
     </div>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"button pull-left"</span><span class="nt">&gt;</span>
     按钮
   <span class="nt">&lt;/button&gt;</span>
@@ -343,7 +344,7 @@
     按钮
   <span class="nt">&lt;/button&gt;</span>
   <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span>标题<span class="nt">&lt;/h1&gt;</span>
-<span class="nt">&lt;/header&gt;</span></code></pre></div>
+<span class="nt">&lt;/header&gt;</span></code></pre></figure>
 
     </article>
 
@@ -358,11 +359,11 @@
         </header>
       </div>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"icon icon-left pull-left"</span><span class="nt">&gt;&lt;/a&gt;</span>
   <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"icon icon-refresh pull-right"</span><span class="nt">&gt;&lt;/a&gt;</span>
   <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span>标题<span class="nt">&lt;/h1&gt;</span>
-<span class="nt">&lt;/header&gt;</span></code></pre></div>
+<span class="nt">&lt;/header&gt;</span></code></pre></figure>
 
     </article>
 
@@ -383,7 +384,7 @@
         </header>
       </div>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"button button-link button-nav pull-left"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"icon icon-left"</span><span class="nt">&gt;&lt;/span&gt;</span>
     返回
@@ -393,7 +394,7 @@
     <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"icon icon-right"</span><span class="nt">&gt;&lt;/span&gt;</span>
   <span class="nt">&lt;/button&gt;</span>
   <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span>标题<span class="nt">&lt;/h1&gt;</span>
-<span class="nt">&lt;/header&gt;</span></code></pre></div>
+<span class="nt">&lt;/header&gt;</span></code></pre></figure>
 
     </article>
 
@@ -416,7 +417,7 @@
         </header>
     </div>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"button pull-left"</span><span class="nt">&gt;</span>
     Left
   <span class="nt">&lt;/button&gt;</span>
@@ -428,62 +429,63 @@
     <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#tab2"</span> <span class="na">class=</span><span class="s">"tab-link button"</span><span class="nt">&gt;</span>Tab 2<span class="nt">&lt;/a&gt;</span>
     <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#tab3"</span> <span class="na">class=</span><span class="s">"tab-link button"</span><span class="nt">&gt;</span>Tab 3<span class="nt">&lt;/a&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/header&gt;</span></code></pre></div>
+<span class="nt">&lt;/header&gt;</span></code></pre></figure>
 
     </article>
 
     <article class="component" id='toolbar' data-url="toolbar">
-      <h2 class="component-title">工具栏</h2>
+      <h2 class="component-title">Toolbar</h2>
 
-      <p>工具栏一般会作为一级导航来切换几个主页面。这个时候你需要把它放到 <code>.page</code> 元素的同级。如果在某个页面中不需要显示工具栏，只需要在 <code>.page</code> 上增加一个 <code>.no-tabbar</code>即可，或者你可以通过调用 <code>$.showToolbar(true/false)</code> 来切换工具栏的显示状态。</p>
-      <p>注意如果你通过路由器进行切换，用来切换的几个页面一定要是内联页面，不然会造成重复加载的问题，具体用法参见 <a href="/examples/light7-mall/">light7商城</a>。</p>
+      <p>Toolbar is used as the main tab. You should put it sibling to <code>.page</code> elements to make it a global toolbar.Add a <code>.no-tabbar</code> class on <code>.page</code> when you  want to hide toolbar on specific page. Or, you can use <code>$.showToolbar(true/false)</code> to toggle toolbar.</p>
+      <p>Note! If you use router to switch pages, you should use inline pages instead of ajax pages. Because when load ajax page, the router will not check if it is already exist. The same page may be loaded multi times.</p>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"bar bar-tab"</span><span class="nt">&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"bar bar-tab"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"tab-item active"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"icon icon-home"</span><span class="nt">&gt;&lt;/span&gt;</span>
-    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"tab-label"</span><span class="nt">&gt;</span>文案<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"tab-label"</span><span class="nt">&gt;</span>Text<span class="nt">&lt;/span&gt;</span>
   <span class="nt">&lt;/a&gt;</span>
   <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"tab-item"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"icon icon-me"</span><span class="nt">&gt;&lt;/span&gt;</span>
-    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"tab-label"</span><span class="nt">&gt;</span>文案<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"tab-label"</span><span class="nt">&gt;</span>Text<span class="nt">&lt;/span&gt;</span>
     <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"badge"</span><span class="nt">&gt;</span>2<span class="nt">&lt;/span&gt;</span>
   <span class="nt">&lt;/a&gt;</span>
   ....
-<span class="nt">&lt;/nav&gt;</span></code></pre></div>
+<span class="nt">&lt;/nav&gt;</span></code></pre></figure>
 
 </article>
 <article class="component">
-    <h3 class="component-title">工具栏 (只有文案)</h3>
+    <h3 class="component-title">Toolbar with only text</h3>
     <div class="component-example component-example-fullbleed">
         <nav class="bar bar-tab">
             <a class="tab-item active" href="#">
             文案
           </a>
             <a class="tab-item" href="#">
-            文案
+            text
           </a>
             <a class="tab-item" href="#">
-            文案
+            Text
           </a>
         </nav>
     </div>
-  <div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"bar bar-tab"</span><span class="nt">&gt;</span>
+  <figure class="highlight"><pre><code class="language-html" data-lang="html">  <span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"bar bar-tab"</span><span class="nt">&gt;</span>
       <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"tab-item active"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>
-  文案
+  Text
 <span class="nt">&lt;/a&gt;</span>
       <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"tab-item"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>
-  文案
+  Text
 <span class="nt">&lt;/a&gt;</span>
       <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"tab-item"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>
-  文案
+  Text
 <span class="nt">&lt;/a&gt;</span>
-  <span class="nt">&lt;/nav&gt;</span></code></pre></div>
+  <span class="nt">&lt;/nav&gt;</span>
+  </code></pre></figure>
 </article>
 <article class="component">
-    <h3 class="component-title">二级标题栏</h3>
+    <h3 class="component-title">Secondary Titlebar and Toolbar</h3>
     <div class="component-example component-example-fullbleed">
       <nav class="bar bar-nav bar-standard">
-        <h1 class="title">多级标题栏和工具栏</h1>
+        <h1 class="title">Secondary Titlebar and Toolbar</h1>
       </nav>
 
       <!-- Block button in standard bar fixed below top bar -->
@@ -503,8 +505,8 @@
       </div>
     </div>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"bar bar-nav bar-standard"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span>多级标题栏和工具栏<span class="nt">&lt;/h1&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"bar bar-nav bar-standard"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span>Secondary Titlebar and Toolbar<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;/nav&gt;</span>
 
 <span class="c">&lt;!-- Block button in standard bar fixed below top bar --&gt;</span>
@@ -521,17 +523,17 @@
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"bar bar-footer"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"icon icon-edit pull-left"</span><span class="nt">&gt;&lt;/a&gt;</span>
   <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"icon icon-settings pull-right"</span><span class="nt">&gt;&lt;/a&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre></div>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
 
   </article>
 
   <article class="component active" id="buttons">
-  <h2 class="component-title">按钮</h2>
-  <p class="component-description">按钮</p>
+  <h2 class="component-title">buttons</h2>
+  <p class="component-description">buttons with different size and color</p>
 
   <div class="component-example component-example-fullbleed">
     <header class="bar bar-nav">
-      <h1 class='title'>按钮</h1>
+      <h1 class='title'>buttons</h1>
     </header>
     <div class="content">
       <div class="content-block">
@@ -552,8 +554,8 @@
       </div>
     </div>
   </div>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">'title'</span><span class="nt">&gt;</span>按钮<span class="nt">&lt;/h1&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">'title'</span><span class="nt">&gt;</span>buttons<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;/header&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content-block"</span><span class="nt">&gt;</span>
@@ -572,13 +574,13 @@
     <span class="nt">&lt;p&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"button button-big"</span><span class="nt">&gt;</span>Big Button <span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
     <span class="nt">&lt;p&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"button button-big button-round"</span><span class="nt">&gt;</span>Big Round Button <span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre></div>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
 </article>
 <article class="component active">
-  <h3 class="component-title">按钮组</h3>
+  <h3 class="component-title">Buttons group</h3>
   <div class="component-example component-example-fullbleed">
     <header class="bar bar-nav">
-      <h1 class='title'>按钮组</h1>
+      <h1 class='title'>Buttons group</h1>
     </header>
     <div class="content">
       <div class="content-block">
@@ -591,8 +593,8 @@
     </div>
   </div>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">'title'</span><span class="nt">&gt;</span>按钮组<span class="nt">&lt;/h1&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">'title'</span><span class="nt">&gt;</span>Buttons group<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;/header&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content-block"</span><span class="nt">&gt;</span>
@@ -602,14 +604,14 @@
     <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"buttons-row"</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"button button-round"</span><span class="nt">&gt;</span>Button 1<span class="nt">&lt;/a&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"button button-round"</span><span class="nt">&gt;</span>Button 2<span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
     <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"buttons-row"</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"button button-round"</span><span class="nt">&gt;</span>Button 1<span class="nt">&lt;/a&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"button button-round active"</span><span class="nt">&gt;</span>Button 2<span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre></div>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
 </article>
 <article class="component active">
-  <h3 class="component-title">填充按钮</h3>
-  <p class="component-description">填充按钮</p>
+  <h3 class="component-title">Filled buttons</h3>
+  <p class="component-description">Filled buttons</p>
   <div class="component-example component-example-fullbleed">
     <header class="bar bar-nav">
-      <h1 class='title'>填充按钮</h1>
+      <h1 class='title'>Filled buttons</h1>
     </header>
     <div class="content">
       <div class="content-block">
@@ -620,8 +622,8 @@
       </div>
     </div>
   </div>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">'title'</span><span class="nt">&gt;</span>填充按钮<span class="nt">&lt;/h1&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">'title'</span><span class="nt">&gt;</span>Filled buttons<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;/header&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content-block"</span><span class="nt">&gt;</span>
@@ -630,14 +632,14 @@
     <span class="nt">&lt;p&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"button button-fill button-danger"</span><span class="nt">&gt;</span>Fill Button <span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
     <span class="nt">&lt;p&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"button button-fill button-warning"</span><span class="nt">&gt;</span>Fill Button <span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre></div>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
 </article>
 <article class="component active">
-  <h3 class="component-title">使用列表和栅格</h3>
-  <p class="component-description">使用列表和栅格来进行按钮布局</p>
+  <h3 class="component-title">Layout with list and grid</h3>
+  <p class="component-description">Layout buttons with list and grid</p>
   <div class="component-example component-example-fullbleed">
     <header class="bar bar-nav">
-      <h1 class='title'>列表和栅格布局按钮</h1>
+      <h1 class='title'>layout buttons</h1>
     </header>
     <div class="content">
       <div class="content-block-title">List block buttons</div>
@@ -666,8 +668,8 @@
     </div>
   </div>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">'title'</span><span class="nt">&gt;</span>列表和栅格布局按钮<span class="nt">&lt;/h1&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">'title'</span><span class="nt">&gt;</span>layout buttons<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;/header&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content-block-title"</span><span class="nt">&gt;</span>List block buttons<span class="nt">&lt;/div&gt;</span>
@@ -693,16 +695,16 @@
       <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-50"</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"button button-big button-fill button-success"</span><span class="nt">&gt;</span>Submit<span class="nt">&lt;/a&gt;&lt;/div&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre></div>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
 </article>
 
   <article class="component active" id="forms">
-  <h2 class="component-title">表单</h2>
-  <p class="component-description">表单</p>
+  <h2 class="component-title">Form</h2>
+  <p class="component-description">Form use List to layout.</p>
 
   <div class="component-example component-example-fullbleed">
     <header class="bar bar-nav">
-      <h1 class='title'>表单</h1>
+      <h1 class='title'>List</h1>
     </header>
     <div class="content">
       <div class="list-block">
@@ -712,7 +714,7 @@
             <div class="item-content">
               <div class="item-media"><i class="icon icon-form-name"></i></div>
               <div class="item-inner">
-                <div class="item-title label">姓名</div>
+                <div class="item-title label">name</div>
                 <div class="item-input">
                   <input type="text" placeholder="Your name">
                 </div>
@@ -723,7 +725,7 @@
             <div class="item-content">
               <div class="item-media"><i class="icon icon-form-email"></i></div>
               <div class="item-inner">
-                <div class="item-title label">邮箱</div>
+                <div class="item-title label">email</div>
                 <div class="item-input">
                   <input type="email" placeholder="E-mail">
                 </div>
@@ -734,7 +736,7 @@
             <div class="item-content">
               <div class="item-media"><i class="icon icon-form-password"></i></div>
               <div class="item-inner">
-                <div class="item-title label">密码</div>
+                <div class="item-title label">password</div>
                 <div class="item-input">
                   <input type="password" placeholder="Password" class="">
                 </div>
@@ -745,7 +747,7 @@
             <div class="item-content">
               <div class="item-media"><i class="icon icon-form-gender"></i></div>
               <div class="item-inner">
-                <div class="item-title label">性别</div>
+                <div class="item-title label">gender</div>
                 <div class="item-input">
                   <select>
                     <option>Male</option>
@@ -760,7 +762,7 @@
             <div class="item-content">
               <div class="item-media"><i class="icon icon-form-calendar"></i></div>
               <div class="item-inner">
-                <div class="item-title label">生日</div>
+                <div class="item-title label">birthday</div>
                 <div class="item-input">
                   <input type="date" placeholder="Birth day" value="2014-04-30">
                 </div>
@@ -772,7 +774,7 @@
             <div class="item-content">
               <div class="item-media"><i class="icon icon-form-toggle"></i></div>
               <div class="item-inner">
-                <div class="item-title label">开关</div>
+                <div class="item-title label">swicth</div>
                 <div class="item-input">
                   <label class="label-switch">
                     <input type="checkbox">
@@ -786,7 +788,7 @@
             <div class="item-content">
               <div class="item-media"><i class="icon icon-form-comment"></i></div>
               <div class="item-inner">
-                <div class="item-title label">文本域</div>
+                <div class="item-title label">text</div>
                 <div class="item-input">
                   <textarea></textarea>
                 </div>
@@ -797,15 +799,15 @@
       </div>
       <div class="content-block">
         <div class="row">
-          <div class="col-50"><a href="#" class="button button-big button-fill button-danger">取消</a></div>
-          <div class="col-50"><a href="#" class="button button-big button-fill button-success">提交</a></div>
+          <div class="col-50"><a href="#" class="button button-big button-fill button-danger">cancel</a></div>
+          <div class="col-50"><a href="#" class="button button-big button-fill button-success">submit</a></div>
         </div>
       </div>
     </div>
   </div>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">'title'</span><span class="nt">&gt;</span>表单<span class="nt">&lt;/h1&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">'title'</span><span class="nt">&gt;</span>Form<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;/header&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-block"</span><span class="nt">&gt;</span>
@@ -815,7 +817,7 @@
         <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-content"</span><span class="nt">&gt;</span>
           <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-media"</span><span class="nt">&gt;&lt;i</span> <span class="na">class=</span><span class="s">"icon icon-form-name"</span><span class="nt">&gt;&lt;/i&gt;&lt;/div&gt;</span>
           <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-inner"</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-title label"</span><span class="nt">&gt;</span>姓名<span class="nt">&lt;/div&gt;</span>
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-title label"</span><span class="nt">&gt;</span>Name<span class="nt">&lt;/div&gt;</span>
             <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-input"</span><span class="nt">&gt;</span>
               <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">placeholder=</span><span class="s">"Your name"</span><span class="nt">&gt;</span>
             <span class="nt">&lt;/div&gt;</span>
@@ -826,7 +828,7 @@
         <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-content"</span><span class="nt">&gt;</span>
           <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-media"</span><span class="nt">&gt;&lt;i</span> <span class="na">class=</span><span class="s">"icon icon-form-email"</span><span class="nt">&gt;&lt;/i&gt;&lt;/div&gt;</span>
           <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-inner"</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-title label"</span><span class="nt">&gt;</span>邮箱<span class="nt">&lt;/div&gt;</span>
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-title label"</span><span class="nt">&gt;</span>Email<span class="nt">&lt;/div&gt;</span>
             <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-input"</span><span class="nt">&gt;</span>
               <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"email"</span> <span class="na">placeholder=</span><span class="s">"E-mail"</span><span class="nt">&gt;</span>
             <span class="nt">&lt;/div&gt;</span>
@@ -837,7 +839,7 @@
         <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-content"</span><span class="nt">&gt;</span>
           <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-media"</span><span class="nt">&gt;&lt;i</span> <span class="na">class=</span><span class="s">"icon icon-form-password"</span><span class="nt">&gt;&lt;/i&gt;&lt;/div&gt;</span>
           <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-inner"</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-title label"</span><span class="nt">&gt;</span>密码<span class="nt">&lt;/div&gt;</span>
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-title label"</span><span class="nt">&gt;</span>Password<span class="nt">&lt;/div&gt;</span>
             <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-input"</span><span class="nt">&gt;</span>
               <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"password"</span> <span class="na">placeholder=</span><span class="s">"Password"</span> <span class="na">class=</span><span class="s">""</span><span class="nt">&gt;</span>
             <span class="nt">&lt;/div&gt;</span>
@@ -848,7 +850,7 @@
         <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-content"</span><span class="nt">&gt;</span>
           <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-media"</span><span class="nt">&gt;&lt;i</span> <span class="na">class=</span><span class="s">"icon icon-form-gender"</span><span class="nt">&gt;&lt;/i&gt;&lt;/div&gt;</span>
           <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-inner"</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-title label"</span><span class="nt">&gt;</span>性别<span class="nt">&lt;/div&gt;</span>
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-title label"</span><span class="nt">&gt;</span>Gender<span class="nt">&lt;/div&gt;</span>
             <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-input"</span><span class="nt">&gt;</span>
               <span class="nt">&lt;select&gt;</span>
                 <span class="nt">&lt;option&gt;</span>Male<span class="nt">&lt;/option&gt;</span>
@@ -863,7 +865,7 @@
         <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-content"</span><span class="nt">&gt;</span>
           <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-media"</span><span class="nt">&gt;&lt;i</span> <span class="na">class=</span><span class="s">"icon icon-form-calendar"</span><span class="nt">&gt;&lt;/i&gt;&lt;/div&gt;</span>
           <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-inner"</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-title label"</span><span class="nt">&gt;</span>生日<span class="nt">&lt;/div&gt;</span>
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-title label"</span><span class="nt">&gt;</span>Birthday<span class="nt">&lt;/div&gt;</span>
             <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-input"</span><span class="nt">&gt;</span>
               <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"date"</span> <span class="na">placeholder=</span><span class="s">"Birth day"</span> <span class="na">value=</span><span class="s">"2014-04-30"</span><span class="nt">&gt;</span>
             <span class="nt">&lt;/div&gt;</span>
@@ -875,7 +877,7 @@
         <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-content"</span><span class="nt">&gt;</span>
           <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-media"</span><span class="nt">&gt;&lt;i</span> <span class="na">class=</span><span class="s">"icon icon-form-toggle"</span><span class="nt">&gt;&lt;/i&gt;&lt;/div&gt;</span>
           <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-inner"</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-title label"</span><span class="nt">&gt;</span>开关<span class="nt">&lt;/div&gt;</span>
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-title label"</span><span class="nt">&gt;</span>Swicth<span class="nt">&lt;/div&gt;</span>
             <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-input"</span><span class="nt">&gt;</span>
               <span class="nt">&lt;label</span> <span class="na">class=</span><span class="s">"label-switch"</span><span class="nt">&gt;</span>
                 <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span><span class="nt">&gt;</span>
@@ -889,7 +891,7 @@
         <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-content"</span><span class="nt">&gt;</span>
           <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-media"</span><span class="nt">&gt;&lt;i</span> <span class="na">class=</span><span class="s">"icon icon-form-comment"</span><span class="nt">&gt;&lt;/i&gt;&lt;/div&gt;</span>
           <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-inner"</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-title label"</span><span class="nt">&gt;</span>文本域<span class="nt">&lt;/div&gt;</span>
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-title label"</span><span class="nt">&gt;</span>Textarea<span class="nt">&lt;/div&gt;</span>
             <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-input"</span><span class="nt">&gt;</span>
               <span class="nt">&lt;textarea&gt;&lt;/textarea&gt;</span>
             <span class="nt">&lt;/div&gt;</span>
@@ -900,20 +902,20 @@
   <span class="nt">&lt;/div&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content-block"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row"</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-50"</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"button button-big button-fill button-danger"</span><span class="nt">&gt;</span>取消<span class="nt">&lt;/a&gt;&lt;/div&gt;</span>
-      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-50"</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"button button-big button-fill button-success"</span><span class="nt">&gt;</span>提交<span class="nt">&lt;/a&gt;&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-50"</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"button button-big button-fill button-danger"</span><span class="nt">&gt;</span>Cancel<span class="nt">&lt;/a&gt;&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-50"</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"button button-big button-fill button-success"</span><span class="nt">&gt;</span>Submit<span class="nt">&lt;/a&gt;&lt;/div&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre></div>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
 </article>
 
 <article class="component active" id="forms">
-  <h3 class="component-title">只有图标的表单</h3>
-  <p class="component-description">只有图标的表单</p>
+  <h3 class="component-title">Only icons</h3>
+  <p class="component-description">Forms with only icons.</p>
 
   <div class="component-example component-example-fullbleed">
     <header class="bar bar-nav">
-      <h1 class='title'>只有图标的表单</h1>
+      <h1 class='title'>Only icons</h1>
     </header>
     <div class="content">
       <div class="list-block">
@@ -959,8 +961,8 @@
     </div>
   </div>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">'title'</span><span class="nt">&gt;</span>只有图标的表单<span class="nt">&lt;/h1&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">'title'</span><span class="nt">&gt;</span>Only icons<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;/header&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-block"</span><span class="nt">&gt;</span>
@@ -1003,12 +1005,12 @@
       <span class="nt">&lt;/li&gt;</span>
     <span class="nt">&lt;/ul&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre></div>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
 </article>
 
 <article class="component active" id="forms">
-  <h3 class="component-title">只有文案的表单</h3>
-  <p class="component-description">只有文案的表单</p>
+  <h3 class="component-title">Only Title</h3>
+  <p class="component-description">Forms with only Title and no icons</p>
 
   <div class="component-example component-example-fullbleed">
     <header class="bar bar-nav">
@@ -1058,8 +1060,8 @@
     </div>
   </div>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">'title'</span><span class="nt">&gt;</span>只有文案的表单<span class="nt">&lt;/h1&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">'title'</span><span class="nt">&gt;</span>Only title<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;/header&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-block"</span><span class="nt">&gt;</span>
@@ -1102,7 +1104,7 @@
       <span class="nt">&lt;/li&gt;</span>
     <span class="nt">&lt;/ul&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre></div>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
 </article>
 
   <article class="component" id="panel" data-url='panels'>
@@ -1120,7 +1122,7 @@
   <p>你可以通过 <code>$.config.swipePanel</code>， <code>$.config.swipePanelOnlyClose</code>等参数来配置。具体配置请参见 <a href='#init'>初始化参数</a></p>
   <div class="component-example component-example-fullbleed">
   </div>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"page"</span><span class="nt">&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"page"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">'title'</span><span class="nt">&gt;</span>侧栏<span class="nt">&lt;/h1&gt;</span>
   <span class="nt">&lt;/header&gt;</span>
@@ -1148,7 +1150,7 @@
     <span class="c">&lt;!-- Click on link with "close-panel" class will close panel --&gt;</span>
     <span class="nt">&lt;p&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"close-panel"</span><span class="nt">&gt;</span>关闭<span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre></div>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
 <p>使用侧栏的时候请注意，务必用 <code>.page</code> 容器把 <code>.bar</code> 和 <code>.content</code> 包裹起来。</p>
 </article>
 
@@ -1171,7 +1173,7 @@
       });
     </script>
   </div>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"page"</span><span class="nt">&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"page"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">'title'</span><span class="nt">&gt;</span>侧栏<span class="nt">&lt;/h1&gt;</span>
   <span class="nt">&lt;/header&gt;</span>
@@ -1198,10 +1200,10 @@
     <span class="c">&lt;!-- Click on link with "close-panel" class will close panel --&gt;</span>
     <span class="nt">&lt;p&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"close-panel"</span><span class="nt">&gt;</span>关闭<span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre></div>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span> <span class="s2">".my-btn"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span> <span class="s2">".my-btn"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
   <span class="nx">$</span><span class="p">.</span><span class="nx">openPanel</span><span class="p">(</span><span class="s2">"#panel-js-demo"</span><span class="p">);</span>
-<span class="p">});</span></code></pre></div>
+<span class="p">});</span></code></pre></figure>
 
   <h3>事件</h3>
   <p>侧栏打开或者关闭的时候，会在 <code>.panel</code> 上触发对应的事件。</p>
@@ -1234,110 +1236,110 @@
 </article>
 
   <article class="component" id="searchbar">
-  <h2 lass="component-title">搜索栏</h2>
-  <p class="component-description">苹果风格的搜索栏，带有一个自动隐藏的取消按钮。适合作为主搜索固定在页面顶部</p>
-  <p class="component-description">搜索栏只是一个CSS组件，不提供任何JS功能。</p>
-  <p>你也可以单独使用 <code>.search-input</code></p>
+  <h2 lass="component-title">Search Bar</h2>
+  <p class="component-description">Searchbar of iOS style to use on top of page.</p>
+  <p class="component-description">Searchbar is only a css component with out any js code.</p>
+  <p>You can use <code>.search-input</code> independent.</p>
 
   <div class="component-example">
     <header class="bar bar-nav">
-      <h1 class='title'>搜索栏</h1>
+      <h1 class='title'>Searchbar</h1>
     </header>
     <div class="bar bar-header-secondary">
       <div class="searchbar">
-        <a class="searchbar-cancel">取消</a>
+        <a class="searchbar-cancel">Cancel</a>
         <div class="search-input">
           <label class="icon icon-search" for="search"></label>
-          <input type="search" id='search' placeholder='输入关键字...'/>
+          <input type="search" id='search' placeholder='input some query...'/>
         </div>
       </div>
     </div>
   </div>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">'title'</span><span class="nt">&gt;</span>搜索栏<span class="nt">&lt;/h1&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">'title'</span><span class="nt">&gt;</span>Searchbar<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;/header&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"bar bar-header-secondary"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"searchbar"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"searchbar-cancel"</span><span class="nt">&gt;</span>取消<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"searchbar-cancel"</span><span class="nt">&gt;</span>Cancel<span class="nt">&lt;/a&gt;</span>
     <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"search-input"</span><span class="nt">&gt;</span>
       <span class="nt">&lt;label</span> <span class="na">class=</span><span class="s">"icon icon-search"</span> <span class="na">for=</span><span class="s">"search"</span><span class="nt">&gt;&lt;/label&gt;</span>
-      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"search"</span> <span class="na">id=</span><span class="s">'search'</span> <span class="na">placeholder=</span><span class="s">'输入关键字...'</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"search"</span> <span class="na">id=</span><span class="s">'search'</span> <span class="na">placeholder=</span><span class="s">'input some query...'</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre></div>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
 </article>
 
 <article class="component">
-  <h3 class="component-title">轻量级搜索栏</h3>
-  <p>轻量级搜索栏适合放在页面内部，而不是固定在顶部。布局是通过栅格来实现的。所以可以非常灵活调整宽度以及组合任何你需要的组件。</p>
+  <h3 class="component-title">Light Searchbar</h3>
+  <p>Light searchbar is to use in page content instead of in header. Light searchbar is layout with grid, it's easy to changed layout by yourself.</p>
 
   <div class="component-example">
     <div class="content-padded">
       <div class="searchbar">
         <div class="search-input">
           <label class="icon icon-search" for="search"></label>
-          <input type="search" id='search' placeholder='输入关键字...'/>
+          <input type="search" id='search' placeholder='query...'/>
         </div>
       </div>
 
       <div class="searchbar row">
         <div class="search-input col-80">
           <label class="icon icon-search" for="search"></label>
-          <input type="search" id='search' placeholder='输入关键字...'/>
+          <input type="search" id='search' placeholder='query...'/>
         </div>
-        <a class="button button-fill button-primary col-20">搜索</a>
+        <a class="button button-fill button-primary col-20">Search</a>
       </div>
 
       <div class="searchbar row">
         <div class="search-input col-85">
-          <input type="search" id='search' placeholder='输入关键字...'/>
+          <input type="search" id='search' placeholder='query...'/>
         </div>
         <a class="button button-fill button-primary col-15"><span class="icon icon-search"></span></a>
       </div>
     </div>
   </div>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content-padded"</span><span class="nt">&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content-padded"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"searchbar"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"search-input"</span><span class="nt">&gt;</span>
       <span class="nt">&lt;label</span> <span class="na">class=</span><span class="s">"icon icon-search"</span> <span class="na">for=</span><span class="s">"search"</span><span class="nt">&gt;&lt;/label&gt;</span>
-      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"search"</span> <span class="na">id=</span><span class="s">'search'</span> <span class="na">placeholder=</span><span class="s">'输入关键字...'</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"search"</span> <span class="na">id=</span><span class="s">'search'</span> <span class="na">placeholder=</span><span class="s">'query...'</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
 
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"searchbar row"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"search-input col-80"</span><span class="nt">&gt;</span>
       <span class="nt">&lt;label</span> <span class="na">class=</span><span class="s">"icon icon-search"</span> <span class="na">for=</span><span class="s">"search"</span><span class="nt">&gt;&lt;/label&gt;</span>
-      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"search"</span> <span class="na">id=</span><span class="s">'search'</span> <span class="na">placeholder=</span><span class="s">'输入关键字...'</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"search"</span> <span class="na">id=</span><span class="s">'search'</span> <span class="na">placeholder=</span><span class="s">'query...'</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"button button-fill button-primary col-20"</span><span class="nt">&gt;</span>搜索<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"button button-fill button-primary col-20"</span><span class="nt">&gt;</span>Search<span class="nt">&lt;/a&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
 
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"searchbar row"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"search-input col-85"</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"search"</span> <span class="na">id=</span><span class="s">'search'</span> <span class="na">placeholder=</span><span class="s">'输入关键字...'</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"search"</span> <span class="na">id=</span><span class="s">'search'</span> <span class="na">placeholder=</span><span class="s">'query...'</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
     <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"button button-fill button-primary col-15"</span><span class="nt">&gt;&lt;span</span> <span class="na">class=</span><span class="s">"icon icon-search"</span><span class="nt">&gt;&lt;/span&gt;&lt;/a&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre></div>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
 </article>
 
 
 
   <article class="component active" id="tabs">
-  <h2 class="component-title">标签页</h2>
-  <p class="component-description">一级标签页</p>
+  <h2 class="component-title">Tabs</h2>
+  <p class="component-description">Tabs allow to simply switch between different content.</p>
 
   <div class="component-example component-example-fullbleed">
     <header class="bar bar-nav">
-      <h1 class='title'>标签页</h1>
+      <h1 class='title'>Tabs</h1>
     </header>
     <div class="content">
       <div class="buttons-tab">
-        <a href="#tab1" class="tab-link active button">全部</a>
-        <a href="#tab2" class="tab-link button">待付款</a>
-        <a href="#tab3" class="tab-link button">待发货</a>
+        <a href="#tab1" class="tab-link active button">All</a>
+        <a href="#tab2" class="tab-link button">Potatos</a>
+        <a href="#tab3" class="tab-link button">Tomatos</a>
       </div>
       <div class="content-block">
         <div class="tabs">
@@ -1361,14 +1363,14 @@
     </div>
   </div>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">'title'</span><span class="nt">&gt;</span>标签页<span class="nt">&lt;/h1&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">'title'</span><span class="nt">&gt;</span>Tabs<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;/header&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"buttons-tab"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#tab1"</span> <span class="na">class=</span><span class="s">"tab-link active button"</span><span class="nt">&gt;</span>全部<span class="nt">&lt;/a&gt;</span>
-    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#tab2"</span> <span class="na">class=</span><span class="s">"tab-link button"</span><span class="nt">&gt;</span>待付款<span class="nt">&lt;/a&gt;</span>
-    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#tab3"</span> <span class="na">class=</span><span class="s">"tab-link button"</span><span class="nt">&gt;</span>待发货<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#tab1"</span> <span class="na">class=</span><span class="s">"tab-link active button"</span><span class="nt">&gt;</span>All<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#tab2"</span> <span class="na">class=</span><span class="s">"tab-link button"</span><span class="nt">&gt;</span>Potatos<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#tab3"</span> <span class="na">class=</span><span class="s">"tab-link button"</span><span class="nt">&gt;</span>Tomatos<span class="nt">&lt;/a&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content-block"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"tabs"</span><span class="nt">&gt;</span>
@@ -1389,17 +1391,17 @@
       <span class="nt">&lt;/div&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre></div>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
 
 </article>
 
 <article class="component active">
-  <h3 class="component-title">二级标签页</h3>
-  <p class="component-description">比一级标签页更轻量的标签页</p>
+  <h3 class="component-title">Secondary Tabs</h3>
+  <p class="component-description">Secondary Tabs is less important than Primary tabs.</p>
 
   <div class="component-example component-example-fullbleed">
     <header class="bar bar-nav">
-      <h1 class='title'>标签页</h1>
+      <h1 class='title'>Secondary Tabs</h1>
     </header>
     <div class="content">
       <div class="content-block">
@@ -1429,8 +1431,8 @@
     </div>
   </div>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">'title'</span><span class="nt">&gt;</span>标签页<span class="nt">&lt;/h1&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">'title'</span><span class="nt">&gt;</span>Secondary tabs<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;/header&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content-block"</span><span class="nt">&gt;</span>
@@ -1457,19 +1459,19 @@
       <span class="nt">&lt;/div&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre></div>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
 
 </article>
 
 
 
   <article class="component active" id="grid">
-  <h2 class="component-title">响应式栅格</h2>
-  <p class="component-description"></p>
+  <h2 class="component-title">Grid</h2>
+  <p class="component-description">responsive grid.</p>
 
   <div class="component-example component-example-fullbleed">
     <header class="bar bar-nav">
-      <h1 class='title'>栅格</h1>
+      <h1 class='title'>Grid</h1>
     </header>
     <div class="content">
       <div class="content-padded grid-demo">
@@ -1486,7 +1488,7 @@
           <div class="col-20">20%</div>
           <div class="col-80">80%</div>
         </div>
-        <h2>无间距</h2>
+        <h2>no gutter</h2>
         <div class="row no-gutter">
           <div class="col-20">20%</div>
           <div class="col-80">80%</div>
@@ -1494,8 +1496,8 @@
       </div>
     </div>
   </div>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">'title'</span><span class="nt">&gt;</span>栅格<span class="nt">&lt;/h1&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">'title'</span><span class="nt">&gt;</span>Grid<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;/header&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content-padded grid-demo"</span><span class="nt">&gt;</span>
@@ -1512,13 +1514,13 @@
       <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-20"</span><span class="nt">&gt;</span>20%<span class="nt">&lt;/div&gt;</span>
       <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-80"</span><span class="nt">&gt;</span>80%<span class="nt">&lt;/div&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;h2&gt;</span>无间距<span class="nt">&lt;/h2&gt;</span>
+    <span class="nt">&lt;h2&gt;</span>no gutter<span class="nt">&lt;/h2&gt;</span>
     <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row no-gutter"</span><span class="nt">&gt;</span>
       <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-20"</span><span class="nt">&gt;</span>20%<span class="nt">&lt;/div&gt;</span>
       <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-80"</span><span class="nt">&gt;</span>80%<span class="nt">&lt;/div&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre></div>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
 </article>
 
   <article class="component" id="modal">
@@ -1580,7 +1582,8 @@
     </div>
   </div>
 
-  <div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
+  <figure class="highlight"><pre><code class="language-html" data-lang="html">  
+  <span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span>Alert<span class="nt">&lt;/h1&gt;</span>
   <span class="nt">&lt;/header&gt;</span>
   ...
@@ -1592,8 +1595,10 @@
       <span class="nt">&lt;p&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"alert-text-callback"</span><span class="nt">&gt;</span>Alert With Text and Callback<span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
   <span class="nt">&lt;/div&gt;</span> 
-   ...</code></pre></div>
-  <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+   ...
+  </code></pre></figure>
+  <figure class="highlight"><pre><code class="language-js" data-lang="js">  
+  <span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
      <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="s1">'.alert-text'</span><span class="p">,</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
         <span class="nx">$</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'Here goes alert text'</span><span class="p">);</span>
      <span class="p">});</span>
@@ -1613,7 +1618,9 @@
             <span class="nx">$</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'Button clicked!'</span><span class="p">)</span>
         <span class="p">});</span>
     <span class="p">});</span>
-  <span class="p">})</span></code></pre></div>
+  <span class="p">})</span>
+     
+  </code></pre></figure>
 </article>
 
 <article class="component active">
@@ -1671,7 +1678,8 @@
       </script>
     </div>
   </div>
-  <div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
+  <figure class="highlight"><pre><code class="language-html" data-lang="html">  
+  <span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span>Confirm<span class="nt">&lt;/h1&gt;</span>
   <span class="nt">&lt;/header&gt;</span>
   ...
@@ -1683,8 +1691,10 @@
       <span class="nt">&lt;p&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"confirm-title-ok-cancel"</span><span class="nt">&gt;</span>Confirm with text, title, Ok and Cancel callback<span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
-  ...</code></pre></div>
-  <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="s1">'.confirm-ok'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  ...
+  </code></pre></figure>
+  <figure class="highlight"><pre><code class="language-js" data-lang="js">  
+  <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="s1">'.confirm-ok'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
       <span class="nx">$</span><span class="p">.</span><span class="nx">confirm</span><span class="p">(</span><span class="s1">'Are you sure?'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
           <span class="nx">$</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'You clicked Ok button'</span><span class="p">);</span>
       <span class="p">});</span>
@@ -1714,7 +1724,8 @@
           <span class="nx">$</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'You clicked Cancel button'</span><span class="p">);</span>
         <span class="p">}</span>
       <span class="p">);</span>
-  <span class="p">});</span></code></pre></div>
+  <span class="p">});</span>    
+  </code></pre></figure>
 </article>
 
 <article class="component active">
@@ -1772,7 +1783,8 @@
       </script>
     </div>
   </div>
-  <div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
+  <figure class="highlight"><pre><code class="language-html" data-lang="html">  
+  <span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span>Prompt<span class="nt">&lt;/h1&gt;</span>
   <span class="nt">&lt;/header&gt;</span>
   ...
@@ -1784,8 +1796,10 @@
       <span class="nt">&lt;p&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"prompt-title-ok-cancel"</span><span class="nt">&gt;</span>Prompt with text, title, Ok and Cancel callback<span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
   <span class="nt">&lt;/div&gt;</span>  
-  ...</code></pre></div>
-  <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="s1">'.prompt-ok'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  ...  
+  </code></pre></figure>
+  <figure class="highlight"><pre><code class="language-js" data-lang="js">  
+  <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="s1">'.prompt-ok'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
       <span class="nx">$</span><span class="p">.</span><span class="nx">prompt</span><span class="p">(</span><span class="s1">'What is your name?'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
           <span class="nx">$</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'Your name is "'</span> <span class="o">+</span> <span class="nx">value</span> <span class="o">+</span> <span class="s1">'". You clicked Ok button'</span><span class="p">);</span>
       <span class="p">});</span>
@@ -1815,7 +1829,8 @@
           <span class="nx">$</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'Your name is "'</span> <span class="o">+</span> <span class="nx">value</span> <span class="o">+</span> <span class="s1">'". You clicked Cancel button'</span><span class="p">);</span>
         <span class="p">}</span>
       <span class="p">);</span>
-  <span class="p">});</span></code></pre></div>
+  <span class="p">});</span>           
+  </code></pre></figure>
 </article>
 
 
@@ -2027,7 +2042,8 @@
       </script>    
     </div>
   </div>
-  <div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
+  <figure class="highlight"><pre><code class="language-html" data-lang="html">  
+  <span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
       <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span>自定义Modals<span class="nt">&lt;/h1&gt;</span>
   <span class="nt">&lt;/header&gt;</span>
   ...
@@ -2039,8 +2055,10 @@
       <span class="nt">&lt;p&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"open-vertical-modal"</span><span class="nt">&gt;</span>Modal With Vertical Buttons<span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
-  ...</code></pre></div>
-  <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="s1">'.open-3-modal'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  ... 
+  </code></pre></figure>
+  <figure class="highlight"><pre><code class="language-js" data-lang="js">  
+  <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="s1">'.open-3-modal'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
     <span class="nx">$</span><span class="p">.</span><span class="nx">modal</span><span class="p">({</span>
       <span class="na">title</span><span class="p">:</span>  <span class="s1">'Modal with 3 buttons'</span><span class="p">,</span>
       <span class="na">text</span><span class="p">:</span> <span class="s1">'Vivamus feugiat diam velit. Maecenas aliquet egestas lacus, eget pretium massa mattis non. Donec volutpat euismod nisl in posuere. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae'</span><span class="p">,</span>
@@ -2139,7 +2157,8 @@
         <span class="p">},</span>
       <span class="p">]</span>
     <span class="p">})</span>
-    <span class="p">});</span></code></pre></div>
+    <span class="p">});</span>
+  </code></pre></figure>
     <h3 class="component-title">用 JavaScript 关闭 Modals</h3>
     <p class="component-description">任何 Modal 可以用 JavaScript 来关闭，不仅仅是通过点击按钮。因此我们需要看看相关App方法：</p>
     <p class="component-description"><code>$.closeModal(modal)</code> - 关闭任意 modal</p>
@@ -2149,7 +2168,8 @@
      <h3 class="component-title">Modal 事件</h3>
         <p class="component-description">如果你希望能自定义 modal 模板，你可在 初始化APP 的时候传入一个 modalTemplate 参数。这个参数的值是一个 Template7 模板，当编译该模板的时候会传入一个 groups 参数。</p>
         <p class="component-description">这个模板可能是这样的：</p>
-  <div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"modal modal-no-buttons"</span><span class="nt">&gt;</span>
+  <figure class="highlight"><pre><code class="language-html" data-lang="html">  
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"modal modal-no-buttons"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"modal-inner"</span><span class="nt">&gt;</span>
       
        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"modal-title"</span><span class="nt">&gt;&lt;/div&gt;</span>
@@ -2168,7 +2188,8 @@
       
       <span class="nt">&lt;/div&gt;</span>
     
-  <span class="nt">&lt;/div&gt;</span></code></pre></div>
+  <span class="nt">&lt;/div&gt;</span>  
+  </code></pre></figure>
 </article>
 
 <article class="component active" id='preloader'>
@@ -2201,7 +2222,8 @@
       </script>    
     </div>
   </div>
-  <div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
+  <figure class="highlight"><pre><code class="language-html" data-lang="html">  
+  <span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span>预加载 Modal (Preloader Modal)<span class="nt">&lt;/h1&gt;</span>
   <span class="nt">&lt;/header&gt;</span>
   ...
@@ -2211,8 +2233,10 @@
       <span class="nt">&lt;p&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"open-preloader-title"</span><span class="nt">&gt;</span>Open Preloader with custom title<span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
   <span class="nt">&lt;/div&gt;</span>  
-  ...</code></pre></div>
-  <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="s1">'.open-preloader'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  ...   
+  </code></pre></figure>
+  <figure class="highlight"><pre><code class="language-js" data-lang="js"> 
+  <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="s1">'.open-preloader'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
     <span class="nx">$</span><span class="p">.</span><span class="nx">showPreloader</span><span class="p">();</span>
     <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
         <span class="nx">$</span><span class="p">.</span><span class="nx">hidePreloader</span><span class="p">();</span>
@@ -2223,7 +2247,8 @@
     <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
         <span class="nx">$</span><span class="p">.</span><span class="nx">hidePreloader</span><span class="p">();</span>
     <span class="p">},</span> <span class="mi">2000</span><span class="p">);</span>
-  <span class="p">});</span></code></pre></div>
+  <span class="p">});</span>  
+  </code></pre></figure>
 </article>
 
 <article class="component active">
@@ -2247,7 +2272,8 @@
       </script>    
     </div>
   </div>
-  <div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
+  <figure class="highlight"><pre><code class="language-html" data-lang="html">  
+  <span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
       <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span>指示器(indicator)<span class="nt">&lt;/h1&gt;</span>
   <span class="nt">&lt;/header&gt;</span>
   ...
@@ -2256,13 +2282,16 @@
       <span class="nt">&lt;p&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"open-indicator"</span><span class="nt">&gt;</span>Open Indicator<span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
-  ...</code></pre></div>
-  <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="s1">'.open-indicator'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  ...     
+  </code></pre></figure>
+  <figure class="highlight"><pre><code class="language-js" data-lang="js">  
+  <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="s1">'.open-indicator'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
       <span class="nx">$</span><span class="p">.</span><span class="nx">showIndicator</span><span class="p">();</span>
       <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
           <span class="nx">$</span><span class="p">.</span><span class="nx">hideIndicator</span><span class="p">();</span>
       <span class="p">},</span> <span class="mi">2000</span><span class="p">);</span>
-  <span class="p">});</span></code></pre></div>
+  <span class="p">});</span>
+  </code></pre></figure>
 </article>
 
 <article class="component active" id='toast' data-url='toast'>
@@ -2270,33 +2299,111 @@
   <p class="component-description">toast是一种轻量的提示，在页面中间显示，并且会在2秒之后自动消失。</p>
   <p>可以用来显示一些不会打断用户操作的提示。</p>
 
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">.</span><span class="nx">toast</span><span class="p">(</span><span class="s2">"操作失败"</span><span class="p">);</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-js" data-lang="js">  
+<span class="nx">$</span><span class="p">.</span><span class="nx">toast</span><span class="p">(</span><span class="s2">"操作失败"</span><span class="p">);</span></code></pre></figure>
   <p>toast 组件后续会支持不同的情景，包括操作成功、操作失败等，显示出不同的颜色</p>
+</article>
+
+<article class="component active" id='popover' data-url='popover'>
+  <h2 class="component-title">Popover</h2>
+  <p class="component-description">Popover compontent is used to manage the presentation of content in a popover. You use popovers to present information temporarily. The popover remains visible until the user taps outside of the popover window or you explicitly dismiss it.</p>
+
+  <p>Note that is not recommended to use Popover on small screens (iPhone). On small screens you should use <a href="#actions">Action Sheet</a>. </p>
+
+  <h3>Popover Layout</h3>
+  <p>First of all let's look on Popover layout, it is pretty simple, just add somewhere in the end of the <code>body</code>:</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html">  
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"popover"</span><span class="nt">&gt;</span>
+  <span class="c">&lt;!-- Popover's angle arrow --&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"popover-angle"</span><span class="nt">&gt;&lt;/div&gt;</span>
+
+  <span class="c">&lt;!-- Popover content --&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"popover-inner"</span><span class="nt">&gt;</span>
+    <span class="c">&lt;!-- Any HTML content here --&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
+
+  <h3>Open and close with HTML</h3>
+  <p>It is possible to open and close required Popover using special classes and data attributes on links:</p>
+  <ul>
+    <li>
+      <p>To open popover we need to add <code>"open-popover"</code> class to any HTML element (prefered to link)</p>
+    </li>
+    <li>
+      <p>To close popover we may add <code>"close-popover"</code> class to any HTML element (prefered to link)</p>
+    </li>
+    <li>
+      <p>If you have more than one popover in app, you need to specify appropriate popover via additional <code>data-popover=".my-popover"</code> attribute on this HTML element</p>
+    </li>
+  </ul>
+
+
+  <p>When we open Popover with such method (from HTML), it will be automatically positioned around element that we clicked to call this Popover.</p>
+
+  <h3>Open and close with JavaScript</h3>
+
+  <p>We can also open and close Popover with JavaScript:</p>
+
+  <p><code>$.popover(<span>popover</span>, <span>target</span>)</code> - open Popover around <strong>target</strong> element</p>
+
+  <ul class="method-parameters">
+    <li><code>popover</code> - <span class="parameter-type">HTMLElement</span> or <span class="parameter-type">string</span> (with CSS Selector) of Popover to open. Requred</li>
+    <li><code>target</code> - <span class="parameter-type">HTMLElement</span> or <span class="parameter-type">string</span> (with CSS Selector) of target element to set popover position around this element. Requred</li>
+    <li class="method-returns">This method returns Popover's HTMLElement</li>
+  </ul>
+
+  <p><code>$.closeModal(<span>popover</span>)</code> - close Popover</p>
+  <ul class="method-parameters">
+    <li><code>popover</code> - <span class="parameter-type">HTMLElement</span> or <span class="parameter-type">string</span> (with CSS Selector). Optional. If not specified, any opened Popover will be closed</li>
+  </ul>
+
+  <h3>Dynamic Popover</h3>
+
+  <p>It allows you to create Popover dynamically by passing its HTML to related methods:</p>
+
+  <p><code>myApp.popover(<span>popoverHTML</span>, <span>target</span>, <span>removeOnClose</span>)</code> - open Popover with <strong>popoverHTML</strong> content around <strong>target</strong> element</p>
+
+  <ul class="method-parameters">
+    <li><code>popoverHTML</code> - <span class="parameter-type">string</span>. HTML string of popover </li>
+    <li><code>target</code> - <span class="parameter-type">HTMLElement</span> or <span class="parameter-type">string</span> (with CSS Selector) of target element to set popover position around this element. Requred</li>
+    <li><code>removeOnClose</code> - <span class="parameter-type">boolean</span>. Optional, by default - true. If true then Popover will be removed from DOM when closed</li>
+    <li class="method-returns">This method returns dynamically created Popover's HTMLElement</li>
+  </ul>
+
 </article>
 
   <article class="component active" id='popup' data-url="popup">
   <h2 class="component-title">Popup</h2>
-  <p class="component-description">Popup 是一种可以包含任何Html内容的弹出窗口，从App的主内容区域上弹出。 Popup 和其他所有的遮罩图层一样，是所谓的“临时视图”的一部分。</p>
-  <h3 class="component-title">Popup 布局</h3>
-  <p class="component-description">Popup 布局相当简单. 你所需要做的就是将 <div class="popup"> 任何需要展示的内容 </div> 放到 body 里正确的位置上:</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"modal modal-no-buttons"</span><span class="nt">&gt;</span>
+  <p class="component-description">Popup is a popup window with any HTML content that pops up over App's main content</p>
+  <h3 class="component-title">Popup</h3>
+  <p class="component-description">Popup layout is pretty simple. All you need to do is to put <code>.popup</code> right in the body:</p>
+<figure class="highlight"><pre><code class="language-html" data-lang="html">  
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"modal modal-no-buttons"</span><span class="nt">&gt;</span>
   ...
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"popup"</span><span class="nt">&gt;</span>
     Any HTML content goes here
   <span class="nt">&lt;/div&gt;</span>
 <span class="nt">&lt;/div&gt;</span>  
 
-  <span class="nt">&lt;p&gt;</span>注意，不要把 <span class="nt">&lt;code&gt;</span>popup<span class="nt">&lt;/code&gt;</span> 放到 <span class="nt">&lt;code&gt;</span>page<span class="nt">&lt;/code&gt;</span> 里面！他们是同级的关系，不是包含关系。<span class="nt">&lt;/p&gt;</span></code></pre></div>
-    <h3 class="component-title">打开和关闭 Popup</h3>
-    <h4 class="component-title">通过HTML</h4>
-    <p class="component-description">可以通过在链接上使用特定的类和data属性打开和关闭所需的popups：</p>
+  <span class="nt">&lt;p&gt;</span>Note! Don't put <span class="nt">&lt;code&gt;</span>popup<span class="nt">&lt;/code&gt;</span> into <span class="nt">&lt;code&gt;</span>page<span class="nt">&lt;/code&gt;</span>.<span class="nt">&lt;/p&gt;</span></code></pre></figure>
+    <h3 class="component-title">Open and Close Popup</h3>
+    <h4 class="component-title">From HTML</h4>
+    <p class="component-description">It is possible to open and close required popups using special classes and data attributes on links:</p>
     <ul>
-      <li>为了打开popup，我们需要添加 <code>open-popup</code> 类到任意 HTML 元素上 (最好是链接)</li>
-      <li>为了关闭popup，我们需要添加 <code>close-popup</code> 类到任意 HTML 元素上 (最好是链接)</li>
-      <li>如果你的App里有超过一个popups, 你需要指定适当popup，则需添加额外的属性 <code>data-popup=".my-popup"</code> 到这个 HTML 元素上</li>
+      <li>
+        <p>To open popup we need to add <code>open-popup</code> class to any HTML element (prefered to link)</p>
+      </li>
+      <li>
+        <p>To close popup we need to add <code>close-popup</code> class to any HTML element (prefered to link)</p>
+      </li>
+      <li>
+        <p>If you have more than one popups in app, you need to specify appropriate popup via additional <code>data-popup=".my-popup"</code> attribute on this HTML element</p>
+      </li>
     </ul>
-    <p class="component-description">代码如下：</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"page"</span><span class="nt">&gt;</span>
+    <p class="component-description">According to above note:</p>
+<figure class="highlight"><pre><code class="language-html" data-lang="html">  
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"page"</span><span class="nt">&gt;</span>
   ...
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content"</span><span class="nt">&gt;</span>
       <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content-block"</span><span class="nt">&gt;</span>
@@ -2322,21 +2429,22 @@
     <span class="nt">&lt;p&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"close-popup"</span><span class="nt">&gt;</span>Close popup<span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
     <span class="nt">&lt;p&gt;</span>Lorem ipsum dolor ...<span class="nt">&lt;/p&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre></div>
+<span class="nt">&lt;/div&gt;</span>  </code></pre></figure>
 </article>
 
 <article class="component active">
-  <h4 class="component-title">使用 JavaScript</h4>
-  <p class="component-description">我们也可以用使用JavaScript来打开和关闭Popups ，因此我们需要看一下相关的App方法：</p>
-  <p class="component-description"><code>$.popup(popup)</code> - 打开 Popup</p>
+  <h4 class="component-title">Using JavaScript</h4>
+  <p class="component-description">We can also open and close Popups with JavaScript, for this we need to look at related App methods:</p>
+  <p class="component-description"><code>$.popup(popup)</code> - Open Popup</p>
   <ul>
-    <li><code>popup - HTML元素 或者 字符串 (需要打开的popup的 CSS 选择器) </code>. 必需</li>
+    <li><code>popup - HTMLElement or string (with CSS Selector) of Popup to open </code>. Required</li>
   </ul>
-  <p class="component-description"><code>$.closeModal(popup)</code> - 关闭 Popup</p>
+  <p class="component-description"><code>$.closeModal(popup)</code> - Close Popup</p>
   <ul>
-    <li><code>popup - HTML元素 或者 字符串 (需要打开的popup的 CSS 选择器)</code>. 可选. 如果没有设置这个值，任何打开着的Popup/Modal 都将被关闭</li>
+    <li><code>popup -  HTMLElement or string (with CSS Selector)</code>. Optional. If not specified, any opened Popup/Modal will be closed</li>
   </ul>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html">  
+<span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span>Popup(JavaScript)<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;/header&gt;</span>
 ...
@@ -2362,48 +2470,49 @@
     <span class="nt">&lt;p&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"close-popup"</span><span class="nt">&gt;</span>Close popup<span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
     <span class="nt">&lt;p&gt;</span>Lorem ipsum dolor ...<span class="nt">&lt;/p&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre></div>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="s1">'.open-about'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+<span class="nt">&lt;/div&gt;</span>  </code></pre></figure>
+<figure class="highlight"><pre><code class="language-js" data-lang="js">  
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="s1">'.open-about'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
   <span class="nx">$</span><span class="p">.</span><span class="nx">popup</span><span class="p">(</span><span class="s1">'.popup-about'</span><span class="p">);</span>
 <span class="p">});</span>
  
 <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="s1">'.open-services'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
   <span class="nx">$</span><span class="p">.</span><span class="nx">popup</span><span class="p">(</span><span class="s1">'.popup-services'</span><span class="p">);</span>
-<span class="p">});</span></code></pre></div>
+<span class="p">});</span>   </code></pre></figure>
 </article>
 
 
 <article class="component active">
-  <h3 class="component-title">Popup 事件</h3>
-  <p class="component-description">Popup 和 Modals有一样的事件, 如果你需要在打开/关闭popup时使用JavaScript做一些事情的时候，这些事件会很有用。</p>
+  <h3 class="component-title">Popup Events</h3>
+  <p class="component-description">Popup has the same events as Modals, they could be useful when you need to do something in JavaScript when Popup opened/closed</p>
   <table class="events-table">
     <thead>
       <tr>
-        <th>事件</th>
-        <th>目标</th>
-        <th>描述</th>
+        <th>Event</th>
+        <th>Target</th>
+        <th>Description</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td>open</td>
         <td>Popup Element<span>&lt;div class="popup"&gt;</span></td>
-        <td>当 Popup 开始打开动画时，事件将被触发。</td>
+        <td>Event will be triggered when Popup starts its opening animation</td>
       </tr>
       <tr>
         <td>opened</td>
         <td>Popup Element<span>&lt;div class="popup"&gt;</span></td>
-        <td>当 Popup 完成打开动画时，事件将被触发。</td>
+        <td>Event will be triggered after Popup completes its opening animation</td>
       </tr>
       <tr>
         <td>close</td>
         <td>Popup Element<span>&lt;div class="popup"&gt;</span></td>
-        <td>当 Popup 开始结束动画时，事件将被触发。</td>
+        <td>Event will be triggered when Popup starts its closing animation</td>
       </tr>
       <tr>
         <td>closed</td>
         <td>Popup Element<span>&lt;div class="popup"&gt;</span></td>
-        <td>当 Popup 完成结束动画后，事件将被触发。</td>
+        <td>Event will be triggered after Popup completes its closing animation</td>
       </tr>
     </tbody>
   </table>
@@ -2449,8 +2558,9 @@
       </div>
     </div>
   </div>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span>Popup事件<span class="nt">&lt;/h1&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html">  
+<span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span>Popup Events<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;/header&gt;</span>
 ...
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content"</span><span class="nt">&gt;</span>
@@ -2475,8 +2585,9 @@
     <span class="nt">&lt;p&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"close-popup"</span><span class="nt">&gt;</span>Close popup<span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
     <span class="nt">&lt;p&gt;</span>Lorem ipsum dolor ...<span class="nt">&lt;/p&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre></div>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="s1">'.popup-about'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+<span class="nt">&lt;/div&gt;</span>  </code></pre></figure>
+<figure class="highlight"><pre><code class="language-js" data-lang="js">  
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="s1">'.popup-about'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'About Popup opened'</span><span class="p">)</span>
 <span class="p">});</span>
 <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="s1">'.popup-about'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
@@ -2487,16 +2598,16 @@
 <span class="p">});</span>
 <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="s1">'.popup-services'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Services Popup is closed'</span><span class="p">)</span>
-<span class="p">});</span></code></pre></div>
+<span class="p">});</span>    </code></pre></figure>
 </article>
 
 <article class="component active">
-  <h3 class="component-title">动态的 Popup</h3>
-  <p class="component-description">允许你调用相关的App方法时传递HTML内容来动态地创建Popup:</p>
-  <p class="component-description"><code>$.popup(popupHTML, removeOnClose)</code> - 打开 Popup</p>
+  <h3 class="component-title">Dynamic Popup</h3>
+  <p class="component-description">Light7 allows you to create Popup dynamically by passing its HTML to related methods:</p>
+  <p class="component-description"><code>$.popup(popupHTML, removeOnClose)</code> - Open Popup</p>
   <ul>
-    <li><code>popupHTML</code> - string. popup的HTML字符串</li>
-    <li><code>removeOnClose</code> - boolean. 可选, 默认 - true. 如果是 true， 那么 Popup 在关闭时将从DOM中移除</li>
+    <li><code>popupHTML</code> - string. HTML String of popup</li>
+    <li><code>removeOnClose</code> - boolean. Optional, by default - true. If true then Popup will be removed from DOM when closed</li>
   </ul>
   <div class="component-example component-example-fullbleed">
     <div class="">
@@ -2519,8 +2630,9 @@
       </script>    
     </div>
    </div>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span>动态的 Popup<span class="nt">&lt;/h1&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html">  
+<span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span>Dynamic Popup<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;/header&gt;</span>
 ...
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content"</span><span class="nt">&gt;</span>
@@ -2528,8 +2640,9 @@
     <span class="c">&lt;!-- In data-popup attribute we specify CSS selector of popup we need to open --&gt;</span>
     <span class="nt">&lt;p&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"create-popup"</span><span class="nt">&gt;</span>Create Popup<span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre></div>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="s1">'.create-popup'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-js" data-lang="js">  
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="s1">'.create-popup'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
   <span class="kd">var</span> <span class="nx">popupHTML</span> <span class="o">=</span> <span class="s1">'&lt;div class="popup"&gt;'</span><span class="o">+</span>
                     <span class="s1">'&lt;div class="content-block"&gt;'</span><span class="o">+</span>
                       <span class="s1">'&lt;p&gt;Popup created dynamically.&lt;/p&gt;'</span><span class="o">+</span>
@@ -2537,7 +2650,7 @@
                     <span class="s1">'&lt;/div&gt;'</span><span class="o">+</span>
                   <span class="s1">'&lt;/div&gt;'</span>
   <span class="nx">$</span><span class="p">.</span><span class="nx">popup</span><span class="p">(</span><span class="nx">popupHTML</span><span class="p">);</span>
-<span class="p">});</span></code></pre></div>
+<span class="p">});</span> </code></pre></figure>
 </article>
 
   <article class="component" id="calendar" data-url='calendar'>
@@ -2545,25 +2658,102 @@
   <p class="component-description">日历组件用来选择年月日，可以代替系统原生的日历组件，提供更统一的视觉和交互以及更好的兼容性。</p>
   <p>日历组件需要初始化才能使用，最简单的方式是通过一下JS代码来初始化，绑定到一个input元素上：</p>
 
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s2">"#my-input"</span><span class="p">).</span><span class="nx">calendar</span><span class="p">();</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s2">"#my-input"</span><span class="p">).</span><span class="nx">calendar</span><span class="p">();</span></code></pre></figure>
 
   <p>当你点击input元素后，会自动弹出一个JS生成的日历组件。当用户选择日期之后，input的值会被设置为用户选择的日期。</p>
   <p>如果你不想写js，可以通过以下方式来自动初始化：</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">data-toggle=</span><span class="s">'date'</span> <span class="nt">/&gt;</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">data-toggle=</span><span class="s">'date'</span> <span class="nt">/&gt;</span></code></pre></figure>
 
   <h2>参数</h2>
   <p>你可以在初始化的时候指定如下参数：</p>
 
-  <table>
-    <tr>
-      <th>参数名</th>
-      <th>默认值</th>
-      <th>说明</th>
+  <table class="params-table">
+    <thead>
+      <tr>
+        <th>Parameter</th>
+        <th>Type</th>
+        <th>Default</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th colspan="4">Common Picker Modal Component Parameters</th>
+      </tr>
+      <tr>
+        <td>inputReadOnly</td>
+        <td>boolean</td>
+        <td>true</td>
+        <td>Sets "readonly" attribute on specified input</td>
+      </tr>
+      <tr>
+        <td>cssClass</td>
+        <td>string</td>
+        <td></td>
+        <td>Additional CSS class name to be set on calendar modal</td>
+      </tr>
+      <tr>
+        <td>closeByOutsideClick</td>
+        <td>boolean</td>
+        <td>true</td>
+        <td>If enabled, picker will be closed by clicking outside of picker or related input element</td>
+      </tr>
+      <tr>
+        <td>toolbar</td>
+        <td>boolean</td>
+        <td>true</td>
+        <td>Enables calendar modal toolbar</td>
+      </tr>
+      <tr>
+        <td>toolbarTemplate</td>
+        <td>string</td>
+        <td></td>
+        <td>Toolbar HTML Template </td>
     </tr>
     <tr>
-      <td>inputReadOnly</td>
-      <td>true</td>
-      <td>是否在input上增加一个 <code>readonly</code> 属性使用户无法自己输入</td>
+      <th colspan="4">Specific Calendar Parameters</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>array</td>
+      <td></td>
+      <td>Array with initial selected dates. Each array item represents selected date</td>
+    </tr>
+    <tr>
+      <td>disabled</td>
+      <td>Date Range</td>
+      <td></td>
+      <td>Additonal disabled dates. Parameter accepts so called <b>Date Range</b> (look below for details)</td>
+    </tr>
+    <tr>
+      <td>formatValue</td>
+      <td>function (p, values)</td>
+      <td></td>
+      <td>Function to format input value, should return new/formatted string value. <b>values</b> is array where each item represents selected date</td>
+    </tr>
+    <tr>
+      <td>monthNames</td>
+      <td>array</td>
+      <td>['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August' , 'September' , 'October', 'November', 'December']</td>
+      <td>Array with full month names</td>
+    </tr>
+    <tr>
+      <td>monthNamesShort</td>
+      <td>array</td>
+      <td>['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']</td>
+      <td>Array with short month names</td>
+    </tr>
+    <tr>
+      <td>dayNames</td>
+      <td>array</td>
+      <td>['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']</td>
+      <td>Array with week day names</td>
+    </tr>
+    <tr>
+      <td>dayNamesShort</td>
+      <td>array</td>
+      <td>['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']</td>
+      <td>Array with week day short names</td>
     </tr>
     <tr>
       <td>dateFormat</td>
@@ -2586,16 +2776,54 @@
       <td>当用户选择日期时触发</td>
     </tr>
     <tr>
-      <td>onOpen</td>
-      <td>function(p){}</td>
-      <td>日历弹层打开时触发</td>
+      <td>closeOnSelect</td>
+      <td>boolean</td>
+      <td>false</td>
+      <td>Enable and calendar will be closed when user pick a date</td>
     </tr>
-    <tr>
-      <td>onClose</td>
-      <td>function(p){}</td>
-      <td>日历弹层关闭时触发</td>
-    </tr>
-  </table>
+  </tr>
+  <tr>
+    <td>yearPicker</td>
+    <td>boolean</td>
+    <td>true</td>
+    <td>Enable year picker in toolbar</td>
+  </tr>
+</tr>
+<tr>
+  <th colspan="4">Callbacks</th>
+</tr>
+<tr>
+  <td>onChange</td>
+  <td>function (p, values, displayValues)</td>
+  <td></td>
+  <td>Callback function that will be executed when picker value changed. <b>values</b> and <b>displayValues</b> are arrays where each item represents value/display value of related column</td>
+</tr>
+<tr>
+  <td>onMonthAdd</td>
+  <td>function (p, monthContainer)</td>
+  <td></td>
+  <td>Callback function that will be executed when newly generated month HTML element will be added to calendar.</td>
+</tr>
+<tr>
+  <td>onDayClick</td>
+  <td>function (p, dayContainer, year, month, day)</td>
+  <td></td>
+  <td>Callback function that will be executed when user clicks/select any date</td>
+</tr>
+<tr>
+  <td>onOpen</td>
+  <td>function (p)</td>
+  <td></td>
+  <td>Callback function that will be executed when picker is opened</td>
+</tr>
+<tr>
+  <td>onClose</td>
+  <td>function (p)</td>
+  <td></td>
+  <td>Callback function that will be executed when picker is closed</td>
+</tr>
+</tbody>
+</table>
 
   <p>当用户选择完日期之后，会在 input 上触发 <code>change</code> 事件，你可以监听此事件。</p>
 
@@ -2605,7 +2833,7 @@
 <article class="component" data-url='calendar-inline'>
   <h2 class="component-title">内联日历</h2>
   <p>日历插件是非常智能的，如果在一个非 <code>input</code> 元素上初始化，它会自动变成内联形式。</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">data-toggle=</span><span class="s">'date'</span> <span class="nt">/&gt;</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">data-toggle=</span><span class="s">'date'</span> <span class="nt">/&gt;</span></code></pre></figure>
 </article>
 
   <article class="component" id='actions'>
@@ -2660,7 +2888,8 @@
       }); 
   </script>
   </div>
-  <div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
+  <figure class="highlight"><pre><code class="language-html" data-lang="html">  
+  <span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
       <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span>操作表<span class="nt">&lt;/h1&gt;</span>
   <span class="nt">&lt;/header&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content"</span><span class="nt">&gt;</span>
@@ -2668,8 +2897,10 @@
       <span class="c">&lt;!-- In data-popup attribute we specify CSS selector of popup we need to open --&gt;</span>
       <span class="nt">&lt;p&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"create-actions"</span><span class="nt">&gt;</span>选择操作<span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
-  <span class="nt">&lt;/div&gt;</span></code></pre></div>
-  <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="s1">'.create-actions'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="nt">&lt;/div&gt;</span>
+  </code></pre></figure>
+  <figure class="highlight"><pre><code class="language-js" data-lang="js">  
+  <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="s1">'.create-actions'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
       <span class="kd">var</span> <span class="nx">buttons1</span> <span class="o">=</span> <span class="p">[</span>
         <span class="p">{</span>
           <span class="na">text</span><span class="p">:</span> <span class="s1">'请选择'</span><span class="p">,</span>
@@ -2698,7 +2929,8 @@
       <span class="p">];</span>
       <span class="kd">var</span> <span class="nx">groups</span> <span class="o">=</span> <span class="p">[</span><span class="nx">buttons1</span><span class="p">,</span> <span class="nx">buttons2</span><span class="p">];</span>
       <span class="nx">$</span><span class="p">.</span><span class="nx">actions</span><span class="p">(</span><span class="nx">groups</span><span class="p">);</span>
-  <span class="p">});</span></code></pre></div>
+  <span class="p">});</span> 
+  </code></pre></figure>
 </article>
 
   <article class="component" id="picker" data-url='picker'>
@@ -2710,7 +2942,7 @@
 
   <p>picker 会自动读取 input 的value作为初始值。对于有多个cols的情况，可能初始值无法正确解析，因为picker并不知道该如何进行分割。默认的规则是：多列模式下，会把input中的值以空格分隔作为每一列的值。如果你有多列并且不是以空格分隔的，那么你需要自己通过参数传入这个初始值，而不能通过 input 元素的 value属性设置。</p>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">id=</span><span class="s">'picker'</span><span class="nt">/&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">id=</span><span class="s">'picker'</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;script&gt;</span>
 <span class="nx">$</span><span class="p">(</span><span class="s2">"#picker"</span><span class="p">).</span><span class="nx">picker</span><span class="p">({</span>
   <span class="na">toolbarTemplate</span><span class="p">:</span> <span class="s1">'&lt;header class="bar bar-nav"&gt;\
@@ -2725,7 +2957,7 @@
     <span class="p">}</span>
   <span class="p">]</span>
 <span class="p">});</span>
-<span class="nt">&lt;/script&gt;</span></code></pre></div>
+<span class="nt">&lt;/script&gt;</span></code></pre></figure>
 
   <h3>关闭picker</h3>
 
@@ -2736,7 +2968,7 @@
 
   <p class="component-description">你可以通过设置 <code>toolbarTemplate</code> 参数来自定义工具栏模板。在 <code>cols</code> 参数中可以传入多列值。</p>
 
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s2">"#picker-name"</span><span class="p">).</span><span class="nx">picker</span><span class="p">({</span>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s2">"#picker-name"</span><span class="p">).</span><span class="nx">picker</span><span class="p">({</span>
   <span class="na">toolbarTemplate</span><span class="p">:</span> <span class="s1">'&lt;header class="bar bar-nav"&gt;\
   &lt;button class="button button-link pull-right close-picker"&gt;确定&lt;/button&gt;\
   &lt;h1 class="title"&gt;请选择称呼&lt;/h1&gt;\
@@ -2756,7 +2988,7 @@
       <span class="na">values</span><span class="p">:</span> <span class="p">[</span><span class="s1">'先生'</span><span class="p">,</span> <span class="s1">'小姐'</span><span class="p">]</span>
     <span class="p">}</span>
   <span class="p">]</span>
-<span class="p">});</span></code></pre></div>
+<span class="p">});</span></code></pre></figure>
 
   <p>所有可用参数如下：</p>
 
@@ -2775,6 +3007,12 @@
         &lt;/header&gt;
       </td>
       <td>工具栏的模板，可以自己定义。</td>
+    </tr>
+
+    <tr>
+      <td>value</td>
+      <td></td>
+      <td>Array with initial values. Each array item represents value of related column. Picker will auto read value from input if not set.</td>
     </tr>
 
     <tr>
@@ -2804,9 +3042,9 @@
 
   <p class="component-description">你可以通过 <code>$(".picker").picker("method", args1, args2...)</code> 的方式来调用相关的方法。</p>
 
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s2">"#picker-name"</span><span class="p">).</span><span class="nx">picker</span><span class="p">(</span><span class="s2">"open"</span><span class="p">);</span>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s2">"#picker-name"</span><span class="p">).</span><span class="nx">picker</span><span class="p">(</span><span class="s2">"open"</span><span class="p">);</span>
 <span class="nx">$</span><span class="p">(</span><span class="s2">"#picker-name"</span><span class="p">).</span><span class="nx">picker</span><span class="p">(</span><span class="s2">"close"</span><span class="p">);</span>
-<span class="nx">$</span><span class="p">(</span><span class="s2">"#picker-name"</span><span class="p">).</span><span class="nx">picker</span><span class="p">(</span><span class="s2">"setValue"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"2012"</span><span class="p">,</span> <span class="s2">"12"</span><span class="p">,</span> <span class="s2">"12"</span><span class="p">]);</span></code></pre></div>
+<span class="nx">$</span><span class="p">(</span><span class="s2">"#picker-name"</span><span class="p">).</span><span class="nx">picker</span><span class="p">(</span><span class="s2">"setValue"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"2012"</span><span class="p">,</span> <span class="s2">"12"</span><span class="p">,</span> <span class="s2">"12"</span><span class="p">]);</span></code></pre></figure>
 
   <p>所有可用方法如下：</p>
 
@@ -2843,7 +3081,7 @@
   <p>datetime-picker 定制了 onChange 和 cols 参数，请不要设置这两个参数。</p>
   <p>datetime-picker 会自动解析 input 的 value 作为初始值，但是要注意初始值的格式一定是 <code>yyyy-mm-dd HH:MM</code>， 比如 <code>2015-12-12 08:30</code></p>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">id=</span><span class="s">'datetime-picker'</span><span class="nt">/&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">id=</span><span class="s">'datetime-picker'</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;script&gt;</span>
   <span class="nx">$</span><span class="p">(</span><span class="s2">"#datetime-picker"</span><span class="p">).</span><span class="nx">datetimePicker</span><span class="p">({</span>
     <span class="na">toolbarTemplate</span><span class="p">:</span> <span class="s1">'&lt;header class="bar bar-nav"&gt;\
@@ -2851,7 +3089,7 @@
     &lt;h1 class="title"&gt;选择日期和时间&lt;/h1&gt;\
     &lt;/header&gt;'</span>
   <span class="p">});</span>
-<span class="nt">&lt;/script&gt;</span></code></pre></div>
+<span class="nt">&lt;/script&gt;</span></code></pre></figure>
 
   <p>如果你只想选择日期，请使用 <a href='#calendar' data-ignore='push'>日历</a></p>
 </article>
@@ -2868,7 +3106,7 @@
     <li>展现一个可以选择的列表</li>
   </ul>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span>视图列表<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;/header&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content"</span><span class="nt">&gt;</span>
@@ -2927,7 +3165,7 @@
       <span class="nt">&lt;/li&gt;</span>
     <span class="nt">&lt;/ul&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre></div>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
 
   <p class="component-description">其中：</p>
   <ul>
@@ -2954,7 +3192,7 @@
   <div class="component-example component-example-fullbleed">
   </div>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span>联系人列表<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;/header&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content"</span><span class="nt">&gt;</span>
@@ -2965,7 +3203,7 @@
         <span class="nt">&lt;li&gt;</span>
           <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-content"</span><span class="nt">&gt;</span>
             <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-inner"</span><span class="nt">&gt;</span>
-              <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-title"</span><span class="nt">&gt;</span>标题1<span class="nt">&lt;/div&gt;</span>
+              <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-title"</span><span class="nt">&gt;</span>Person0<span class="nt">&lt;/div&gt;</span>
             <span class="nt">&lt;/div&gt;</span>
           <span class="nt">&lt;/div&gt;</span>
         <span class="nt">&lt;/li&gt;</span>
@@ -3134,7 +3372,7 @@
       <span class="nt">&lt;/ul&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre></div>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
 
 </article>
 
@@ -3146,7 +3384,7 @@
   <div class="component-example component-example-fullbleed">
   </div>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span>多媒体列表<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;/header&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content"</span><span class="nt">&gt;</span>
@@ -3217,7 +3455,7 @@
       <span class="nt">&lt;/li&gt;</span>
     <span class="nt">&lt;/ul&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre></div>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
 
   <p class="component-description">其中：</p>
   <ul>
@@ -3239,7 +3477,7 @@
 
   <p>列表是单选还是多选，完全取决于 <code>input</code> 的 <code>type</code> 属性设置。目前我们对单选和多选的图标样式是没有做区分的，后续可能会设置不同的样式以区分单选和多选。</p>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;ul&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;ul&gt;</span>
   <span class="nt">&lt;li&gt;</span>
     <span class="nt">&lt;label</span> <span class="na">class=</span><span class="s">"label-checkbox item-content"</span><span class="nt">&gt;</span>
       <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"radio"</span> <span class="na">name=</span><span class="s">"my-radio"</span><span class="nt">&gt;</span>
@@ -3268,7 +3506,7 @@
       <span class="nt">&lt;/div&gt;</span>
     <span class="nt">&lt;/label&gt;</span>
   <span class="nt">&lt;/li&gt;</span>
-<span class="nt">&lt;/ul&gt;</span></code></pre></div>
+<span class="nt">&lt;/ul&gt;</span></code></pre></figure>
 
   <p>因为选择操作是由原生的 <code>input</code> 实现的，所以只需要把上面的代码中的 input 元素的 <code>type="radio"</code> 改成 <code>type="checkbox"</code> 就可以变成多选。</p>
 
@@ -3281,7 +3519,7 @@
   <div class="component-example component-example-fullbleed">
   </div>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span>卡片<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;/header&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content"</span><span class="nt">&gt;</span>
@@ -3374,7 +3612,7 @@
       <span class="nt">&lt;span&gt;</span>5 评论<span class="nt">&lt;/span&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
   <span class="nt">&lt;/div&gt;</span>            
-<span class="nt">&lt;/div&gt;</span></code></pre></div>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
 
 </article>
 
@@ -3385,7 +3623,7 @@
   <div class="component-example component-example-fullbleed">
   </div>
 
-  <div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
+  <figure class="highlight"><pre><code class="language-html" data-lang="html">  <span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span>列表卡片<span class="nt">&lt;/h1&gt;</span>
   <span class="nt">&lt;/header&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content"</span><span class="nt">&gt;</span>
@@ -3414,219 +3652,164 @@
         <span class="nt">&lt;/li&gt;</span>
       <span class="nt">&lt;/ul&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
-  <span class="nt">&lt;/div&gt;</span></code></pre></div>
+  <span class="nt">&lt;/div&gt;</span>
+  </code></pre></figure>
 
 </article>
 
-  <article class="component active " id="scroller">
-    <h2 class="component-title">滚动条</h2>
-    <p>因为手机不断更新换代，并且原生滚动条的问题基本可以忽略，所以 light7 放弃了在 SUI Mobile 中使用的 IScroll 滚动条，并且使JS 文件体积减少了 30K.</p>
-    <div class="component-example component-example-fullbleed">
-    </div>
-    <h3 class="component-title">滚动接口</h3>
-    <p class="component-description">scroller插件重置的了zepto的滚动方法，无论在js模式下或者native模式下都是一样的调用方式：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">$</span><span class="p">(</span><span class="s1">'.content'</span><span class="p">).</span><span class="nx">scrollTop</span><span class="p">();</span> <span class="c1">//==&gt; number</span>
-    <span class="nx">$</span><span class="p">(</span><span class="s1">'.content'</span><span class="p">).</span><span class="nx">scrollTop</span><span class="p">(</span><span class="nx">number</span><span class="p">);</span> <span class="c1">// ==&gt;self</span>
-    <span class="nx">$</span><span class="p">(</span><span class="s1">'.content'</span><span class="p">).</span><span class="nx">scrollLeft</span><span class="p">();</span> <span class="c1">//==&gt; number</span>
-    <span class="nx">$</span><span class="p">(</span><span class="s1">'.content'</span><span class="p">).</span><span class="nx">scrollLeft</span><span class="p">(</span><span class="nx">number</span><span class="p">);</span> <span class="c1">// ==&gt;self</span>
-<span class="p">});</span></code></pre></div>
-<h3 class="component-title">滚动事件</h3>
-    <div class="component-description">
-        滚动条提供的事件：
-        <ul>
-          <li><code>scroll</code>: 滚动中触发</li>
-        </ul>
-
-    </div>
-    <p class="component-description">
-        直接通过下边的方式进行监听
-    </p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">$</span><span class="p">(</span><span class="s2">".content"</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'scroll'</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
-     <span class="c1">//dosomething</span>
-    <span class="p">});</span>
-<span class="p">});</span></code></pre></div>   
-
-</article>
-
-
-
+  
 
   <article class="component active" id="pulltorefresh">
-  <h2 class="component-title">下拉刷新</h2>
-  <p class="component-description">下拉刷新是一个特别的组件，可以用来初始化页面内容的刷新。</p>
-  <h3 class="component-title">下拉刷新的demo</h3>
+  <h2 class="component-title">Pull to refresh</h2>
+  <p class="component-description">Pull to refresh is a special component that can be used to initiate the refreshing of a page’s contents.</p>
+  <h3 class="component-title">demo</h3>
 <p class="component-description">HTML:</p>
 
   <div class="component-example component-example-fullbleed">
       <header class="bar bar-nav">
-          <h1 class='title'>下拉刷新</h1>
+          <h1 class='title'>Pull to refresh</h1>
       </header>
       <div class="content pull-to-refresh-content" data-ptr-distance="55">
-          <!-- 默认的下拉刷新层 -->
           <div class="pull-to-refresh-layer">
               <div class="preloader"></div>
               <div class="pull-to-refresh-arrow"></div>
           </div>
-          <!-- 下面是正文 -->
           <div class="card">
               <div class="card-header">card</div>
               <div class="card-content">
                   <div class="card-content-inner">
-                      这里是第1个card，下拉刷新会出现第2个card。
+                      Hello there! I am a card;
                   </div>
               </div>
           </div>
       </div>
   </div>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">'title'</span><span class="nt">&gt;</span>下拉刷新<span class="nt">&lt;/h1&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">'title'</span><span class="nt">&gt;</span>Pull to refresh<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;/header&gt;</span>
-<span class="c">&lt;!-- content应该拥有"pull-to-refresh-content"类,表示启用下拉刷新 --&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content pull-to-refresh-content"</span> <span class="na">data-ptr-distance=</span><span class="s">"55"</span><span class="nt">&gt;</span>
-    <span class="c">&lt;!-- 默认的下拉刷新层 --&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"pull-to-refresh-layer"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"preloader"</span><span class="nt">&gt;&lt;/div&gt;</span>
-        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"pull-to-refresh-arrow"</span><span class="nt">&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"pull-to-refresh-layer"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"preloader"</span><span class="nt">&gt;&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"pull-to-refresh-arrow"</span><span class="nt">&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-header"</span><span class="nt">&gt;</span>card<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-content"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-content-inner"</span><span class="nt">&gt;</span>
+        Hello there! I am a card;
+      <span class="nt">&lt;/div&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
-    <span class="c">&lt;!-- 下面是正文 --&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-container"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card"</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-header"</span><span class="nt">&gt;</span>card<span class="nt">&lt;/div&gt;</span>
-            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-content"</span><span class="nt">&gt;</span>
-                <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-content-inner"</span><span class="nt">&gt;</span>
-                    这里是第1个card，下拉刷新会出现第2个card。
-                <span class="nt">&lt;/div&gt;</span>
-            <span class="nt">&lt;/div&gt;</span>
-        <span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre></div>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
 
 <script type="text/javascript">
-// 添加'refresh'监听器
 $(document).on('refresh', '.pull-to-refresh-content',function(e) {
-    // 模拟2s的加载过程
     setTimeout(function() {
-        var cardNumber = $(e.target).find('.ptr-demo').length + 1;
         var cardHTML = '<div class="card">' +
-                          '<div class="card-header">card'+cardNumber+'</div>' +
+                          '<div class="card-header">New Card</div>' +
                           '<div class="card-content">' +
                             '<div class="card-content-inner">' +
-                                '这里是第' + cardNumber + '个card，下拉刷新会出现第' + (cardNumber + 1) + '个card。' +
+                                'Hello! I am the new card!'+(Math.random()*1000000)+
                             '</div>' +
                           '</div>' +
                       '</div>';
 
-        $(e.target).find('.card-container').prepend(cardHTML);
-        // 加载完毕需要重置
+        $(e.target).find('.card').replaceWith(cardHTML);
+        // done!
         $.pullToRefreshDone('.pull-to-refresh-content');
     }, 2000);
 });
 </script>
 <p class="component-description">javascript:</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 添加'refresh'监听器</span>
-<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'refresh'</span><span class="p">,</span> <span class="s1">'.pull-to-refresh-content'</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// 模拟2s的加载过程</span>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'refresh'</span><span class="p">,</span> <span class="s1">'.pull-to-refresh-content'</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">cardNumber</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s1">'.card'</span><span class="p">).</span><span class="nx">length</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
         <span class="kd">var</span> <span class="nx">cardHTML</span> <span class="o">=</span> <span class="s1">'&lt;div class="card"&gt;'</span> <span class="o">+</span>
-                          <span class="s1">'&lt;div class="card-header"&gt;card'</span><span class="o">+</span><span class="nx">cardNumber</span><span class="o">+</span><span class="s1">'&lt;/div&gt;'</span> <span class="o">+</span>
+                          <span class="s1">'&lt;div class="card-header"&gt;New Card&lt;/div&gt;'</span> <span class="o">+</span>
                           <span class="s1">'&lt;div class="card-content"&gt;'</span> <span class="o">+</span>
                             <span class="s1">'&lt;div class="card-content-inner"&gt;'</span> <span class="o">+</span>
-                                <span class="s1">'这里是第'</span> <span class="o">+</span> <span class="nx">cardNumber</span> <span class="o">+</span> <span class="s1">'个card，下拉刷新会出现第'</span> <span class="o">+</span> <span class="p">(</span><span class="nx">cardNumber</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'个card。'</span> <span class="o">+</span>
+                                <span class="s1">'Hello! I am the new card!'</span><span class="o">+</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="o">*</span><span class="mi">1000000</span><span class="p">)</span><span class="o">+</span>
                             <span class="s1">'&lt;/div&gt;'</span> <span class="o">+</span>
                           <span class="s1">'&lt;/div&gt;'</span> <span class="o">+</span>
                       <span class="s1">'&lt;/div&gt;'</span><span class="p">;</span>
 
-        <span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s1">'.card-container'</span><span class="p">).</span><span class="nx">prepend</span><span class="p">(</span><span class="nx">cardHTML</span><span class="p">);</span>
-        <span class="c1">// 加载完毕需要重置</span>
+        <span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s1">'.card'</span><span class="p">).</span><span class="nx">replaceWith</span><span class="p">(</span><span class="nx">cardHTML</span><span class="p">);</span>
+        <span class="c1">// done</span>
         <span class="nx">$</span><span class="p">.</span><span class="nx">pullToRefreshDone</span><span class="p">(</span><span class="s1">'.pull-to-refresh-content'</span><span class="p">);</span>
     <span class="p">},</span> <span class="mi">2000</span><span class="p">);</span>
-<span class="p">});</span></code></pre></div>
- <p class="component-description">其中</p>
- <ul>
-   <li><code>page-content</code>需要额外添加<code>pull-to-refresh-content</code>类，它会开启下拉刷新。</li>
-   <li><code>pull-to-refresh-layer</code>平时隐藏的布局块，包含下拉刷新的可视元素：加载提示符和上/下箭头。</li>
-   <li><code>data-ptr-distance="55"</code>可以配置下拉刷新的下拉距离. 默认是 44px.</li>
- </ul>
+<span class="p">});</span></code></pre></figure>
+<p class="component-description">Where</p>
+<ul>
+  <li><code>page-content</code> should have additional <code>pull-to-refresh-content</code> class. This is required to enable pull to refresh</li>
+  <li><code>pull-to-refresh-layer</code> hidden layer with pull to refresh visual elements: preloader and arrow. </li>
+  <li><code>data-ptr-distance="55"</code> additional attribute that allows to set custom pull to refresh trigger distance. By default (if not specified) it is 44px.</li>
+</ul>
+<h3 class="component-title">Pull To Refresh Sequence</h3>
+<p>When user starts to pull <b>pull-to-refresh-content</b> down, then <b>pull-to-refresh-layer</b> will receive additional "<b>pull-down</b>" class.</p>
+<p>When user pulls down <b>pull-to-refresh-content</b> on a distance more than 44px (when <b>pull-to-refresh-layer</b> will be fully visible), then <b>pull-to-refresh-layer</b> will receive additional "<b>pull-up</b>" class which changes arrow rotation to notify user about refresh action on release.</p>
+<p>When user release pull to refresh content when it is in "pull-up" state, then <b>pull-to-refresh-layer</b> will receive additional "<b>refreshing</b>" class. In "refreshing" state arrow will be hidden and user will see preloader indicator. On this stage you probably need to do Ajax request and refresh page content.</p>
 
-<h3 class="component-title">下拉刷新的行为顺序</h3>
-<p class="component-description">当用户开始下拉的时候， <code>pull-to-refresh-layer</code>会增加一个额外的 <code>pull-down</code> 类。</p>
-<p class="component-description">当用户下拉使<code>pull-to-refresh-content</code>元素下降超过44px时(即<code>pull-to-refresh-layer</code>元素完全可视)，<code>pull-to-refresh-layer</code>元素将自动添加"<code>pull-up</code>"类，使箭头转向180度，以提醒用户界面将在他松开手指时刷新。</p>
-<p class="component-description">当用户在“pull-up”状态释放下拉区块使页面刷新时，<code>pull-to-refresh-layer</code>区块将会添加一个"<code>refreshing</code>"类。在“refreshing”状态，箭头将会隐藏，同时会展现一个加载提示符。这个时候你通常需要进行Ajax异步请求并刷新页面内容。</p>
-<h3 class="component-title">下拉刷新事件</h3>
-<p class="component-description">以下是下拉刷新的特殊事件，用以帮助我们识别需要刷新界面的时机：</p>
-<table class="params-table">
-    <thead>
-      <tr>
-        <th>事件（Event）</th>
-        <th>对象（Target）</th>
-        <th>描述（Description）</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>refresh</td>
-        <td>拥有下拉刷新功能的界面
-<code><div class="pull-to-refresh-content"></code></td>
-        <td>事件会在下拉刷新进入“refreshing”状态时触发</td>
-      </tr> 
-    </tbody>
-  </table>
-
+<h3 class="component-title">Pull To Refresh Events</h3>
+<p class="component-description">There is a special JavaScript event that helps us to recognize when we need to refresh content:</p>
+<table class="events-table">
+  <thead>
+    <tr>
+      <th>Event</th>
+      <th>Target</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>refresh</td>
+      <td>Pull To Refresh content<span>&lt;div class="pull-to-refresh-content"&gt;</span></td>
+      <td>Event will be triggered when pull to refresh enters in "refreshing" state</td>
+    </tr>
+  </tbody>
+</table>
 
 
-<h3 class="component-title">重置下拉刷新</h3>
-<p class="component-description">在我们刷新页面内容之后，需要重置下拉刷新组件，以使用户可以再次下拉：</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html">$.pullToRefreshDone(ptrContent) // 重置特定的下拉刷新界面
+<h3 class="component-title">Reset Pull To Refresh</h3>
+<p class="component-description">After we refreshed page content, we need to reset pull to refresh component to let user pull it again:</p>
+<figure class="highlight"><pre><code class="language-html" data-lang="html">$.pullToRefreshDone(ptrContent)</code></pre></figure>
 
-//ptrContent  我们想要重置的下拉刷新页面的HTML元素或CSS选择器</code></pre></div>
-
-<h3 class="component-title">JS触发下拉刷新</h3>
-<p class="component-description">我们也可以通过下面的方法手工触发下拉刷新:</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html">$.pullToRefreshTrigger(ptrContent) //触发特定界面的下拉刷新
-
-ptrContent //我们想要触发的下拉刷新页面的HTML元素或CSS选择器</code></pre></div>
+<h3 class="component-title">Trigger Pull To Refresh</h3>
+<p class="component-description">We can also trigger Pull To Refresh manually by using the following method:</p>
+<figure class="highlight"><pre><code class="language-html" data-lang="html">$.pullToRefreshTrigger(ptrContent)</code></pre></figure>
 
 
-<h3 class="component-title">销毁/禁用下拉刷新</h3>
-<p class="component-description">有的时候你可能需要禁用下拉刷新。我们可以通过这个方法来做到:</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html">$.destroyPullToRefresh(ptrContent) //销毁/禁用 下拉刷新
+<h3 class="component-title">Destroy/Disable Pull To Refresh</h3>
+<p class="component-description">Sometimes you may need to disable Pull To Refresh on page. We can do that using the following method:</p>
+<figure class="highlight"><pre><code class="language-html" data-lang="html">$.destroyPullToRefresh(ptrContent)</code></pre></figure>
 
-ptrContent // HTMLElement or string (CSS 选择器) 我们需要销毁/禁用的下拉刷新</code></pre></div>
-
-<p class="component-description">我们可以再次初始化/启用它：</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html">$.initPullToRefresh(ptrContent) - 初始化/启用下拉刷新
-
-ptrContent - HTMLElement or string (with CSS Selector) 需要启用的下拉刷新</code></pre></div>
+<p class="component-description">And if we need to initialize/enable it again:<p>
+<figure class="highlight"><pre><code class="language-html" data-lang="html">$.initPullToRefresh(ptrContent)</code></pre></figure>
 
 </article>
 
   <article class="component" id="infinitescroll">
-    <h2 class="component-title">无限滚动</h2>
-    <p class="component-description">无限滚动用来在页面滚动到接近底部时加载新内容或进行其他操作。</p>
-    <h3 class="component-title">无限滚动demo</h3>
+    <h2 class="component-title">Infinite scroll</h2>
+    <p class="component-description">Load new items when user scroll to bottom of page。</p>
+    <h3 class="component-title">demo</h3>
     <p class="component-description">
-        你只需在可滚动的容器上添加“infinite-scroll”类，一般是页面滚动区域 - <code>div.content</code>
+       What you should do is only add a <code>infinite-scroll</code> class to <code>div.content</code>
     </p>
     <div class="component-example component-example-fullbleed">
         <header class="bar bar-nav">
-            <h1 class="title">无限滚动</h1>
+            <h1 class="title">infinite scroll</h1>
         </header>
         <div class="content infinite-scroll" data-distance="100">
             ...
         </div>
     </div>
-    <div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;style </span><span class="na">type=</span><span class="s">"text/css"</span><span class="nt">&gt;</span>
+    <figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;style </span><span class="na">type=</span><span class="s">"text/css"</span><span class="nt">&gt;</span>
 <span class="nc">.infinite-scroll-preloader</span> <span class="p">{</span>
   <span class="nl">margin-top</span><span class="p">:</span><span class="m">-20px</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nt">&lt;/style&gt;</span>
 
 <span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span>无限滚动<span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span>infinite scroll<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;/header&gt;</span>
 <span class="c">&lt;!-- 添加 class infinite-scroll 和 data-distaance --&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content infinite-scroll"</span> <span class="na">data-distance=</span><span class="s">"100"</span><span class="nt">&gt;</span>
@@ -3634,73 +3817,55 @@ ptrContent - HTMLElement or string (with CSS Selector) 需要启用的下拉刷�
         <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"list-container"</span><span class="nt">&gt;</span>
         <span class="nt">&lt;/ul&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
-    <span class="c">&lt;!-- 加载提示符 --&gt;</span>
+    <span class="c">&lt;!-- preloader --&gt;</span>
     <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"infinite-scroll-preloader"</span><span class="nt">&gt;</span>
         <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"preloader"</span><span class="nt">&gt;&lt;/div&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre></div>
-    <p class="component-description">其中：</p>
+<span class="nt">&lt;/div&gt;</span>
+    </code></pre></figure>
+    <p class="component-description">Note：</p>
     <ul>
-        <li><code>div class="page-content infinite-scroll"</code> -是我们无限滚动的容器</li>
-        <li><code>data-distance</code> - 属性用来配置页面滚动到离底部多远时触发无限滚动事件，默认是50 (px)</li>
+        <li><code>div class="page-content infinite-scroll"</code> - the container of infinite scroll</li>
+        <li><code>data-distance</code> - distance to bottom to trigger infinite scroll , default is 50 (px)</li>
     </ul>
 <script type="text/javascript">
 $(function() {
-    // 加载flag
     var loading = false;
-    // 最多可加载的条目
     var maxItems = 100;
 
-    // 每次加载添加多少条目
     var itemsPerLoad = 20;
 
     function addItems(number, lastIndex) {
-        // 生成新条目的HTML
         var html = '';
         for (var i = lastIndex + 1; i <= lastIndex + number; i++) {
             html += '<li class="item-content"><div class="item-inner"><div class="item-title">Item ' + i + '</div></div></li>';
         }
-        // 添加新条目
         $('.infinite-scroll .list-container').append(html);
     }
 
-    // 上次加载的序号
 
     var lastIndex = 0;
-    //文档专用事件 updateContent
     $(document).on('updateContent', '.infinite-scroll', function() {
-        //预先加载20条
         addItems(itemsPerLoad, 0);
         lastIndex = 20;
     });
-    // 注册'infinite'事件处理函数
     $(document).on('infinite', '.infinite-scroll', function() {
 
-        // 如果正在加载，则退出
         if (loading) return;
 
-        // 设置flag
         loading = true;
 
-        // 模拟1s的加载过程
         setTimeout(function() {
-            // 重置加载flag
             loading = false;
 
             if (lastIndex >= maxItems) {
-                // 加载完毕，则注销无限加载事件，以防不必要的加载
                 $.detachInfiniteScroll($('.infinite-scroll'));
-                // 隐藏加载提示符
                 $('.infinite-scroll-preloader').hide();
                 return;
             }
 
-            // 添加新条目
             addItems(itemsPerLoad, lastIndex);
-            // 更新最后加载的序号
             lastIndex = $('.list-container li').length;
-            //容器发生改变,如果是js滚动，需要刷新滚动
-            $.refreshScroller();
         }, 1000);
     });
 });
@@ -3708,32 +3873,24 @@ $(function() {
 
 
 <p class="component-description">javacript:</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 加载flag</span>
-    <span class="kd">var</span> <span class="nx">loading</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-    <span class="c1">// 最多可加载的条目</span>
+<figure class="highlight"><pre><code class="language-js" data-lang="js">    <span class="kd">var</span> <span class="nx">loading</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
     <span class="kd">var</span> <span class="nx">maxItems</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
 
-    <span class="c1">// 每次加载添加多少条目</span>
     <span class="kd">var</span> <span class="nx">itemsPerLoad</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
 
     <span class="kd">function</span> <span class="nx">addItems</span><span class="p">(</span><span class="nx">number</span><span class="p">,</span> <span class="nx">lastIndex</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// 生成新条目的HTML</span>
             <span class="kd">var</span> <span class="nx">html</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
             <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">lastIndex</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;=</span> <span class="nx">lastIndex</span> <span class="o">+</span> <span class="nx">number</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
                 <span class="nx">html</span> <span class="o">+=</span> <span class="s1">'&lt;li class="item-content"&gt;&lt;div class="item-inner"&gt;&lt;div class="item-title"&gt;Item '</span> <span class="o">+</span> <span class="nx">i</span> <span class="o">+</span> <span class="s1">'&lt;/div&gt;&lt;/div&gt;&lt;/li&gt;'</span><span class="p">;</span>
             <span class="p">}</span>
-            <span class="c1">// 添加新条目</span>
             <span class="nx">$</span><span class="p">(</span><span class="s1">'.list-container'</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">html</span><span class="p">);</span>
 
         <span class="p">}</span>
-        <span class="c1">//预先加载20条</span>
     <span class="nx">addItems</span><span class="p">(</span><span class="nx">itemsPerLoad</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 
-    <span class="c1">// 上次加载的序号</span>
 
     <span class="kd">var</span> <span class="nx">lastIndex</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
 
-    <span class="c1">// 注册'infinite'事件处理函数</span>
     <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'infinite'</span><span class="p">,</span> <span class="s1">'.infinite-scroll'</span><span class="p">,</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
 
         <span class="c1">// 如果正在加载，则退出</span>
@@ -3742,34 +3899,26 @@ $(function() {
         <span class="c1">// 设置flag</span>
         <span class="nx">loading</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
 
-        <span class="c1">// 模拟1s的加载过程</span>
         <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-            <span class="c1">// 重置加载flag</span>
             <span class="nx">loading</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
 
             <span class="k">if</span> <span class="p">(</span><span class="nx">lastIndex</span> <span class="o">&gt;=</span> <span class="nx">maxItems</span><span class="p">)</span> <span class="p">{</span>
-                <span class="c1">// 加载完毕，则注销无限加载事件，以防不必要的加载</span>
                 <span class="nx">$</span><span class="p">.</span><span class="nx">detachInfiniteScroll</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">'.infinite-scroll'</span><span class="p">));</span>
-                <span class="c1">// 删除加载提示符</span>
                 <span class="nx">$</span><span class="p">(</span><span class="s1">'.infinite-scroll-preloader'</span><span class="p">).</span><span class="nx">remove</span><span class="p">();</span>
                 <span class="k">return</span><span class="p">;</span>
             <span class="p">}</span>
 
-            <span class="c1">// 添加新条目</span>
             <span class="nx">addItems</span><span class="p">(</span><span class="nx">itemsPerLoad</span><span class="p">,</span> <span class="nx">lastIndex</span><span class="p">);</span>
-            <span class="c1">// 更新最后加载的序号</span>
             <span class="nx">lastIndex</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'.list-container li'</span><span class="p">).</span><span class="nx">length</span><span class="p">;</span>
-            <span class="c1">//容器发生改变,如果是js滚动，需要刷新滚动</span>
-            <span class="nx">$</span><span class="p">.</span><span class="nx">refreshScroller</span><span class="p">();</span>
         <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
-    <span class="p">});</span></code></pre></div>
+    <span class="p">});</span></code></pre></figure>
 
-    <h3 class="component-title">在顶部的无限滚动</h3>
-    <p class="component-description">如果你需要向上滚动到顶部时进行无限滚动，那么需要在 “<code>page-content</code>”添加额外的class <code>infinite-scroll-top</code>
+    <h3 class="component-title">infinite scroll on top of page</h3>
+    <p class="component-description">If you want load items when scroll top of page，you should add <code>infinite-scroll-top</code> class to <code>page-content</code>.
     </p>
     <div class="component-example component-example-fullbleed">
             <header class="bar bar-nav">
-                <h1 class="title">在顶部的无限滚动</h1>
+                <h1 class="title">infinite scroll on top</h1>
             </header>
             <div class="content infinite-scroll-top" data-distance="100">
                 <div>...</div>
@@ -3777,57 +3926,57 @@ $(function() {
     </div>
 
 
-		<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span>在顶部的无限滚动<span class="nt">&lt;/h1&gt;</span>
+		<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span>infinite scroll on top<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;/header&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content infinite-scroll-top"</span> <span class="na">data-distance=</span><span class="s">"100"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;div&gt;</span>...<span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre></div>
+<span class="nt">&lt;/div&gt;</span>
+    </code></pre></figure>
 
-    <h3 class="component-title">无限滚动事件</h3>
+    <h3 class="component-title">Infinite scroll Event</h3>
     <table class="params-table">
         <thead>
             <tr>
-                <th>事件（Event）</th>
-                <th>对象（Target）</th>
-                <th>描述（Description）</th>
+                <th>Event</th>
+                <th>Target</th>
+                <th>Description</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>infinite</td>
-                <td>可无限滚动的容器
-                    <code> div.content.infinite-scroll"</code>
+                <td>
+                    <code> div.content.infinite-scroll</code>
                 </td>
-                <td>事件会在页面滚动至距底部还有特定距离（可在<code>data-distance</code>中配置）时触发</td>
+                <td>Trigger when user scroll to bottom of page. use <code>data-distance</code> to set distance.</td>
             </tr>
         </tbody>
     </table>
 
-    <h3 class="component-title">无限滚动API</h3>
-    <p class="component-description">有2个App方法：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">.</span><span class="nx">attachInfiniteScroll</span><span class="p">(</span><span class="nx">container</span><span class="p">)</span> <span class="o">-</span> <span class="err">为指定的</span><span class="nx">HTML</span><span class="err">元素容器添加无限滚动事件监听器</span>
-<span class="nx">parameters</span> <span class="o">-</span> <span class="err">表示无限滚动容器的</span><span class="nx">HTML</span><span class="err">元素或</span><span class="nx">CSS</span><span class="err">选择器。必选。</span></code></pre></div> 
+    <h3 class="component-title">API</h3>
+    <p class="component-description">Two methods can use：</p>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">.</span><span class="nx">attachInfiniteScroll</span><span class="p">(</span><span class="nx">container</span><span class="p">)</span> <span class="o">-</span> <span class="nx">attach</span> <span class="nx">infinite</span> <span class="nx">scroll</span> <span class="nx">listener</span> <span class="nx">on</span> <span class="nx">container</span>
+<span class="nx">parameters</span> <span class="o">-</span>  <span class="nx">HTML</span> <span class="nx">Element</span> <span class="nx">or</span> <span class="nx">CSS</span> <span class="nx">Selector</span><span class="p">.</span></code></pre></figure> 
 
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">.</span><span class="nx">detachInfiniteScroll</span><span class="p">(</span><span class="nx">container</span><span class="p">)</span> <span class="o">-</span> <span class="err">从指定的</span><span class="nx">HTML</span><span class="err">元素容器删除无限滚动事件监听器</span>
-<span class="nx">parameters</span> <span class="o">-</span> <span class="err">表示无限滚动容器的</span><span class="nx">HTML</span><span class="err">元素或</span><span class="nx">CSS</span><span class="err">选择器。必选。</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">.</span><span class="nx">detachInfiniteScroll</span><span class="p">(</span><span class="nx">container</span><span class="p">)</span> <span class="o">-</span> <span class="nx">remove</span> <span class="nx">infinite</span> <span class="nx">scroll</span> <span class="nx">event</span>
+<span class="nx">parameters</span> <span class="o">-</span> <span class="nx">HTML</span> <span class="nx">Element</span> <span class="nx">or</span> <span class="nx">CSS</span> <span class="nx">Selector</span><span class="p">.</span></code></pre></figure>
 
     <p class="component-description attention">
-    	注意，仅在你使用$.detachInfiniteScroll方法删除过事件监听器后，才可能需要使用
-        $.attachInfiniteScroll方法，因为无限滚动组件的事件监听器会在“initPage”时被自动添加。
+      You need to use $.attachInfiniteScroll  only after you have called $.detachInfiniteScroll. The $.detachInfiniteScroll method will auto be called when infinite scroll component init.
     </p>
 </article>
 
 
 
   <article class="component no-border" id="icons">
-  <h2 class="component-title">图标</h2>
-  <p class="component-description">使用iconfont的图标</p>
+  <h2 class="component-title">Icons</h2>
+  <p class="component-description">Icons with iconfont</p>
 
   <div class="component-example">
   </div>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content-padded docs-icons"</span><span class="nt">&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content-padded docs-icons"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"icon icon-app"</span><span class="nt">&gt;&lt;/span&gt;</span>
   <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"icon icon-browser"</span><span class="nt">&gt;&lt;/span&gt;</span>
   <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"icon icon-card"</span><span class="nt">&gt;&lt;/span&gt;</span>
@@ -3858,7 +4007,7 @@ $(function() {
   <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"icon icon-left"</span><span class="nt">&gt;&lt;/span&gt;</span>
   <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"icon icon-check"</span><span class="nt">&gt;&lt;/span&gt;</span>
   <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"icon icon-search"</span><span class="nt">&gt;&lt;/span&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre></div>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
 </article>
 
   <article class="component" id='router' data-url="router">
@@ -3869,16 +4018,16 @@ $(function() {
 
   <p>默认情况下，加载新的页面会从右向左滑动，后退会从左向右滑动。如果你想关掉加载动画，只需要在链接上加上 <code>class="no-transition"</code> 即可</p>
 
-  <p>注意如果你希望点击工具栏切换页面，一定要用内联页面进行切换，不然会造成重复加载的问题，具体用法参见 <a href="/examples/light7-mall/">light7商城</a>。</p>
+  <p>There is a stack to manage the history, the new page will push to stack, you can add <code>class='replace'</code> to replace the stack instead of push.</p>
 
-  <h3 class="component-title">内联页面</h3>
-  <p class="component-description">你可以在同一个HTML文件中内联编写多个页面。每一个页面都是一个 <code>.page</code> 容器，如果有多个页面，则需要用 <code>.page-current</code> 标记出第一次进入的时候应该显示的页面。</p>
-  <p>每一个 <code>.page</code> 容器都应该有一个全局唯一的id，路由器会使用这个id作为唯一标示，如果没有设置id，可能会导致路由出错。你只需要这样写一个链接就可以跳转到id对应的内联页面 <code>&lt;a href='#{page-id}'&gt;跳转&lt;/a&gt;</code>.</p>
+  <h3 class="component-title">Inline Page</h3>
+  <p class="component-description">You can write multi page in one html file. Each page is in a <code>.page</code> container. If you have multi page in one html, you should use <code>.page-current</code> to make it a visiable at first enter.</p>
+  <p>Every <code>.page</code> container must have an id attr.Router will use id as the unique identify of a page. And you can use the id to jump to the page like this: <code>&lt;a href='#{page-id}'&gt;jump&lt;/a&gt;</code>. And if the new Page has the same id to a old page , the DOM of old page will be replace by new page.</p>
 
   <h3 class="component-title">JS和CSS等脚本问题</h3>
   <p>当通过ajax加载新页面的时候，路由器会自动忽略新页面的JS和CSS脚本。所以请把全部页面的脚本都打包到入口页面。在demo中我们每个页面都引用了相同的脚本，是为了在子页面刷新的时候也可以用。</p>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"page page-current"</span> <span class="na">id=</span><span class="s">'router'</span><span class="nt">&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"page page-current"</span> <span class="na">id=</span><span class="s">'router'</span><span class="nt">&gt;</span>
   <span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">'title'</span><span class="nt">&gt;</span>路由<span class="nt">&lt;/h1&gt;</span>
   <span class="nt">&lt;/header&gt;</span>
@@ -3905,14 +4054,14 @@ $(function() {
       这是内联编写的页面，点击左上角的 <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">'back'</span><span class="nt">&gt;</span>返回<span class="nt">&lt;/a&gt;</span> 按钮返回上一页。
     <span class="nt">&lt;/div&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre></div>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
 
 <p>注意，内联页面只能在第一个页面编写，通过ajax加载的页面里面不能内联多个页面。</p>
 
   <h3 class="component-title">ajax页面</h3>
   <p class="component-description">除了内联编写多个页面以外，你还可以通过ajax来加载新页面。通过ajax加载新页面和普通的链接写法没有区别，路由器会自动拦截链接的点击事件，并通过ajax请求加载新的页面。</p>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- page 1 --&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- page 1 --&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"page page-current"</span> <span class="na">id=</span><span class="s">'router'</span><span class="nt">&gt;</span>
   <span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">'title'</span><span class="nt">&gt;</span>路由<span class="nt">&lt;/h1&gt;</span>
@@ -3924,9 +4073,9 @@ $(function() {
       <span class="nt">&lt;/ul&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre></div>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- page 2 --&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- page 2 --&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"page"</span> <span class="na">id=</span><span class="s">'router2'</span><span class="nt">&gt;</span>
   <span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"button button-link button-nav pull-left back"</span> <span class="na">href=</span><span class="s">"/docs-demos/router"</span><span class="nt">&gt;</span>
@@ -3940,21 +4089,60 @@ $(function() {
       这是ajax 加载的新页面，点击左上角的 <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">'back'</span><span class="nt">&gt;</span>返回<span class="nt">&lt;/a&gt;</span> 按钮返回上一页。
     <span class="nt">&lt;/div&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre></div>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
 
   <h3 class="component-title">后退</h3>
   <p class="component-description">我们对后退操作进行了封装，你只需要在任意链接上增加一个 <code>.back</code> 类，点击就会自动返回到上一页。为了防止在某些情况下无法返回，最好同时设置 <code>href</code> 指定上一页的地址，这样当无法后退的时候，会直接加载指定的地址。</p>
   <p class="component-description">或者你可以通过调用 <code>$.router.back(url)</code> 来执行返回上一页操作，同样为了确保能正常返回，最好把上一页的地址作为参数传入。</p>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"button button-link button-nav pull-left back"</span> <span class="na">href=</span><span class="s">"/docs-demos/router"</span><span class="nt">&gt;</span>返回上一页<span class="nt">&lt;/a&gt;</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"button button-link button-nav pull-left back"</span> <span class="na">href=</span><span class="s">"/docs-demos/router"</span><span class="nt">&gt;</span>返回上一页<span class="nt">&lt;/a&gt;</span></code></pre></figure>
 
   <h3 class="component-title">JS方法</h3>
   <p class="component-description">你可以通过调用 <code>$.router.loadPage(url)</code> 来加载一个页面，参数url既可以是一个ajax页面的地址，也可以是一个内联页面的id.</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="nx">loadPage</span><span class="p">(</span><span class="s2">"/detail"</span><span class="p">);</span>  <span class="c1">//加载ajax页面</span>
-<span class="nx">$</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="nx">loadPage</span><span class="p">(</span><span class="s2">"#about"</span><span class="p">);</span>  <span class="c1">//加载内联页面</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="nx">loadPage</span><span class="p">(</span><span class="s2">"/detail"</span><span class="p">);</span>  <span class="c1">//加载ajax页面</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="nx">loadPage</span><span class="p">(</span><span class="s2">"#about"</span><span class="p">);</span>  <span class="c1">//加载内联页面</span></code></pre></figure>
 
-  <h3 class="component-title">事件</h3>
-  <p class="component-description">从一个页面准备开始加载，到执行完加载动画，会按顺序触发以下事件：</p>
+  <p>You can call <code>$.router.loadPage</code> with a config object like this:</p>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="nx">loadPage</span><span class="p">({</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s2">"/detail"</span><span class="p">,</span>
+  <span class="na">noAnimation</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="na">replace</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">});</span></code></pre></figure>
+
+  <table>
+    <tr>
+      <th>Param</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td>url</td>
+      <td>undefined</td>
+      <td>url to load</td>
+    </tr>
+    <tr>
+      <td>noAnimation</td>
+      <td>false</td>
+      <td>Load new page with animation</td>
+    </tr>
+    <tr>
+      <td>replace</td>
+      <td>false</td>
+      <td>If set true, the new page will replace old page in history, you can't back to old page because it has been removed from histroy(but not removed from DOM).</td>
+    </tr>
+  </table>
+
+  <p>The <code>loadPage</code> method will load new page, and push to history. If you dont't want to push to history, but want to replace history, you should use <code>replacePage</code>:</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="nx">replacePage</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">noAnimation</span><span class="p">);</span></code></pre></figure>
+
+  <p>Infact, <code>replacePage</code> is only a shortcut of <code>loadPage</code>, but set the param <code>replace</code> as <code>true</code>.</p>
+
+  <p>And if you want to refresh current page, you can simply use <code>$.router.reloadPage();</code>.</p>
+
+  <h3 class="component-title">Event</h3>
+  <p class="component-description">There are many events：</p>
+
 
   <table>
     <tr>
@@ -3999,40 +4187,40 @@ $(function() {
 
   <p>你可以这样监听事件：</p>
 
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s2">"pageInit"</span><span class="p">,</span> <span class="s2">"#page-index"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">pageId</span><span class="p">,</span> <span class="nx">$page</span><span class="p">)</span> <span class="p">{});</span>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s2">"pageInit"</span><span class="p">,</span> <span class="s2">"#page-index"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">pageId</span><span class="p">,</span> <span class="nx">$page</span><span class="p">)</span> <span class="p">{});</span>
 <span class="c">&lt;!--</span><span class="err">或者</span><span class="o">--&gt;</span>
 <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s2">"pageInit"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">pageId</span><span class="p">,</span> <span class="nx">$page</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">if</span><span class="p">(</span><span class="nx">pageId</span> <span class="o">==</span> <span class="s2">"pageIndex"</span><span class="p">)</span> <span class="p">{}</span>
-<span class="p">});</span></code></pre></div>
+<span class="p">});</span></code></pre></figure>
 </article>
 
   <article class="component" id="themes" data-url='theme-dark'>
-  <h2 class="component-title">夜间模式</h2>
-  <p class="component-description">现在我们提供一个夜间模式，你只需要在 <code>body</code> 或者 <code>.page</code> 或者 <code>.content</code> 上加上 <code>.theme-dark</code>。它和其中所有子元素都会变成夜间模式。</p>
-  <p>你也可以单独给 <code>.bar</code> 加上 <code>.theme-dark</code>，这样可以单独使标题栏或者工具栏变成夜间模式。</p>
-  <p>夜间模式最大的区别是他的背景变成了黑色，而前景色变成了白色。</p>
+  <h2 class="component-title">Night Mode</h2>
+  <p class="component-description">We provide a night mod (night theme). You can add <code>.theme-dark</code> to <code>body</code> or <code>.page</code> or <code>.content</code> to enable night mode on all it's children.</p>
+  <p>You can alse add <code>.theme-dark</code> to <code>.bar</code> to make the Title Bar or Toolbar to be night mode.</p>
+  <p>The foreground color is white and background color is black, in night mode.</p>
 
-  <p>夜间模式还处在测试阶段，可能会有某些组件在夜间模式下显示不正常。有任何问题都可以及时在旺旺群中反馈。</p>
+  <p>Night mode is still in test. Please create an Issue on github if you find any problems.</p>
 
-  <p>下一节是介绍颜色主题的用法，颜色主题主要是改变前景色，可以和 <code>.theme-dark</code> 结合使用以在夜间模式下实现不同的颜色。</p>
+  <p>The next chapter is color theme. Color theme only chang the foreground color. You can also use color-them in <code>.theme-dark</code> to show different color.</p>
 </article>
 
 <article class="component" id="colors" data-url='colors'>
-  <h2 class="component-title">颜色主题</h2>
-  <p class="component-description">不同于夜间模式，颜色主题只改变组件的“主色”。你只需要在<code>body</code> 或者 <code>.page</code> 或者 <code>.content</code> 上加上 <code>theme-{color}</code> 就可以使它的所有子元素的主色改变。 </p>
-  <p>现在有如下几种颜色可用: </p>
+  <h2 class="component-title">Color theme</h2>
+  <p class="component-description">Color theme only change the primary color. Add <code>theme-{color}</code> to <code>body</code> or <code>.page</code> or <code>.content</code> to change it's color.</p>
+  <p>There are three buildin color-themes: </p>
 
   <ul>
-    <li> <code>.theme-pink</code> 粉色主题</li>
-    <li> <code>.theme-green</code> 绿色主题</li>
-    <li> <code>.theme-yellow</code> 黄色主题</li>
+    <li> <code>.theme-pink</code></li>
+    <li> <code>.theme-green</code></li>
+    <li> <code>.theme-yellow</code></li>
   </ul>
 
-  <p>你可以在右侧的示例中点击按钮来切换不同的颜色主题。</p>
+  <p>You can click buttons in the demo on the right to change colors.</p>
 
-  <p>注意颜色主题并不会影响所有的颜色，他只会影响组件的主色。因此有些组件没有使用到主色，因此对他们没有影响。</p>
+  <p>Note that the color-theme will only change the primary color, most of foreground color will not be changed.</p>
 
-  <p>颜色主题还处在测试阶段，可能会有某些组件在颜色主题下显示不正常。有任何问题都可以及时在旺旺群中反馈。</p>
+  <p>Color theme is still in test. Please create an Issue on github if you find any problems.</p>
 
 </article>
 
@@ -4043,7 +4231,7 @@ $(function() {
       <div class="docs-footer">
   <!-- Social links -->
 
-  <p class="docs-footer-text">@author <a href="mailto:lihongxun945@gmail.com">任行</a> QQ群: 255389987</p>
+  <p class="docs-footer-text">@author <a href="mailto:lihongxun945@gmail.com">lihongxun945</a>, Twitter: <a href="https://twitter.com/lihongxun945" target="_blank">lihongxun945</a></p>
 
   <ul class="docs-footer-links">
     <li>友情链接</li>
