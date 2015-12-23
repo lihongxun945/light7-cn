@@ -99,9 +99,9 @@
 <article class="component active">
   <h3 class="component-title">Confirm</h3>
   <p class="component-description">Confirm modal usualy used when it is required to confirm some action. To open Confirm modal we should also call one of the following App methods:</p>
-  <code>myApp.confirm(text, [title, callbackOk, callbackCancel])</code>
+  <code>$.confirm(text, [title, callbackOk, callbackCancel])</code>
   or
-  <code>myApp.confirm(text, [callbackOk, callbackCancel])</code>
+  <code>$.confirm(text, [callbackOk, callbackCancel])</code>
   <ul>
     <li><code>text  - string. Text to Confirm</code></li>
     <li><code>title - string. Optional</code>. Confirm modal title</li>
@@ -205,7 +205,7 @@
 <article class="component active">
   <h3 class="component-title">Prompt</h3>
   <p class="component-description">Prompt modal used when it is required to get some data/answer from user. To open Prompt modal we should also call one of the following App methods:</br>
-  <code>myApp.prompt(text, [title, callbackOk, callbackCancel])</code>
+  <code>$.prompt(text, [title, callbackOk, callbackCancel])</code>
   <code>$.prompt(text, [callbackOk, callbackCancel])</code></p>
   <ul>
     <li><code>text - string</code>. Prompt text/question</li>
@@ -843,7 +843,7 @@ $.toast("Error!");
 
   <p>It allows you to create Popover dynamically by passing its HTML to related methods:</p>
 
-  <p><code>myApp.popover(<span>popoverHTML</span>, <span>target</span>, <span>removeOnClose</span>)</code> - open Popover with <strong>popoverHTML</strong> content around <strong>target</strong> element</p>
+  <p><code>$.popover(<span>popoverHTML</span>, <span>target</span>, <span>removeOnClose</span>)</code> - open Popover with <strong>popoverHTML</strong> content around <strong>target</strong> element</p>
 
   <ul class="method-parameters">
     <li><code>popoverHTML</code> - <span class="parameter-type">string</span>. HTML string of popover </li>
@@ -851,5 +851,39 @@ $.toast("Error!");
     <li><code>removeOnClose</code> - <span class="parameter-type">boolean</span>. Optional, by default - true. If true then Popover will be removed from DOM when closed</li>
     <li class="method-returns">This method returns dynamically created Popover's HTMLElement</li>
   </ul>
+
+  <h3>Modal Defaults</h3>
+
+  <p>The default config of modal is <code>$.modal.prototype.defaults</code>, you can change these config:</p>
+
+  <table class="params-table">
+    <thead>
+      <tr>
+        <th>Parameter</th>
+        <th>Default</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>modalButtonOk</td>
+        <td>"OK"</td>
+        <td>Text of OK button</td>
+      </tr> 
+      <tr>
+        <td>modalButtonCancel</td>
+        <td>"Cancel"</td>
+        <td>Text of cancel button</td>
+      </tr> 
+      <tr>
+        <td>modalPreloaderTitle</td>
+        <td>"Loading"</td>
+        <td>Text of preloader</td>
+      </tr> 
+      <tr>
+        <td>closePrevious</td>
+        <td>true</td>
+        <td>Close all previous modal when open a new modal.</td>
+      </tr> 
 
 </article>
