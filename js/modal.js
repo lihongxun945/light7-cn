@@ -2,7 +2,7 @@
 ************   Modals   ************
 ======================================================*/
 /*jshint unused: false*/
-/* global Zepto:true */
+/* global $:true */
 +function ($) {
   "use strict";
     var _modalTemplateTempDiv = document.createElement('div');
@@ -401,7 +401,6 @@
         modal = $(modal);
         if (modal.length === 0) return false;
         modal.show();
-        modal.find(".content").scroller("refresh");
         if (modal.find('.' + defaults.viewClass).length > 0) {
             $.sizeNavbars(modal.find('.' + defaults.viewClass)[0]);
         }
@@ -620,11 +619,16 @@
       
        
     }
-    $(document).on('click', ' .modal-overlay, .popup-overlay, .close-popup, .open-popup, .open-popover,  .close-picker', handleClicks);
-    var defaults =  $.modal.prototype.defaults  = {
-        modalButtonOk: '确定',
-        modalButtonCancel: '取消',
-        modalPreloaderTitle: '加载中',
-        modalContainer : document.body 
+
+    var defaults = $.modal.prototype.defaults  = {
+      modalButtonOk: 'OK',
+      modalButtonCancel: 'Cancel',
+      modalPreloaderTitle: 'Loading...',
+      modalContainer : document.body 
     };
-}(Zepto);
+
+    $(function() {
+      $(document).on('click', ' .modal-overlay, .popup-overlay, .close-popup, .open-popup, .open-popover, .close-popover, .close-picker', handleClicks);
+      defaults.modalContainer = defaults.modalContainer || document.body;  //incase some one include js in head
+    });
+}($);

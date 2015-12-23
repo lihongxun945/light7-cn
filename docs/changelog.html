@@ -18,15 +18,21 @@ title: 更新日志 &middot; light7
   <div class="column-group">
     <div class="column docs-content">
       <div class="docs-section">
-        <h2>版本号说明</h2>
-        <p>版本号由x.y.z三位组成，符合 <a href='http://semver.org/lang/zh-CN/' target="_blank">语义化版本号</a> 规范：</p>
-        <ul>
-          <li>主版本号：当做了不兼容的API 修改</li>
-          <li>次版本号：当做了向下兼容的功能性新增</li>
-          <li>修订号：当做了向下兼容的问题修正</li>
-        </ul>
+        <h2>About Version number</h2>
+        <p>Version number is formated as <code>x.y.x</code>, it's defined by <a href='http://semver.org/' target="_blank">Semantic Versioning 2.0.0</a>:</p>
 
-        <h2>更新日志</h2>
+        <h2>Changelog</h2>
+
+        <h3>v0.1.0 is coming...</h3>
+        <ul>
+          <li>The main repo <a href="https://github.com/lihongxun945/light7">Light7</a> has been translated to English. And there is a chinese repo - <a href="https://github.com/lihongxun945/light7-cn">Light-CN</a> too.</li>
+          <li>Light7 can work with both jQuery and Zepto now! choose the one you like.</li>
+          <li>Add new Component: <a href='/components/#popover'>Popover</a>.</li>
+          <li>Fix a bug: when include JS file in header, Fastclick and modal will get an empty <code>document.body</code></li>
+          <li>Add a <code>replace</code> config in <a href='/components/#router'>router</a>, so you can load a new page to replace current page in history but not push to history. And also a new <code>reloadPage</code> method to reload current page.</li>
+          <li><a href='/components/#router'>router</a> will remove old page with same id when load new page.</li>
+          <li>Fix fastclick bug: It do nothing when click element is wrapped by an <code>label</code>, because of a error fix.</li>
+        </ul>
 
         <h3>V0.0.5 - 2015-11-30</h3>
         <ul>

@@ -6,11 +6,11 @@
 
   <p>默认情况下，加载新的页面会从右向左滑动，后退会从左向右滑动。如果你想关掉加载动画，只需要在链接上加上 <code>class="no-transition"</code> 即可</p>
 
-  <p>注意如果你希望点击工具栏切换页面，一定要用内联页面进行切换，不然会造成重复加载的问题，具体用法参见 <a href="/examples/light7-mall/">light7商城</a>。</p>
+  <p>There is a stack to manage the history, the new page will push to stack, you can add <code>class='replace'</code> to replace the stack instead of push.</p>
 
-  <h3 class="component-title">内联页面</h3>
-  <p class="component-description">你可以在同一个HTML文件中内联编写多个页面。每一个页面都是一个 <code>.page</code> 容器，如果有多个页面，则需要用 <code>.page-current</code> 标记出第一次进入的时候应该显示的页面。</p>
-  <p>每一个 <code>.page</code> 容器都应该有一个全局唯一的id，路由器会使用这个id作为唯一标示，如果没有设置id，可能会导致路由出错。你只需要这样写一个链接就可以跳转到id对应的内联页面 <code>&lt;a href='#{page-id}'&gt;跳转&lt;/a&gt;</code>.</p>
+  <h3 class="component-title">Inline Page</h3>
+  <p class="component-description">You can write multi page in one html file. Each page is in a <code>.page</code> container. If you have multi page in one html, you should use <code>.page-current</code> to make it a visiable at first enter.</p>
+  <p>Every <code>.page</code> container must have an id attr.Router will use id as the unique identify of a page. And you can use the id to jump to the page like this: <code>&lt;a href='#{page-id}'&gt;jump&lt;/a&gt;</code>. And if the new Page has the same id to a old page , the DOM of old page will be replace by new page.</p>
 
   <h3 class="component-title">JS和CSS等脚本问题</h3>
   <p>当通过ajax加载新页面的时候，路由器会自动忽略新页面的JS和CSS脚本。所以请把全部页面的脚本都打包到入口页面。在demo中我们每个页面都引用了相同的脚本，是为了在子页面刷新的时候也可以用。</p>
@@ -100,8 +100,51 @@ $.router.loadPage("/detail");  //加载ajax页面
 $.router.loadPage("#about");  //加载内联页面
 {% endhighlight %}
 
-  <h3 class="component-title">事件</h3>
-  <p class="component-description">从一个页面准备开始加载，到执行完加载动画，会按顺序触发以下事件：</p>
+  <p>You can call <code>$.router.loadPage</code> with a config object like this:</p>
+{% highlight js %}
+$.router.loadPage({
+  url: "/detail",
+  noAnimation: true,
+  replace: true
+});
+{% endhighlight %}
+
+  <table>
+    <tr>
+      <th>Param</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td>url</td>
+      <td>undefined</td>
+      <td>url to load</td>
+    </tr>
+    <tr>
+      <td>noAnimation</td>
+      <td>false</td>
+      <td>Load new page with animation</td>
+    </tr>
+    <tr>
+      <td>replace</td>
+      <td>false</td>
+      <td>If set true, the new page will replace old page in history, you can't back to old page because it has been removed from histroy(but not removed from DOM).</td>
+    </tr>
+  </table>
+
+  <p>The <code>loadPage</code> method will load new page, and push to history. If you dont't want to push to history, but want to replace history, you should use <code>replacePage</code>:</p>
+
+{% highlight js %}
+$.router.replacePage(url, noAnimation);
+{% endhighlight %}
+
+  <p>Infact, <code>replacePage</code> is only a shortcut of <code>loadPage</code>, but set the param <code>replace</code> as <code>true</code>.</p>
+
+  <p>And if you want to refresh current page, you can simply use <code>$.router.reloadPage();</code>.</p>
+
+  <h3 class="component-title">Event</h3>
+  <p class="component-description">There are many events：</p>
+
 
   <table>
     <tr>

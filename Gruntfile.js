@@ -61,7 +61,6 @@ module.exports = function(grunt) {
                   'js/calendar.js',
                   'js/picker.js',
                   'js/datetime-picker.js',
-                  'js/scroller.js',
                   'js/pull-to-refresh-js-scroll.js',
                   'js/pull-to-refresh.js',
                   'js/infinite-scroll.js',
@@ -195,7 +194,9 @@ module.exports = function(grunt) {
 
         cssmin: {
             options: {
-                keepSpecialComments: '*' // keep all important comments
+                keepSpecialComments: '*', // keep all important comments
+                advanced: false,
+                keepBreaks: true
             },
             light7: {
                 src: '<%= meta.distPath %>css/<%= pkg.name %>.css',

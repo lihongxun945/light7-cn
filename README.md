@@ -2,7 +2,7 @@
 
 简单易用的h5 UI库，是从 [SUI Mobile](https://github.com/sdc-alibaba/SUI-Mobile) Fork 出来的一个版本。 官网地址： [http://www.light7.org/](http://www.light7.org/)
 
-**官网以为没有备案，服务器还在国外，国内可以暂时用 [http://123.56.245.102/](http://123.56.245.102/)**
+**官网因为没有备案，服务器还在国外，国内可以暂时用 [http://123.56.245.102/](http://123.56.245.102/)**
 
 # 下载
 
@@ -22,6 +22,10 @@
 
 或者执行 `jekyll serve` 打开本地服务器. 如果你的系统中没有ruby，请先[安装ruby](https://www.ruby-lang.org/en/documentation/installation/)。然后再安装 `jekyll` 和 `rouge` （执行 `gem install jekyll` 和 `gem install rouge`）。
 如果发现 `gem install` 失败，可能是因为 gem 服务器被和谐，参考[淘宝gem镜像](https://ruby.taobao.org/)
+
+# 兼容性
+
+兼容 iOS 6+，Android 4.0+
 
 
 # 联系方式

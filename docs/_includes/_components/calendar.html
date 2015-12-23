@@ -16,16 +16,93 @@ $("#my-input").calendar();
   <h2>参数</h2>
   <p>你可以在初始化的时候指定如下参数：</p>
 
-  <table>
-    <tr>
-      <th>参数名</th>
-      <th>默认值</th>
-      <th>说明</th>
+  <table class="params-table">
+    <thead>
+      <tr>
+        <th>Parameter</th>
+        <th>Type</th>
+        <th>Default</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th colspan="4">Common Picker Modal Component Parameters</th>
+      </tr>
+      <tr>
+        <td>inputReadOnly</td>
+        <td>boolean</td>
+        <td>true</td>
+        <td>Sets "readonly" attribute on specified input</td>
+      </tr>
+      <tr>
+        <td>cssClass</td>
+        <td>string</td>
+        <td></td>
+        <td>Additional CSS class name to be set on calendar modal</td>
+      </tr>
+      <tr>
+        <td>closeByOutsideClick</td>
+        <td>boolean</td>
+        <td>true</td>
+        <td>If enabled, picker will be closed by clicking outside of picker or related input element</td>
+      </tr>
+      <tr>
+        <td>toolbar</td>
+        <td>boolean</td>
+        <td>true</td>
+        <td>Enables calendar modal toolbar</td>
+      </tr>
+      <tr>
+        <td>toolbarTemplate</td>
+        <td>string</td>
+        <td></td>
+        <td>Toolbar HTML Template </td>
     </tr>
     <tr>
-      <td>inputReadOnly</td>
-      <td>true</td>
-      <td>是否在input上增加一个 <code>readonly</code> 属性使用户无法自己输入</td>
+      <th colspan="4">Specific Calendar Parameters</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>array</td>
+      <td></td>
+      <td>Array with initial selected dates. Each array item represents selected date</td>
+    </tr>
+    <tr>
+      <td>disabled</td>
+      <td>Date Range</td>
+      <td></td>
+      <td>Additonal disabled dates. Parameter accepts so called <b>Date Range</b> (look below for details)</td>
+    </tr>
+    <tr>
+      <td>formatValue</td>
+      <td>function (p, values)</td>
+      <td></td>
+      <td>Function to format input value, should return new/formatted string value. <b>values</b> is array where each item represents selected date</td>
+    </tr>
+    <tr>
+      <td>monthNames</td>
+      <td>array</td>
+      <td>['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August' , 'September' , 'October', 'November', 'December']</td>
+      <td>Array with full month names</td>
+    </tr>
+    <tr>
+      <td>monthNamesShort</td>
+      <td>array</td>
+      <td>['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']</td>
+      <td>Array with short month names</td>
+    </tr>
+    <tr>
+      <td>dayNames</td>
+      <td>array</td>
+      <td>['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']</td>
+      <td>Array with week day names</td>
+    </tr>
+    <tr>
+      <td>dayNamesShort</td>
+      <td>array</td>
+      <td>['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']</td>
+      <td>Array with week day short names</td>
     </tr>
     <tr>
       <td>dateFormat</td>
@@ -48,16 +125,54 @@ $("#my-input").calendar();
       <td>当用户选择日期时触发</td>
     </tr>
     <tr>
-      <td>onOpen</td>
-      <td>function(p){}</td>
-      <td>日历弹层打开时触发</td>
+      <td>closeOnSelect</td>
+      <td>boolean</td>
+      <td>false</td>
+      <td>Enable and calendar will be closed when user pick a date</td>
     </tr>
-    <tr>
-      <td>onClose</td>
-      <td>function(p){}</td>
-      <td>日历弹层关闭时触发</td>
-    </tr>
-  </table>
+  </tr>
+  <tr>
+    <td>yearPicker</td>
+    <td>boolean</td>
+    <td>true</td>
+    <td>Enable year picker in toolbar</td>
+  </tr>
+</tr>
+<tr>
+  <th colspan="4">Callbacks</th>
+</tr>
+<tr>
+  <td>onChange</td>
+  <td>function (p, values, displayValues)</td>
+  <td></td>
+  <td>Callback function that will be executed when picker value changed. <b>values</b> and <b>displayValues</b> are arrays where each item represents value/display value of related column</td>
+</tr>
+<tr>
+  <td>onMonthAdd</td>
+  <td>function (p, monthContainer)</td>
+  <td></td>
+  <td>Callback function that will be executed when newly generated month HTML element will be added to calendar.</td>
+</tr>
+<tr>
+  <td>onDayClick</td>
+  <td>function (p, dayContainer, year, month, day)</td>
+  <td></td>
+  <td>Callback function that will be executed when user clicks/select any date</td>
+</tr>
+<tr>
+  <td>onOpen</td>
+  <td>function (p)</td>
+  <td></td>
+  <td>Callback function that will be executed when picker is opened</td>
+</tr>
+<tr>
+  <td>onClose</td>
+  <td>function (p)</td>
+  <td></td>
+  <td>Callback function that will be executed when picker is closed</td>
+</tr>
+</tbody>
+</table>
 
   <p>当用户选择完日期之后，会在 input 上触发 <code>change</code> 事件，你可以监听此事件。</p>
 

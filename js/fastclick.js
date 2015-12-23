@@ -1,4 +1,5 @@
-;(function () {
+/* global $:true */
+;(function ($) {
 	'use strict';
 
 	/**
@@ -226,12 +227,6 @@
 	 */
 	FastClick.prototype.needsClick = function(target) {
 
-    //修复bug: 如果父元素中有 label
-    var parent = target;
-    while(parent && (parent.tagName.toUpperCase() !== "BODY")) {
-      if(parent.tagName.toUpperCase() === "LABEL") return true;
-      parent = parent.parentNode;
-    }
 		switch (target.nodeName.toLowerCase()) {
 
 		// Don't send a synthetic click to disabled inputs (issue #62)
@@ -255,7 +250,19 @@
 		case 'iframe': // iOS8 homescreen apps can prevent events bubbling into frames
 		case 'video':
 			return true;
+    default:
+      //fix a bug: when input is wrap by label, but click other element in this label will do nothing.
+      var parent = target;
+      while(parent && (parent.tagName.toUpperCase() !== "BODY")) {
+        if(parent.tagName.toUpperCase() === "LABEL") {
+          $(parent).find("input").click();
+        }
+        parent = parent.parentNode;
+      }
 		}
+
+
+    
 
 		return (/\bneedsclick\b/).test(target.className);
 	};
@@ -833,5 +840,7 @@
 	};
 
   //直接绑定
-  FastClick.attach(document.body);
-}());
+  $(function() {
+    FastClick.attach(document.body);
+  });
+}($));

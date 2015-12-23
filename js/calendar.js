@@ -1,7 +1,7 @@
 /*======================================================
 ************   Calendar   ************
 ======================================================*/
-/* global Zepto:true */
+/* global $:true */
 /*jshint unused: false*/
 +function ($) {
   "use strict";
@@ -9,10 +9,10 @@
   var Calendar = function (params) {
       var p = this;
       var defaults = {
-          monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月' , '九月' , '十月', '十一月', '十二月'],
-          monthNamesShort: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月' , '九月' , '十月', '十一月', '十二月'],
-          dayNames: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
-          dayNamesShort: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+          monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August' , 'September' , 'October', 'November', 'December'],
+          monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+          dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+          dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
           firstDay: 1, // First day of the week, Monday
           weekendDays: [0, 6], // Sunday and Saturday
           multiple: false,
@@ -188,8 +188,9 @@
               if (isMoved || isTouched) return;
               // e.preventDefault();
               isTouched = true;
-              touchStartX = touchCurrentY = e.type === 'touchstart' ? e.targetTouches[0].pageX : e.pageX;
-              touchStartY = touchCurrentY = e.type === 'touchstart' ? e.targetTouches[0].pageY : e.pageY;
+              var position = $.getTouchPosition(e);
+              touchStartX = touchCurrentY = position.x;
+              touchStartY = touchCurrentY = position.y;
               touchStartTime = (new Date()).getTime();
               percentage = 0;
               allowItemClick = true;
@@ -198,9 +199,9 @@
           }
           function handleTouchMove (e) {
               if (!isTouched) return;
-              
-              touchCurrentX = e.type === 'touchmove' ? e.targetTouches[0].pageX : e.pageX;
-              touchCurrentY = e.type === 'touchmove' ? e.targetTouches[0].pageY : e.pageY;
+              var position = $.getTouchPosition(e);
+              touchCurrentX = position.x;
+              touchCurrentY = position.y;
               if (typeof isScrolling === 'undefined') {
                   isScrolling = !!(isScrolling || Math.abs(touchCurrentY - touchStartY) > Math.abs(touchCurrentX - touchStartX));
               }
@@ -861,4 +862,4 @@
       $(this).calendar();
     });
   };
-}(Zepto);
+}($);

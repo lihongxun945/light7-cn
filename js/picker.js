@@ -1,7 +1,7 @@
 /*======================================================
 ************   Picker   ************
 ======================================================*/
-/* global Zepto:true */
+/* global $:true */
 /* jshint unused:false */
 /* jshint multistr:true */
 + function($) {
@@ -20,9 +20,9 @@
           convertToPopover: true,
           onlyInPopover: false,
           toolbar: true,
-          toolbarCloseText: '确定',
+          toolbarCloseText: 'OK',
           toolbarTemplate: '<header class="bar bar-nav">\
-          <button class="button button-link pull-right close-picker">确定</button>\
+          <button class="button button-link pull-right close-picker">OK</button>\
           <h1 class="title"></h1>\
           </header>',
       };
@@ -263,7 +263,8 @@
               if (isMoved || isTouched) return;
               e.preventDefault();
               isTouched = true;
-              touchStartY = touchCurrentY = e.type === 'touchstart' ? e.targetTouches[0].pageY : e.pageY;
+              var position = $.getTouchPosition(e);
+              touchStartY = touchCurrentY = position.y;
               touchStartTime = (new Date()).getTime();
               
               allowItemClick = true;
@@ -273,7 +274,8 @@
               if (!isTouched) return;
               e.preventDefault();
               allowItemClick = false;
-              touchCurrentY = e.type === 'touchmove' ? e.targetTouches[0].pageY : e.pageY;
+              var position = $.getTouchPosition(e);
+              touchCurrentY = position.y;
               if (!isMoved) {
                   // First move
                   $.cancelAnimationFrame(animationFrameId);
@@ -445,7 +447,7 @@
           if (p.opened) return;
           p.open();
           if (p.params.scrollToInput && !isPopover()) {
-              var pageContent = p.input.parents('.page-content');
+              var pageContent = p.input.parents('.content');
               if (pageContent.length === 0) return;
 
               var paddingTop = parseInt(pageContent.css('padding-top'), 10),
@@ -631,4 +633,4 @@
       }
     });
   };
-}(Zepto);
+}($);

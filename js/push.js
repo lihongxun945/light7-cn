@@ -8,7 +8,7 @@
  * ======================================================================== */
 
 /* global _gaq: true */
-/* global Zepto: true */
+/* global $: true */
 
 + function ($) {
   'use strict';
@@ -695,4 +695,4 @@
 
   $.push = PUSH;
 
-}(Zepto);
+}($);
