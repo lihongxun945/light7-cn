@@ -1,23 +1,23 @@
 <article class="component active" id="bars">
-  <h2 class="component-title">Titlebar</h2>
-  <p class="component-description">Title bar is on top of page.</p>
+  <h2 class="component-title">标题栏</h2>
+  <p class="component-description">标题栏放在页面顶部</p>
 
   <div class="component-example component-example-fullbleed">
     <header class="bar bar-nav">
-      <h1 class="title">title</h1>
+      <h1 class="title">标题</h1>
     </header>
   </div>
 
 {% highlight html %}
 <header class="bar bar-nav">
-  <h1 class="title">title</h1>
+  <h1 class="title">标题</h1>
 </header>
 {% endhighlight %}
 
     </article>
 
     <article class="component">
-      <h3 class="component-title">Title bar with buttons</h3>
+      <h3 class="component-title">带按钮的标题栏</h3>
 
       <div class="component-example component-example-fullbleed">
         <header class="bar bar-nav">
@@ -33,47 +33,52 @@
 {% highlight html %}
 <header class="bar bar-nav">
   <button class="button pull-left">
-    Btn
+    按钮
   </button>
   <button class="button pull-right">
-    Btn
+    按钮
   </button>
-  <h1 class="title">Title</h1>
+  <h1 class="title">标题</h1>
 </header>
 {% endhighlight %}
 
     </article>
 
     <article class="component">
-      <h3 class="component-title">With icons</h3>
+      <h3 class="component-title">带图标的标题栏</h3>
 
       <div class="component-example component-example-fullbleed">
+        <header class="bar bar-nav">
+          <a class="icon icon-left pull-left"></a>
+          <a class="icon icon-refresh pull-right"></a>
+          <h1 class="title">标题</h1>
+        </header>
       </div>
 
 {% highlight html %}
 <header class="bar bar-nav">
   <a class="icon icon-left pull-left"></a>
   <a class="icon icon-refresh pull-right"></a>
-  <h1 class="title">title</h1>
+  <h1 class="title">标题</h1>
 </header>
 {% endhighlight %}
 
     </article>
 
     <article class="component">
-      <h3 class="component-title">With icons and text</h3>
+      <h3 class="component-title">带链接和图标</h3>
 
       <div class="component-example component-example-fullbleed">
         <header class="bar bar-nav">
           <button class="button button-link button-nav pull-left">
             <span class="icon icon-left"></span>
-            back
+            返回
           </button>
           <button class="button button-link button-nav pull-right">
-            next
+            下一步
             <span class="icon icon-right"></span>
           </button>
-          <h1 class="title">title</h1>
+          <h1 class="title">标题</h1>
         </header>
       </div>
 
@@ -81,13 +86,13 @@
 <header class="bar bar-nav">
   <button class="button button-link button-nav pull-left">
     <span class="icon icon-left"></span>
-    back
+    返回
   </button>
   <button class="button button-link button-nav pull-right">
-    next
+    下一步
     <span class="icon icon-right"></span>
   </button>
-  <h1 class="title">title</h1>
+  <h1 class="title">标题</h1>
 </header>
 {% endhighlight %}
 
