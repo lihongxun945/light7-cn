@@ -5,8 +5,6 @@
   <ul>
     <li><code>buttons</code> - buttons in action sheet, you can put buttons in different group.</li>
   </ul>
-  <p>use <code>color: "danger"</code> to set text color as danger.</p>
-  <p>use <code>bg: "danger"</code> to set background color as danger.</p>
   <div class="component-example component-example-fullbleed">
     <header class="bar bar-nav">
         <h1 class="title">Actions</h1>
@@ -34,6 +32,7 @@
           },
           {
             text: 'Bob',
+            color: "success",
             onClick: function() {
               $.alert("you choose 'Bob'");
             }
@@ -50,6 +49,8 @@
       }); 
   </script>
   </div>
+
+
   {% highlight html %}  
   <header class="bar bar-nav">
       <h1 class="title">Actions</h1>
@@ -93,4 +94,8 @@
     $.actions(groups);
   });
   {% endhighlight %}
+
+
+  <p>You can set button color with <code>color</code>, or set background with <code>bg</code>. There are four different color: <code>primary</code>, <code>success</code>, <code>warning</code>, <code>danger</code>. In fact, the different color is defined in <a href="#typography">Text</a>.</p>
+
 </article>
