@@ -196,4 +196,22 @@ $(document).on("pageInit", function(e, pageId, $page) {
   if(pageId == "pageIndex") {}
 });
 {% endhighlight %}
+
+  <h3>Router Defaults</h3>
+
+  <p><code>$.router.defaults</code> is the default config of router:</p>
+
+  <table>
+    <tr>
+      <th>Param</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td>transition</td>
+      <td>true</td>
+      <td>Use transition when load new page. You can always use <code>no-transition</code> to disable transiton on a link even if <code>defaults.transition</code> is set to true.</td>
+    </tr>
+  </table>
+
 </article>

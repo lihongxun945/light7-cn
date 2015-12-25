@@ -6,63 +6,9 @@
 +function ($) {
   "use strict";
   var rtl = false;
+  var defaults;
   var Calendar = function (params) {
       var p = this;
-      var defaults = {
-          monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August' , 'September' , 'October', 'November', 'December'],
-          monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-          dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-          dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-          firstDay: 1, // First day of the week, Monday
-          weekendDays: [0, 6], // Sunday and Saturday
-          multiple: false,
-          dateFormat: 'yyyy-mm-dd',
-          direction: 'horizontal', // or 'vertical'
-          minDate: null,
-          maxDate: null,
-          touchMove: true,
-          animate: true,
-          closeOnSelect: true,
-          monthPicker: true,
-          monthPickerTemplate: 
-              '<div class="picker-calendar-month-picker">' +
-                  '<a href="#" class="link icon-only picker-calendar-prev-month"><i class="icon icon-prev"></i></a>' +
-                  '<div class="current-month-value"></div>' +
-                  '<a href="#" class="link icon-only picker-calendar-next-month"><i class="icon icon-next"></i></a>' +
-              '</div>',
-          yearPicker: true,
-          yearPickerTemplate: 
-              '<div class="picker-calendar-year-picker">' +
-                  '<a href="#" class="link icon-only picker-calendar-prev-year"><i class="icon icon-prev"></i></a>' +
-                  '<span class="current-year-value"></span>' +
-                  '<a href="#" class="link icon-only picker-calendar-next-year"><i class="icon icon-next"></i></a>' +
-              '</div>',
-          weekHeader: true,
-          // Common settings
-          scrollToInput: true,
-          inputReadOnly: true,
-          convertToPopover: true,
-          onlyInPopover: false,
-          toolbar: true,
-          toolbarCloseText: 'Done',
-          toolbarTemplate: 
-              '<div class="toolbar">' +
-                  '<div class="toolbar-inner">' +
-                      '{{monthPicker}}' +
-                      '{{yearPicker}}' +
-                      // '<a href="#" class="link close-picker">{{closeText}}</a>' +
-                  '</div>' +
-              '</div>',
-          /* Callbacks
-          onMonthAdd
-          onChange
-          onOpen
-          onClose
-          onDayClick
-          onMonthYearChangeStart
-          onMonthYearChangeEnd
-          */
-      };
       params = params || {};
       for (var def in defaults) {
           if (typeof params[def] === 'undefined') {
@@ -854,6 +800,62 @@
         }
         new Calendar($.extend(p, params));
       });
+  };
+
+  defaults = $.fn.calendar.prototype.defaults = {
+    monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August' , 'September' , 'October', 'November', 'December'],
+    monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+    firstDay: 1, // First day of the week, Monday
+    weekendDays: [0, 6], // Sunday and Saturday
+    multiple: false,
+    dateFormat: 'yyyy-mm-dd',
+    direction: 'horizontal', // or 'vertical'
+    minDate: null,
+    maxDate: null,
+    touchMove: true,
+    animate: true,
+    closeOnSelect: true,
+    monthPicker: true,
+    monthPickerTemplate: 
+        '<div class="picker-calendar-month-picker">' +
+            '<a href="#" class="link icon-only picker-calendar-prev-month"><i class="icon icon-prev"></i></a>' +
+            '<div class="current-month-value"></div>' +
+            '<a href="#" class="link icon-only picker-calendar-next-month"><i class="icon icon-next"></i></a>' +
+        '</div>',
+    yearPicker: true,
+    yearPickerTemplate: 
+        '<div class="picker-calendar-year-picker">' +
+            '<a href="#" class="link icon-only picker-calendar-prev-year"><i class="icon icon-prev"></i></a>' +
+            '<span class="current-year-value"></span>' +
+            '<a href="#" class="link icon-only picker-calendar-next-year"><i class="icon icon-next"></i></a>' +
+        '</div>',
+    weekHeader: true,
+    // Common settings
+    scrollToInput: true,
+    inputReadOnly: true,
+    convertToPopover: true,
+    onlyInPopover: false,
+    toolbar: true,
+    toolbarCloseText: 'Done',
+    toolbarTemplate: 
+        '<div class="toolbar">' +
+            '<div class="toolbar-inner">' +
+                '{{monthPicker}}' +
+                '{{yearPicker}}' +
+                // '<a href="#" class="link close-picker">{{closeText}}</a>' +
+            '</div>' +
+        '</div>',
+    /* Callbacks
+    onMonthAdd
+    onChange
+    onOpen
+    onClose
+    onDayClick
+    onMonthYearChangeStart
+    onMonthYearChangeEnd
+    */
   };
 
   $.initCalendar = function(content) {

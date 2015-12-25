@@ -13,8 +13,7 @@ module.exports = function(grunt) {
         return string.replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
     };
 
-    var buildTo = grunt.option('buildTo');
-  var dist = buildTo ? (buildTo + '/') : 'dist/';
+    var dist = 'dist/';
 
     // Project configuration.
     grunt.initConfig({
@@ -80,7 +79,7 @@ module.exports = function(grunt) {
                   'js/swiper-init.js',
                   'js/photo-browser.js'
               ],
-              dest: '<%= meta.distPath %>js/<%= pkg.name %>-extend.js'
+              dest: '<%= meta.distPath %>js/<%= pkg.name %>-swiper.js'
             },
             cityPicker: {
               options: {
@@ -91,6 +90,24 @@ module.exports = function(grunt) {
                   'js/city-picker.js'
               ],
               dest: '<%= meta.distPath %>js/<%= pkg.name %>-city-picker.js'
+            },
+            swipeout: {
+              options: {
+                  banner: '<%= banner %>'
+              },
+              src: [
+                  'js/swipeout.js'
+              ],
+              dest: '<%= meta.distPath %>js/<%= pkg.name %>-swipeout.js'
+            },
+            i18n: {
+              options: {
+                  banner: '<%= banner %>'
+              },
+              src: [
+                  'js/i18n/cn.js'
+              ],
+              dest: '<%= meta.distPath %>js/i18n/cn.js'
             }
         },
 
@@ -100,9 +117,13 @@ module.exports = function(grunt) {
                 src: 'less/light7.less',
                 dest: '<%= meta.distPath %>css/<%= pkg.name %>.css'
             },
-            extend: {
-                src: 'less/light7-extend.less',
-                dest: '<%= meta.distPath %>css/<%= pkg.name %>-extend.css'
+            swiper: {
+                src: 'less/light7-swiper.less',
+                dest: '<%= meta.distPath %>css/<%= pkg.name %>-swiper.css'
+            },
+            swipeout: {
+                src: 'less/swipeout.less',
+                dest: '<%= meta.distPath %>css/<%= pkg.name %>-swipeout.css'
             },
             docs: {
                 src: 'less/docs.less',
@@ -181,8 +202,11 @@ module.exports = function(grunt) {
             core: {
                 src: '<%= less.core.dest %>'
             },
-            extend: {
-                src: '<%= less.extend.dest %>'
+            swiper: {
+                src: '<%= less.swiper.dest %>'
+            },
+            swipeout: {
+                src: '<%= less.swipeout.dest %>'
             },
             docs: {
                 src: '<%= less.docs.dest %>'
@@ -236,6 +260,10 @@ module.exports = function(grunt) {
                 src: '<%= concat.cityPicker.dest %>',
                 dest: '<%= meta.distPath %>js/<%= pkg.name %>-city-picker.min.js'
             },
+            i18n: {
+                src: '<%= concat.i18n.dest %>',
+                dest: '<%= meta.distPath %>js/i18n/cn.min.js'
+            },
             docs: {
                 src: [
                     '<%= meta.doclessetsPath %>js/docs.js',
@@ -259,12 +287,12 @@ module.exports = function(grunt) {
                 port: 8000
             },
             js: {
-                files: '<%= meta.jsPath %>**/*.js',
+                files: '<%= meta.jsPath %>*.js',
                 tasks: ['dist-js', 'copy']
             },
-            cityPicker: {
-                files: ['<%= meta.jsPath %>city-*.js'],
-                tasks: ['dist-js:cityPicker', 'copy']
+            i18n: {
+                files: ['<%= meta.jsPath %>i18n/*.js'],
+                tasks: ['concat:i18n']
             },
             css: {
                 files: '<%= meta.srcPath %>**/*.less',
