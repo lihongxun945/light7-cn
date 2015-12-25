@@ -36,11 +36,9 @@
     var li = this.getElementOnTouch($.getTouchPosition(e));
     if(!li) return;
     var title = this.titles.eq(li.data("index"));
-    console.log(title.text());
     var titleTop = title.parent().offset().top; // if a element has class list-group-title, it will be sticky in safari, so it's offset is not correct
     var top =  titleTop - this.pageOffsetTop + this.content.scrollTop();
     this.content.scrollTop(top);
-    console.log(li.offset().top);
   }
   Index.prototype.getElementOnTouch = function(position) {
     var result = null;
@@ -91,7 +89,4 @@
     }
   }
 
-  $(function() {
-    $(".contacts-block").index();
-  });
 }($);
