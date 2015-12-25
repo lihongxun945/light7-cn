@@ -76,9 +76,19 @@
     });
   }
 
+
   $.fn.index.prototype.defaults = {
     titleSelector: ".list-group-title",
     indexListTemplate: "{{#indexes}}<li data-index={{@index}}>{{this}}</li>{{/indexes}}"
+  }
+
+  $.initIndex = function(selector) {
+    var container = $(selector);
+    if(container.hasClass(".contacts-block")) {
+      container.index();
+    } else {
+      container.find(".contacts-block").index();
+    }
   }
 
   $(function() {
