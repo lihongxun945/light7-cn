@@ -14,7 +14,8 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1431676360_347254.css">
 
 <link rel="stylesheet" href="/dist/css/light7.css">
-<link rel="stylesheet" href="/dist/css/light7-extend.css">
+<link rel="stylesheet" href="/dist/css/light7-swiper.css">
+<link rel="stylesheet" href="/dist/css/light7-swipeout.css">
 <link rel="stylesheet" href="/assets/css/docs.css">
 
 <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/img/apple-touch-icon-114x114.png">
@@ -61,6 +62,7 @@
           <a class="docs-nav-item" href="/changelog">更新日志</a>
           <a class="docs-nav-item" href="https://github.com/lihongxun945/light7" target="_blank">github</a>
           <a class="docs-nav-item" href="/about">关于</a>
+          <a class="docs-nav-item" href="http://light7.org/">English</a>
         </div>
       </nav>
     </div>
@@ -275,22 +277,21 @@
 
 
 
-  <!-- Typography -->
   <article class="component" id="typography">
-    <h2 class="component-title">Types</h2>
-    <p class="component-description">Basic text style.</p>
+  <h2 class="component-title">Types</h2>
+  <p class="component-description">Basic text style.</p>
 
-    <div class="component-example component-example-fullbleed">
-      <div class="content-padded">
-        <h1>Heading1</h1>
-        <h2>Heading2</h2>
-        <h3>Heading3</h3>
-        <h4>Heading4</h4>
-        <h5>Heading5</h5>
-        <h6>Heading6</h6>
-        <p>This is a paragraph.This is a paragraph.This is a paragraph.This is a paragraph.This is a paragraph.This is a paragraph.This is a paragraph.This is a paragraph.</p>
-      </div>
+  <div class="component-example component-example-fullbleed">
+    <div class="content-padded">
+      <h1>Heading1</h1>
+      <h2>Heading2</h2>
+      <h3>Heading3</h3>
+      <h4>Heading4</h4>
+      <h5>Heading5</h5>
+      <h6>Heading6</h6>
+      <p>This is a paragraph.This is a paragraph.This is a paragraph.This is a paragraph.This is a paragraph.This is a paragraph.This is a paragraph.This is a paragraph.</p>
     </div>
+  </div>
 
 <figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content-padded"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;h1&gt;</span>Heading1<span class="nt">&lt;/h1&gt;</span>
@@ -301,6 +302,25 @@
   <span class="nt">&lt;h6&gt;</span>Heading6<span class="nt">&lt;/h6&gt;</span>
   <span class="nt">&lt;p&gt;</span>This is a paragraph.This is a paragraph.This is a paragraph.This is a paragraph.This is a paragraph.This is a paragraph.This is a paragraph.This is a paragraph.<span class="nt">&lt;/p&gt;</span>
 <span class="nt">&lt;/div&gt;</span></code></pre></figure>
+</article>
+<article class="component" data-url="type">
+    <h2>Text and Background Color</h2>
+
+    <p>There are some util class to set text color and background color:</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;ul&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">'color-primary'</span><span class="nt">&gt;</span>color primary<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">'color-success'</span><span class="nt">&gt;</span>color success<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">'color-warning'</span><span class="nt">&gt;</span>color warning<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">'color-danger'</span><span class="nt">&gt;</span>color danger<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+
+<span class="nt">&lt;ul&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">'bg-primary'</span><span class="nt">&gt;</span>bg primary<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">'bg-success'</span><span class="nt">&gt;</span>bg success<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">'bg-warning'</span><span class="nt">&gt;</span>bg warning<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">'bg-danger'</span><span class="nt">&gt;</span>bg danger<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span></code></pre></figure>
 
   </article>
 
@@ -1324,8 +1344,6 @@
   <span class="nt">&lt;/div&gt;</span>
 <span class="nt">&lt;/div&gt;</span></code></pre></figure>
 </article>
-
-
 
   <article class="component active" id="tabs">
   <h2 class="component-title">Tabs</h2>
@@ -2362,7 +2380,7 @@
 
   <p>It allows you to create Popover dynamically by passing its HTML to related methods:</p>
 
-  <p><code>myApp.popover(<span>popoverHTML</span>, <span>target</span>, <span>removeOnClose</span>)</code> - open Popover with <strong>popoverHTML</strong> content around <strong>target</strong> element</p>
+  <p><code>$.popover(<span>popoverHTML</span>, <span>target</span>, <span>removeOnClose</span>)</code> - open Popover with <strong>popoverHTML</strong> content around <strong>target</strong> element</p>
 
   <ul class="method-parameters">
     <li><code>popoverHTML</code> - <span class="parameter-type">string</span>. HTML string of popover </li>
@@ -2370,6 +2388,40 @@
     <li><code>removeOnClose</code> - <span class="parameter-type">boolean</span>. Optional, by default - true. If true then Popover will be removed from DOM when closed</li>
     <li class="method-returns">This method returns dynamically created Popover's HTMLElement</li>
   </ul>
+
+  <h3>Modal Defaults</h3>
+
+  <p>The default config of modal is <code>$.modal.prototype.defaults</code>, you can change these config:</p>
+
+  <table class="params-table">
+    <thead>
+      <tr>
+        <th>Parameter</th>
+        <th>Default</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>modalButtonOk</td>
+        <td>"OK"</td>
+        <td>Text of OK button</td>
+      </tr> 
+      <tr>
+        <td>modalButtonCancel</td>
+        <td>"Cancel"</td>
+        <td>Text of cancel button</td>
+      </tr> 
+      <tr>
+        <td>modalPreloaderTitle</td>
+        <td>"Loading"</td>
+        <td>Text of preloader</td>
+      </tr> 
+      <tr>
+        <td>closePrevious</td>
+        <td>true</td>
+        <td>Close all previous modal when open a new modal.</td>
+      </tr> 
 
 </article>
 
@@ -2843,8 +2895,6 @@
   <ul>
     <li><code>buttons</code> - 显示的几个按钮，你也可以把按钮分组</li>
   </ul>
-  <p>你可以通过 <code>color: "danger"</code> 来指定按钮的文案为红色</p>
-  <p>或者通过 <code>bg: "danger"</code> 来指定按钮的背景为红色</p>
   <div class="component-example component-example-fullbleed">
     <header class="bar bar-nav">
         <h1 class="title">操作表</h1>
@@ -2871,7 +2921,8 @@
             }
           },
           {
-            text: '买入',
+            text: 'Bob',
+            color: "success",
             onClick: function() {
               $.alert("你选择了“买入“");
             }
@@ -2888,6 +2939,8 @@
       }); 
   </script>
   </div>
+
+
   <figure class="highlight"><pre><code class="language-html" data-lang="html">  
   <span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
       <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span>操作表<span class="nt">&lt;/h1&gt;</span>
@@ -2931,6 +2984,10 @@
       <span class="nx">$</span><span class="p">.</span><span class="nx">actions</span><span class="p">(</span><span class="nx">groups</span><span class="p">);</span>
   <span class="p">});</span> 
   </code></pre></figure>
+
+
+  <p>You can set button color with <code>color</code>, or set background with <code>bg</code>. There are four different color: <code>primary</code>, <code>success</code>, <code>warning</code>, <code>danger</code>. In fact, the different color is defined in <a href="#typography">Text</a>.</p>
+
 </article>
 
   <article class="component" id="picker" data-url='picker'>
@@ -4192,6 +4249,24 @@ $(function() {
 <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s2">"pageInit"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">pageId</span><span class="p">,</span> <span class="nx">$page</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">if</span><span class="p">(</span><span class="nx">pageId</span> <span class="o">==</span> <span class="s2">"pageIndex"</span><span class="p">)</span> <span class="p">{}</span>
 <span class="p">});</span></code></pre></figure>
+
+  <h3>Router Defaults</h3>
+
+  <p><code>$.router.defaults</code> is the default config of router:</p>
+
+  <table>
+    <tr>
+      <th>Param</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td>transition</td>
+      <td>true</td>
+      <td>Use transition when load new page. You can always use <code>no-transition</code> to disable transiton on a link even if <code>defaults.transition</code> is set to true.</td>
+    </tr>
+  </table>
+
 </article>
 
   <article class="component" id="themes" data-url='theme-dark'>
@@ -4240,8 +4315,9 @@ $(function() {
 </div>
 
 <script src="/dist/js/light7.js"></script>
-<script src="/dist/js/light7-extend.js"></script>
+<script src="/dist/js/light7-swiper.js"></script>
 <script src="/dist/js/light7-city-picker.js"></script>
+<script src="/dist/js/light7-swipeout.js"></script>
 <script src="/assets/js/docs.js"></script>
 
     </div>

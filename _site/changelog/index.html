@@ -14,7 +14,8 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1431676360_347254.css">
 
 <link rel="stylesheet" href="/dist/css/light7.css">
-<link rel="stylesheet" href="/dist/css/light7-extend.css">
+<link rel="stylesheet" href="/dist/css/light7-swiper.css">
+<link rel="stylesheet" href="/dist/css/light7-swipeout.css">
 <link rel="stylesheet" href="/assets/css/docs.css">
 
 <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/img/apple-touch-icon-114x114.png">
@@ -61,6 +62,7 @@
           <a class="docs-nav-item" href="/changelog">更新日志</a>
           <a class="docs-nav-item" href="https://github.com/lihongxun945/light7" target="_blank">github</a>
           <a class="docs-nav-item" href="/about">关于</a>
+          <a class="docs-nav-item" href="http://light7.org/">English</a>
         </div>
       </nav>
     </div>
@@ -70,7 +72,7 @@
   <div class="container">
     <div class="docs-sub-content">
       <h2 class="page-title">更新日志</h2>
-      <p class='page-description'>当前最新版本为 V0.1.0</p>
+      <p class='page-description'>当前最新版本为 V0.2.0</p>
     </div>
     
   </div>
@@ -81,19 +83,30 @@
     <div class="column docs-content">
       <div class="docs-section">
         <h2>About Version number</h2>
-        <p>Version number is formated as <code>x.y.x</code>, it's defined by <a href='http://semver.org/' target="_blank">Semantic Versioning 2.0.0</a>:</p>
+        <p>版本号为 <code>x.y.x</code> 格式, 每个字段的意思可以参考 <a href='http://semver.org/' target="_blank">Semantic Versioning 2.0.0</a>.</p>
 
         <h2>Changelog</h2>
 
-        <h3>v0.1.0 is coming...</h3>
+        <h3>v0.2.0 - 2015-12-24 - Merry Christmas!</h3>
         <ul>
-          <li>The main repo <a href="https://github.com/lihongxun945/light7">Light7</a> has been translated to English. And there is a chinese repo - <a href="https://github.com/lihongxun945/light7-cn">Light-CN</a> too.</li>
-          <li>Light7 can work with both jQuery and Zepto now! choose the one you like.</li>
-          <li>Add new Component: <a href='/components/#popover'>Popover</a>.</li>
-          <li>Fix a bug: when include JS file in header, Fastclick and modal will get an empty <code>document.body</code></li>
-          <li>Add a <code>replace</code> config in <a href='/components/#router'>router</a>, so you can load a new page to replace current page in history but not push to history. And also a new <code>reloadPage</code> method to reload current page.</li>
-          <li><a href='/components/#router'>router</a> will remove old page with same id when load new page.</li>
-          <li>Fix fastclick bug: It do nothing when click element is wrapped by an <code>label</code>, because of a error fix.</li>
+          <li>修复bug：cssmin 在压缩的时候会自动进行合并，会导致一些重要的兼容性代码被合并掉，在安卓机器上会出现问题。</li>
+          <li>新组建 - <a href="/extends/#swipeout">Swipeout</a>.</li>
+          <li>支持 i18n - <a href="/extends/#i18n">I18N</a>.</li>
+          <li>修复了 <a href="/components/#panel">Side Panel</a> 的bug: 如果跳转页面，会导致无法滑动打开侧栏。</li>
+          <li>注意! <code>light7-extend.js</code> 更名为 <code>light7-swiper.js</code>, <code>light7-extend.css</code> 更名为 <code>light7-swiper.css</code>.</li>
+          <li><a href="/components/#modal">Modal</a> 增加了一个新的 <code>closePrevious</code> 参数，在打开对话框的时候会先关闭之前的对话框.</li>
+          <li><a href="/components/#typography">Text</a> 中增加了新的颜色和背景类， 同时也可以用在 <a href="/components/#actions">Action Sheet</a> 中.</li>
+        </ul>
+
+        <h3>v0.1.0 - 2015-12-20</h3>
+        <ul>
+          <li>主仓库 <a href="https://github.com/lihongxun945/light7">Light7</a> 全部翻译为英文. 中文仓库是独立的 <a href="https://github.com/lihongxun945/light7-cn">Light-CN</a>，这个中文仓库只进行文档翻译，不要用这里的代码.</li>
+          <li>Light7 同时兼容 jQuery 和 Zepto，你可以自由选择合适的库.</li>
+          <li>增加了一个新的组件: <a href='/components/#popover'>Popover</a>.</li>
+          <li>修复bug: 在head中引入 light7.js 时，fastclick 和 modal 初始化的时候<code>document.body</code>为空，导致出错。</li>
+          <li>在 <a href='/components/#router'>router</a> 配置中增加了一个 <code>replace</code> 选项，可以在加载新页面的时候在历史记录上替换掉当前页面. 同时增加了一个 <code>reloadPage</code> 可以刷新当前页面.</li>
+          <li><a href='/components/#router'>router</a> 在加载新页面的时候 会自动替换掉相同id的旧页面.</li>
+          <li>修复了fastclick不生效的bug：会导致手机上300ms的点击延迟</li>
         </ul>
 
         <h3>V0.0.5 - 2015-11-30</h3>
@@ -142,8 +155,9 @@
 </div>
 
 <script src="/dist/js/light7.js"></script>
-<script src="/dist/js/light7-extend.js"></script>
+<script src="/dist/js/light7-swiper.js"></script>
 <script src="/dist/js/light7-city-picker.js"></script>
+<script src="/dist/js/light7-swipeout.js"></script>
 <script src="/assets/js/docs.js"></script>
 
   </div>

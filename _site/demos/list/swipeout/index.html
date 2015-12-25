@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ligh7 Demo</title>
+    <meta name="description" content="light7: Build mobile apps with simple HTML, CSS, and JS components.">
+    <meta name="author" content="任行">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- Google Web Fonts -->
+
+    <link rel="stylesheet" href="/dist/css/light7.css">
+    <link rel="stylesheet" href="/dist/css/light7-swiper.css">
+    <link rel="stylesheet" href="/dist/css/light7-swipeout.css">
+    <link rel="stylesheet" href="/assets/css/demos.css">
+
+    <link rel="apple-touch-icon-precomposed" href="/assets/img/apple-touch-icon-114x114.png">
+    <script src="/assets/js/jquery-2.1.4.js"></script>
+    <script>
+      //ga
+    </script>
+  </head>
+  <body>
+    <div id="page-swipeout-list" class="page">
+  <header class="bar bar-nav">
+    <a class="button button-link button-nav pull-left back" href="/demos/list">
+      <span class="icon icon-left"></span>
+      Back
+    </a>
+    <h1 class="title">Swipeout</h1>
+  </header>
+  <div class="content">
+    <div class="list-block">
+      <ul>
+        <!-- Additional "swipeout" class on li -->
+        <li class="swipeout">
+          <!-- Usual list element wrapped with "swipeout-content" -->
+          <div class="swipeout-content">
+            <!-- Your list element here -->
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title">Swipe me left!</div>
+                <div class="item-after">666</div>
+              </div>
+            </div>
+          </div>
+          <!-- Swipeout actions right -->
+          <div class="swipeout-actions-right">
+            <!-- Swipeout actions links/buttons -->
+            <a class="bg-success">Action 1</a>
+            <a class="swipeout-close" href="#">Close</a>
+          </div>
+        </li>
+        <li class="swipeout">
+          <div class="swipeout-content">
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title">Swipe me right!</div>
+                <div class="item-after">666</div>
+              </div>
+            </div>
+          </div>
+          <div class="swipeout-actions-left">
+            <a class="bg-danger swipeout-delete" href="#">Delete</a>
+            <a href="#">Action 2</a>
+          </div>
+        </li>
+        <li class="swipeout">
+          <div class="swipeout-content">
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title">Remove me after confirm!</div>
+              </div>
+            </div>
+          </div>
+          <div class="swipeout-actions-right">
+            <a class="bg-danger swipeout-delete" href="#" data-confirm="Are you sure want to delete me?" data-confirm-title="Confirm Delete">Delete</a>
+            <a href="#">Action 2</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+    <script src="/dist/js/light7.js"></script>
+    <script src="/dist/js/light7-swiper.js"></script>
+    <script src="/dist/js/light7-city-picker.js"></script>
+    <script src="/dist/js/light7-swipeout.js"></script>
+    <script src="/assets/js/demos.js"></script>
+  </body>
+</html>

@@ -973,20 +973,124 @@ i.icon.icon-plus {
 .color-gray {
   color: #999;
 }
-.color-primary {
-  color: #0894ec;
-}
-.color-success {
-  color: #4cd964;
-}
-.color-danger {
-  color: #f6383a;
-}
-.color-warning {
-  color: #f60;
-}
 .text-center {
   text-align: center;
+}
+body .bg-primary,
+.content .bg-primary,
+.list-block .swipeout .bg-primary,
+.actions-modal .bg-primary,
+.panel .bg-primary {
+  color: white;
+  background-color: #0894ec;
+}
+body .bg-primary:active,
+.content .bg-primary:active,
+.list-block .swipeout .bg-primary:active,
+.actions-modal .bg-primary:active,
+.panel .bg-primary:active {
+  background-color: #0a8ddf;
+}
+body .bg-danger,
+.content .bg-danger,
+.list-block .swipeout .bg-danger,
+.actions-modal .bg-danger,
+.panel .bg-danger {
+  color: white;
+  background-color: #f6383a;
+}
+body .bg-danger:active,
+.content .bg-danger:active,
+.list-block .swipeout .bg-danger:active,
+.actions-modal .bg-danger:active,
+.panel .bg-danger:active {
+  background-color: #f00b0d;
+}
+body .bg-warning,
+.content .bg-warning,
+.list-block .swipeout .bg-warning,
+.actions-modal .bg-warning,
+.panel .bg-warning {
+  color: white;
+  background-color: #f60;
+}
+body .bg-warning:active,
+.content .bg-warning:active,
+.list-block .swipeout .bg-warning:active,
+.actions-modal .bg-warning:active,
+.panel .bg-warning:active {
+  background-color: #cc5200;
+}
+body .bg-success,
+.content .bg-success,
+.list-block .swipeout .bg-success,
+.actions-modal .bg-success,
+.panel .bg-success {
+  color: white;
+  background-color: #4cd964;
+}
+body .bg-success:active,
+.content .bg-success:active,
+.list-block .swipeout .bg-success:active,
+.actions-modal .bg-success:active,
+.panel .bg-success:active {
+  background-color: #2ac845;
+}
+body .color-primary,
+.content .color-primary,
+.list-block .swipeout .color-primary,
+.actions-modal .color-primary,
+.panel .color-primary {
+  color: #0894ec;
+}
+body .color-primary:active,
+.content .color-primary:active,
+.list-block .swipeout .color-primary:active,
+.actions-modal .color-primary:active,
+.panel .color-primary:active {
+  color: #0a8ddf;
+}
+body .color-danger,
+.content .color-danger,
+.list-block .swipeout .color-danger,
+.actions-modal .color-danger,
+.panel .color-danger {
+  color: #f6383a;
+}
+body .color-danger:active,
+.content .color-danger:active,
+.list-block .swipeout .color-danger:active,
+.actions-modal .color-danger:active,
+.panel .color-danger:active {
+  color: #f00b0d;
+}
+body .color-warning,
+.content .color-warning,
+.list-block .swipeout .color-warning,
+.actions-modal .color-warning,
+.panel .color-warning {
+  color: #f60;
+}
+body .color-warning:active,
+.content .color-warning:active,
+.list-block .swipeout .color-warning:active,
+.actions-modal .color-warning:active,
+.panel .color-warning:active {
+  color: #cc5200;
+}
+body .color-success,
+.content .color-success,
+.list-block .swipeout .color-success,
+.actions-modal .color-success,
+.panel .color-success {
+  color: #4cd964;
+}
+body .color-success:active,
+.content .color-success:active,
+.list-block .swipeout .color-success:active,
+.actions-modal .color-success:active,
+.panel .color-success:active {
+  color: #2ac845;
 }
 .bar {
   position: absolute;

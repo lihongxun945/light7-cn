@@ -2360,6 +2360,7 @@ Device/OS Detection
       }, 2000);
     };
     $.openModal = function (modal) {
+        if(defaults.closePrevious) $.closeModal();
         modal = $(modal);
         var isModal = modal.hasClass('modal');
         if ($('.modal.modal-in:not(.modal-out)').length && defaults.modalStack && isModal) {
@@ -2530,17 +2531,14 @@ Device/OS Detection
             if ($('.popup.modal-in').length > 0 && defaults.popupCloseByOutside)
                 $.closeModal('.popup.modal-in');
         }
-
-      
-      
-       
     }
 
     var defaults = $.modal.prototype.defaults  = {
       modalButtonOk: 'OK',
       modalButtonCancel: 'Cancel',
       modalPreloaderTitle: 'Loading...',
-      modalContainer : document.body 
+      modalContainer : document.body,
+      closePrevious: true  //close all previous modal before open
     };
 
     $(function() {
@@ -2557,63 +2555,9 @@ Device/OS Detection
 +function ($) {
   "use strict";
   var rtl = false;
+  var defaults;
   var Calendar = function (params) {
       var p = this;
-      var defaults = {
-          monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August' , 'September' , 'October', 'November', 'December'],
-          monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-          dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-          dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-          firstDay: 1, // First day of the week, Monday
-          weekendDays: [0, 6], // Sunday and Saturday
-          multiple: false,
-          dateFormat: 'yyyy-mm-dd',
-          direction: 'horizontal', // or 'vertical'
-          minDate: null,
-          maxDate: null,
-          touchMove: true,
-          animate: true,
-          closeOnSelect: true,
-          monthPicker: true,
-          monthPickerTemplate: 
-              '<div class="picker-calendar-month-picker">' +
-                  '<a href="#" class="link icon-only picker-calendar-prev-month"><i class="icon icon-prev"></i></a>' +
-                  '<div class="current-month-value"></div>' +
-                  '<a href="#" class="link icon-only picker-calendar-next-month"><i class="icon icon-next"></i></a>' +
-              '</div>',
-          yearPicker: true,
-          yearPickerTemplate: 
-              '<div class="picker-calendar-year-picker">' +
-                  '<a href="#" class="link icon-only picker-calendar-prev-year"><i class="icon icon-prev"></i></a>' +
-                  '<span class="current-year-value"></span>' +
-                  '<a href="#" class="link icon-only picker-calendar-next-year"><i class="icon icon-next"></i></a>' +
-              '</div>',
-          weekHeader: true,
-          // Common settings
-          scrollToInput: true,
-          inputReadOnly: true,
-          convertToPopover: true,
-          onlyInPopover: false,
-          toolbar: true,
-          toolbarCloseText: 'Done',
-          toolbarTemplate: 
-              '<div class="toolbar">' +
-                  '<div class="toolbar-inner">' +
-                      '{{monthPicker}}' +
-                      '{{yearPicker}}' +
-                      // '<a href="#" class="link close-picker">{{closeText}}</a>' +
-                  '</div>' +
-              '</div>',
-          /* Callbacks
-          onMonthAdd
-          onChange
-          onOpen
-          onClose
-          onDayClick
-          onMonthYearChangeStart
-          onMonthYearChangeEnd
-          */
-      };
       params = params || {};
       for (var def in defaults) {
           if (typeof params[def] === 'undefined') {
@@ -3405,6 +3349,62 @@ Device/OS Detection
         }
         new Calendar($.extend(p, params));
       });
+  };
+
+  defaults = $.fn.calendar.prototype.defaults = {
+    monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August' , 'September' , 'October', 'November', 'December'],
+    monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+    firstDay: 1, // First day of the week, Monday
+    weekendDays: [0, 6], // Sunday and Saturday
+    multiple: false,
+    dateFormat: 'yyyy-mm-dd',
+    direction: 'horizontal', // or 'vertical'
+    minDate: null,
+    maxDate: null,
+    touchMove: true,
+    animate: true,
+    closeOnSelect: true,
+    monthPicker: true,
+    monthPickerTemplate: 
+        '<div class="picker-calendar-month-picker">' +
+            '<a href="#" class="link icon-only picker-calendar-prev-month"><i class="icon icon-prev"></i></a>' +
+            '<div class="current-month-value"></div>' +
+            '<a href="#" class="link icon-only picker-calendar-next-month"><i class="icon icon-next"></i></a>' +
+        '</div>',
+    yearPicker: true,
+    yearPickerTemplate: 
+        '<div class="picker-calendar-year-picker">' +
+            '<a href="#" class="link icon-only picker-calendar-prev-year"><i class="icon icon-prev"></i></a>' +
+            '<span class="current-year-value"></span>' +
+            '<a href="#" class="link icon-only picker-calendar-next-year"><i class="icon icon-next"></i></a>' +
+        '</div>',
+    weekHeader: true,
+    // Common settings
+    scrollToInput: true,
+    inputReadOnly: true,
+    convertToPopover: true,
+    onlyInPopover: false,
+    toolbar: true,
+    toolbarCloseText: 'Done',
+    toolbarTemplate: 
+        '<div class="toolbar">' +
+            '<div class="toolbar-inner">' +
+                '{{monthPicker}}' +
+                '{{yearPicker}}' +
+                // '<a href="#" class="link close-picker">{{closeText}}</a>' +
+            '</div>' +
+        '</div>',
+    /* Callbacks
+    onMonthAdd
+    onChange
+    onOpen
+    onClose
+    onDayClick
+    onMonthYearChangeStart
+    onMonthYearChangeEnd
+    */
   };
 
   $.initCalendar = function(content) {
@@ -4502,9 +4502,10 @@ Device/OS Detection
 
       var panelOverlay = $('.panel-overlay');
       var isTouched, isMoved, isScrolling, touchesStart = {}, touchStartTime, touchesDiff, translate, opened, panelWidth, effect, direction;
-      var views = $('.page');
+      var currentPage = $($.getCurrentPage());
 
       function handleTouchStart(e) {
+          currentPage = $($.getCurrentPage());  //page may changed
           if (!$.allowPanelOpen || (!swipePanel && !swipePanelOnlyClose) || isTouched) return;
           if ($('.modal-in, .photo-browser-in').length > 0) return;
           if (!(swipePanelCloseOpposite || swipePanelOnlyClose)) {
@@ -4592,7 +4593,6 @@ Device/OS Detection
                   }
               }
               isTouched = false;
-            console.log(3);
               isMoved = false;
               return;
           }
@@ -4635,13 +4635,13 @@ Device/OS Detection
               }
           }
           if (effect === 'reveal') {
-              views.transform('translate3d(' + translate + 'px,0,0)').transition(0);
+              currentPage.transform('translate3d(' + translate + 'px,0,0)').transition(0);
               panelOverlay.transform('translate3d(' + translate + 'px,0,0)');
-              //app.pluginHook('swipePanelSetTransform', views[0], panel[0], Math.abs(translate / panelWidth));
+              //app.pluginHook('swipePanelSetTransform', currentPage[0], panel[0], Math.abs(translate / panelWidth));
           }
           else {
               panel.transform('translate3d(' + translate + 'px,0,0)').transition(0);
-              //app.pluginHook('swipePanelSetTransform', views[0], panel[0], Math.abs(translate / panelWidth));
+              //app.pluginHook('swipePanelSetTransform', currentPage[0], panel[0], Math.abs(translate / panelWidth));
           }
       }
       function handleTouchEnd(e) {
@@ -4711,7 +4711,7 @@ Device/OS Detection
                       panel.css({display: ''});
                   }
                   else {
-                      var target = effect === 'reveal' ? views : panel;
+                      var target = effect === 'reveal' ? currentPage : panel;
                       $('body').addClass('panel-closing');
                       target.transitionEnd(function () {
                           $.allowPanelOpen = true;
@@ -4722,8 +4722,8 @@ Device/OS Detection
               }
           }
           if (effect === 'reveal') {
-              views.transition('');
-              views.transform('');
+              currentPage.transition('');
+              currentPage.transform('');
           }
           panel.transition('').transform('');
           panelOverlay.css({display: ''}).transform('');
@@ -4763,6 +4763,7 @@ Device/OS Detection
   }
 
   Router.prototype.defaults = {
+    transition: true
   };
 
   Router.prototype.init = function() {
@@ -4804,6 +4805,10 @@ Device/OS Detection
   Router.prototype.loadPage = function(url, noAnimation, replace) {
 
     var param = url;
+
+    if(noAnimation === undefined) {
+      noAnimation = !this.defaults.transition;
+    }
 
     if(typeof url === typeof "a") {
       param = {
@@ -5105,9 +5110,13 @@ Device/OS Detection
     window.dispatchEvent(e);
   };
 
+
   $(function() {
     if(!$.smConfig.router) return;
+
     var router = $.router = new Router();
+    router.defaults = Router.prototype.defaults;
+
     $(document).on("click", "a", function(e) {
       var $target = $(e.currentTarget);
       if($target.hasClass("external") ||
@@ -5124,7 +5133,7 @@ Device/OS Detection
       }
 
       if(!url || url === "#") return;
-      router.loadPage(url, $target.hasClass("no-transition"), $target.hasClass("replace"));
+      router.loadPage(url, $target.hasClass("no-transition") ? true : undefined, $target.hasClass("replace") ? true : undefined);  //undefined is different to false
     })
   });
 }($);
@@ -5153,6 +5162,7 @@ Device/OS Detection
 
     //extend
     if($.initSwiper) $.initSwiper($content);
+    if($.initSwipeout) $.initSwipeout();  // don't pass $content because the swipeout element is not $content
   };
 
 

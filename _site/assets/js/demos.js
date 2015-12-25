@@ -138,6 +138,7 @@ $(function () {
         },
         {
           text: 'Tomato',
+          color: "success",
           onClick: function() {
             $.alert("You choosed Tomato");
           }

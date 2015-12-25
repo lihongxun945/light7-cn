@@ -14,7 +14,8 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1431676360_347254.css">
 
 <link rel="stylesheet" href="/dist/css/light7.css">
-<link rel="stylesheet" href="/dist/css/light7-extend.css">
+<link rel="stylesheet" href="/dist/css/light7-swiper.css">
+<link rel="stylesheet" href="/dist/css/light7-swipeout.css">
 <link rel="stylesheet" href="/assets/css/docs.css">
 
 <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/img/apple-touch-icon-114x114.png">
@@ -61,6 +62,7 @@
           <a class="docs-nav-item" href="/changelog">更新日志</a>
           <a class="docs-nav-item" href="https://github.com/lihongxun945/light7" target="_blank">github</a>
           <a class="docs-nav-item" href="/about">关于</a>
+          <a class="docs-nav-item" href="http://light7.org/">English</a>
         </div>
       </nav>
     </div>
@@ -82,7 +84,9 @@
     <div class="docs-side-menu">
   <li><a href="#swiper" data-ignore="push">幻灯片</a></li>
   <li><a href="#browser" data-ignore="push">图片浏览器</a></li>
-  <li><a href="#city-picker" data-ignore="push">省市区 <span class='new'>新</span></a></li>
+  <li><a href="#city-picker" data-ignore="push">省市区</a></li>
+  <li><a href="#swipeout">Swipeout <span class="new">新</span></a></li>
+  <li><a href="#i18n">I18N <span class="new">新</span></a></li>
 </div>
 
     <div class="device-column column pull-right">
@@ -105,8 +109,8 @@
   <p class="component-description">You must include these to file after <code>light7.js</code> and <code>light7.css</code> to use Swiper:</p>
 
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"css/light7-extend.min.css"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">'text/javascript'</span> <span class="na">src=</span><span class="s">'0.1.0/js/light7-extend.min.js'</span> <span class="na">charset=</span><span class="s">'utf-8'</span><span class="nt">&gt;&lt;/script&gt;</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"css/light7-swiper.min.css"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">'text/javascript'</span> <span class="na">src=</span><span class="s">'0.2.0/js/light7-swiper.min.js'</span> <span class="na">charset=</span><span class="s">'utf-8'</span><span class="nt">&gt;&lt;/script&gt;</span></code></pre></figure>
 
 <p>The swiper will auto be init when <code>$.init</code> is called. If you create a Swiper after that, call <code>$(".swiper-container").swiper(config)</code> to init.</p>
 
@@ -128,8 +132,8 @@
 
   <p class="component-description">使用图片浏览器，你需要在 <code>light7.js</code> 和 <code>light7.css</code> 之后额外引入如下两个文件:</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"css/light7-extend.min.css"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">'text/javascript'</span> <span class="na">src=</span><span class="s">'js/light7-extend.min.js'</span> <span class="na">charset=</span><span class="s">'utf-8'</span><span class="nt">&gt;&lt;/script&gt;</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"css/light7-swiper.min.css"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">'text/javascript'</span> <span class="na">src=</span><span class="s">'js/light7-swiper.min.js'</span> <span class="na">charset=</span><span class="s">'utf-8'</span><span class="nt">&gt;&lt;/script&gt;</span></code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bar bar-nav"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span>图片浏览器<span class="nt">&lt;/h1&gt;</span>
@@ -246,6 +250,191 @@
 
 </article>
 
+      <article class="component" id="swipeout" data-url='swipeout'>
+  <h2 class="component-title">Swipeout</h2>
+
+  <p>Note! Swipeout is not complete tested in Android, and there is a known bug in some Android: Swipeout element may flicker when page scroll.</p>
+
+  <p class="component-description">You must include these to file after <code>light7.js</code> and <code>light7.css</code> to use Swipeout:</p>
+
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"css/light7-swipeout.min.css"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">'text/javascript'</span> <span class="na">src=</span><span class="s">'0.2.0/js/light7-swipeout.min.js'</span> <span class="na">charset=</span><span class="s">'utf-8'</span><span class="nt">&gt;&lt;/script&gt;</span></code></pre></figure>
+
+
+
+  <p class="component-description">
+    Swipeout is an extension of list view that allows you to swipe over list elements to reveal hidden menu with available actions, like swipe-to-delete.
+  </p>
+  <p>
+    Let's look on layout structure of swipeout element in your list views:
+  </p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"list-block"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;ul&gt;</span>
+    <span class="c">&lt;!-- Additional "swipeout" class on li --&gt;</span>
+    <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"swipeout"</span><span class="nt">&gt;</span>
+      <span class="c">&lt;!-- Usual list element wrapped with "swipeout-content" --&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"swipeout-content"</span><span class="nt">&gt;</span>
+        <span class="c">&lt;!-- Your list element here --&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-content"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-media"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span>
+          <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-inner"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="c">&lt;!-- Swipeout actions left --&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"swipeout-actions-left"</span><span class="nt">&gt;</span>
+        <span class="c">&lt;!-- Swipeout actions links/buttons --&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Action 1<span class="nt">&lt;/a&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Action 2<span class="nt">&lt;/a&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="c">&lt;!-- Swipeout actions right --&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"swipeout-actions-right"</span><span class="nt">&gt;</span>
+        <span class="c">&lt;!-- Swipeout actions links/buttons --&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Action 1<span class="nt">&lt;/a&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"swipeout-close"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Action 2<span class="nt">&lt;/a&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/li&gt;</span>
+    ...
+  <span class="nt">&lt;/ul&gt;</span>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
+
+  <p>Where:</p>
+  <ul>
+    <li><code>swipeout-content</code> - wrapper for your list element. This container will move during swipe over the list item</li>
+    <li><code>swipeout-actions-left</code> - container with left swipeout action buttons/links</li>
+    <li><code>swipeout-actions-right</code> - container with right swipeout action buttons/links</li>
+    <li><code>swipeout-close</code> - additional class on swipeout link that will close swipeout element when you click this link</li>
+  </ul>
+
+  <h3>Close And Delete</h3>
+
+  <p>Add <code>.swipeout-close</code> to action link to close swipeout.</p>
+  <p>Add <code>.swipeout-delete</code> to action link to close swipeout. You can also add <code>data-confirm="confirm message"</code> and <code>data-confirm-title="confirm title"</code> to show a confirm dialog when user click the delete button.</p>
+
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"swipeout"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"swipeout-content"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-content"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-inner"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-title"</span><span class="nt">&gt;</span>Swipe me left!<span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-after"</span><span class="nt">&gt;</span>666<span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"swipeout-actions-right"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"bg-success"</span><span class="nt">&gt;</span>Action 1<span class="nt">&lt;/a&gt;</span>
+    <span class="c">&lt;!-- close --&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"swipeout-close"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Close<span class="nt">&lt;/a&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"swipeout"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"swipeout-content"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-content"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-inner"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item-title"</span><span class="nt">&gt;</span>Remove me after confirm!<span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"swipeout-actions-right"</span><span class="nt">&gt;</span>
+    <span class="c">&lt;!-- delete with confirm --&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"bg-danger swipeout-delete"</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">data-confirm=</span><span class="s">"Are you sure want to delete me?"</span> <span class="na">data-confirm-title=</span><span class="s">"Confirm Delete"</span><span class="nt">&gt;</span>Delete<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Action 2<span class="nt">&lt;/a&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/li&gt;</span></code></pre></figure>
+
+  <h3>JavaScript</h3>
+
+  <p>Swipeouts also has rich JavaScript API that allows you to control swipeout elements. Let's look on appropriate App's properties and methods:</p>
+
+  <p><code>$.swipeoutOpen(<span>el</span>, <span>direction</span>, <span>callback</span>)</code> - reveal swipeout actions on specified element</p>
+  <ul class="method-parameters">
+    <li><code>el</code> - <span class="parameter-type">HTMLElement</span> or <span class="parameter-type">string</span> (with CSS Selector) of list (&lt;li&gt;) element with "swipeout" class. Required</li>
+    <li><code>direction</code> - <span class="parameter-type">string</span> (could be "left" or "right") swipeout actions to open. Should be specified if item has both left and right swipeout actions. Optional</li>
+    <li><code>callback</code> - <span class="parameter-type">function</span> - callback function will be executed after swipeout element completes its opening animation</li>
+  </ul>
+
+  <p><code>$.swipeoutClose(<span>el</span>, <span>callback</span>)</code> - close swipeout actions on specified element</p>
+  <ul class="method-parameters">
+    <li><code>el</code> - <span class="parameter-type">HTMLElement</span> or <span class="parameter-type">string</span> (with CSS Selector) of list (&lt;li&gt;) element with "swipeout" class. Required</li>
+    <li><code>callback</code> - <span class="parameter-type">function</span> - callback function will be executed after swipeout element completes its closing animation</li>
+  </ul>
+
+  <p><code>$.swipeoutDelete(<span>el</span>, <span>callback</span>)</code> - delete specified swipeout element</p>
+  <ul class="method-parameters">
+    <li><code>el</code> - <span class="parameter-type">HTMLElement</span> or <span class="parameter-type">string</span> (with CSS Selector) of list (&lt;li&gt;) element with "swipeout" class. Required</li>
+    <li><code>callback</code> - <span class="parameter-type">function</span> - callback function will be executed after swipeout element completes its delete animation right before it will be removed from DOM</li>
+  </ul>
+
+
+  <h3>Swipeout Events</h3>
+
+  <p>Swipeout elements have the following events:</p>
+
+  <table class="events-table">
+    <thead>
+      <tr>
+        <th>Event</th>
+        <th>Target</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>swipeout</td>
+        <td>Swipeout Element<span>&lt;li class="swipeout"&gt;</span></td>
+        <td>Event will be triggered while you move swipeout element. <b>event.detail.progress</b> contains current opened progress percentage</td>
+      </tr>
+      <tr>
+        <td>open</td>
+        <td>Swipeout Element<span>&lt;li class="swipeout"&gt;</span></td>
+        <td>Event will be triggered when swipeout element starts its opening animation</td>
+      </tr>
+      <tr>
+        <td>opened</td>
+        <td>Swipeout Element<span>&lt;li class="swipeout"&gt;</span></td>
+        <td>Event will be triggered after swipeout element completes its opening animation</td>
+      </tr>
+      <tr>
+        <td>close</td>
+        <td>Swipeout Element<span>&lt;li class="swipeout"&gt;</span></td>
+        <td>Event will be triggered when swipeout element starts its closing animation</td>
+      </tr>
+      <tr>
+        <td>closed</td>
+        <td>Swipeout Element<span>&lt;li class="swipeout"&gt;</span></td>
+        <td>Event will be triggered after swipeout element completes its closing animation </td>
+      </tr>
+      <tr>
+        <td>delete</td>
+        <td>Swipeout Element<span>&lt;li class="swipeout"&gt;</span></td>
+        <td>Event will be triggered after swipeout element starts its delete animation </td>
+      </tr>
+      <tr>
+        <td>deleted</td>
+        <td>Swipeout Element<span>&lt;li class="swipeout"&gt;</span></td>
+        <td>Event will be triggered after swipeout element completes its delete animation right before it will be removed from DOM</td>
+      </tr>
+    </tbody>
+  </table>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">'.swipeout'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'swipeout'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Item opened on: '</span> <span class="o">+</span> <span class="nx">e</span><span class="p">.</span><span class="nx">detail</span><span class="p">.</span><span class="nx">progress</span> <span class="o">+</span> <span class="s1">'%'</span><span class="p">);</span>
+<span class="p">});</span>  </code></pre></figure>
+
+</article>
+
+      <article class="component active" id="i18n" data-url='i18n'>
+  <h2 class="component-title">i18n</h2>
+
+  <p>English is the default language of Light7. You can include <code>i18n/cn.js</code> after <code>light7.js</code> to change the language to Chinese:</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">'js/i18n/cn.js'</span><span class="nt">&gt;&lt;/script&gt;</span></code></pre></figure>
+
+  <p>Right click the demo on right side to see how it's writen;</p>
+  <p>Note! The i18n only change the language of Light7's components. It can't change the language of your entire site.</p>
+</article>
+
       <!-- Footer -->
       <div class="docs-footer">
   <!-- Social links -->
@@ -259,8 +448,9 @@
 </div>
 
 <script src="/dist/js/light7.js"></script>
-<script src="/dist/js/light7-extend.js"></script>
+<script src="/dist/js/light7-swiper.js"></script>
 <script src="/dist/js/light7-city-picker.js"></script>
+<script src="/dist/js/light7-swipeout.js"></script>
 <script src="/assets/js/docs.js"></script>
 
     </div>
