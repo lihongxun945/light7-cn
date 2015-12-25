@@ -25,6 +25,7 @@
   }
 
   Router.prototype.defaults = {
+    transition: true
   };
 
   Router.prototype.init = function() {
@@ -66,6 +67,10 @@
   Router.prototype.loadPage = function(url, noAnimation, replace) {
 
     var param = url;
+
+    if(noAnimation === undefined) {
+      noAnimation = !this.defaults.transition;
+    }
 
     if(typeof url === typeof "a") {
       param = {
@@ -367,9 +372,13 @@
     window.dispatchEvent(e);
   };
 
+
   $(function() {
     if(!$.smConfig.router) return;
+
     var router = $.router = new Router();
+    router.defaults = Router.prototype.defaults;
+
     $(document).on("click", "a", function(e) {
       var $target = $(e.currentTarget);
       if($target.hasClass("external") ||
@@ -386,7 +395,7 @@
       }
 
       if(!url || url === "#") return;
-      router.loadPage(url, $target.hasClass("no-transition"), $target.hasClass("replace"));
+      router.loadPage(url, $target.hasClass("no-transition") ? true : undefined, $target.hasClass("replace") ? true : undefined);  //undefined is different to false
     })
   });
 }($);

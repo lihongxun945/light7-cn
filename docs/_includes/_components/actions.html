@@ -5,8 +5,6 @@
   <ul>
     <li><code>buttons</code> - 显示的几个按钮，你也可以把按钮分组</li>
   </ul>
-  <p>你可以通过 <code>color: "danger"</code> 来指定按钮的文案为红色</p>
-  <p>或者通过 <code>bg: "danger"</code> 来指定按钮的背景为红色</p>
   <div class="component-example component-example-fullbleed">
     <header class="bar bar-nav">
         <h1 class="title">操作表</h1>
@@ -33,7 +31,8 @@
             }
           },
           {
-            text: '买入',
+            text: 'Bob',
+            color: "success",
             onClick: function() {
               $.alert("你选择了“买入“");
             }
@@ -50,6 +49,8 @@
       }); 
   </script>
   </div>
+
+
   {% highlight html %}  
   <header class="bar bar-nav">
       <h1 class="title">操作表</h1>
@@ -93,4 +94,8 @@
       $.actions(groups);
   }); 
   {% endhighlight %}
+
+
+  <p>You can set button color with <code>color</code>, or set background with <code>bg</code>. There are four different color: <code>primary</code>, <code>success</code>, <code>warning</code>, <code>danger</code>. In fact, the different color is defined in <a href="#typography">Text</a>.</p>
+
 </article>

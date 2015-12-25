@@ -21,6 +21,7 @@
 
     //extend
     if($.initSwiper) $.initSwiper($content);
+    if($.initSwipeout) $.initSwipeout();  // don't pass $content because the swipeout element is not $content
   };
 
 

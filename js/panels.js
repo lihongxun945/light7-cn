@@ -88,9 +88,10 @@
 
       var panelOverlay = $('.panel-overlay');
       var isTouched, isMoved, isScrolling, touchesStart = {}, touchStartTime, touchesDiff, translate, opened, panelWidth, effect, direction;
-      var views = $('.page');
+      var currentPage = $($.getCurrentPage());
 
       function handleTouchStart(e) {
+          currentPage = $($.getCurrentPage());  //page may changed
           if (!$.allowPanelOpen || (!swipePanel && !swipePanelOnlyClose) || isTouched) return;
           if ($('.modal-in, .photo-browser-in').length > 0) return;
           if (!(swipePanelCloseOpposite || swipePanelOnlyClose)) {
@@ -178,7 +179,6 @@
                   }
               }
               isTouched = false;
-            console.log(3);
               isMoved = false;
               return;
           }
@@ -221,13 +221,13 @@
               }
           }
           if (effect === 'reveal') {
-              views.transform('translate3d(' + translate + 'px,0,0)').transition(0);
+              currentPage.transform('translate3d(' + translate + 'px,0,0)').transition(0);
               panelOverlay.transform('translate3d(' + translate + 'px,0,0)');
-              //app.pluginHook('swipePanelSetTransform', views[0], panel[0], Math.abs(translate / panelWidth));
+              //app.pluginHook('swipePanelSetTransform', currentPage[0], panel[0], Math.abs(translate / panelWidth));
           }
           else {
               panel.transform('translate3d(' + translate + 'px,0,0)').transition(0);
-              //app.pluginHook('swipePanelSetTransform', views[0], panel[0], Math.abs(translate / panelWidth));
+              //app.pluginHook('swipePanelSetTransform', currentPage[0], panel[0], Math.abs(translate / panelWidth));
           }
       }
       function handleTouchEnd(e) {
@@ -297,7 +297,7 @@
                       panel.css({display: ''});
                   }
                   else {
-                      var target = effect === 'reveal' ? views : panel;
+                      var target = effect === 'reveal' ? currentPage : panel;
                       $('body').addClass('panel-closing');
                       target.transitionEnd(function () {
                           $.allowPanelOpen = true;
@@ -308,8 +308,8 @@
               }
           }
           if (effect === 'reveal') {
-              views.transition('');
-              views.transform('');
+              currentPage.transition('');
+              currentPage.transform('');
           }
           panel.transition('').transform('');
           panelOverlay.css({display: ''}).transform('');
