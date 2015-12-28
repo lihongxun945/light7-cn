@@ -5,12 +5,12 @@
   var Index = function(params) {
     this.params = params;
     this.tpl = $.t7(this.params.indexListTemplate).compile();
-  }
+  };
 
   Index.prototype.render = function(list) {
     this.list = $(list || ".list");
     this.draw();
-  }
+  };
 
   Index.prototype.draw = function() {
     if(this.indexList) this.indexList.remove();
@@ -26,12 +26,12 @@
     this.indexList.on($.touchEvents.end, $.proxy(this.touchEnd, this));
 
     this.content = this.list.parents(".content");
-  }
+  };
 
-  Index.prototype.touchStart = function(e) {
+  Index.prototype.touchStart = function() {
     this.pageOffsetTop = this.content.offset().top;
     this.touching = true;
-  }
+  };
 
   Index.prototype.touchMove = function(e) {
     if(!this.touching) return;
@@ -42,10 +42,12 @@
     var titleTop = title.parent().offset().top; // if a element has class list-group-title, it will be sticky in safari, so it's offset is not correct
     var top =  titleTop - this.pageOffsetTop + this.content.scrollTop();
     this.content.scrollTop(top);
-  }
-  Index.prototype.touchEnd = function(e) {
+  };
+
+  Index.prototype.touchEnd = function() {
     this.touching = false;
-  }
+  };
+
   Index.prototype.getElementOnTouch = function(position) {
     var result = null;
     this.indexList.find("li").each(function() {
@@ -57,9 +59,7 @@
       }
     });
     return result;
-  }
-
-
+  };
 
   $.fn.index = function(params) {
     return this.each(function() {
@@ -78,13 +78,13 @@
       return index;
 
     });
-  }
+  };
 
 
   $.fn.index.prototype.defaults = {
     titleSelector: ".list-group-title",
     indexListTemplate: "{{#indexes}}<li data-index={{@index}}><strong>{{this}}</strong></li>{{/indexes}}"
-  }
+  };
 
   $.initIndex = function(selector) {
     var container = $(selector);
@@ -93,6 +93,6 @@
     } else {
       container.find(".contacts-block").index();
     }
-  }
+  };
 
 }($);
