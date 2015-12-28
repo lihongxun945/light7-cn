@@ -46,7 +46,7 @@
       if(result) return;
       var $this = $(this);
       var offset = $this.offset();
-      if(offset.top < position.y && offset.top + $this.outerHeight() > position.y && offset.left < position.x && offset.left + $this.outerWidth() > position.x) {
+      if(offset.top < position.y && offset.top + $this.outerHeight() > position.y) {
         result = $this;
       }
     });
@@ -77,7 +77,7 @@
 
   $.fn.index.prototype.defaults = {
     titleSelector: ".list-group-title",
-    indexListTemplate: "{{#indexes}}<li data-index={{@index}}>{{this}}</li>{{/indexes}}"
+    indexListTemplate: "{{#indexes}}<li data-index={{@index}}><strong>{{this}}</strong></li>{{/indexes}}"
   }
 
   $.initIndex = function(selector) {
