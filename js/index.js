@@ -19,7 +19,7 @@
       return $(t).data("index") || $(t).text();
     }).toArray();
 
-    this.indexList = $("<ul class='index-list'></ul>").appendTo(this.list.parents(".page"));
+    this.indexList = $("<ul class='index-list-bar'></ul>").appendTo(this.list.parents(".page"));
     this.indexList.html(this.tpl({indexes: titleTexts}));
     this.indexList.on($.touchEvents.start, $.proxy(this.touchStart, this));
     this.indexList.on($.touchEvents.start + " " + $.touchEvents.move, $.proxy(this.touchMove, this));
