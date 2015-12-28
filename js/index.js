@@ -23,15 +23,18 @@
     this.indexList.html(this.tpl({indexes: titleTexts}));
     this.indexList.on($.touchEvents.start, $.proxy(this.touchStart, this));
     this.indexList.on($.touchEvents.start + " " + $.touchEvents.move, $.proxy(this.touchMove, this));
+    this.indexList.on($.touchEvents.end, $.proxy(this.touchEnd, this));
 
     this.content = this.list.parents(".content");
   }
 
   Index.prototype.touchStart = function(e) {
     this.pageOffsetTop = this.content.offset().top;
+    this.touching = true;
   }
 
   Index.prototype.touchMove = function(e) {
+    if(!this.touching) return;
     e.preventDefault();
     var li = this.getElementOnTouch($.getTouchPosition(e));
     if(!li) return;
@@ -39,6 +42,9 @@
     var titleTop = title.parent().offset().top; // if a element has class list-group-title, it will be sticky in safari, so it's offset is not correct
     var top =  titleTop - this.pageOffsetTop + this.content.scrollTop();
     this.content.scrollTop(top);
+  }
+  Index.prototype.touchEnd = function(e) {
+    this.touching = false;
   }
   Index.prototype.getElementOnTouch = function(position) {
     var result = null;
