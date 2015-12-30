@@ -20,6 +20,7 @@
     this.stack = sessionStorage;
     this.stack.setItem("back", "[]");  //返回栈, {url, pageid, stateid}
     this.stack.setItem("forward", "[]");  //前进栈, {url, pageid, stateid}
+    this.extras = {}; //page extra: popup, panel...
     this.init();
     this.xhr = null;
   }
@@ -82,7 +83,7 @@
 
     var url = param.url, noAnimation = param.noAnimation, replace = param.replace;
 
-    this.getPage(url, function(page) {
+    this.getPage(url, function(page, extra) {
 
       var currentPage = this.getCurrentPage();
 
@@ -97,10 +98,16 @@
 
       //remove all forward page
       var forward = JSON.parse(this.state.getItem("forward") || "[]");
+      var self = this;
       for(var i=0;i<forward.length;i++) {
         $(forward[i].pageid).each(function() {
           var $page = $(this);
-          if($page.data("page-remote")) $page.remove();
+          if($page.data("page-remote")) {
+            var extra = self.extras[$page[0].id];
+            extra && extra.remove();
+            self.extras[$page[0].id] = undefined;
+            $page.remove();
+          }
         });
       }
       this.state.setItem("forward", "[]");  //clearforward
@@ -110,6 +117,8 @@
       page.insertBefore($(".page")[0]);
 
       if(duplicatePage[0] !== page[0]) duplicatePage.remove(); //if inline mod, the duplicate page is current page
+
+      self.extras[page[0].id] = extra.appendTo(document.body);
 
       var id = this.genStateID();
       this.setCurrentStateID(id);
@@ -290,10 +299,12 @@
     this.xhr = $.ajax({
       url: url,
       success: $.proxy(function(data, s, xhr) {
-        var $page = this.parseXHR(xhr);
+        var html = this.parseXHR(xhr);
+        var $page = html[0];
+        var $extra = html[1];
         if(!$page[0].id) $page[0].id = this.genRandomID();
         $page.data("page-remote", 1);
-        callback.apply(this, [$page]);
+        callback.apply(this, [$page, $extra]);
       }, this),
       error: function() {
         self.dispatch("pageLoadError");
@@ -310,11 +321,11 @@
     html = "<div>"+html+"</div>";
     var tmp = $(html);
 
-    tmp.find(".popup, .popover, .panel, .panel-overlay").appendTo(document.body);
+    var $extra = tmp.find(".popup, .popover, .panel, .panel-overlay");
 
     var $page = tmp.find(".page");
     if(!$page[0]) $page = tmp.addClass("page");
-    return $page;
+    return [$page, $extra];
   }
 
   Router.prototype.genStateID = function() {
