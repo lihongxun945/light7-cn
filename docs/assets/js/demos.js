@@ -227,5 +227,9 @@ $(function () {
     $("#city-picker").cityPicker({});
   });
 
+  $(document).on("click", "#show-noti", function() {
+    $.notification({});
+  });
+
   $.init();
 });
