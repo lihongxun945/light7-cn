@@ -1,19 +1,36 @@
 .notification {
   position: absolute;
   width: 100%;
-  min-height: 50px;
-  top: 0;
+  min-height: 5rem;
+  top: -2rem;
+  padding-top: 2rem;
   left: 0;
   right: 0;
   z-index: 9999;
-  background-color: rgba(0,0,0,.8);
+  background-color: rgba(0,0,0,.85);
   color: white;
 
   transform: translate3d(0, -100%, 0);
 
-  transition-duration: .3s;
+  transition: .3s;
 
   &.notification-in {
     transform: translate3d(0,0,0);
+  }
+
+  &.touching {
+    transition-duration: 0s;
+  }
+
+  .notification-handle-bar {
+    position: absolute;
+    bottom: .2rem;
+    left: 50%;
+    transform: translate3d(-50%, 0, 0);
+    width: 3rem;
+    height: .3rem;
+    border-radius: .15rem;
+    background: white;
+    opacity: .5;
   }
 }
