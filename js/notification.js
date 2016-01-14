@@ -51,11 +51,17 @@
       attachEvents(noti);
     }
 
+    noti.off("click");
+    if(params.onClick) noti.on("click", function() {
+      params.onClick(params.data);
+    });
+
     noti.html($.t7.compile(params.tpl)(params));
 
     noti.show();
 
     noti.addClass("notification-in");
+    noti.data("params", params);
 
     var startTimeout = function() {
       if(timeout) {
@@ -79,9 +85,16 @@
   $.closeNotification = function() {
     timeout && clearTimeout(timeout);
     timeout = null;
-    $(".notification").removeClass("notification-in").transitionEnd(function() {
+    var noti = $(".notification").removeClass("notification-in").transitionEnd(function() {
       $(this).remove();
     });
+
+    if(noti[0]) {
+      var params = $(".notification").data("params");
+      if(params && params.onClose) {
+        params.onClose(params.data);
+      }
+    }
   }
 
   defaults = $.noti.prototype.defaults = {
@@ -89,6 +102,9 @@
     text: undefined,
     media: undefined,
     time: 4000,
+    onClick: undefined,
+    onClose: undefined,
+    data: undefined,
     tpl:  '<div class="notification-inner">' +
             '{{#if media}}<div class="notification-media">{{media}}</div>{{/if}}' +
             '<div class="notification-content">' +

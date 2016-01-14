@@ -232,8 +232,18 @@ $(function () {
       title: "Baby",
       text: "I miss you",
       media: "<img src='/assets/img/i-wechat.png'>",
+      data: "123",
+      onClick: function(data) {
+        $.alert("Click" + data);
+      },
+      onClose: function(data) {
+        $.alert("Close "+data);
+      },
       time: 999999
     });
+  });
+  $(document).on("click", "#close-noti", function() {
+    $.closeNotification();
   });
 
   $.init();
