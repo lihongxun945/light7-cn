@@ -25,7 +25,7 @@
   var touchEnd = function(e) {
     noti.removeClass("touching");
     noti.attr("style", "");
-    if(diff < 0 && (Math.abs(diff) > noti.height()/2)) {
+    if(diff < 0 && (Math.abs(diff) > noti.height()*.3)) {
       $.closeNotification();
     }
 
@@ -51,7 +51,7 @@
       attachEvents(noti);
     }
 
-    noti.html(params.tpl);
+    noti.html($.t7.compile(params.tpl)(params));
 
     noti.show();
 
@@ -64,13 +64,15 @@
       }
 
       timeout = setTimeout(function() {
-        if(noti.hasClass("moving")) {
+        if(noti.hasClass("touching")) {
           startTimeout();
         } else {
           $.closeNotification();
         }
       }, params.time);
     }
+
+    startTimeout();
 
   };
 
@@ -85,13 +87,13 @@
   defaults = $.noti.prototype.defaults = {
     title: undefined,
     text: undefined,
-    image: undefined,
+    media: undefined,
     time: 4000,
     tpl:  '<div class="notification-inner">' +
-            '<div class="notification-media">' +
-            'dasdada' +
-            '</div>' +
+            '{{#if media}}<div class="notification-media">{{media}}</div>{{/if}}' +
             '<div class="notification-content">' +
+            '{{#if title}}<div class="notification-title">{{title}}</div>{{/if}}' +
+            '{{#if text}}<div class="notification-text">{{text}}</div>{{/if}}' +
             '</div>' +
             '<div class="notification-handle-bar"></div>' +
           '</div>'

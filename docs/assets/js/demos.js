@@ -228,7 +228,12 @@ $(function () {
   });
 
   $(document).on("click", "#show-noti", function() {
-    $.notification({});
+    $.notification({
+      title: "Baby",
+      text: "I miss you",
+      media: "<img src='/assets/img/i-wechat.png'>",
+      time: 999999
+    });
   });
 
   $.init();
