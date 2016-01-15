@@ -14,6 +14,8 @@
   }
   var touchMove = function(e) {
     if(!start) return false;
+    e.preventDefault();
+    e.stopPropagation();
     var p = $.getTouchPosition(e);
     diff = p.y - start.y;
     if(diff > 0) {
