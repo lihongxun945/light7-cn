@@ -12,7 +12,7 @@
     start = p;
     diffX = diffY = 0;
     noti.addClass("touching");
-  }
+  };
   var touchMove = function(e) {
     if(!start) return false;
     e.preventDefault();
@@ -25,8 +25,8 @@
     }
 
     noti.css("transform", "translate3d(0, "+diffY+"px, 0)");
-  }
-  var touchEnd = function(e) {
+  };
+  var touchEnd = function() {
     noti.removeClass("touching");
     noti.attr("style", "");
     if(diffY < 0 && (Math.abs(diffY) > noti.height()*0.38)) {
@@ -38,13 +38,13 @@
     }
 
     start = false;
-  }
+  };
 
   var attachEvents = function(el) {
     el.on($.touchEvents.start, touchStart);
     el.on($.touchEvents.move, touchMove);
     el.on($.touchEvents.end, touchEnd);
-  }
+  };
 
   $.notification = $.noti = function(params) {
     params = $.extend({}, defaults, params);
@@ -79,7 +79,7 @@
           $.closeNotification();
         }
       }, params.time);
-    }
+    };
 
     startTimeout();
 
@@ -98,7 +98,7 @@
         params.onClose(params.data);
       }
     }
-  }
+  };
 
   defaults = $.noti.prototype.defaults = {
     title: undefined,

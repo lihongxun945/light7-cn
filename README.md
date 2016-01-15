@@ -10,6 +10,13 @@ For more docs please visit [Light7 Website](http://light7.org/)
 
 Please clone this repo and compile by yourself. The `master` branch contains only source file, You can clone and change to `build` branch to get all compiled files under `dist/`.
 
+# Install Grunt
+
+- Install `grunt` first, see [Grunt](http://gruntjs.com/) for how to install and use grunt, if you have never used grunt before.
+- Then, run `npm install` under the root dir of this repo. This command will install the nodejs packages required by grunt.
+- Now, you can run `grunt` to compile the source file.
+
+
 # Grunt
 
 exec `grunt` to compile all source file, and the compiled file is in `dist` dir.

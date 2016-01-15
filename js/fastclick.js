@@ -597,7 +597,7 @@
       var parent = targetElement;
       while(parent && (parent.tagName.toUpperCase() !== "BODY")) {
         if(parent.tagName.toUpperCase() === "LABEL") {
-          var input = $(parent).find("input").click();
+          $(parent).find("input").click();
         }
         parent = parent.parentNode;
       }
