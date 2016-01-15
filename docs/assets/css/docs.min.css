@@ -251,6 +251,7 @@ table td{border-top:1px solid #ddd}
 .docs-side-menu.menu-fixed{position:fixed}
 .docs-side-menu .beta,.docs-side-menu .new{position:relative;top:-1px;display:inline-block;padding:0 3px;margin-left:10px;font-size:14px;line-height:20px;color:#fff;text-align:center;background-color:red;border-radius:10px}
 .docs-side-menu .beta{background:#ff9500}
+.docs-column{overflow-y:hidden}
 .index-content{max-width:1200px;padding:20px;margin:auto;font-size:20px}
 .index-content .section{margin-top:60px}
 .index-content .section .round{float:left;width:250px;height:250px;margin-right:60px;overflow:hidden;border-radius:125px;box-shadow:0 0 10px 5px rgba(0,0,0,.15)}

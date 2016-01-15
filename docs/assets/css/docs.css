@@ -1210,6 +1210,9 @@ table td {
 .docs-side-menu .beta {
   background: #ff9500;
 }
+.docs-column {
+  overflow-y: hidden;
+}
 .index-content {
   max-width: 1200px;
   padding: 20px;
