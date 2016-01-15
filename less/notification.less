@@ -11,15 +11,8 @@
   color: white;
   font-size: .65rem;
 
-  .notification-inner {
-    padding: .3rem .6rem 1rem .6rem;
-    .flexbox();
-    .align-items(flex-start);
-  }
-
   transform: translate3d(0, -100%, 0);
-
-  transition: .3s;
+  transition: .4s;
 
   &.notification-in {
     transform: translate3d(0,0,0);
@@ -28,6 +21,14 @@
   &.touching {
     transition-duration: 0s;
   }
+
+  .notification-inner {
+    padding: .3rem .6rem 1rem .6rem;
+    .flexbox();
+    .align-items(flex-start);
+  }
+
+
 
   .notification-content {
     width: 100%;

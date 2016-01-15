@@ -61,7 +61,7 @@
     return result;
   };
 
-  $.fn.index = function(params) {
+  $.fn.indexList = function(params) {
     return this.each(function() {
       if(!this) return;
 
@@ -70,7 +70,7 @@
       var index = list.data("index");
 
       if(!index) {
-        params = $.extend({}, $.fn.index.prototype.defaults, params);
+        params = $.extend({}, $.fn.indexList.prototype.defaults, params);
         index = new Index(params).render(list);
         list.data("index", index);
       }
@@ -81,17 +81,17 @@
   };
 
 
-  $.fn.index.prototype.defaults = {
+  $.fn.indexList.prototype.defaults = {
     titleSelector: ".list-group-title",
     indexListTemplate: "{{#indexes}}<li data-index={{@index}}><strong>{{this}}</strong></li>{{/indexes}}"
   };
 
-  $.initIndex = function(selector) {
+  $.initIndexList = function(selector) {
     var container = $(selector);
     if(container.hasClass(".contacts-block")) {
-      container.index();
+      container.indexList();
     } else {
-      container.find(".contacts-block").index();
+      container.find(".contacts-block").indexList();
     }
   };
 

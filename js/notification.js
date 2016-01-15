@@ -5,11 +5,12 @@
 +function ($) {
   "use strict";
 
-  var noti, defaults, timeout, start, diff;
+  var noti, defaults, timeout, start, diffX, diffY;
 
   var touchStart = function(e) {
     var p = $.getTouchPosition(e);
     start = p;
+    diffX = diffY = 0;
     noti.addClass("touching");
   }
   var touchMove = function(e) {
@@ -17,18 +18,23 @@
     e.preventDefault();
     e.stopPropagation();
     var p = $.getTouchPosition(e);
-    diff = p.y - start.y;
-    if(diff > 0) {
-      diff = Math.sqrt(diff);
+    diffX = p.x - start.x;
+    diffY = p.y - start.y;
+    if(diffY > 0) {
+      diffY = Math.sqrt(diffY);
     }
 
-    noti.css("transform", "translate3d(0, "+diff+"px, 0)");
+    noti.css("transform", "translate3d(0, "+diffY+"px, 0)");
   }
   var touchEnd = function(e) {
     noti.removeClass("touching");
     noti.attr("style", "");
-    if(diff < 0 && (Math.abs(diff) > noti.height()*.3)) {
+    if(diffY < 0 && (Math.abs(diffY) > noti.height()*0.38)) {
       $.closeNotification();
+    }
+
+    if(Math.abs(diffX) <= 1 && Math.abs(diffY) <= 1) {
+      noti.trigger("noti-click");
     }
 
     start = false;
@@ -41,11 +47,6 @@
   }
 
   $.notification = $.noti = function(params) {
-    if(typeof params === typeof "a") {
-      params = {
-        text: params
-      };
-    }
     params = $.extend({}, defaults, params);
     noti = $(".notification");
     if(!noti[0]) { // create a new notification
@@ -53,8 +54,8 @@
       attachEvents(noti);
     }
 
-    noti.off("click");
-    if(params.onClick) noti.on("click", function() {
+    noti.off("noti-click"); //the click event is not correct sometime: it will trigger when user is draging.
+    if(params.onClick) noti.on("noti-click", function() {
       params.onClick(params.data);
     });
 

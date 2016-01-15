@@ -882,7 +882,7 @@ hr {
     position: relative;
     top: 50px;
     float: left;
-    width: 150px;
+    width: 160px;
     max-height: 100vh;
     padding-bottom: 50px;
     overflow: auto;
@@ -890,7 +890,7 @@ hr {
   .docs-column {
     float: none;
     width: auto;
-    margin: 0 400px 0 170px;
+    margin: 0 400px 0 180px;
   }
   .device-column {
     width: 400px;

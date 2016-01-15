@@ -18,7 +18,7 @@
     $.initPullToRefresh($content);
     $.initInfiniteScroll($content);
     $.initCalendar($content);
-    $.initIndex($content);
+    $.initIndexList($content);
 
     //extend
     if($.initSwiper) $.initSwiper($content);
