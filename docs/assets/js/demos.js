@@ -238,8 +238,7 @@ $(function () {
       },
       onClose: function(data) {
         $.alert("Close "+data);
-      },
-      time: 999999
+      }
     });
   });
   $(document).on("click", "#close-noti", function() {
