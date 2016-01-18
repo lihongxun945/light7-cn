@@ -21,9 +21,14 @@ title: Get Started &middot; light7
         <h2>Create Layout HTML</h2>
         <p class="lead"></p>
 
-        <h3>1. Include Static Files</h3>
+        <h3>1. Install / Download</h3>
+        <p>First of all, you should download jQuery or Zepto. You can get zepto.js on <a href="http://zeptojs.com/">http://zeptojs.com/</a>, and jQuery on <a href="http://jquery.com/">http://jquery.com/</a>. It's recommand to use jQuery instead of Zepto.</p>
+        <p>Then, you should install Light7. It's recommand to install Light7 with npm - <code>npm install light7</code>.</p>
 
-        <p>You can get zepto.js on [http://zeptojs.com/](http://zeptojs.com/), and jQuery on [http://jquery.com/](http://jquery.com/). It's recommand to use jQuery instead of Zepto.</p>
+        <p>It's recommand to clone <a href="https://github.com/lihongxun945/light7" target="_blank">light7 on github</a> and compile by yourself, if you don't want to use npm. You can change to <code>build</code> branch if you don't want to build by yourself, there are all compiled files in <code>dist</code> folder. Or, you can just click <a href="https://github.com/lihongxun945/light7/archive/build.zip" target="_blank">Here to download</a>.
+
+        <h3>2. Include Static Files</h3>
+
  
 {% highlight html %}
 <link rel="stylesheet" href="css/light7.min.css">
@@ -34,12 +39,11 @@ title: Get Started &middot; light7
 <script type='text/javascript' src='js/light7-swiper.min.js' charset='utf-8'></script>
 {% endhighlight %}
 
-<p>It's recommand to clone <a href="https://github.com/lihongxun945/light7" target="_blank">light7 on github</a> and compile by yourself。You can change to <code>build</code> branch if you don't want to build by yourself, there are all compiled files in <code>dist</code> folder. Or, you can click <a href="https://github.com/lihongxun945/light7/archive/build.zip" target="_blank">Here to download</a>.
 
-        <h3>2. Debug</h3>
+        <h3>3. Debug</h3>
         <p>The "min" in file name means it's compressed. You should include <code>light7.js</code> instead of <code>light7.min.js</code> if you want to debug the code.</p>
 
-        <h3>Init Layout</h3>
+        <h3>4. Init Layout</h3>
         <p>The init Layout:</p>
 
 {% highlight html %}
