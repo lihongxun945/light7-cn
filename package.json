@@ -1,21 +1,23 @@
 {
   "name": "light7",
   "description": "Build mobile apps with simple HTML, CSS, and JS components.",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "keywords": [
+    "light7",
+    "UI",
+    "webapp",
     "css",
     "fonts",
     "ios",
     "android",
-    "mobile",
-    "prototype"
+    "mobile"
   ],
   "homepage": "http://light7.org/",
   "style": "dist/css/light7.css",
   "less": "less/light7.less",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/lihongxun945/light7"
   },
   "license": "MIT",
   "scripts": {
@@ -35,6 +37,8 @@
     "grunt-contrib-jshint": "~0.11.1",
     "grunt-contrib-uglify": "~0.9.1",
     "grunt-contrib-watch": "~0.6.1",
+    "grunt-contrib-less": "^1.0.1",
+    "grunt-contrib-qunit": "^0.7.0",
     "grunt-csscomb": "~3.0.0",
     "grunt-jekyll": "~0.4.2",
     "load-grunt-tasks": "~3.1.0",
@@ -42,9 +46,5 @@
   },
   "engines": {
     "node": ">=0.10.1"
-  },
-  "dependencies": {
-    "grunt-contrib-less": "^1.0.1",
-    "grunt-contrib-qunit": "^0.7.0"
   }
 }
