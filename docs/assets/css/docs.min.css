@@ -163,8 +163,8 @@ hr{height:0;margin:10px 0 30px;clear:both;border:solid #ddd;border-width:1px 0 0
 .lg-units-6{width:50%}
 .lg-units-7{width:58.333%}
 .lg-units-8{width:66.666%}
-.docs-side-menu{position:relative;top:50px;float:left;width:150px;max-height:100vh;padding-bottom:50px;overflow:auto}
-.docs-column{float:none;width:auto;margin:0 400px 0 170px}
+.docs-side-menu{position:relative;top:50px;float:left;width:160px;max-height:100vh;padding-bottom:50px;overflow:auto}
+.docs-column{float:none;width:auto;margin:0 400px 0 180px}
 .device-column{width:400px;margin-left:20px}
 }
 @-webkit-keyframes fadeintext{0%{opacity:0}
@@ -251,6 +251,7 @@ table td{border-top:1px solid #ddd}
 .docs-side-menu.menu-fixed{position:fixed}
 .docs-side-menu .beta,.docs-side-menu .new{position:relative;top:-1px;display:inline-block;padding:0 3px;margin-left:10px;font-size:14px;line-height:20px;color:#fff;text-align:center;background-color:red;border-radius:10px}
 .docs-side-menu .beta{background:#ff9500}
+.docs-column{overflow-y:hidden}
 .index-content{max-width:1200px;padding:20px;margin:auto;font-size:20px}
 .index-content .section{margin-top:60px}
 .index-content .section .round{float:left;width:250px;height:250px;margin-right:60px;overflow:hidden;border-radius:125px;box-shadow:0 0 10px 5px rgba(0,0,0,.15)}

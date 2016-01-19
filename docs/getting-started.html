@@ -21,18 +21,27 @@ title: 开始使用 &middot; light7
         <h2>创建页面</h2>
         <p class="lead"></p>
 
-        <h3>1. 引用静态资源</h3>
+        <h3>1. 下载/安装</h3>
+        <p>First of all, you should download jQuery or Zepto. You can get zepto.js on <a href="http://zeptojs.com/">http://zeptojs.com/</a>, and jQuery on <a href="http://jquery.com/">http://jquery.com/</a>. It's recommand to use jQuery instead of Zepto.</p>
+        <p>Light7 依赖jQuery或者Zepto，你可以在 <a href="http://zeptojs.com/">http://zeptojs.com/</a> 上下载Zepto, 或者在 <a href="http://jquery.com/">http://jquery.com/</a> 下载jQuery。 推荐使用jQuery而不是Zepto。</p>
+        <p>Then, you should install Light7. It's recommand to install Light7 with npm - <code>npm install light7</code>.</p>
+        <p>然后需要下载 Light7. 推荐使用 npm 来安装 - <code>npm install light7</code>.</p>
+
+
+        <p>或者在 <a href="https://github.com/lihongxun945/light7" target="_blank">github</a> 上 clone 到本地并且编译一遍。如果你不想自己编译，可以在clone完之后选择 <code>build</code> 分支，里面有全部编译好的文件。或者更懒一点话，你可以直接点击 <a href="https://github.com/lihongxun945/light7/archive/build.zip" target="_blank">这里下载</a>。
+
+        <h3>2. 引入静态文件</h3>
+
  
 {% highlight html %}
 <link rel="stylesheet" href="css/light7.min.css">
-<script type='text/javascript' src='js/zepto.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='js/jquery.min.js' charset='utf-8'></script>
 <script type='text/javascript' src='js/light7.min.js' charset='utf-8'></script>
 <!--如果你用到了拓展包中的组件，还需要引用下面两个-->
 <link rel="stylesheet" href="css/light7-extend.min.css">
 <script type='text/javascript' src='js/light7-extend.min.js' charset='utf-8'></script>
 {% endhighlight %}
 
-<p>暂时并没有提供CDN服务，建议在 <a href="https://github.com/lihongxun945/light7" target="_blank">github</a> 上 clone 到本地并且编译一遍。如果你不想自己编译，可以在clone完之后选择 <code>build</code> 分支，里面有全部编译好的文件。或者更懒一点话，你可以直接点击 <a href="https://github.com/lihongxun945/light7/archive/build.zip" target="_blank">这里下载</a>。
 
         <h3>2. 调试代码</h3>
         <p>如果你希望在开发环境下可以调试代码，那么你可以这样引用未压缩的版本。只要把上面的对应文件名中的 `.min` 去掉就可以</p>
@@ -53,7 +62,7 @@ title: 开始使用 &middot; light7
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
     <link rel="stylesheet" href="css/light7.min.css">
-    <link rel="stylesheet" href="css/light7-extend.min.css">
+    <link rel="stylesheet" href="css/light7-swiper.min.css">
 
     <link rel="stylesheet" href="/your-css-file.css">
   </head>
@@ -61,7 +70,7 @@ title: 开始使用 &middot; light7
     <!-- 你的html代码 -->
     <script type='text/javascript' src='js/zepto.min.js' charset='utf-8'></script>
     <script type='text/javascript' src='js/light7.min.js' charset='utf-8'></script>
-    <script type='text/javascript' src='js/light7-extend.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='js/light7-swiper.min.js' charset='utf-8'></script>
 
     <script src="/your-js-file.js"></script>
   </body>

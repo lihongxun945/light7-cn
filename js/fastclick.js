@@ -251,14 +251,6 @@
 		case 'video':
 			return true;
     default:
-      //fix a bug: when input is wrap by label, but click other element in this label will do nothing.
-      var parent = target;
-      while(parent && (parent.tagName.toUpperCase() !== "BODY")) {
-        if(parent.tagName.toUpperCase() === "LABEL") {
-          $(parent).find("input").click();
-        }
-        parent = parent.parentNode;
-      }
 		}
 
 
@@ -601,7 +593,15 @@
 			}
 
 			return false;
-		}
+    } else {
+      var parent = targetElement;
+      while(parent && (parent.tagName.toUpperCase() !== "BODY")) {
+        if(parent.tagName.toUpperCase() === "LABEL") {
+          $(parent).find("input").click();
+        }
+        parent = parent.parentNode;
+      }
+    }
 
 		if (deviceIsIOS && !deviceIsIOS4) {
 

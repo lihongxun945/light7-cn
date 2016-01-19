@@ -85,7 +85,8 @@
 
 </article>
 
-<article class="component active">
+<<<<<<< HEAD
+<article class="component active" data-url="contacts-list" id='contacts-list'>
   <h3 class="component-title">联系人列表（Contacts List）</h3>
   <p class="component-description">联系人列表用来展示个人的联系方式。</p>
   <p>联系人列表是<a href="#list">分组列表（Grouped Lists）</a>的一个特殊的类型，主要有2点不同：</p>
@@ -93,6 +94,13 @@
     <li>列表区域元素（“list-block”）需要带上额外的“contacts-block”类</li>
     <li>页面内容元素（“page-content”）需要带上额外的“contacts-content”类</li>
   </ul>
+
+  <p>联系人列表默认有一个iOS风格的索引条。</p>
+  <p>索引条是一个JS组件，pageInit的时候会自动初始化。你也可以手动初始化这个组件：</p>
+
+{% highlight js %}
+$(".contacts-block").indexList();
+{% endhighlight %}
 
   <div class="component-example component-example-fullbleed">
   </div>
