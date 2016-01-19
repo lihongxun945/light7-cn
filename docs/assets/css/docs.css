@@ -492,6 +492,10 @@ body {
 .docs-header-content .btn:active {
   opacity: .5;
 }
+.docs-header-content .git-buttons iframe {
+  display: inline-block;
+  border: 0;
+}
 .docs-subtitle {
   max-width: 750px;
   margin: 0 auto 20px;
@@ -616,7 +620,7 @@ body {
 .version {
   margin-top: 10px;
   margin-bottom: 0;
-  font-size: 90%;
+  font-size: 18px;
   color: #777;
 }
 .docs-footer {

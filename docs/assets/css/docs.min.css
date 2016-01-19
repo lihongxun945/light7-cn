@@ -58,6 +58,7 @@ body{position:relative!important;overflow:auto;font:400 14px/1.5 "Open Sans",san
 .docs-header-content .btn{display:block;padding:15px 60px 16px;margin-bottom:0;font-size:18px;color:#0a1855;background-color:#fff;border:0;-webkit-transition:all .2s linear;-o-transition:all .2s linear;transition:all .2s linear}
 .docs-header-content .btn:hover{background-color:#fff;box-shadow:0 0 50px rgba(255,255,255,.3)}
 .docs-header-content .btn:active{opacity:.5}
+.docs-header-content .git-buttons iframe{display:inline-block;border:0}
 .docs-subtitle{max-width:750px;margin:0 auto 20px;font-size:28px;font-weight:300;line-height:38px;color:#fff}
 @media screen and (min-width:768px){.docs-header-content{top:40%;-webkit-transform:translateY(-50%);-ms-transform:translateY(-50%);-o-transform:translateY(-50%);transform:translateY(-50%)}
 .docs-header-content .btn{display:inline-block}
@@ -84,7 +85,7 @@ body{position:relative!important;overflow:auto;font:400 14px/1.5 "Open Sans",san
 }
 .docs-module{padding:20px;margin-top:20px;border:1px solid #e7e7e7;border-radius:3px}
 .docs-module .btn-block{margin-bottom:0}
-.version{margin-top:10px;margin-bottom:0;font-size:90%;color:#777}
+.version{margin-top:10px;margin-bottom:0;font-size:18px;color:#777}
 .docs-footer{padding:30px 20px;margin-top:50px;font-size:14px;color:#777;text-align:center;border-top:1px solid #ddd}
 .docs-footer .social{padding:0 0 20px;margin:0;list-style:none}
 .docs-footer .social li{display:inline-block;height:20px;vertical-align:top}
