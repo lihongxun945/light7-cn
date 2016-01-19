@@ -11,8 +11,8 @@ body{position:relative!important;overflow:auto;font:400 14px/1.5 "Open Sans",san
 @media screen and (min-width:768px){.docs-content{font-size:18px}
 }
 .docs-content h1,.docs-content h2,.docs-content h3,.docs-content h4,.docs-content h5,.docs-content h6{font-weight:400;color:#222}
-.docs-content h2{padding:15px 0;margin-bottom:.25em;margin-bottom:30px;font-size:2em;border-bottom:1px solid #ccc}
-.docs-content h3{margin-bottom:.5em;font-size:1.25em}
+.docs-content h2{padding:15px 0;margin-bottom:.25em;margin-bottom:30px;font-size:2em;color:#900;border-bottom:1px solid #ccc}
+.docs-content h3{margin-bottom:.5em;font-size:1.25em;color:#900}
 .docs-content p{margin-bottom:1.5em;font-size:1em;color:#555}
 .docs-content .lead{font-size:1.1em;color:#777}
 .docs-header{position:relative;background-color:#571c94;background-image:url(http://sui.taobao.org/sui/docs/assets/imgs/grid.png),-webkit-gradient(linear,left bottom,right top,color-stop(0,#571c94),color-stop(100%,#e609cf));background-image:url(http://sui.taobao.org/sui/docs/assets/imgs/grid.png),-webkit-linear-gradient(135deg,#571c94 0,#e609cf 100%);background-image:url(http://sui.taobao.org/sui/docs/assets/imgs/grid.png),-o-linear-gradient(135deg,#571c94 0,#e609cf 100%);background-image:url(http://sui.taobao.org/sui/docs/assets/imgs/grid.png),-webkit-linear-gradient(315deg,#571c94 0,#e609cf 100%);background-image:url(http://sui.taobao.org/sui/docs/assets/imgs/grid.png),-o-linear-gradient(315deg,#571c94 0,#e609cf 100%);background-repeat:no-repeat;background-position:50% 40%}
@@ -58,7 +58,8 @@ body{position:relative!important;overflow:auto;font:400 14px/1.5 "Open Sans",san
 .docs-header-content .btn{display:block;padding:15px 60px 16px;margin-bottom:0;font-size:18px;color:#0a1855;background-color:#fff;border:0;-webkit-transition:all .2s linear;-o-transition:all .2s linear;transition:all .2s linear}
 .docs-header-content .btn:hover{background-color:#fff;box-shadow:0 0 50px rgba(255,255,255,.3)}
 .docs-header-content .btn:active{opacity:.5}
-.docs-header-content .git-buttons iframe{display:inline-block;border:0}
+.docs-header-content .git-buttons{margin-top:20px}
+.docs-header-content .git-buttons iframe{display:inline-block;height:24px!important;border:0}
 .docs-subtitle{max-width:750px;margin:0 auto 20px;font-size:28px;font-weight:300;line-height:38px;color:#fff}
 @media screen and (min-width:768px){.docs-header-content{top:40%;-webkit-transform:translateY(-50%);-ms-transform:translateY(-50%);-o-transform:translateY(-50%);transform:translateY(-50%)}
 .docs-header-content .btn{display:inline-block}
