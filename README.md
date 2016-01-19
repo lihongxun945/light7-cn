@@ -10,7 +10,11 @@
 
 # grunt 配置
 
-执行 `grunt` 编译打包所有JS和CSS文件，并生成离线文档。
+- Install `grunt` first, see [Grunt](http://gruntjs.com/) for how to install and use grunt, if you have never used grunt before.
+- Then, run `npm install` under the root dir of this repo. This command will install the nodejs packages required by grunt.
+- Now, you can run `grunt` to compile the source file.
+
+# Grunt
 
 执行 `grunt watch` 进入 watch 状态。
 
@@ -35,7 +39,7 @@
 
 # 关于作者
 
-前阿里巴巴国际UED前端, 在阿里主要负责 [SUI Mobile](https://github.com/sdc-alibaba/SUI-Mobile) 和 [Framework7-Plus](https://github.com/sdc-fe/Framework7-Plus) 以及 [Framework7](http://framework7.taobao.org/) 。博客地址：http://blog.csdn.net/lihongxun945?viewmode=contents。
+前知乎前端工程师，前阿里巴巴国际UED前端, 在阿里主要负责 [SUI Mobile](https://github.com/sdc-alibaba/SUI-Mobile) 和 [Framework7-Plus](https://github.com/sdc-fe/Framework7-Plus) 以及 [Framework7](http://framework7.taobao.org/) 。博客地址：http://blog.csdn.net/lihongxun945?viewmode=contents。
 
 # 关于 f7, sui 和 light7
 

@@ -63,6 +63,8 @@ module.exports = function(grunt) {
                   'js/pull-to-refresh-js-scroll.js',
                   'js/pull-to-refresh.js',
                   'js/infinite-scroll.js',
+                  'js/notification.js',
+                  'js/index.js',
                   'js/searchbar.js',
                   'js/panels.js',
                   'js/router.js',
@@ -70,7 +72,7 @@ module.exports = function(grunt) {
               ],
               dest: '<%= meta.distPath %>js/<%= pkg.name %>.js'
             },
-            extend: {
+            swiper: {
               options: {
                   banner: '<%= banner %>'
               },
@@ -226,9 +228,9 @@ module.exports = function(grunt) {
                 src: '<%= meta.distPath %>css/<%= pkg.name %>.css',
                 dest: '<%= meta.distPath %>css/<%= pkg.name %>.min.css'
             },
-            extend: {
-                src: '<%= meta.distPath %>css/<%= pkg.name %>-extend.css',
-                dest: '<%= meta.distPath %>css/<%= pkg.name %>-extend.min.css'
+            swiper: {
+                src: '<%= meta.distPath %>css/<%= pkg.name %>-swiper.css',
+                dest: '<%= meta.distPath %>css/<%= pkg.name %>-swiper.min.css'
             },
             docs: {
                 src: [
@@ -252,9 +254,9 @@ module.exports = function(grunt) {
                 src: '<%= concat.light7.dest %>',
                 dest: '<%= meta.distPath %>js/<%= pkg.name %>.min.js'
             },
-            extend: {
-                src: '<%= concat.extend.dest %>',
-                dest: '<%= meta.distPath %>js/<%= pkg.name %>-extend.min.js'
+            swiper: {
+                src: '<%= concat.swiper.dest %>',
+                dest: '<%= meta.distPath %>js/<%= pkg.name %>-swiper.min.js'
             },
             cityPicker: {
                 src: '<%= concat.cityPicker.dest %>',

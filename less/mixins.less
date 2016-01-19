@@ -95,7 +95,7 @@
         clear: both;
     }
 }
-.hairline(@position, @color) when (@position = top) {
+/*.hairline(@position, @color) when (@position = top) {
     &:before {
         content: '';
         position: absolute;
@@ -206,6 +206,39 @@
     &:before {
         background-color: @color;
     }
+}*/
+
+.hairline(@position, @color) when (@position = top) {
+  border-top: 1px solid @color;
+}
+.hairline(@position, @color) when (@position = left) {
+  border-left: 1px solid @color;
+}
+.hairline(@position, @color) when (@position = bottom) {
+  border-bottom: 1px solid @color;
+}
+.hairline(@position, @color) when (@position = right) {
+  border-right: 1px solid @color;
+}
+// For right and bottom
+.hairline-remove(@position) when not (@position = left) and not (@position = top) {
+  border-left: 0;
+  border-bottom: 0;
+}
+// For left and top
+.hairline-remove(@position) when not (@position = right) and not (@position = bottom) {
+  border-right: 0;
+  border-top: 0;
+}
+// For right and bottom
+.hairline-color(@position, @color) when not (@position = left) and not (@position = top) {
+  border-right-color: @color;
+  border-bottom-color: @color;
+}
+// For left and top
+.hairline-color(@position, @color) when not (@position = right) and not (@position = bottom) {
+  border-left-color: @color;
+  border-top-color: @color;
 }
 
 // Encoded SVG Background

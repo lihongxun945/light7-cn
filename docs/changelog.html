@@ -23,6 +23,27 @@ title: 更新日志 &middot; light7
 
         <h2>Changelog</h2>
 
+        <h3>v0.3.1 - 2015-01-18</h3>
+        <ul>
+          <li>Fix width of <a href='/components/#picker'>Picker</a>.</li>
+        </ul>
+
+        <h3>v0.3.0 - 2015-01-15</h3>
+        <ul>
+          <li>New <a href='/components/#notification'>Notification</a>.</li>
+          <li>Fix bug in <a href='/components/#router'>router</a>: router will remove extras related it when remove ajax page, such as popup and panels.</li>
+          <li>Fix bug in fastclick: The error handle of label click may cause stack overflow bug.</li>
+          <li>The name of index list method changed to <code>$.fn.indexList</code>, because the jQuery already has a method named index. see in <a href="/components#contacts-list">Contacts List</a>. </li>
+          <li>Remove hairline, use border instead. Because hairline not works well on android device, especially when scroll page.</li>
+        </ul>
+
+        <h3>v0.2.1 - 2015-12-28</h3>
+        <ul>
+          <li>Add a iOS-like index list in <a href="/components#contacts-list">Contacts List</a></li>
+          <li>Fix a bug: Forgot to change file name <code>light7-extend.js</code> to <code>light7-swiper.min.js</code></li>
+        </ul>
+
+
         <h3>v0.2.0 - 2015-12-24 - Merry Christmas!</h3>
         <ul>
           <li>修复bug：cssmin 在压缩的时候会自动进行合并，会导致一些重要的兼容性代码被合并掉，在安卓机器上会出现问题。</li>
