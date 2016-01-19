@@ -765,14 +765,6 @@ Device/OS Detection
 		case 'video':
 			return true;
     default:
-      //fix a bug: when input is wrap by label, but click other element in this label will do nothing.
-      var parent = target;
-      while(parent && (parent.tagName.toUpperCase() !== "BODY")) {
-        if(parent.tagName.toUpperCase() === "LABEL") {
-          $(parent).find("input").click();
-        }
-        parent = parent.parentNode;
-      }
 		}
 
 
@@ -1115,7 +1107,15 @@ Device/OS Detection
 			}
 
 			return false;
-		}
+    } else {
+      var parent = targetElement;
+      while(parent && (parent.tagName.toUpperCase() !== "BODY")) {
+        if(parent.tagName.toUpperCase() === "LABEL") {
+          $(parent).find("input").click();
+        }
+        parent = parent.parentNode;
+      }
+    }
 
 		if (deviceIsIOS && !deviceIsIOS4) {
 
@@ -4393,6 +4393,227 @@ Device/OS Detection
     };
 }($); 
 
+/* ===============================================================================
+************   Notification ************
+=============================================================================== */
+/* global $:true */
++function ($) {
+  "use strict";
+
+  var noti, defaults, timeout, start, diffX, diffY;
+
+  var touchStart = function(e) {
+    var p = $.getTouchPosition(e);
+    start = p;
+    diffX = diffY = 0;
+    noti.addClass("touching");
+  };
+  var touchMove = function(e) {
+    if(!start) return false;
+    e.preventDefault();
+    e.stopPropagation();
+    var p = $.getTouchPosition(e);
+    diffX = p.x - start.x;
+    diffY = p.y - start.y;
+    if(diffY > 0) {
+      diffY = Math.sqrt(diffY);
+    }
+
+    noti.css("transform", "translate3d(0, "+diffY+"px, 0)");
+  };
+  var touchEnd = function() {
+    noti.removeClass("touching");
+    noti.attr("style", "");
+    if(diffY < 0 && (Math.abs(diffY) > noti.height()*0.38)) {
+      $.closeNotification();
+    }
+
+    if(Math.abs(diffX) <= 1 && Math.abs(diffY) <= 1) {
+      noti.trigger("noti-click");
+    }
+
+    start = false;
+  };
+
+  var attachEvents = function(el) {
+    el.on($.touchEvents.start, touchStart);
+    el.on($.touchEvents.move, touchMove);
+    el.on($.touchEvents.end, touchEnd);
+  };
+
+  $.notification = $.noti = function(params) {
+    params = $.extend({}, defaults, params);
+    noti = $(".notification");
+    if(!noti[0]) { // create a new notification
+      noti = $('<div class="notification"></div>').appendTo(document.body);
+      attachEvents(noti);
+    }
+
+    noti.off("noti-click"); //the click event is not correct sometime: it will trigger when user is draging.
+    if(params.onClick) noti.on("noti-click", function() {
+      params.onClick(params.data);
+    });
+
+    noti.html($.t7.compile(params.tpl)(params));
+
+    noti.show();
+
+    noti.addClass("notification-in");
+    noti.data("params", params);
+
+    var startTimeout = function() {
+      if(timeout) {
+        clearTimeout(timeout);
+        timeout = null;
+      }
+
+      timeout = setTimeout(function() {
+        if(noti.hasClass("touching")) {
+          startTimeout();
+        } else {
+          $.closeNotification();
+        }
+      }, params.time);
+    };
+
+    startTimeout();
+
+  };
+
+  $.closeNotification = function() {
+    timeout && clearTimeout(timeout);
+    timeout = null;
+    var noti = $(".notification").removeClass("notification-in").transitionEnd(function() {
+      $(this).remove();
+    });
+
+    if(noti[0]) {
+      var params = $(".notification").data("params");
+      if(params && params.onClose) {
+        params.onClose(params.data);
+      }
+    }
+  };
+
+  defaults = $.noti.prototype.defaults = {
+    title: undefined,
+    text: undefined,
+    media: undefined,
+    time: 4000,
+    onClick: undefined,
+    onClose: undefined,
+    data: undefined,
+    tpl:  '<div class="notification-inner">' +
+            '{{#if media}}<div class="notification-media">{{media}}</div>{{/if}}' +
+            '<div class="notification-content">' +
+            '{{#if title}}<div class="notification-title">{{title}}</div>{{/if}}' +
+            '{{#if text}}<div class="notification-text">{{text}}</div>{{/if}}' +
+            '</div>' +
+            '<div class="notification-handle-bar"></div>' +
+          '</div>'
+  };
+
+}($);
+
+/* global $:true */
++function ($) {
+  "use strict";
+
+  var Index = function(params) {
+    this.params = params;
+    this.tpl = $.t7(this.params.indexListTemplate).compile();
+  };
+
+  Index.prototype.render = function(list) {
+    this.list = $(list || ".list");
+    this.draw();
+  };
+
+  Index.prototype.draw = function() {
+    if(this.indexList) this.indexList.remove();
+    this.titles = this.list.find(this.params.titleSelector);
+    var titleTexts = this.titles.map(function(i, t) {
+      return $(t).data("index") || $(t).text();
+    }).toArray();
+
+    this.indexList = $("<ul class='index-list-bar'></ul>").appendTo(this.list.parents(".page"));
+    this.indexList.html(this.tpl({indexes: titleTexts}));
+    this.indexList.on($.touchEvents.start, $.proxy(this.touchStart, this));
+    this.indexList.on($.touchEvents.start + " " + $.touchEvents.move, $.proxy(this.touchMove, this));
+    this.indexList.on($.touchEvents.end, $.proxy(this.touchEnd, this));
+
+    this.content = this.list.parents(".content");
+  };
+
+  Index.prototype.touchStart = function() {
+    this.pageOffsetTop = this.content.offset().top;
+    this.touching = true;
+  };
+
+  Index.prototype.touchMove = function(e) {
+    if(!this.touching) return;
+    e.preventDefault();
+    var li = this.getElementOnTouch($.getTouchPosition(e));
+    if(!li) return;
+    var title = this.titles.eq(li.data("index"));
+    var titleTop = title.parent().offset().top; // if a element has class list-group-title, it will be sticky in safari, so it's offset is not correct
+    var top =  titleTop - this.pageOffsetTop + this.content.scrollTop();
+    this.content.scrollTop(top);
+  };
+
+  Index.prototype.touchEnd = function() {
+    this.touching = false;
+  };
+
+  Index.prototype.getElementOnTouch = function(position) {
+    var result = null;
+    this.indexList.find("li").each(function() {
+      if(result) return;
+      var $this = $(this);
+      var offset = $this.offset();
+      if(offset.top < position.y && offset.top + $this.outerHeight() > position.y) {
+        result = $this;
+      }
+    });
+    return result;
+  };
+
+  $.fn.indexList = function(params) {
+    return this.each(function() {
+      if(!this) return;
+
+      var list = $(this);
+
+      var index = list.data("index");
+
+      if(!index) {
+        params = $.extend({}, $.fn.indexList.prototype.defaults, params);
+        index = new Index(params).render(list);
+        list.data("index", index);
+      }
+
+      return index;
+
+    });
+  };
+
+
+  $.fn.indexList.prototype.defaults = {
+    titleSelector: ".list-group-title",
+    indexListTemplate: "{{#indexes}}<li data-index={{@index}}><strong>{{this}}</strong></li>{{/indexes}}"
+  };
+
+  $.initIndexList = function(selector) {
+    var container = $(selector);
+    if(container.hasClass(".contacts-block")) {
+      container.indexList();
+    } else {
+      container.find(".contacts-block").indexList();
+    }
+  };
+
+}($);
+
 /* global $:true */
 +function ($) {
   "use strict";
@@ -4758,6 +4979,7 @@ Device/OS Detection
     this.stack = sessionStorage;
     this.stack.setItem("back", "[]");  //返回栈, {url, pageid, stateid}
     this.stack.setItem("forward", "[]");  //前进栈, {url, pageid, stateid}
+    this.extras = {}; //page extra: popup, panel...
     this.init();
     this.xhr = null;
   }
@@ -4820,7 +5042,7 @@ Device/OS Detection
 
     var url = param.url, noAnimation = param.noAnimation, replace = param.replace;
 
-    this.getPage(url, function(page) {
+    this.getPage(url, function(page, extra) {
 
       var currentPage = this.getCurrentPage();
 
@@ -4835,10 +5057,16 @@ Device/OS Detection
 
       //remove all forward page
       var forward = JSON.parse(this.state.getItem("forward") || "[]");
+      var self = this;
       for(var i=0;i<forward.length;i++) {
         $(forward[i].pageid).each(function() {
           var $page = $(this);
-          if($page.data("page-remote")) $page.remove();
+          if($page.data("page-remote")) {
+            var extra = self.extras[$page[0].id];
+            extra && extra.remove();
+            self.extras[$page[0].id] = undefined;
+            $page.remove();
+          }
         });
       }
       this.state.setItem("forward", "[]");  //clearforward
@@ -4848,6 +5076,8 @@ Device/OS Detection
       page.insertBefore($(".page")[0]);
 
       if(duplicatePage[0] !== page[0]) duplicatePage.remove(); //if inline mod, the duplicate page is current page
+
+      self.extras[page[0].id] = extra.appendTo(document.body);
 
       var id = this.genStateID();
       this.setCurrentStateID(id);
@@ -5028,10 +5258,12 @@ Device/OS Detection
     this.xhr = $.ajax({
       url: url,
       success: $.proxy(function(data, s, xhr) {
-        var $page = this.parseXHR(xhr);
+        var html = this.parseXHR(xhr);
+        var $page = html[0];
+        var $extra = html[1];
         if(!$page[0].id) $page[0].id = this.genRandomID();
         $page.data("page-remote", 1);
-        callback.apply(this, [$page]);
+        callback.apply(this, [$page, $extra]);
       }, this),
       error: function() {
         self.dispatch("pageLoadError");
@@ -5048,11 +5280,11 @@ Device/OS Detection
     html = "<div>"+html+"</div>";
     var tmp = $(html);
 
-    tmp.find(".popup, .popover, .panel, .panel-overlay").appendTo(document.body);
+    var $extra = tmp.find(".popup, .popover, .panel, .panel-overlay");
 
     var $page = tmp.find(".page");
     if(!$page[0]) $page = tmp.addClass("page");
-    return $page;
+    return [$page, $extra];
   }
 
   Router.prototype.genStateID = function() {
@@ -5159,6 +5391,7 @@ Device/OS Detection
     $.initPullToRefresh($content);
     $.initInfiniteScroll($content);
     $.initCalendar($content);
+    $.initIndexList($content);
 
     //extend
     if($.initSwiper) $.initSwiper($content);
