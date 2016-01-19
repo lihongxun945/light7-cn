@@ -1,5 +1,7 @@
 # Light7 - a light and easy to use UI lib for webapp
 
+[![Join the chat at https://gitter.im/lihongxun945/light7](https://badges.gitter.im/lihongxun945/light7.svg)](https://gitter.im/lihongxun945/light7?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Light7 is a fork of [Framework7](https://github.com/nolimits4web/Framework7). Framework7 is a very amazing framework for build webapp. I use it in my project last year.
 
 But I find it's to hard to learn, and most time I only need a simple UI lib instead of a heavy framework. So, I forked Framework7 and rewrite it to be Light7 - a very light and easy to use UI lib.I have fix some compatibility problems on Android 4.0~4.2 too.
