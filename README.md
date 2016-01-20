@@ -11,7 +11,9 @@ For more docs please visit [Light7 Website](http://light7.org/)
 
 # Download
 
-Please clone this repo and compile by yourself. The `master` branch contains only source file, You can clone and change to `build` branch to get all compiled files under `dist/`.
+It's recommand to use npm to install Light7 - `npm install light7`.
+
+You can also clone this repo and compile by yourself. There is only source file on `master` branch. You can change to `build` branch to get all compiled files under `dist/`.
 
 # Install Grunt
 
