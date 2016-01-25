@@ -20,10 +20,31 @@ title: light7
 </div>
 
 <div class="index-content docs-content">
-  <h2>light7</h2>
-  <p>light7 is light and easy to use UI lib forked from <a href='http://www.idangero.us/framework7/' target="_blank">Framework7</a>。I would like to make it easy to build a webapp UI on both Android 4.0+ and iOS 6+ using Light7.</p>
+  <h2>Try Light7 Now!</h2>
 
-  <h3>Very Light</h3>
+  <p>Get light7 code with npm: <code>npm install light7</code>.</p>
+  <p>It's more recommand to clone the source code on github - <a href="https://github.com/lihongxun945/light7" target="_blank">light7 on github</a> - and compile by yourself. You can also click <a href="https://github.com/lihongxun945/light7/archive/build.zip" target="_blank">Here to download a zip file</a>.</p>
+
+  <p>All the compiled code is in the folder <code>dist</code>, now import the CSS and JS file like this: </p>
+
+{% highlight html %}
+<!-- in head -->
+<link rel="stylesheet" href="dist/css/light7.min.css">
+
+<!-- at the end of body -->
+<script type='text/javascript' src='jquery.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='dist/js/light7.min.js' charset='utf-8'></script>
+{% endhighlight %}
+
+  <p>You can simple show an alert dialog with <code>$.alert</code>now:</p>
+{% highlight js %}
+$.alert("Hello Light7");
+{% endhighlight %}
+
+
+  <h2>Why Light7 ?</h2>
+
+  <h3>Light and Powerful</h3>
   <p>It is only a UI lib, but not a framework. It provides 20+ useful components with only 82K JS and 117K CSS files. Most time you just copy component's HTML code and paste in your project, and It works!</p>
   <p>Light7 depend on <a href="http://jquery.com/" target="_blank">jQuery</a> or <a href='http://zeptojs.com/'>zeptojs</a>, nothing to learn if you have used Zepto/jQuery before.</p>
 
@@ -50,12 +71,6 @@ title: light7
     <p>We have four different color themes, and a night theme， see <a href="/components/#themes" target="_blank">themes</a>。</p>
   </div>
 
-  <div class="section clearfix">
-    <h3>Share Me</h3>
-    <div class="addthis_native_toolbox"></div>
-  </div>
 </div>
 
-<!-- Go to www.addthis.com/dashboard to customize your tools -->
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-569e02bd13e44a12" async="async"></script>
 {% include footer.html %}
