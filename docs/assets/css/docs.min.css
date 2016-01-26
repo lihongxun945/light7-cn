@@ -11,12 +11,12 @@ body{position:relative!important;overflow:auto;font:400 14px/1.5 "Open Sans",san
 @media screen and (min-width:768px){.docs-content{font-size:18px}
 }
 .docs-content h1,.docs-content h2,.docs-content h3,.docs-content h4,.docs-content h5,.docs-content h6{font-weight:400;color:#222}
-.docs-content h2{padding:15px 0;margin-bottom:.25em;margin-bottom:30px;font-size:2em;border-bottom:1px solid #ccc}
-.docs-content h3{margin-bottom:.5em;font-size:1.25em}
+.docs-content h2{padding:15px 0;margin-bottom:.25em;margin-bottom:30px;font-size:2em;color:#b72f20;border-bottom:1px solid #ccc}
+.docs-content h3{margin-bottom:.5em;font-size:1.25em;color:#b72f20}
 .docs-content p{margin-bottom:1.5em;font-size:1em;color:#555}
 .docs-content .lead{font-size:1.1em;color:#777}
-.docs-header{position:relative;background-color:#571c94;background-image:url(http://sui.taobao.org/sui/docs/assets/imgs/grid.png),-webkit-gradient(linear,left bottom,right top,color-stop(0,#571c94),color-stop(100%,#e609cf));background-image:url(http://sui.taobao.org/sui/docs/assets/imgs/grid.png),-webkit-linear-gradient(135deg,#571c94 0,#e609cf 100%);background-image:url(http://sui.taobao.org/sui/docs/assets/imgs/grid.png),-o-linear-gradient(135deg,#571c94 0,#e609cf 100%);background-image:url(http://sui.taobao.org/sui/docs/assets/imgs/grid.png),-webkit-linear-gradient(315deg,#571c94 0,#e609cf 100%);background-image:url(http://sui.taobao.org/sui/docs/assets/imgs/grid.png),-o-linear-gradient(315deg,#571c94 0,#e609cf 100%);background-repeat:no-repeat;background-position:50% 40%}
-.docs-sub-header{position:relative;background-color:#571c94;background-image:-webkit-gradient(linear,left bottom,right top,color-stop(0,#571c94),color-stop(100%,#e609cf));background-image:-webkit-linear-gradient(135deg,#571c94 0,#e609cf 100%);background-image:-o-linear-gradient(135deg,#571c94 0,#e609cf 100%);background-image:-webkit-linear-gradient(315deg,#571c94 0,#e609cf 100%);background-image:-o-linear-gradient(315deg,#571c94 0,#e609cf 100%);background-image:linear-gradient(135deg,#571c94 0,#e609cf 100%);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#{@color-from}', endColorstr='#{@color-to}', GradientType=1)}
+.docs-header{position:relative;background-color:#b72f20;background-image:url(http://sui.taobao.org/sui/docs/assets/imgs/grid.png);background-repeat:no-repeat;background-position:50% 40%}
+.docs-sub-header{position:relative;background-color:#b72f20}
 .docs-header{height:320px}
 .docs-header .carbonad{position:relative!important;margin-top:0!important;-webkit-animation-name:fadeintext;-o-animation-name:fadeintext;animation-name:fadeintext;-webkit-animation-duration:2s;-o-animation-duration:2s;animation-duration:2s}
 .docs-header .version{margin-top:15px;color:rgba(255,255,255,.5);text-align:center}
@@ -58,6 +58,8 @@ body{position:relative!important;overflow:auto;font:400 14px/1.5 "Open Sans",san
 .docs-header-content .btn{display:block;padding:15px 60px 16px;margin-bottom:0;font-size:18px;color:#0a1855;background-color:#fff;border:0;-webkit-transition:all .2s linear;-o-transition:all .2s linear;transition:all .2s linear}
 .docs-header-content .btn:hover{background-color:#fff;box-shadow:0 0 50px rgba(255,255,255,.3)}
 .docs-header-content .btn:active{opacity:.5}
+.docs-header-content .git-buttons{margin-top:20px}
+.docs-header-content .git-buttons iframe{display:inline-block;height:24px!important;border:0}
 .docs-subtitle{max-width:750px;margin:0 auto 20px;font-size:28px;font-weight:300;line-height:38px;color:#fff}
 @media screen and (min-width:768px){.docs-header-content{top:40%;-webkit-transform:translateY(-50%);-ms-transform:translateY(-50%);-o-transform:translateY(-50%);transform:translateY(-50%)}
 .docs-header-content .btn{display:inline-block}
@@ -84,7 +86,7 @@ body{position:relative!important;overflow:auto;font:400 14px/1.5 "Open Sans",san
 }
 .docs-module{padding:20px;margin-top:20px;border:1px solid #e7e7e7;border-radius:3px}
 .docs-module .btn-block{margin-bottom:0}
-.version{margin-top:10px;margin-bottom:0;font-size:90%;color:#777}
+.version{margin-top:10px;margin-bottom:0;font-size:18px;color:#777}
 .docs-footer{padding:30px 20px;margin-top:50px;font-size:14px;color:#777;text-align:center;border-top:1px solid #ddd}
 .docs-footer .social{padding:0 0 20px;margin:0;list-style:none}
 .docs-footer .social li{display:inline-block;height:20px;vertical-align:top}
@@ -132,8 +134,7 @@ code{padding:2px 4px;font-family:Menlo,Monaco,Consolas,"Courier New",monospace;f
 .highlight pre{padding:15px;margin-top:15px;overflow-x:auto;font-size:13px;color:#777;word-wrap:normal;white-space:pre;background-color:#fafafa;border-top:1px solid #ddd;border-bottom:1px solid #ddd}
 .highlight pre code{padding:0}
 @media screen and (min-width:768px){.component,.component-example-fullbleed,.highlight{margin-right:0;margin-left:0}
-.component{padding-right:0;padding-left:0;opacity:.3;-webkit-transition:opacity .2s ease-in-out;-o-transition:opacity .2s ease-in-out;transition:opacity .2s ease-in-out}
-.component.active{opacity:1}
+.component{padding-right:0;padding-left:0;-webkit-transition:opacity .2s ease-in-out;-o-transition:opacity .2s ease-in-out;transition:opacity .2s ease-in-out}
 .component-example{display:none}
 .highlight pre{border-right:1px solid #ddd;border-left:1px solid #ddd;border-radius:3px}
 }

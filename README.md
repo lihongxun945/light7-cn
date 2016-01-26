@@ -1,8 +1,11 @@
 # light7 - a light H5 UI lib for webapp
+[![Join the chat at https://gitter.im/lihongxun945/light7](https://badges.gitter.im/lihongxun945/light7.svg)](https://gitter.im/lihongxun945/light7?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![npm version](https://img.shields.io/npm/v/light7.svg)](https://www.npmjs.com/package/light7)
 
 简单易用的h5 UI库，是从 [SUI Mobile](https://github.com/sdc-alibaba/SUI-Mobile) Fork 出来的一个版本。 官网地址： [http://www.light7.org/](http://www.light7.org/)
 
-**官网因为没有备案，服务器还在国外，国内可以暂时用 [http://123.56.245.102/](http://123.56.245.102/)**
+
+**中文官网已备案通过，地址 [http://light7.cn/](http://light7.cn/) **
 
 # 下载
 
@@ -13,10 +16,6 @@
 - Install `grunt` first, see [Grunt](http://gruntjs.com/) for how to install and use grunt, if you have never used grunt before.
 - Then, run `npm install` under the root dir of this repo. This command will install the nodejs packages required by grunt.
 - Now, you can run `grunt` to compile the source file.
-
-# Grunt
-
-执行 `grunt watch` 进入 watch 状态。
 
 
 # 离线文档
