@@ -17,7 +17,7 @@ body{position:relative!important;overflow:auto;font:400 14px/1.5 "Open Sans",san
 .docs-content .lead{font-size:1.1em;color:#777}
 .docs-header{position:relative;background-color:#b72f20;background-image:url(http://sui.taobao.org/sui/docs/assets/imgs/grid.png);background-repeat:no-repeat;background-position:50% 40%}
 .docs-sub-header{position:relative;background-color:#b72f20}
-.docs-header{height:320px}
+.docs-header{height:380px}
 .docs-header .carbonad{position:relative!important;margin-top:0!important;-webkit-animation-name:fadeintext;-o-animation-name:fadeintext;animation-name:fadeintext;-webkit-animation-duration:2s;-o-animation-duration:2s;animation-duration:2s}
 .docs-header .version{margin-top:15px;color:rgba(255,255,255,.5);text-align:center}
 .docs-header-bottom{position:absolute;right:0;bottom:0;left:0}
