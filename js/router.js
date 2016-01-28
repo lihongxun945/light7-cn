@@ -103,8 +103,8 @@
         $(forward[i].pageid).each(function() {
           var $page = $(this);
           if($page.data("page-remote")) {
-            var extra = self.extras[$page[0].id];
-            extra && extra.remove();
+            var pageExtra = self.extras[$page[0].id];
+            pageExtra && pageExtra.remove();
             self.extras[$page[0].id] = undefined;
             $page.remove();
           }
@@ -118,7 +118,7 @@
 
       if(duplicatePage[0] !== page[0]) duplicatePage.remove(); //if inline mod, the duplicate page is current page
 
-      self.extras[page[0].id] = extra.appendTo(document.body);
+      if(extra) self.extras[page[0].id] = extra.appendTo(document.body);
 
       var id = this.genStateID();
       this.setCurrentStateID(id);
