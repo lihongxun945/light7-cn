@@ -441,7 +441,7 @@
       $.openModal($toast);
       setTimeout(function() {
         $.closeModal($toast);
-      }, 2000);
+      }, 200000);
     };
     $.openModal = function (modal) {
         if(defaults.closePrevious) $.closeModal();
@@ -465,8 +465,9 @@
             });
         }
         if (isToast) {
+            modal.show();
             modal.css({
-                marginLeft: - Math.round(modal.outerWidth() / 2 / 1.185) + 'px' //1.185 是初始化时候的放大效果
+                marginLeft: - Math.round(modal.outerWidth() / 2 + 32 / 2)  + 'px' //outerWidth未计算32px的padding
             });
         }
 
