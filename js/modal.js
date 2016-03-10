@@ -566,14 +566,10 @@
         /*jshint validthis:true */
         var clicked = $(this);
         var url = clicked.attr('href');
-       
 
         //Collect Clicked data- attributes
         var clickedData = clicked.dataset();
 
-       
-        
-      
         // Popover
         if (clicked.hasClass('open-popover')) {
             var popover;
@@ -618,11 +614,14 @@
         }
     }
 
-    var defaults = $.modal.prototype.defaults  = {
+    var defaults = $.modal.prototype.defaults = {
       modalButtonOk: 'OK',
       modalButtonCancel: 'Cancel',
       modalPreloaderTitle: 'Loading...',
       modalContainer : document.body,
+      modalCloseByOutside: true,
+      actionsCloseByOutside: false,
+      popupCloseByOutside: true,
       closePrevious: true  //close all previous modal before open
     };
 
