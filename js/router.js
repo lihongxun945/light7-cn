@@ -229,8 +229,10 @@
     var stack = JSON.parse(this.stack.getItem("back"));
     if(stack.length) {
       history.back();
-    } else {
+    } else if(url) {
       location.href = url;
+    } else {
+      history.back();
     }
   }
 
@@ -267,7 +269,6 @@
   }
 
   Router.prototype.onpopstate = function(d) {
-    console.log("popstate");
     var state = d.state;
     if(!state) {
       return true;
