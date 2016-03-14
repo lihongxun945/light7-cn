@@ -72,7 +72,7 @@
   <div class="container">
     <div class="docs-sub-content">
       <h2 class="page-title">更新日志</h2>
-      <p class='page-description'>当前最新版本为 V0.4.1</p>
+      <p class='page-description'>当前最新版本为 V0.4.2</p>
     </div>
     
   </div>
@@ -87,9 +87,19 @@
 
         <h2>Changelog</h2>
 
+        <h3>v0.4.2 - 2016-03-14</h3>
+        <p>这个版本主要是修复经常反馈最多的几个bug</p>
+        <ul>
+          <li>修复了picker上滑动会导致页面滚动的bug</li>
+          <li>修复了 toast 不在页面居中的bug</li>
+          <li>现在Modal和ActionSheet都可以通过点击背景来关闭，并且可以配置</li>
+          <li>修复了路由器的bug: <code>.back</code> 链接上如果没有 <code>href</code> 属性会重定向到 <code>undefined</code> 页面.</li>
+          <li>修复了路由器的bug: <code>$.router.reloadPage()</code> 会引起历史的问题，导致返回上一页出现bug.</li>
+        </ul>
+
         <h3>v0.4.1 - 2016-01-28</h3>
         <ul>
-          <li>Fix router bug: JS error when use inline page.</li>
+          <li>修复了路由器在加载内联页面时的JS报错</li>
         </ul>
 
         <h3>v0.4.0 - 2016-01-25</h3>

@@ -2352,12 +2352,12 @@ Device/OS Detection
         return modal[0];
     };
     //显示一个消息，会在2秒钟后自动消失
-    $.toast = function(msg) {
+    $.toast = function(msg, time) {
       var $toast = $("<div class='modal toast'>"+msg+"</div>").appendTo(document.body);
       $.openModal($toast);
       setTimeout(function() {
         $.closeModal($toast);
-      }, 2000);
+      }, time || 2000);
     };
     $.openModal = function (modal) {
         if(defaults.closePrevious) $.closeModal();
@@ -2381,8 +2381,9 @@ Device/OS Detection
             });
         }
         if (isToast) {
+            modal.show();
             modal.css({
-                marginLeft: - Math.round(modal.outerWidth() / 2 / 1.185) + 'px' //1.185 是初始化时候的放大效果
+                marginLeft: - Math.round(modal.outerWidth() / 1.18 / 2)  + 'px' //
             });
         }
 
@@ -2481,14 +2482,10 @@ Device/OS Detection
         /*jshint validthis:true */
         var clicked = $(this);
         var url = clicked.attr('href');
-       
 
         //Collect Clicked data- attributes
         var clickedData = clicked.dataset();
 
-       
-        
-      
         // Popover
         if (clicked.hasClass('open-popover')) {
             var popover;
@@ -2533,11 +2530,14 @@ Device/OS Detection
         }
     }
 
-    var defaults = $.modal.prototype.defaults  = {
+    var defaults = $.modal.prototype.defaults = {
       modalButtonOk: 'OK',
       modalButtonCancel: 'Cancel',
       modalPreloaderTitle: 'Loading...',
       modalContainer : document.body,
+      modalCloseByOutside: true,
+      actionsCloseByOutside: false,
+      popupCloseByOutside: true,
       closePrevious: true  //close all previous modal before open
     };
 
@@ -4028,6 +4028,11 @@ Device/OS Detection
     }
   });
 
+  //修复picker会滚动页面的bug
+  $(document).on($.touchEvents.move, ".picker-modal-inner", function(e) {
+    e.preventDefault();
+  });
+
   $.fn.picker = function(params) {
     var args = arguments;
     return this.each(function() {
@@ -5024,7 +5029,7 @@ Device/OS Detection
   }
 
   //load new page, and push to history
-  Router.prototype.loadPage = function(url, noAnimation, replace) {
+  Router.prototype.loadPage = function(url, noAnimation, replace, reload) {
 
     var param = url;
 
@@ -5048,7 +5053,10 @@ Device/OS Detection
 
       var pageid = currentPage[0].id;
 
-      this[replace ? "replaceBack" : "pushBack"]({
+      var action = "pushBack";
+      if(replace) action = "replaceBack";
+      if(reload) action = "reloadBack";
+      this[action]({
         url: location.href,
         pageid: "#"+ pageid,
         id: this.getCurrentStateID(),
@@ -5082,7 +5090,7 @@ Device/OS Detection
       var id = this.genStateID();
       this.setCurrentStateID(id);
 
-      this[replace ? "replaceState" : "pushState"](url, id);
+      this[replace || reload ? "replaceState" : "pushState"](url, id);
 
       this.forwardStack  = [];  //clear forward stack
       
@@ -5097,7 +5105,7 @@ Device/OS Detection
 
   //reload current page
   Router.prototype.reloadPage = function() {
-    return this.replacePage(location.href, true);
+    return this.loadPage(location.href, true, false, true);
   }
 
   Router.prototype.animatePages = function (leftPage, rightPage, leftToRight, noTransition) {
@@ -5188,8 +5196,10 @@ Device/OS Detection
     var stack = JSON.parse(this.stack.getItem("back"));
     if(stack.length) {
       history.back();
-    } else {
+    } else if(url) {
       location.href = url;
+    } else {
+      history.back();
     }
   }
 
@@ -5226,7 +5236,6 @@ Device/OS Detection
   }
 
   Router.prototype.onpopstate = function(d) {
-    console.log("popstate");
     var state = d.state;
     if(!state) {
       return true;
@@ -5319,6 +5328,10 @@ Device/OS Detection
     stack.pop();
     stack.push(h);
     this.stack.setItem("back", JSON.stringify(stack));
+  }
+  Router.prototype.reloadBack = function(h) {
+    //do nothing;
+    return;
   }
   Router.prototype.popForward = function() {
     var stack = JSON.parse(this.stack.getItem("forward"));
