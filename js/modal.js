@@ -436,12 +436,12 @@
         return modal[0];
     };
     //显示一个消息，会在2秒钟后自动消失
-    $.toast = function(msg) {
+    $.toast = function(msg, time) {
       var $toast = $("<div class='modal toast'>"+msg+"</div>").appendTo(document.body);
       $.openModal($toast);
       setTimeout(function() {
         $.closeModal($toast);
-      }, 200000);
+      }, time || 2000);
     };
     $.openModal = function (modal) {
         if(defaults.closePrevious) $.closeModal();
@@ -467,7 +467,7 @@
         if (isToast) {
             modal.show();
             modal.css({
-                marginLeft: - Math.round(modal.outerWidth() / 2 + 32 / 2)  + 'px' //outerWidth未计算32px的padding
+                marginLeft: - Math.round(modal.outerWidth() / 1.18 / 2)  + 'px' //
             });
         }
 
