@@ -65,7 +65,7 @@
   }
 
   //load new page, and push to history
-  Router.prototype.loadPage = function(url, noAnimation, replace) {
+  Router.prototype.loadPage = function(url, noAnimation, replace, reload) {
 
     var param = url;
 
@@ -89,7 +89,10 @@
 
       var pageid = currentPage[0].id;
 
-      this[replace ? "replaceBack" : "pushBack"]({
+      var action = "pushBack";
+      if(replace) action = "replaceBack";
+      if(reload) action = "reloadBack";
+      this[action]({
         url: location.href,
         pageid: "#"+ pageid,
         id: this.getCurrentStateID(),
@@ -123,7 +126,7 @@
       var id = this.genStateID();
       this.setCurrentStateID(id);
 
-      this[replace ? "replaceState" : "pushState"](url, id);
+      this[replace || reload ? "replaceState" : "pushState"](url, id);
 
       this.forwardStack  = [];  //clear forward stack
       
@@ -138,7 +141,7 @@
 
   //reload current page
   Router.prototype.reloadPage = function() {
-    return this.replacePage(location.href, true);
+    return this.loadPage(location.href, true, false, true);
   }
 
   Router.prototype.animatePages = function (leftPage, rightPage, leftToRight, noTransition) {
@@ -229,8 +232,10 @@
     var stack = JSON.parse(this.stack.getItem("back"));
     if(stack.length) {
       history.back();
-    } else {
+    } else if(url) {
       location.href = url;
+    } else {
+      history.back();
     }
   }
 
@@ -267,7 +272,6 @@
   }
 
   Router.prototype.onpopstate = function(d) {
-    console.log("popstate");
     var state = d.state;
     if(!state) {
       return true;
@@ -360,6 +364,10 @@
     stack.pop();
     stack.push(h);
     this.stack.setItem("back", JSON.stringify(stack));
+  }
+  Router.prototype.reloadBack = function(h) {
+    //do nothing;
+    return;
   }
   Router.prototype.popForward = function() {
     var stack = JSON.parse(this.stack.getItem("forward"));

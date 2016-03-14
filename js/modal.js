@@ -436,12 +436,12 @@
         return modal[0];
     };
     //显示一个消息，会在2秒钟后自动消失
-    $.toast = function(msg) {
+    $.toast = function(msg, time) {
       var $toast = $("<div class='modal toast'>"+msg+"</div>").appendTo(document.body);
       $.openModal($toast);
       setTimeout(function() {
         $.closeModal($toast);
-      }, 2000);
+      }, time || 2000);
     };
     $.openModal = function (modal) {
         if(defaults.closePrevious) $.closeModal();
@@ -465,8 +465,9 @@
             });
         }
         if (isToast) {
+            modal.show();
             modal.css({
-                marginLeft: - Math.round(modal.outerWidth() / 2 / 1.185) + 'px' //1.185 是初始化时候的放大效果
+                marginLeft: - Math.round(modal.outerWidth() / 1.18 / 2)  + 'px' //
             });
         }
 
@@ -565,14 +566,10 @@
         /*jshint validthis:true */
         var clicked = $(this);
         var url = clicked.attr('href');
-       
 
         //Collect Clicked data- attributes
         var clickedData = clicked.dataset();
 
-       
-        
-      
         // Popover
         if (clicked.hasClass('open-popover')) {
             var popover;
@@ -617,11 +614,14 @@
         }
     }
 
-    var defaults = $.modal.prototype.defaults  = {
+    var defaults = $.modal.prototype.defaults = {
       modalButtonOk: 'OK',
       modalButtonCancel: 'Cancel',
       modalPreloaderTitle: 'Loading...',
       modalContainer : document.body,
+      modalCloseByOutside: true,
+      actionsCloseByOutside: false,
+      popupCloseByOutside: true,
       closePrevious: true  //close all previous modal before open
     };
 
