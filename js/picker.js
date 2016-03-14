@@ -611,6 +611,11 @@
     }
   });
 
+  //修复picker会滚动页面的bug
+  $(document).on($.touchEvents.move, ".picker-modal-inner", function(e) {
+    e.preventDefault();
+  });
+
   $.fn.picker = function(params) {
     var args = arguments;
     return this.each(function() {
