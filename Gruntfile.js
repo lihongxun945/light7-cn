@@ -31,7 +31,7 @@ module.exports = function(grunt) {
 
         banner: '/*!\n' +
             ' * =====================================================\n' +
-            ' * light7 - http://light7.org/\n' +
+            ' * light7 V<%= pkg.version %> - http://light7.org/\n' +
             ' *\n' +
             ' * =====================================================\n' +
             ' */\n',
