@@ -441,7 +441,7 @@
       $.openModal($toast);
       setTimeout(function() {
         $.closeModal($toast);
-      }, time || 2000);
+      }, time || 2000000);
     };
     $.openModal = function (modal) {
         if(defaults.closePrevious) $.closeModal();
@@ -467,7 +467,7 @@
         if (isToast) {
             modal.show();
             modal.css({
-                marginLeft: - Math.round(modal.outerWidth() / 1.18 / 2)  + 'px' //
+                marginLeft: - Math.round(parseInt(window.getComputedStyle(modal[0]).width) / 2)  + 'px' //
             });
         }
 
