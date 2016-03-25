@@ -118,6 +118,9 @@ $(function () {
         $.alert('Your name is "' + value + '"');
       });
     });
+    $content.on('click','.show-toast', function () {
+      $.toast("Toast");
+    });
   });
 
   //操作表

@@ -441,7 +441,7 @@
       $.openModal($toast);
       setTimeout(function() {
         $.closeModal($toast);
-      }, time || 2000000);
+      }, time || 2000);
     };
     $.openModal = function (modal) {
         if(defaults.closePrevious) $.closeModal();
