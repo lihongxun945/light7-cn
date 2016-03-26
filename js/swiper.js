@@ -12,9 +12,12 @@
  * 
  * Released on: February 7, 2016
  */
+/* global $:true, jQuery: true, Dom7:true, Modernizr: true, DocumentTouch: true */
+/* jshint unused:false */
+/*jshint forin: false */
+/*jshint bitwise: false*/
 (function ($) {
     'use strict';
-    var $;
     /*===========================
     Swiper
     ===========================*/
@@ -253,22 +256,6 @@
         
         // Classname
         s.classNames = [];
-        /*=========================
-          Dom Library and plugins
-          ===========================*/
-        if (typeof $ !== 'undefined' && typeof Dom7 !== 'undefined'){
-            $ = Dom7;
-        }
-        if (typeof $ === 'undefined') {
-            if (typeof Dom7 === 'undefined') {
-                $ = window.Dom7 || window.Zepto || window.jQuery;
-            }
-            else {
-                $ = Dom7;
-            }
-            if (!$) return;
-        }
-        // Export it to Swiper instance
         s.$ = $;
         
         /*=========================
@@ -3688,6 +3675,16 @@
     /*===========================
      Get Dom libraries
      ===========================*/
+    var addLibraryPlugin = function (lib) {
+        lib.fn.swiper = function (params) {
+            var firstInstance;
+            lib(this).each(function () {
+                var s = new Swiper(this, params);
+                if (!firstInstance) firstInstance = s;
+            });
+            return firstInstance;
+        };
+    };
     var swiperDomPlugins = ['jQuery', 'Zepto', 'Dom7'];
     for (var i = 0; i < swiperDomPlugins.length; i++) {
     	if (window[swiperDomPlugins[i]]) {
@@ -3703,19 +3700,6 @@
     	domLib = Dom7;
     }
 
-    /*===========================
-    Add .swiper plugin from Dom libraries
-    ===========================*/
-    function addLibraryPlugin(lib) {
-        lib.fn.swiper = function (params) {
-            var firstInstance;
-            lib(this).each(function () {
-                var s = new Swiper(this, params);
-                if (!firstInstance) firstInstance = s;
-            });
-            return firstInstance;
-        };
-    }
     
     if (domLib) {
         if (!('transitionEnd' in domLib.fn)) {
