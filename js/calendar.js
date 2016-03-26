@@ -666,7 +666,20 @@
           if (p.input.length > 0) {
               if (p.params.inputReadOnly) p.input.prop('readOnly', true);
               if (!p.inline) {
-                  p.input.on('click', openOnInput);    
+                  var start, isMove;
+                  p.input.on($.touchEvents.start, function(e) {
+                    start = $.getTouchPosition(e);
+                    isMove = false;
+                  });
+                  p.input.on($.touchEvents.move, function(e) {
+                    if(!start) return;
+                    var current = $.getTouchPosition(e);
+                    if(Math.abs(current.x - start.x) > 2 || Math.abs(current.y - start.y) > 2) isMove = true;
+
+                  });
+                  p.input.on($.touchEvents.end, function(e) {
+                    !isMove && openOnInput(e);
+                  });    
               }
               if (p.params.inputReadOnly) {
                   p.input.on('focus mousedown', function (e) {
