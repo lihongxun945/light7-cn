@@ -672,6 +672,11 @@
                   p.input.on('focus mousedown', function (e) {
                       e.preventDefault();
                   });
+
+                  p.input.on("touchstart touchend", function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                  });
               }
           }
               
