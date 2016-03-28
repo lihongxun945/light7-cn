@@ -1,11 +1,26 @@
 /* === Tabs === */
 .tabs {
-    .tab {
-        display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  overflow: auto;
+  .tab {
+    display: none;
+  }
+  .tab.active {
+    display: block;
+  }
+
+  .pull-to-refresh-content {
+    top: 0;
+    height: 100%;
+    &:refreshing {
+      top: 2.2rem;
     }
-    .tab.active {
-        display: block;
-    }
+  }
 }
 .tabs-animated-wrap {
     position: relative;
