@@ -347,7 +347,7 @@
         };
         pb.onSlideGestureChange = function (e) {
             if (!gestureImg || gestureImg.length === 0) return;
-            scale = e.scale * currentScale;
+            scale = (e.scale || e.originalEvent.scale) * currentScale;
             if (scale > pb.params.maxZoom) {
                 scale = pb.params.maxZoom - 1 + Math.pow((scale - pb.params.maxZoom + 1), 0.5);
             }
@@ -390,8 +390,7 @@
             if (imageIsTouched) return;
             if ($.device.os === 'android') e.preventDefault();
             imageIsTouched = true;
-            imageTouchesStart.x = e.type === 'touchstart' ? e.targetTouches[0].pageX : e.pageX;
-            imageTouchesStart.y = e.type === 'touchstart' ? e.targetTouches[0].pageY : e.pageY;
+            imageTouchesStart = $.getTouchPosition(e);
         };
         pb.onSlideTouchMove = function (e) {
             if (!gestureImg || gestureImg.length === 0) return;
@@ -416,8 +415,7 @@
             imageMinY = Math.min((pb.swiper.height / 2 - scaledHeight / 2), 0);
             imageMaxY = -imageMinY;
             
-            imageTouchesCurrent.x = e.type === 'touchmove' ? e.targetTouches[0].pageX : e.pageX;
-            imageTouchesCurrent.y = e.type === 'touchmove' ? e.targetTouches[0].pageY : e.pageY;
+            imageTouchesCurrent = $.getTouchPosition(e);
 
             if (!imageIsMoved && !isScaling) {
                 if (
