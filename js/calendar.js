@@ -666,33 +666,21 @@
           if (p.input.length > 0) {
               if (p.params.inputReadOnly) p.input.prop('readOnly', true);
               if (!p.inline) {
-                  var start, isMove;
-                  p.input.on($.touchEvents.start, function(e) {
-                    start = $.getTouchPosition(e);
-                    isMove = false;
+                  p.input.on("click", function(e) {
+                    openOnInput(e);
+                    //修复部分安卓系统下，即使设置了readonly依然会弹出系统键盘的bug
+                    if (p.params.inputReadOnly) {
+                      this.focus();
+                      this.blur();
+                    }
                   });
-                  p.input.on($.touchEvents.move, function(e) {
-                    if(!start) return;
-                    var current = $.getTouchPosition(e);
-                    if(Math.abs(current.x - start.x) > 2 || Math.abs(current.y - start.y) > 2) isMove = true;
-
-                  });
-                  p.input.on($.touchEvents.end, function(e) {
-                    !isMove && openOnInput(e);
-                  });    
               }
               if (p.params.inputReadOnly) {
                   p.input.on('focus mousedown', function (e) {
                       e.preventDefault();
                   });
-
-                  p.input.on("touchstart touchend", function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                  });
               }
           }
-              
       }
       
       if (!p.inline) $('html').on('click', closeOnHTMLClick);
@@ -810,13 +798,16 @@
       return this.each(function() {
         var $this = $(this);
         if(!$this[0]) return;
-        var p = {};
-        if($this[0].tagName.toUpperCase() === "INPUT") {
-          p.input = $this;
-        } else {
-          p.container = $this;
+        var calendar = $this.data("calendar");
+        if(!calendar) {
+          var p = {};
+          if($this[0].tagName.toUpperCase() === "INPUT") {
+            p.input = $this;
+          } else {
+            p.container = $this;
+          }
+          $this.data("calendar", new Calendar($.extend(p, params)));
         }
-        new Calendar($.extend(p, params));
       });
   };
 
