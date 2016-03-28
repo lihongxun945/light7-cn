@@ -666,7 +666,14 @@
           if (p.input.length > 0) {
               if (p.params.inputReadOnly) p.input.prop('readOnly', true);
               if (!p.inline) {
-                  p.input.on('click', openOnInput);    
+                  p.input.on("click", function(e) {
+                    openOnInput(e);
+                    //修复部分安卓系统下，即使设置了readonly依然会弹出系统键盘的bug
+                    if (p.params.inputReadOnly) {
+                      this.focus();
+                      this.blur();
+                    }
+                  });
               }
               if (p.params.inputReadOnly) {
                   p.input.on('focus mousedown', function (e) {
@@ -674,7 +681,6 @@
                   });
               }
           }
-              
       }
       
       if (!p.inline) $('html').on('click', closeOnHTMLClick);
@@ -792,13 +798,16 @@
       return this.each(function() {
         var $this = $(this);
         if(!$this[0]) return;
-        var p = {};
-        if($this[0].tagName.toUpperCase() === "INPUT") {
-          p.input = $this;
-        } else {
-          p.container = $this;
+        var calendar = $this.data("calendar");
+        if(!calendar) {
+          var p = {};
+          if($this[0].tagName.toUpperCase() === "INPUT") {
+            p.input = $this;
+          } else {
+            p.container = $this;
+          }
+          $this.data("calendar", new Calendar($.extend(p, params)));
         }
-        new Calendar($.extend(p, params));
       });
   };
 

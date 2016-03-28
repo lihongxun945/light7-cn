@@ -484,7 +484,14 @@
           if (p.input.length > 0) {
               if (p.params.inputReadOnly) p.input.prop('readOnly', true);
               if (!p.inline) {
-                  p.input.on('click', openOnInput);    
+                p.input.on("click", function(e) {
+                  openOnInput(e);
+                  //修复部分安卓系统下，即使设置了readonly依然会弹出系统键盘的bug
+                  if (p.params.inputReadOnly) {
+                    this.focus();
+                    this.blur();
+                  }
+                });
               }
               if (p.params.inputReadOnly) {
                   p.input.on('focus mousedown', function (e) {

@@ -413,7 +413,7 @@
         return;
       }
 
-      if(!url || url === "#") return;
+      if(!url || url === "#" || /javascript:.*;/.test(url)) return;
       router.loadPage(url, $target.hasClass("no-transition") ? true : undefined, $target.hasClass("replace") ? true : undefined);  //undefined is different to false
     })
   });
